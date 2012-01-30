@@ -11,17 +11,17 @@ DPRIME_V = -D'DPRIME_VERSION="4.0.$(SVNDEV_T)"'
 
 
 VERSION_INFO = $(SVNDEV) $(SNPLASH_V) 
-
-#CMP = icpc -O3 -ipo -no-prec-div -static -openmp -c -g -Wall -wd981 -wd383 $(VERSION_INFO)
-#LINK = icpc -O3 -ipo -no-prec-div -static -openmp -g -Wall -wd981 -wd383
-#AR = xiar rvs
+# removed -ipo
+CMP = icpc -O3 -no-prec-div -static -openmp -c -g -Wall -wd981 -wd383 $(VERSION_INFO)
+LINK = icpc -O3 -no-prec-div -static -openmp -g -Wall -wd981 -wd383
+AR = xiar rvs
 
 #CMP = g++ -O3 -fopenmp -g -c -static -Wall -Wunused $(VERSION_INFO)
 #LINK = g++ -O3 -fopenmp -g -Wall -static -Wunused
 
-CMP = g++ -O3 -fopenmp -g -c -Wall -Wunused $(VERSION_INFO)
-LINK = g++ -O3 -fopenmp -g -Wall -Wunused
-AR = ar rvs 
+#CMP = g++ -O3 -fopenmp -g -c -Wall -Wunused $(VERSION_INFO)
+#LINK = g++ -O3 -fopenmp -g -Wall -Wunused
+#AR = ar rvs 
 
 MAKE = make
 
