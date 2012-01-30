@@ -1,0 +1,225 @@
+\hypertarget{classHaploStats}{
+\section{HaploStats Class Reference}
+\label{classHaploStats}\index{HaploStats@{HaploStats}}
+}
+
+
+{\ttfamily \#include $<$haplostats.hh$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classHaploStats_ada2d93862b794d80fe0903410689234e}{HaploStats} (\hyperlink{classDataAccess}{DataAccess} $\ast$)
+\item 
+void \hyperlink{classHaploStats_a2e17c8ccd68b20b4a2cb20e91025c13e}{prepHaploStatsForOutput} (int, \hyperlink{structHaploStatsResults}{HaploStatsResults} \&)
+\item 
+void \hyperlink{classHaploStats_a5f5c2445d79a7913381ff0ac5d8f53d4}{setHaploThresh} (int k)
+\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{classHaploStats_ae7c212db625f88424070abcc364ed89f}{calculateAllelic} (int)
+\item 
+void \hyperlink{classHaploStats_a4eb4a1554f92c356d3d6bcb3f15a4daf}{calculateTwoMarker} (int, int)
+\item 
+void \hyperlink{classHaploStats_af2525446b1f48c377adeffd328c53cba}{calculateThreeMarker} (int, int, int)
+\item 
+double \hyperlink{classHaploStats_a8f9a2f53316b3e76f350dbd68589ccb0}{computeGlobalZaykinStatisic} (\hyperlink{classEM}{EM} \&em, int size, double \&testStat, int \&degFreedom)
+\item 
+double \hyperlink{classHaploStats_a25999dcaac8dabc7a4c10a0992db61fb}{computeGlobalZaykinStatisic} (\hyperlink{classEM}{EM} \&em, int size, double \&testStat, int \&degFreedom, const vector$<$ double $>$ \&phenotype, const vector$<$ vector$<$ double $>$ $>$ \&cov, int snp)
+\end{DoxyCompactItemize}
+\subsection*{Static Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static double \hyperlink{classHaploStats_ad2719f7191d458bf72cf117b0d581aaa}{EPS} ()
+\begin{DoxyCompactList}\small\item\em Used by \hyperlink{classZaykin}{Zaykin}. Passed in at start. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classDataAccess}{DataAccess} $\ast$ \hyperlink{classHaploStats_aae230c13a34d75fe7e07ab7ae75b2c6d}{data}
+\item 
+double \hyperlink{classHaploStats_ac19e1b8dcc610e73969faad69b27ccc6}{allelicPval}
+\item 
+double \hyperlink{classHaploStats_a4fe152dc428bff18ec9d04254834eff1}{allelicChiSq}
+\item 
+int \hyperlink{classHaploStats_a839271fb722730e8b45127525c471fe6}{allelicDF}
+\item 
+double \hyperlink{classHaploStats_ae385ebf05af0fa4d0199f4ffa8fd6c74}{twoMarkerPval}
+\item 
+double \hyperlink{classHaploStats_ae09deb6ca71b310c0c8362b0c92bd116}{twoMarkerChiS}
+\item 
+int \hyperlink{classHaploStats_a9cfc39f1d2348301cad42b3a4b600229}{twoMarkerDF}
+\item 
+vector$<$ double $>$ \hyperlink{classHaploStats_ac65cb68586d5102e6b771b5d2cca24eb}{twoMarkerCaseHapFreq}
+\item 
+vector$<$ double $>$ \hyperlink{classHaploStats_a68d73b06d601fa5809b051f8458a2a23}{twoMarkerCntrlHapFreq}
+\item 
+vector$<$ double $>$ \hyperlink{classHaploStats_a0a4928ebe077029a82a13fcdb10910c7}{twoMarkerCmbdHapFreq}
+\item 
+double \hyperlink{classHaploStats_aaaff3d8ec32e831c25296fca296b3f25}{threeMarkerPval}
+\item 
+double \hyperlink{classHaploStats_a7146d3781769f3c30c353ebc6552bf8c}{threeMarkerChiS}
+\item 
+int \hyperlink{classHaploStats_a88b45a1784a3af46f1727325f1520300}{threeMarkerDF}
+\item 
+vector$<$ double $>$ \hyperlink{classHaploStats_ab9fe88dff2fea23a2d76ab656f5a22ec}{threeMarkerCaseHapFreq}
+\item 
+vector$<$ double $>$ \hyperlink{classHaploStats_aeabf9d28af93060be4d3b7a06a36684c}{threeMarkerCntrlHapFreq}
+\item 
+vector$<$ double $>$ \hyperlink{classHaploStats_ae4aa675ce11d88b43564c7ca54cc9f3f}{threeMarkerCmbdHapFreq}
+\item 
+int \hyperlink{classHaploStats_a856613cafb08e96a0fc267ab3a5482fc}{haploThresh}
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classHaploStats_ada2d93862b794d80fe0903410689234e}{
+\index{HaploStats@{HaploStats}!HaploStats@{HaploStats}}
+\index{HaploStats@{HaploStats}!HaploStats@{HaploStats}}
+\subsubsection[{HaploStats}]{\setlength{\rightskip}{0pt plus 5cm}HaploStats::HaploStats ({\bf DataAccess} $\ast$ {\em d})}}
+\label{classHaploStats_ada2d93862b794d80fe0903410689234e}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classHaploStats_ae7c212db625f88424070abcc364ed89f}{
+\index{HaploStats@{HaploStats}!calculateAllelic@{calculateAllelic}}
+\index{calculateAllelic@{calculateAllelic}!HaploStats@{HaploStats}}
+\subsubsection[{calculateAllelic}]{\setlength{\rightskip}{0pt plus 5cm}void HaploStats::calculateAllelic (int {\em snp})\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classHaploStats_ae7c212db625f88424070abcc364ed89f}
+Calculate allelic test. This can be conceived as a single SNP haplotype test where all of hte haplotpyes are known with probability one. It leverages the code built for larger hapltoypes, but \hyperlink{classEM}{EM} is never called. \hypertarget{classHaploStats_af2525446b1f48c377adeffd328c53cba}{
+\index{HaploStats@{HaploStats}!calculateThreeMarker@{calculateThreeMarker}}
+\index{calculateThreeMarker@{calculateThreeMarker}!HaploStats@{HaploStats}}
+\subsubsection[{calculateThreeMarker}]{\setlength{\rightskip}{0pt plus 5cm}void HaploStats::calculateThreeMarker (int {\em s1}, \/  int {\em s2}, \/  int {\em s3})\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classHaploStats_af2525446b1f48c377adeffd328c53cba}
+Calculate the three marker haplotype test.
+
+Steps: 1) Prep and run the \hyperlink{classEM}{EM} algorithm for cases and for controls. 2) Calculate haplotypic associatoin \hypertarget{classHaploStats_a4eb4a1554f92c356d3d6bcb3f15a4daf}{
+\index{HaploStats@{HaploStats}!calculateTwoMarker@{calculateTwoMarker}}
+\index{calculateTwoMarker@{calculateTwoMarker}!HaploStats@{HaploStats}}
+\subsubsection[{calculateTwoMarker}]{\setlength{\rightskip}{0pt plus 5cm}void HaploStats::calculateTwoMarker (int {\em s1}, \/  int {\em s2})\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classHaploStats_a4eb4a1554f92c356d3d6bcb3f15a4daf}
+Calculate the two marker haplotype test.
+
+Steps: 1) Prep and run the \hyperlink{classEM}{EM} algorithm for cases and for controls. 2) Calculate haplotypic associatoin \hypertarget{classHaploStats_a25999dcaac8dabc7a4c10a0992db61fb}{
+\index{HaploStats@{HaploStats}!computeGlobalZaykinStatisic@{computeGlobalZaykinStatisic}}
+\index{computeGlobalZaykinStatisic@{computeGlobalZaykinStatisic}!HaploStats@{HaploStats}}
+\subsubsection[{computeGlobalZaykinStatisic}]{\setlength{\rightskip}{0pt plus 5cm}double HaploStats::computeGlobalZaykinStatisic ({\bf EM} \& {\em em}, \/  int {\em size}, \/  double \& {\em testStat}, \/  int \& {\em degFreedom}, \/  const vector$<$ double $>$ \& {\em phenotype}, \/  const vector$<$ vector$<$ double $>$ $>$ \& {\em cov}, \/  int {\em snp})\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classHaploStats_a25999dcaac8dabc7a4c10a0992db61fb}
+\hypertarget{classHaploStats_a8f9a2f53316b3e76f350dbd68589ccb0}{
+\index{HaploStats@{HaploStats}!computeGlobalZaykinStatisic@{computeGlobalZaykinStatisic}}
+\index{computeGlobalZaykinStatisic@{computeGlobalZaykinStatisic}!HaploStats@{HaploStats}}
+\subsubsection[{computeGlobalZaykinStatisic}]{\setlength{\rightskip}{0pt plus 5cm}double HaploStats::computeGlobalZaykinStatisic ({\bf EM} \& {\em em}, \/  int {\em size}, \/  double \& {\em testStat}, \/  int \& {\em degFreedom})\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classHaploStats_a8f9a2f53316b3e76f350dbd68589ccb0}
+\hypertarget{classHaploStats_ad2719f7191d458bf72cf117b0d581aaa}{
+\index{HaploStats@{HaploStats}!EPS@{EPS}}
+\index{EPS@{EPS}!HaploStats@{HaploStats}}
+\subsubsection[{EPS}]{\setlength{\rightskip}{0pt plus 5cm}static double HaploStats::EPS ()\hspace{0.3cm}{\ttfamily  \mbox{[}inline, static, protected\mbox{]}}}}
+\label{classHaploStats_ad2719f7191d458bf72cf117b0d581aaa}
+
+
+Used by \hyperlink{classZaykin}{Zaykin}. Passed in at start. 
+
+\hypertarget{classHaploStats_a2e17c8ccd68b20b4a2cb20e91025c13e}{
+\index{HaploStats@{HaploStats}!prepHaploStatsForOutput@{prepHaploStatsForOutput}}
+\index{prepHaploStatsForOutput@{prepHaploStatsForOutput}!HaploStats@{HaploStats}}
+\subsubsection[{prepHaploStatsForOutput}]{\setlength{\rightskip}{0pt plus 5cm}void HaploStats::prepHaploStatsForOutput (int {\em snp}, \/  {\bf HaploStatsResults} \& {\em res})}}
+\label{classHaploStats_a2e17c8ccd68b20b4a2cb20e91025c13e}
+\hypertarget{classHaploStats_a5f5c2445d79a7913381ff0ac5d8f53d4}{
+\index{HaploStats@{HaploStats}!setHaploThresh@{setHaploThresh}}
+\index{setHaploThresh@{setHaploThresh}!HaploStats@{HaploStats}}
+\subsubsection[{setHaploThresh}]{\setlength{\rightskip}{0pt plus 5cm}void HaploStats::setHaploThresh (int {\em k})\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{classHaploStats_a5f5c2445d79a7913381ff0ac5d8f53d4}
+
+
+\subsection{Field Documentation}
+\hypertarget{classHaploStats_a4fe152dc428bff18ec9d04254834eff1}{
+\index{HaploStats@{HaploStats}!allelicChiSq@{allelicChiSq}}
+\index{allelicChiSq@{allelicChiSq}!HaploStats@{HaploStats}}
+\subsubsection[{allelicChiSq}]{\setlength{\rightskip}{0pt plus 5cm}double {\bf HaploStats::allelicChiSq}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classHaploStats_a4fe152dc428bff18ec9d04254834eff1}
+\hypertarget{classHaploStats_a839271fb722730e8b45127525c471fe6}{
+\index{HaploStats@{HaploStats}!allelicDF@{allelicDF}}
+\index{allelicDF@{allelicDF}!HaploStats@{HaploStats}}
+\subsubsection[{allelicDF}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf HaploStats::allelicDF}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classHaploStats_a839271fb722730e8b45127525c471fe6}
+\hypertarget{classHaploStats_ac19e1b8dcc610e73969faad69b27ccc6}{
+\index{HaploStats@{HaploStats}!allelicPval@{allelicPval}}
+\index{allelicPval@{allelicPval}!HaploStats@{HaploStats}}
+\subsubsection[{allelicPval}]{\setlength{\rightskip}{0pt plus 5cm}double {\bf HaploStats::allelicPval}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classHaploStats_ac19e1b8dcc610e73969faad69b27ccc6}
+\hypertarget{classHaploStats_aae230c13a34d75fe7e07ab7ae75b2c6d}{
+\index{HaploStats@{HaploStats}!data@{data}}
+\index{data@{data}!HaploStats@{HaploStats}}
+\subsubsection[{data}]{\setlength{\rightskip}{0pt plus 5cm}{\bf DataAccess}$\ast$ {\bf HaploStats::data}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classHaploStats_aae230c13a34d75fe7e07ab7ae75b2c6d}
+\hypertarget{classHaploStats_a856613cafb08e96a0fc267ab3a5482fc}{
+\index{HaploStats@{HaploStats}!haploThresh@{haploThresh}}
+\index{haploThresh@{haploThresh}!HaploStats@{HaploStats}}
+\subsubsection[{haploThresh}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf HaploStats::haploThresh}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classHaploStats_a856613cafb08e96a0fc267ab3a5482fc}
+\hypertarget{classHaploStats_ab9fe88dff2fea23a2d76ab656f5a22ec}{
+\index{HaploStats@{HaploStats}!threeMarkerCaseHapFreq@{threeMarkerCaseHapFreq}}
+\index{threeMarkerCaseHapFreq@{threeMarkerCaseHapFreq}!HaploStats@{HaploStats}}
+\subsubsection[{threeMarkerCaseHapFreq}]{\setlength{\rightskip}{0pt plus 5cm}vector$<$double$>$ {\bf HaploStats::threeMarkerCaseHapFreq}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classHaploStats_ab9fe88dff2fea23a2d76ab656f5a22ec}
+\hypertarget{classHaploStats_a7146d3781769f3c30c353ebc6552bf8c}{
+\index{HaploStats@{HaploStats}!threeMarkerChiS@{threeMarkerChiS}}
+\index{threeMarkerChiS@{threeMarkerChiS}!HaploStats@{HaploStats}}
+\subsubsection[{threeMarkerChiS}]{\setlength{\rightskip}{0pt plus 5cm}double {\bf HaploStats::threeMarkerChiS}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classHaploStats_a7146d3781769f3c30c353ebc6552bf8c}
+\hypertarget{classHaploStats_ae4aa675ce11d88b43564c7ca54cc9f3f}{
+\index{HaploStats@{HaploStats}!threeMarkerCmbdHapFreq@{threeMarkerCmbdHapFreq}}
+\index{threeMarkerCmbdHapFreq@{threeMarkerCmbdHapFreq}!HaploStats@{HaploStats}}
+\subsubsection[{threeMarkerCmbdHapFreq}]{\setlength{\rightskip}{0pt plus 5cm}vector$<$double$>$ {\bf HaploStats::threeMarkerCmbdHapFreq}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classHaploStats_ae4aa675ce11d88b43564c7ca54cc9f3f}
+\hypertarget{classHaploStats_aeabf9d28af93060be4d3b7a06a36684c}{
+\index{HaploStats@{HaploStats}!threeMarkerCntrlHapFreq@{threeMarkerCntrlHapFreq}}
+\index{threeMarkerCntrlHapFreq@{threeMarkerCntrlHapFreq}!HaploStats@{HaploStats}}
+\subsubsection[{threeMarkerCntrlHapFreq}]{\setlength{\rightskip}{0pt plus 5cm}vector$<$double$>$ {\bf HaploStats::threeMarkerCntrlHapFreq}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classHaploStats_aeabf9d28af93060be4d3b7a06a36684c}
+\hypertarget{classHaploStats_a88b45a1784a3af46f1727325f1520300}{
+\index{HaploStats@{HaploStats}!threeMarkerDF@{threeMarkerDF}}
+\index{threeMarkerDF@{threeMarkerDF}!HaploStats@{HaploStats}}
+\subsubsection[{threeMarkerDF}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf HaploStats::threeMarkerDF}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classHaploStats_a88b45a1784a3af46f1727325f1520300}
+\hypertarget{classHaploStats_aaaff3d8ec32e831c25296fca296b3f25}{
+\index{HaploStats@{HaploStats}!threeMarkerPval@{threeMarkerPval}}
+\index{threeMarkerPval@{threeMarkerPval}!HaploStats@{HaploStats}}
+\subsubsection[{threeMarkerPval}]{\setlength{\rightskip}{0pt plus 5cm}double {\bf HaploStats::threeMarkerPval}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classHaploStats_aaaff3d8ec32e831c25296fca296b3f25}
+\hypertarget{classHaploStats_ac65cb68586d5102e6b771b5d2cca24eb}{
+\index{HaploStats@{HaploStats}!twoMarkerCaseHapFreq@{twoMarkerCaseHapFreq}}
+\index{twoMarkerCaseHapFreq@{twoMarkerCaseHapFreq}!HaploStats@{HaploStats}}
+\subsubsection[{twoMarkerCaseHapFreq}]{\setlength{\rightskip}{0pt plus 5cm}vector$<$double$>$ {\bf HaploStats::twoMarkerCaseHapFreq}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classHaploStats_ac65cb68586d5102e6b771b5d2cca24eb}
+\hypertarget{classHaploStats_ae09deb6ca71b310c0c8362b0c92bd116}{
+\index{HaploStats@{HaploStats}!twoMarkerChiS@{twoMarkerChiS}}
+\index{twoMarkerChiS@{twoMarkerChiS}!HaploStats@{HaploStats}}
+\subsubsection[{twoMarkerChiS}]{\setlength{\rightskip}{0pt plus 5cm}double {\bf HaploStats::twoMarkerChiS}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classHaploStats_ae09deb6ca71b310c0c8362b0c92bd116}
+\hypertarget{classHaploStats_a0a4928ebe077029a82a13fcdb10910c7}{
+\index{HaploStats@{HaploStats}!twoMarkerCmbdHapFreq@{twoMarkerCmbdHapFreq}}
+\index{twoMarkerCmbdHapFreq@{twoMarkerCmbdHapFreq}!HaploStats@{HaploStats}}
+\subsubsection[{twoMarkerCmbdHapFreq}]{\setlength{\rightskip}{0pt plus 5cm}vector$<$double$>$ {\bf HaploStats::twoMarkerCmbdHapFreq}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classHaploStats_a0a4928ebe077029a82a13fcdb10910c7}
+\hypertarget{classHaploStats_a68d73b06d601fa5809b051f8458a2a23}{
+\index{HaploStats@{HaploStats}!twoMarkerCntrlHapFreq@{twoMarkerCntrlHapFreq}}
+\index{twoMarkerCntrlHapFreq@{twoMarkerCntrlHapFreq}!HaploStats@{HaploStats}}
+\subsubsection[{twoMarkerCntrlHapFreq}]{\setlength{\rightskip}{0pt plus 5cm}vector$<$double$>$ {\bf HaploStats::twoMarkerCntrlHapFreq}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classHaploStats_a68d73b06d601fa5809b051f8458a2a23}
+\hypertarget{classHaploStats_a9cfc39f1d2348301cad42b3a4b600229}{
+\index{HaploStats@{HaploStats}!twoMarkerDF@{twoMarkerDF}}
+\index{twoMarkerDF@{twoMarkerDF}!HaploStats@{HaploStats}}
+\subsubsection[{twoMarkerDF}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf HaploStats::twoMarkerDF}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classHaploStats_a9cfc39f1d2348301cad42b3a4b600229}
+\hypertarget{classHaploStats_ae385ebf05af0fa4d0199f4ffa8fd6c74}{
+\index{HaploStats@{HaploStats}!twoMarkerPval@{twoMarkerPval}}
+\index{twoMarkerPval@{twoMarkerPval}!HaploStats@{HaploStats}}
+\subsubsection[{twoMarkerPval}]{\setlength{\rightskip}{0pt plus 5cm}double {\bf HaploStats::twoMarkerPval}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classHaploStats_ae385ebf05af0fa4d0199f4ffa8fd6c74}
+
+
+The documentation for this class was generated from the following files:\begin{DoxyCompactItemize}
+\item 
+engine/snpgwa/\hyperlink{haplostats_8hh}{haplostats.hh}\item 
+engine/snpgwa/\hyperlink{haplostats_8cpp}{haplostats.cpp}\end{DoxyCompactItemize}

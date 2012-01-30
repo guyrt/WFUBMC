@@ -1,0 +1,306 @@
+\hypertarget{classEM}{
+\section{EM Class Reference}
+\label{classEM}\index{EM@{EM}}
+}
+
+
+{\ttfamily \#include $<$em.h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classEM_ab63fb999a41e57947ecd2e61c073c5ef}{EM} ()
+\item 
+\hyperlink{classEM_a5da3eaa0aa91b3925de2c5bca158faca}{$\sim$EM} ()
+\item 
+void \hyperlink{classEM_abcc9e390b2a2c8143bfa364a7911d6fa}{setup} (const vector$<$ vector$<$ short $>$ $>$ \&)
+\item 
+bool \hyperlink{classEM_a18638c8e6a8da46ca0ea77981c275486}{run} ()
+\item 
+void \hyperlink{classEM_abe803c5ae01733a57224c3d530ae2921}{result} (double $\ast$$\ast$, vector$<$ int $>$ \&, vector$<$ double $>$ \&)
+\item 
+void \hyperlink{classEM_ac3787d2909eb87ac231b533482d1f644}{getAlleleFreqs} (double a\mbox{[}2\mbox{]}\mbox{[}3\mbox{]})
+\item 
+vector$<$ int $>$ \hyperlink{classEM_a5050cd53ebe803ee4e677119af7869ae}{getNumberAlleles} ()
+\item 
+vector$<$ double $>$ \hyperlink{classEM_ac7552d323bf702bc7a76ade909415cab}{getHapProbs} ()
+\item 
+vector$<$ double $>$ \hyperlink{classEM_ab5f91b9b53ea2090197c8e389ffa5a38}{getEMFreqs} ()
+\item 
+vector$<$ \hyperlink{structEMPersonalProbsResults}{EMPersonalProbsResults} $>$ \hyperlink{classEM_a07bb2d56390f494c885bd7c7ea4b53b9}{getPersonalProbabilities} ()
+\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{classEM_a5393a49dd932245a931e6d5eece1cf27}{uniqueElements} (const vector$<$ short $>$ \&)
+\item 
+void \hyperlink{classEM_a8531164d0fa92217eb0c7d9f75382912}{initEMAlgorithm} ()
+\item 
+void \hyperlink{classEM_af7ab6d102b2901761764b91abb28d88a}{computeIncompleteFreqs} ()
+\item 
+void \hyperlink{classEM_a385df83b9c344ceaa000966dccc92796}{computeCompleteFreqs} ()
+\item 
+void \hyperlink{classEM_a65fd72ccd0f1a9ff5289e96d419fa65f}{cycleThroughPeople} ()
+\item 
+void \hyperlink{classEM_addc146c4cd9b7d98e01c485454544529}{distributeCounts} ()
+\item 
+void \hyperlink{classEM_a7a49c56e4c55158f0c1ff4ec6a9469e3}{reweightKnownHaps} ()
+\item 
+void \hyperlink{classEM_af63a611b10a4a1bbe15b2013d2c72b45}{getRelHaps} (int indiv, int split, int \&newHapNum1, int \&newHapNum2)
+\item 
+int \hyperlink{classEM_a456073e2e19b310df9ed0f953dbd6abc}{getRelHap1} (int indiv, int split, vector$<$ int $>$ \&\hyperlink{classEM_a8355d01f8998e654c32b1fc8f478ced1}{numAlleles}) const 
+\begin{DoxyCompactList}\small\item\em . Use the combined form. \item\end{DoxyCompactList}\item 
+int \hyperlink{classEM_a8a03279b3b78e8f88add021a28b7ac28}{getRelHap2} (int indiv, int split, vector$<$ int $>$ \&\hyperlink{classEM_a8355d01f8998e654c32b1fc8f478ced1}{numAlleles}) const 
+\item 
+void \hyperlink{classEM_a1bd0c351ef1ee04ad0552f2066d7f3d7}{resolve} (vector$<$ vector$<$ double $>$ $>$ \&, int lefthap, int righthap)
+\item 
+int \hyperlink{classEM_a3e6b256bb2996b1903f5a2490540659b}{hapToIndex} (const vector$<$ int $>$ \&)
+\item 
+int \hyperlink{classEM_abdb50dc221b573b78c2c9785b2ae7f9b}{index2Allele} (int imark, int haplotypeIndex)
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+vector$<$ vector$<$ short $>$ $>$ \hyperlink{classEM_a0a7a49feeff6a6ce2908bd626c876a60}{inTotal}
+\item 
+vector$<$ int $>$ \hyperlink{classEM_a8355d01f8998e654c32b1fc8f478ced1}{numAlleles}
+\item 
+int \hyperlink{classEM_ae8420599f2bb0359bec3f8640699aa43}{numberAlleles}
+\item 
+int \hyperlink{classEM_a6fb53f57dafe2497417ae7b55748a2f5}{numHaps}
+\item 
+int \hyperlink{classEM_af93ac6cc803cd05ab2a266e77b864ae1}{numSplits}
+\item 
+vector$<$ double $>$ \hyperlink{classEM_adc712759a9c74b26826ffbc28d4cf410}{unknownProb}
+\item 
+vector$<$ double $>$ \hyperlink{classEM_ae28d8a79298bd3b15801f4eff84216b1}{tempCount}
+\item 
+vector$<$ double $>$ \hyperlink{classEM_ae76fe505f85355d362d5022436980331}{emFrequencies}
+\item 
+vector$<$ \hyperlink{classhaplotype}{haplotype} $\ast$ $>$ \hyperlink{classEM_a16a75209aa892c812af91aaea1b41500}{incompleteTable}
+\item 
+vector$<$ \hyperlink{classhaplotype}{haplotype} $>$ \hyperlink{classEM_a4d771fc7aca0ee55ee0b8742269b54e7}{haplotype1}
+\item 
+vector$<$ \hyperlink{classhaplotype}{haplotype} $>$ \hyperlink{classEM_a7eb2fa8a9c6db4c1425d77298cec869d}{haplotype2}
+\item 
+int \hyperlink{classEM_a138450b0d00acac64fd8a272b999be9f}{setFor}
+\item 
+vector$<$ vector$<$ double $>$ $>$ \hyperlink{classEM_abb7e20d53630eb8b692084ba1cf666c5}{personalProb}
+\end{DoxyCompactItemize}
+\subsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{classEM_ab5eb8e85b324a9728c593bdc1ada8198}{HaploStats}
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classEM_ab63fb999a41e57947ecd2e61c073c5ef}{
+\index{EM@{EM}!EM@{EM}}
+\index{EM@{EM}!EM@{EM}}
+\subsubsection[{EM}]{\setlength{\rightskip}{0pt plus 5cm}EM::EM ()}}
+\label{classEM_ab63fb999a41e57947ecd2e61c073c5ef}
+\hypertarget{classEM_a5da3eaa0aa91b3925de2c5bca158faca}{
+\index{EM@{EM}!$\sim$EM@{$\sim$EM}}
+\index{$\sim$EM@{$\sim$EM}!EM@{EM}}
+\subsubsection[{$\sim$EM}]{\setlength{\rightskip}{0pt plus 5cm}EM::$\sim$EM ()}}
+\label{classEM_a5da3eaa0aa91b3925de2c5bca158faca}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classEM_a385df83b9c344ceaa000966dccc92796}{
+\index{EM@{EM}!computeCompleteFreqs@{computeCompleteFreqs}}
+\index{computeCompleteFreqs@{computeCompleteFreqs}!EM@{EM}}
+\subsubsection[{computeCompleteFreqs}]{\setlength{\rightskip}{0pt plus 5cm}void EM::computeCompleteFreqs ()\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classEM_a385df83b9c344ceaa000966dccc92796}
+\hypertarget{classEM_af7ab6d102b2901761764b91abb28d88a}{
+\index{EM@{EM}!computeIncompleteFreqs@{computeIncompleteFreqs}}
+\index{computeIncompleteFreqs@{computeIncompleteFreqs}!EM@{EM}}
+\subsubsection[{computeIncompleteFreqs}]{\setlength{\rightskip}{0pt plus 5cm}void EM::computeIncompleteFreqs ()\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classEM_af7ab6d102b2901761764b91abb28d88a}
+\hypertarget{classEM_a65fd72ccd0f1a9ff5289e96d419fa65f}{
+\index{EM@{EM}!cycleThroughPeople@{cycleThroughPeople}}
+\index{cycleThroughPeople@{cycleThroughPeople}!EM@{EM}}
+\subsubsection[{cycleThroughPeople}]{\setlength{\rightskip}{0pt plus 5cm}void EM::cycleThroughPeople ()\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classEM_a65fd72ccd0f1a9ff5289e96d419fa65f}
+\hypertarget{classEM_addc146c4cd9b7d98e01c485454544529}{
+\index{EM@{EM}!distributeCounts@{distributeCounts}}
+\index{distributeCounts@{distributeCounts}!EM@{EM}}
+\subsubsection[{distributeCounts}]{\setlength{\rightskip}{0pt plus 5cm}void EM::distributeCounts ()\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classEM_addc146c4cd9b7d98e01c485454544529}
+\hypertarget{classEM_ac3787d2909eb87ac231b533482d1f644}{
+\index{EM@{EM}!getAlleleFreqs@{getAlleleFreqs}}
+\index{getAlleleFreqs@{getAlleleFreqs}!EM@{EM}}
+\subsubsection[{getAlleleFreqs}]{\setlength{\rightskip}{0pt plus 5cm}void EM::getAlleleFreqs (double {\em a}\mbox{[}2\mbox{]}\mbox{[}3\mbox{]})}}
+\label{classEM_ac3787d2909eb87ac231b533482d1f644}
+\hypertarget{classEM_ab5f91b9b53ea2090197c8e389ffa5a38}{
+\index{EM@{EM}!getEMFreqs@{getEMFreqs}}
+\index{getEMFreqs@{getEMFreqs}!EM@{EM}}
+\subsubsection[{getEMFreqs}]{\setlength{\rightskip}{0pt plus 5cm}vector$<$ double $>$ EM::getEMFreqs ()}}
+\label{classEM_ab5f91b9b53ea2090197c8e389ffa5a38}
+Return the haplotype frequencies for each possible haplotype. \hypertarget{classEM_ac7552d323bf702bc7a76ade909415cab}{
+\index{EM@{EM}!getHapProbs@{getHapProbs}}
+\index{getHapProbs@{getHapProbs}!EM@{EM}}
+\subsubsection[{getHapProbs}]{\setlength{\rightskip}{0pt plus 5cm}vector$<$ double $>$ EM::getHapProbs ()}}
+\label{classEM_ac7552d323bf702bc7a76ade909415cab}
+\hypertarget{classEM_a5050cd53ebe803ee4e677119af7869ae}{
+\index{EM@{EM}!getNumberAlleles@{getNumberAlleles}}
+\index{getNumberAlleles@{getNumberAlleles}!EM@{EM}}
+\subsubsection[{getNumberAlleles}]{\setlength{\rightskip}{0pt plus 5cm}vector$<$ int $>$ EM::getNumberAlleles ()}}
+\label{classEM_a5050cd53ebe803ee4e677119af7869ae}
+\hypertarget{classEM_a07bb2d56390f494c885bd7c7ea4b53b9}{
+\index{EM@{EM}!getPersonalProbabilities@{getPersonalProbabilities}}
+\index{getPersonalProbabilities@{getPersonalProbabilities}!EM@{EM}}
+\subsubsection[{getPersonalProbabilities}]{\setlength{\rightskip}{0pt plus 5cm}vector$<$ {\bf EMPersonalProbsResults} $>$ EM::getPersonalProbabilities ()}}
+\label{classEM_a07bb2d56390f494c885bd7c7ea4b53b9}
+Calculate all haplotype probs for an individual. \hypertarget{classEM_a456073e2e19b310df9ed0f953dbd6abc}{
+\index{EM@{EM}!getRelHap1@{getRelHap1}}
+\index{getRelHap1@{getRelHap1}!EM@{EM}}
+\subsubsection[{getRelHap1}]{\setlength{\rightskip}{0pt plus 5cm}int EM::getRelHap1 (int {\em indiv}, \/  int {\em split}, \/  vector$<$ int $>$ \& {\em numAlleles}) const\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classEM_a456073e2e19b310df9ed0f953dbd6abc}
+
+
+. Use the combined form. 
+
+\hypertarget{classEM_a8a03279b3b78e8f88add021a28b7ac28}{
+\index{EM@{EM}!getRelHap2@{getRelHap2}}
+\index{getRelHap2@{getRelHap2}!EM@{EM}}
+\subsubsection[{getRelHap2}]{\setlength{\rightskip}{0pt plus 5cm}int EM::getRelHap2 (int {\em indiv}, \/  int {\em split}, \/  vector$<$ int $>$ \& {\em numAlleles}) const\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classEM_a8a03279b3b78e8f88add021a28b7ac28}
+\hypertarget{classEM_af63a611b10a4a1bbe15b2013d2c72b45}{
+\index{EM@{EM}!getRelHaps@{getRelHaps}}
+\index{getRelHaps@{getRelHaps}!EM@{EM}}
+\subsubsection[{getRelHaps}]{\setlength{\rightskip}{0pt plus 5cm}void EM::getRelHaps (int {\em indiv}, \/  int {\em split}, \/  int \& {\em newHapNum1}, \/  int \& {\em newHapNum2})\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classEM_af63a611b10a4a1bbe15b2013d2c72b45}
+\hypertarget{classEM_a3e6b256bb2996b1903f5a2490540659b}{
+\index{EM@{EM}!hapToIndex@{hapToIndex}}
+\index{hapToIndex@{hapToIndex}!EM@{EM}}
+\subsubsection[{hapToIndex}]{\setlength{\rightskip}{0pt plus 5cm}int EM::hapToIndex (const vector$<$ int $>$ \& {\em haps})\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classEM_a3e6b256bb2996b1903f5a2490540659b}
+\hypertarget{classEM_abdb50dc221b573b78c2c9785b2ae7f9b}{
+\index{EM@{EM}!index2Allele@{index2Allele}}
+\index{index2Allele@{index2Allele}!EM@{EM}}
+\subsubsection[{index2Allele}]{\setlength{\rightskip}{0pt plus 5cm}int EM::index2Allele (int {\em imark}, \/  int {\em haplotypeIndex})\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classEM_abdb50dc221b573b78c2c9785b2ae7f9b}
+\hypertarget{classEM_a8531164d0fa92217eb0c7d9f75382912}{
+\index{EM@{EM}!initEMAlgorithm@{initEMAlgorithm}}
+\index{initEMAlgorithm@{initEMAlgorithm}!EM@{EM}}
+\subsubsection[{initEMAlgorithm}]{\setlength{\rightskip}{0pt plus 5cm}void EM::initEMAlgorithm ()\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classEM_a8531164d0fa92217eb0c7d9f75382912}
+Perform initilization for the \hyperlink{classEM}{EM} by giving all haplotypes equal probability \hypertarget{classEM_a1bd0c351ef1ee04ad0552f2066d7f3d7}{
+\index{EM@{EM}!resolve@{resolve}}
+\index{resolve@{resolve}!EM@{EM}}
+\subsubsection[{resolve}]{\setlength{\rightskip}{0pt plus 5cm}void EM::resolve (vector$<$ vector$<$ double $>$ $>$ \& {\em personalProb}, \/  int {\em lefthap}, \/  int {\em righthap})\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classEM_a1bd0c351ef1ee04ad0552f2066d7f3d7}
+\hypertarget{classEM_abe803c5ae01733a57224c3d530ae2921}{
+\index{EM@{EM}!result@{result}}
+\index{result@{result}!EM@{EM}}
+\subsubsection[{result}]{\setlength{\rightskip}{0pt plus 5cm}void EM::result (double $\ast$$\ast$ {\em aFreq}, \/  vector$<$ int $>$ \& {\em numAlleles}, \/  vector$<$ double $>$ \& {\em hapProbs})}}
+\label{classEM_abe803c5ae01733a57224c3d530ae2921}
+\hypertarget{classEM_a7a49c56e4c55158f0c1ff4ec6a9469e3}{
+\index{EM@{EM}!reweightKnownHaps@{reweightKnownHaps}}
+\index{reweightKnownHaps@{reweightKnownHaps}!EM@{EM}}
+\subsubsection[{reweightKnownHaps}]{\setlength{\rightskip}{0pt plus 5cm}void EM::reweightKnownHaps ()\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classEM_a7a49c56e4c55158f0c1ff4ec6a9469e3}
+\hypertarget{classEM_a18638c8e6a8da46ca0ea77981c275486}{
+\index{EM@{EM}!run@{run}}
+\index{run@{run}!EM@{EM}}
+\subsubsection[{run}]{\setlength{\rightskip}{0pt plus 5cm}bool EM::run ()}}
+\label{classEM_a18638c8e6a8da46ca0ea77981c275486}
+Execute the \hyperlink{classEM}{EM} algorithm for the individuals that have been loaded. \hypertarget{classEM_abcc9e390b2a2c8143bfa364a7911d6fa}{
+\index{EM@{EM}!setup@{setup}}
+\index{setup@{setup}!EM@{EM}}
+\subsubsection[{setup}]{\setlength{\rightskip}{0pt plus 5cm}void EM::setup (const vector$<$ vector$<$ short $>$ $>$ \& {\em data})}}
+\label{classEM_abcc9e390b2a2c8143bfa364a7911d6fa}
+Perform the initilization steps to run on an arbitrary number of individuals.
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em \&data}]Each inner vector is a SNP. \end{DoxyParams}
+\hypertarget{classEM_a5393a49dd932245a931e6d5eece1cf27}{
+\index{EM@{EM}!uniqueElements@{uniqueElements}}
+\index{uniqueElements@{uniqueElements}!EM@{EM}}
+\subsubsection[{uniqueElements}]{\setlength{\rightskip}{0pt plus 5cm}int EM::uniqueElements (const vector$<$ short $>$ \& {\em v})\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classEM_a5393a49dd932245a931e6d5eece1cf27}
+
+
+\subsection{Friends And Related Function Documentation}
+\hypertarget{classEM_ab5eb8e85b324a9728c593bdc1ada8198}{
+\index{EM@{EM}!HaploStats@{HaploStats}}
+\index{HaploStats@{HaploStats}!EM@{EM}}
+\subsubsection[{HaploStats}]{\setlength{\rightskip}{0pt plus 5cm}friend class {\bf HaploStats}\hspace{0.3cm}{\ttfamily  \mbox{[}friend\mbox{]}}}}
+\label{classEM_ab5eb8e85b324a9728c593bdc1ada8198}
+
+
+\subsection{Field Documentation}
+\hypertarget{classEM_ae76fe505f85355d362d5022436980331}{
+\index{EM@{EM}!emFrequencies@{emFrequencies}}
+\index{emFrequencies@{emFrequencies}!EM@{EM}}
+\subsubsection[{emFrequencies}]{\setlength{\rightskip}{0pt plus 5cm}vector$<$double$>$ {\bf EM::emFrequencies}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classEM_ae76fe505f85355d362d5022436980331}
+\hypertarget{classEM_a4d771fc7aca0ee55ee0b8742269b54e7}{
+\index{EM@{EM}!haplotype1@{haplotype1}}
+\index{haplotype1@{haplotype1}!EM@{EM}}
+\subsubsection[{haplotype1}]{\setlength{\rightskip}{0pt plus 5cm}vector$<${\bf haplotype}$>$ {\bf EM::haplotype1}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classEM_a4d771fc7aca0ee55ee0b8742269b54e7}
+\hypertarget{classEM_a7eb2fa8a9c6db4c1425d77298cec869d}{
+\index{EM@{EM}!haplotype2@{haplotype2}}
+\index{haplotype2@{haplotype2}!EM@{EM}}
+\subsubsection[{haplotype2}]{\setlength{\rightskip}{0pt plus 5cm}vector$<${\bf haplotype}$>$ {\bf EM::haplotype2}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classEM_a7eb2fa8a9c6db4c1425d77298cec869d}
+\hypertarget{classEM_a16a75209aa892c812af91aaea1b41500}{
+\index{EM@{EM}!incompleteTable@{incompleteTable}}
+\index{incompleteTable@{incompleteTable}!EM@{EM}}
+\subsubsection[{incompleteTable}]{\setlength{\rightskip}{0pt plus 5cm}vector$<${\bf haplotype} $\ast$$>$ {\bf EM::incompleteTable}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classEM_a16a75209aa892c812af91aaea1b41500}
+\hypertarget{classEM_a0a7a49feeff6a6ce2908bd626c876a60}{
+\index{EM@{EM}!inTotal@{inTotal}}
+\index{inTotal@{inTotal}!EM@{EM}}
+\subsubsection[{inTotal}]{\setlength{\rightskip}{0pt plus 5cm}vector$<$vector$<$short$>$ $>$ {\bf EM::inTotal}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classEM_a0a7a49feeff6a6ce2908bd626c876a60}
+\hypertarget{classEM_a8355d01f8998e654c32b1fc8f478ced1}{
+\index{EM@{EM}!numAlleles@{numAlleles}}
+\index{numAlleles@{numAlleles}!EM@{EM}}
+\subsubsection[{numAlleles}]{\setlength{\rightskip}{0pt plus 5cm}vector$<$int$>$ {\bf EM::numAlleles}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classEM_a8355d01f8998e654c32b1fc8f478ced1}
+\hypertarget{classEM_ae8420599f2bb0359bec3f8640699aa43}{
+\index{EM@{EM}!numberAlleles@{numberAlleles}}
+\index{numberAlleles@{numberAlleles}!EM@{EM}}
+\subsubsection[{numberAlleles}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf EM::numberAlleles}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classEM_ae8420599f2bb0359bec3f8640699aa43}
+\hypertarget{classEM_a6fb53f57dafe2497417ae7b55748a2f5}{
+\index{EM@{EM}!numHaps@{numHaps}}
+\index{numHaps@{numHaps}!EM@{EM}}
+\subsubsection[{numHaps}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf EM::numHaps}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classEM_a6fb53f57dafe2497417ae7b55748a2f5}
+\hypertarget{classEM_af93ac6cc803cd05ab2a266e77b864ae1}{
+\index{EM@{EM}!numSplits@{numSplits}}
+\index{numSplits@{numSplits}!EM@{EM}}
+\subsubsection[{numSplits}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf EM::numSplits}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classEM_af93ac6cc803cd05ab2a266e77b864ae1}
+\hypertarget{classEM_abb7e20d53630eb8b692084ba1cf666c5}{
+\index{EM@{EM}!personalProb@{personalProb}}
+\index{personalProb@{personalProb}!EM@{EM}}
+\subsubsection[{personalProb}]{\setlength{\rightskip}{0pt plus 5cm}vector$<$vector$<$double$>$ $>$ {\bf EM::personalProb}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classEM_abb7e20d53630eb8b692084ba1cf666c5}
+\hypertarget{classEM_a138450b0d00acac64fd8a272b999be9f}{
+\index{EM@{EM}!setFor@{setFor}}
+\index{setFor@{setFor}!EM@{EM}}
+\subsubsection[{setFor}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf EM::setFor}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classEM_a138450b0d00acac64fd8a272b999be9f}
+\hypertarget{classEM_ae28d8a79298bd3b15801f4eff84216b1}{
+\index{EM@{EM}!tempCount@{tempCount}}
+\index{tempCount@{tempCount}!EM@{EM}}
+\subsubsection[{tempCount}]{\setlength{\rightskip}{0pt plus 5cm}vector$<$double$>$ {\bf EM::tempCount}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classEM_ae28d8a79298bd3b15801f4eff84216b1}
+\hypertarget{classEM_adc712759a9c74b26826ffbc28d4cf410}{
+\index{EM@{EM}!unknownProb@{unknownProb}}
+\index{unknownProb@{unknownProb}!EM@{EM}}
+\subsubsection[{unknownProb}]{\setlength{\rightskip}{0pt plus 5cm}vector$<$double$>$ {\bf EM::unknownProb}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classEM_adc712759a9c74b26826ffbc28d4cf410}
+
+
+The documentation for this class was generated from the following files:\begin{DoxyCompactItemize}
+\item 
+engine/em/\hyperlink{em_8h}{em.h}\item 
+engine/em/\hyperlink{em_8cpp}{em.cpp}\end{DoxyCompactItemize}

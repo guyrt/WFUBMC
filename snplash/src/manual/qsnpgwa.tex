@@ -1,0 +1,95 @@
+\section{QSNPGWA}
+\label{sec:qsnpgwa}
+\subsection{Description}
+This is the QSNPGWA section.
+\subsection{Usage}
+\begin{verbatim}
+  snplash -engine qsnpgwa -geno <filename> -phen <filename> \
+          -out <filename> -map <filename> -cov <name1,...>  \
+          --haplo_file --hwe_file --haplo_thresh <integer> --val
+
+where
+
+  -cov            Comma-separated names of covariates from the
+                  phenotype file
+  --haplo_file    Print additional haplotype information to
+                  <out>.haplo[1,2,3]
+  --hwe_file      Print additional Hardy-Weinberg statistics to
+                  <out>.hwe[cntrl,case]
+  --haplo_thresh  Set the threshold number of chromosomes across
+                  all participants on which a haplotype must 
+                  exist to be used for global haplotype testing.
+  --val           Print additional statistics to <out>.statvals
+
+\end{verbatim}
+
+\subsection{Output}
+General, Hardy-Weinberg, association and linkage statistics are printed.  The
+specific  variables are:
+
+\vspace{1em}
+\begin{supertabular}{r p{5in}}
+  General & ~ \\
+    Chr: & The chromosomal location for the feature \\
+    Marker: & The marker label \\
+    Position: & The position of the feature on the chromosome \\
+    Difference: & \\
+    Total Number Indivs: & \\
+    Minor Allele Freq: & Minor allele frequency\\
+    \%{}\_Miss: & Percentage records missing a value for this allele\\
+    \%{}\_Miss PVal: & \\
+    P: & \\
+    Q: & \\
+    Ref(a): & \\
+    ~ & ~\\[1em]
+  Hardy-Weinberg Analysis & ~ \\
+    NumPP: &    \\
+    ENumPP: &    \\
+    NumPQ: &    \\
+    ENumPQ: &    \\
+    NumQQ: &    \\
+    ENumQQ: &    \\
+    X\^2\_PValue: &    \\
+    Prob\_HWE: &     \\
+    ~ & ~ \\
+
+  Quantitative Genotypic Association & \\
+          Two-degree-of-freedom test & \\
+   PV\_2DF: & P-value for the two-degree-of-freedom test \\
+
+   ~ & ~ \\[1em]
+  Dominant Test & ~ \\
+      PV\_Dom: & P-value \\
+      Dom\_Beta: & Coefficient \\
+      Dom\_SE: & Standard error \\[1em]
+
+   Additive Test & ~ \\
+      PV\_Dom: & P-value \\
+      Dom\_Beta: & Coefficient \\
+      Dom\_SE: & Standard error \\[1em]
+
+   Recessive Test & ~ \\
+      PV\_Dom: & P-value \\
+      Dom\_Beta: & Coefficient \\
+      Dom\_SE: & Standard error \\[1em]
+
+   Lack of Fit & ~ \\
+      PV\_LOF: & Lack of fit p-value \\[1em]
+
+   Means and Standard Deviations & ~ \\
+      Mean\_AA: & \\
+      SD\_AA: & \\
+      Mean\_Aa: & \\
+      SD\_Aa: & \\
+      Mean\_aa: & \\
+      SD\_aa: &  \\
+      Mean\_AA\&Aa: &  \\
+      SD\_AA\&Aa : & \\
+      Mean\_Aa\&aa: &  \\
+      SD\_Aa\&aa: &  \\ [1em]
+
+   (Linkage) & ~ \\
+      D\_Prime: & $D'$ \\
+      R\_Sqr: & $r^2$  \\
+ 
+\end{supertabular}

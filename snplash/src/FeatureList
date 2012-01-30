@@ -1,0 +1,26 @@
+This is a comprehensive (eventually) list of all features in the SPLASH
+software suite:
+
+Snpgwa:
+	Population statistics (tested)
+	Genotype statistics (tested)
+	Dprime/Rsquare (tested)
+	Allelic test (tested)
+	2 Marker Haplotype (tested)
+	3 Marker Haplotype (tested)
+	
+Qsnpgwa:
+	Population statistics (basic tests - needs to be tested again)
+	Genotype statistics (tested)
+	Means and SD (needs retest)
+	
+Dprime:
+	Basic tests passed.  Needs comprehensive test
+	
+Dandelion:
+	Haplotypes (basic tests passed)
+	Allelic (tested)
+	All haplotype tests in LR (needs implemented)
+	
+Intertwolog:
+	Needs testing

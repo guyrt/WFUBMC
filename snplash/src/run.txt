@@ -1,0 +1,4 @@
+
+./snpadt -geno ../test/sim2000.geno -phen ../test/sim2000.covphen -out ../test/sim2000.snpgwa -beg 1 -end 25 -engine snpgwa -trait ds -cov cov1
+
+./snpadt -geno ../test/sim2000.geno -phen ../test/sim2000.covphen -out ../test/sim2000.qsnpgwa -beg 1 -end 25 -engine qsnpgwa -trait cov1

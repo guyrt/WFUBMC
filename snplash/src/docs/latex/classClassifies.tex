@@ -1,0 +1,65 @@
+\hypertarget{classClassifies}{
+\section{Classifies Class Reference}
+\label{classClassifies}\index{Classifies@{Classifies}}
+}
+
+
+{\ttfamily \#include $<$combinable.h$>$}
+
+Inheritance diagram for Classifies:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3cm]{classClassifies}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual void \hyperlink{classClassifies_a15864d3a95edfde2bf48384c9b25c6d8}{classify} (int a\mbox{[}4\mbox{]})=0
+\item 
+virtual void \hyperlink{classClassifies_a7d2ae89f04af1a74eb6dd35be8eda476}{classify} (int a\mbox{[}4\mbox{]}, \hyperlink{classSnpData}{SnpData} $\ast$)=0
+\item 
+virtual int \hyperlink{classClassifies_a5e3d218b44024ec2c3ab3398e3dbd2e3}{classify} (vector$<$ short $>$ \&)=0
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Abstract class for an engine that can be used in a bag or under cross-\/validation.
+
+The point here is to include the capacity for classifying instances.
+
+An engine is a large algorithm class like SNPGWA, INTERTWOLOG, ADTREE, or ADTREEBAG 
+
+\subsection{Member Function Documentation}
+\hypertarget{classClassifies_a5e3d218b44024ec2c3ab3398e3dbd2e3}{
+\index{Classifies@{Classifies}!classify@{classify}}
+\index{classify@{classify}!Classifies@{Classifies}}
+\subsubsection[{classify}]{\setlength{\rightskip}{0pt plus 5cm}virtual int Classifies::classify (vector$<$ short $>$ \&)\hspace{0.3cm}{\ttfamily  \mbox{[}pure virtual\mbox{]}}}}
+\label{classClassifies_a5e3d218b44024ec2c3ab3398e3dbd2e3}
+
+
+Implemented in \hyperlink{classADTree_a266a816ec8750b5ceb1549ff610fb67b}{ADTree}, \hyperlink{classBagging_a92072d6610e9b9d932d10a123cc6ff18}{Bagging}, and \hyperlink{classCrossValidation_a4c11570314fe9e98e434abee990ac2d4}{CrossValidation}.
+
+\hypertarget{classClassifies_a7d2ae89f04af1a74eb6dd35be8eda476}{
+\index{Classifies@{Classifies}!classify@{classify}}
+\index{classify@{classify}!Classifies@{Classifies}}
+\subsubsection[{classify}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Classifies::classify (int {\em a}\mbox{[}4\mbox{]}, \/  {\bf SnpData} $\ast$)\hspace{0.3cm}{\ttfamily  \mbox{[}pure virtual\mbox{]}}}}
+\label{classClassifies_a7d2ae89f04af1a74eb6dd35be8eda476}
+
+
+Implemented in \hyperlink{classADTree_a498b7a7830dba60118e89d5f5bb7cbd3}{ADTree}, \hyperlink{classBagging_a9b17e15983996f8ae3b39564e7c3deba}{Bagging}, and \hyperlink{classCrossValidation_a237cd67d2e1e6fc7c62abf0fef8bd3e8}{CrossValidation}.
+
+\hypertarget{classClassifies_a15864d3a95edfde2bf48384c9b25c6d8}{
+\index{Classifies@{Classifies}!classify@{classify}}
+\index{classify@{classify}!Classifies@{Classifies}}
+\subsubsection[{classify}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Classifies::classify (int {\em a}\mbox{[}4\mbox{]})\hspace{0.3cm}{\ttfamily  \mbox{[}pure virtual\mbox{]}}}}
+\label{classClassifies_a15864d3a95edfde2bf48384c9b25c6d8}
+
+
+Implemented in \hyperlink{classADTree_a335cdf83f845638ae6c74fa1d7e7e4b8}{ADTree}, \hyperlink{classBagging_a02227120bc610a21f39f2454ac03ec7b}{Bagging}, and \hyperlink{classCrossValidation_a6b26e9c496dac46fb066fae0f381fed0}{CrossValidation}.
+
+
+
+The documentation for this class was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+engine/\hyperlink{combinable_8h}{combinable.h}\end{DoxyCompactItemize}

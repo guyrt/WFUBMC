@@ -1,0 +1,37 @@
+# latexmake
+#
+# Make file for latex file processing.
+#
+# Run as 'make -f <this_file_name>'
+#
+# David R. McWilliams
+# 08-Sep-2011
+
+latexfile = manualshell
+TEX = latex
+
+## Reruns latex if needed.  To get rid of this capability, delete the
+## three lines after the rule.  Delete .bbl dependency if not using
+## BibTeX references.
+## idea from http://ctan.unsw.edu.au/help/uk-tex-faq/Makefile
+
+$(latexfile).dvi : $(latexfile).tex
+	while ($(TEX) $(latexfile) ; \
+	grep -q "Rerun to get cross" $(latexfile).log ) do true ; \
+	done
+
+$(latexfile).pdf : $(latexfile).dvi
+	dvipdf $(latexfile).dvi $(latexfile).pdf
+
+pdf : $(latexfile).pdf
+
+
+## make can't know all the sourcefiles.  some file may not have
+## sourcefiles, e.g. eps's taken from other documents.
+$(latexfile).tar.gz : $(latexfile).tex
+	tar -czvf $(latexfile).tar.gz $^
+
+tarball: $(latexfile).tar.gz
+
+clean:
+	rm *dvi *log *aux *toc *lof

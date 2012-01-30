@@ -1,0 +1,381 @@
+\hypertarget{classEngineParamReader}{
+\section{EngineParamReader Class Reference}
+\label{classEngineParamReader}\index{EngineParamReader@{EngineParamReader}}
+}
+
+
+{\ttfamily \#include $<$engine\_\-param\_\-reader.h$>$}
+
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+enum \hyperlink{classEngineParamReader_ab2ee80aa67ba657beddf852c526e1a3d}{BaggingTypes} \{ \hyperlink{classEngineParamReader_ab2ee80aa67ba657beddf852c526e1a3dad564d072511cbff180a2f017a20eb842}{ALL}, 
+\hyperlink{classEngineParamReader_ab2ee80aa67ba657beddf852c526e1a3daa474dec3c26cb72fb2762ce5c9a6ddf0}{LEAVES}, 
+\hyperlink{classEngineParamReader_ab2ee80aa67ba657beddf852c526e1a3da84d0e6978fb6ad03ff1095742531abd9}{SUBTREE}
+ \}
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classEngineParamReader_a0fcc8aa5dcc6a42dc88e94f7177d4322}{EngineParamReader} ()
+\item 
+void \hyperlink{classEngineParamReader_a6205586b208453840260a6203f605037}{read\_\-parameters} (vector$<$ string $>$ $\ast$)
+\item 
+int \hyperlink{classEngineParamReader_a1c0d37ffe417acf63b4eec01ca0d3836}{get\_\-cross\_\-validation} ()
+\begin{DoxyCompactList}\small\item\em Getters. \item\end{DoxyCompactList}\item 
+int \hyperlink{classEngineParamReader_a4338ed4d4978b04d6368cb10da68ccbd}{get\_\-number\_\-of\_\-bags} ()
+\item 
+\hyperlink{classParamReader_ade771142042ad0251f905f38248ae9df}{ParamReader::EngineTypes} \hyperlink{classEngineParamReader_a0e58d3172ab16c243a207651cb39cae0}{get\_\-engine\_\-type} ()
+\item 
+int \hyperlink{classEngineParamReader_aaf990b2dfcdb336b1ae0ee368518bca5}{get\_\-threshold\_\-of\_\-bags} ()
+\item 
+double \hyperlink{classEngineParamReader_af2226b8cad9a09be1acb47244266ce70}{get\_\-division\_\-threshold} ()
+\item 
+int \hyperlink{classEngineParamReader_a70ca973f1da2ca59547f9ac87ed83558}{get\_\-number\_\-of\_\-nodes} ()
+\item 
+\hyperlink{classEngineParamReader_ab2ee80aa67ba657beddf852c526e1a3d}{BaggingTypes} \hyperlink{classEngineParamReader_a73bbd8a96eb9c000aace5cb69d899f34}{get\_\-bag\_\-type} ()
+\item 
+bool \hyperlink{classEngineParamReader_a466e0c76542221a4e0d98b91a670cc75}{get\_\-dprime\_\-smartpairs} ()
+\item 
+int \hyperlink{classEngineParamReader_a1bf555e1267a06976f5241e8aa46e5d9}{get\_\-dprime\_\-fmt} ()
+\item 
+int \hyperlink{classEngineParamReader_a27e98726d5628e58e036c5f3a5d53a8f}{get\_\-dprime\_\-window} ()
+\item 
+bool \hyperlink{classEngineParamReader_ac4beadc882ffad47d90c2a4a6b6f1b44}{get\_\-snpgwa\_\-dohap} ()
+\item 
+bool \hyperlink{classEngineParamReader_abb93491da0bbba648a51ff2f785b6513}{get\_\-output\_\-val} ()
+\item 
+bool \hyperlink{classEngineParamReader_a0e8c6905841556a37fdaa536d3067cfb}{get\_\-output\_\-geno} ()
+\item 
+bool \hyperlink{classEngineParamReader_a70a565ae28a5c9fdc927dcdf7a43024b}{get\_\-output\_\-haplo} ()
+\item 
+bool \hyperlink{classEngineParamReader_a84cb9683c21d88007a5cb730ec670730}{get\_\-output\_\-hwe} ()
+\item 
+int \hyperlink{classEngineParamReader_ace42820941952d215dd2648794b95187}{get\_\-haplo\_\-thresh} ()
+\item 
+bool \hyperlink{classEngineParamReader_a0a165af1235bfe522dae1217821748f7}{get\_\-dandelion\_\-pprob} ()
+\item 
+int \hyperlink{classEngineParamReader_a278f819c297b3f62457823ceb0c69a94}{get\_\-dandelion\_\-window} ()
+\item 
+double \hyperlink{classEngineParamReader_ade1f5ccf0bd5c7cb748ca66fd332cbd0}{getRegressionConditionNumberThreshold} ()
+\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \hyperlink{classEngineParamReader_a4708b88a7e4708c648a82b1374b1f2b8}{check\_\-necessary} ()
+\item 
+bool \hyperlink{classEngineParamReader_ae7836fec858ebba41351511bc3fd0147}{check\_\-conflicting} ()
+\item 
+bool \hyperlink{classEngineParamReader_a99bed4b33c7cec3662413e3d049adc4c}{check\_\-engine\_\-param\_\-conflict} ()
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classParamReader_ade771142042ad0251f905f38248ae9df}{ParamReader::EngineTypes} \hyperlink{classEngineParamReader_a7e6ea61924214939032fdbce1ecba651}{engine\_\-type}
+\item 
+int \hyperlink{classEngineParamReader_ae664f1cefdf1bfbb3fb93d3dcacac822}{number\_\-of\_\-crossvalidations}
+\item 
+int \hyperlink{classEngineParamReader_ade5d84964b6eebdb2a0efb86db6d5486}{number\_\-of\_\-bags}
+\item 
+int \hyperlink{classEngineParamReader_ad071b31418cfeeb13b015064bf3714b0}{threshold\_\-of\_\-bags}
+\item 
+\hyperlink{classEngineParamReader_ab2ee80aa67ba657beddf852c526e1a3d}{BaggingTypes} \hyperlink{classEngineParamReader_aa014c5a4566d1732eb0a14435330f379}{bag\_\-type}
+\item 
+int \hyperlink{classEngineParamReader_ac1054fd8623de4a86d2a1cf4085628c0}{number\_\-of\_\-nodes}
+\item 
+double \hyperlink{classEngineParamReader_a9b18c388f784d057fc284be2f372bb1e}{division\_\-threshold}
+\item 
+bool \hyperlink{classEngineParamReader_acb567723678ce125c1b29070aadcebf8}{dprime\_\-smartpairs}
+\item 
+int \hyperlink{classEngineParamReader_aa5e874ef2077ba99e90ab42f13049dc7}{dprime\_\-fmt}
+\item 
+int \hyperlink{classEngineParamReader_a0b24a93f84519a2392fbaab16b6bc82a}{dprime\_\-window}
+\item 
+bool \hyperlink{classEngineParamReader_ac782b98dc9c201d73458b3ae6c5a53e6}{snpgwa\_\-dohaptest}
+\item 
+bool \hyperlink{classEngineParamReader_adfad9c1511ba0932828906285b9a022d}{output\_\-val}
+\item 
+bool \hyperlink{classEngineParamReader_af1d4d68b8561127a5134090ebaedee56}{output\_\-geno}
+\item 
+bool \hyperlink{classEngineParamReader_a7747cc0a7bc3dbe11dea0df50349a2cc}{output\_\-haplo}
+\item 
+bool \hyperlink{classEngineParamReader_ad5357c75728cd53b4d6927e1d119b8c3}{output\_\-hwe}
+\item 
+bool \hyperlink{classEngineParamReader_ac352d87f0967d442b9d1e76757b7aab9}{dandelion\_\-pprob}
+\item 
+int \hyperlink{classEngineParamReader_a1a4228fe387a551cc84e1f45e4e55aca}{haplo\_\-thresh}
+\item 
+int \hyperlink{classEngineParamReader_a9a843b871678893b7c8968de092f4b48}{dandelion\_\-window}
+\begin{DoxyCompactList}\small\item\em acceptance of haplotype for testing. \item\end{DoxyCompactList}\item 
+double \hyperlink{classEngineParamReader_a3c9b1f9d8ed6b84647e3321faeadabfc}{regression\_\-condition\_\-threshold}
+\begin{DoxyCompactList}\small\item\em Stats engines. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Member Enumeration Documentation}
+\hypertarget{classEngineParamReader_ab2ee80aa67ba657beddf852c526e1a3d}{
+\index{EngineParamReader@{EngineParamReader}!BaggingTypes@{BaggingTypes}}
+\index{BaggingTypes@{BaggingTypes}!EngineParamReader@{EngineParamReader}}
+\subsubsection[{BaggingTypes}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf EngineParamReader::BaggingTypes}}}
+\label{classEngineParamReader_ab2ee80aa67ba657beddf852c526e1a3d}
+\begin{Desc}
+\item[Enumerator: ]\par
+\begin{description}
+\index{ALL@{ALL}!EngineParamReader@{EngineParamReader}}\index{EngineParamReader@{EngineParamReader}!ALL@{ALL}}\item[{\em 
+\hypertarget{classEngineParamReader_ab2ee80aa67ba657beddf852c526e1a3dad564d072511cbff180a2f017a20eb842}{
+ALL}
+\label{classEngineParamReader_ab2ee80aa67ba657beddf852c526e1a3dad564d072511cbff180a2f017a20eb842}
+}]\index{LEAVES@{LEAVES}!EngineParamReader@{EngineParamReader}}\index{EngineParamReader@{EngineParamReader}!LEAVES@{LEAVES}}\item[{\em 
+\hypertarget{classEngineParamReader_ab2ee80aa67ba657beddf852c526e1a3daa474dec3c26cb72fb2762ce5c9a6ddf0}{
+LEAVES}
+\label{classEngineParamReader_ab2ee80aa67ba657beddf852c526e1a3daa474dec3c26cb72fb2762ce5c9a6ddf0}
+}]\index{SUBTREE@{SUBTREE}!EngineParamReader@{EngineParamReader}}\index{EngineParamReader@{EngineParamReader}!SUBTREE@{SUBTREE}}\item[{\em 
+\hypertarget{classEngineParamReader_ab2ee80aa67ba657beddf852c526e1a3da84d0e6978fb6ad03ff1095742531abd9}{
+SUBTREE}
+\label{classEngineParamReader_ab2ee80aa67ba657beddf852c526e1a3da84d0e6978fb6ad03ff1095742531abd9}
+}]\end{description}
+\end{Desc}
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classEngineParamReader_a0fcc8aa5dcc6a42dc88e94f7177d4322}{
+\index{EngineParamReader@{EngineParamReader}!EngineParamReader@{EngineParamReader}}
+\index{EngineParamReader@{EngineParamReader}!EngineParamReader@{EngineParamReader}}
+\subsubsection[{EngineParamReader}]{\setlength{\rightskip}{0pt plus 5cm}EngineParamReader::EngineParamReader ()}}
+\label{classEngineParamReader_a0fcc8aa5dcc6a42dc88e94f7177d4322}
+\begin{Desc}
+\item[\hyperlink{todo__todo000001}{Todo}]Make all of these defaults for speed. \end{Desc}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classEngineParamReader_ae7836fec858ebba41351511bc3fd0147}{
+\index{EngineParamReader@{EngineParamReader}!check\_\-conflicting@{check\_\-conflicting}}
+\index{check\_\-conflicting@{check\_\-conflicting}!EngineParamReader@{EngineParamReader}}
+\subsubsection[{check\_\-conflicting}]{\setlength{\rightskip}{0pt plus 5cm}bool EngineParamReader::check\_\-conflicting ()\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classEngineParamReader_ae7836fec858ebba41351511bc3fd0147}
+\hypertarget{classEngineParamReader_a99bed4b33c7cec3662413e3d049adc4c}{
+\index{EngineParamReader@{EngineParamReader}!check\_\-engine\_\-param\_\-conflict@{check\_\-engine\_\-param\_\-conflict}}
+\index{check\_\-engine\_\-param\_\-conflict@{check\_\-engine\_\-param\_\-conflict}!EngineParamReader@{EngineParamReader}}
+\subsubsection[{check\_\-engine\_\-param\_\-conflict}]{\setlength{\rightskip}{0pt plus 5cm}bool EngineParamReader::check\_\-engine\_\-param\_\-conflict ()\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classEngineParamReader_a99bed4b33c7cec3662413e3d049adc4c}
+\hypertarget{classEngineParamReader_a4708b88a7e4708c648a82b1374b1f2b8}{
+\index{EngineParamReader@{EngineParamReader}!check\_\-necessary@{check\_\-necessary}}
+\index{check\_\-necessary@{check\_\-necessary}!EngineParamReader@{EngineParamReader}}
+\subsubsection[{check\_\-necessary}]{\setlength{\rightskip}{0pt plus 5cm}bool EngineParamReader::check\_\-necessary ()\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classEngineParamReader_a4708b88a7e4708c648a82b1374b1f2b8}
+\hypertarget{classEngineParamReader_a73bbd8a96eb9c000aace5cb69d899f34}{
+\index{EngineParamReader@{EngineParamReader}!get\_\-bag\_\-type@{get\_\-bag\_\-type}}
+\index{get\_\-bag\_\-type@{get\_\-bag\_\-type}!EngineParamReader@{EngineParamReader}}
+\subsubsection[{get\_\-bag\_\-type}]{\setlength{\rightskip}{0pt plus 5cm}{\bf BaggingTypes} EngineParamReader::get\_\-bag\_\-type ()\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{classEngineParamReader_a73bbd8a96eb9c000aace5cb69d899f34}
+\hypertarget{classEngineParamReader_a1c0d37ffe417acf63b4eec01ca0d3836}{
+\index{EngineParamReader@{EngineParamReader}!get\_\-cross\_\-validation@{get\_\-cross\_\-validation}}
+\index{get\_\-cross\_\-validation@{get\_\-cross\_\-validation}!EngineParamReader@{EngineParamReader}}
+\subsubsection[{get\_\-cross\_\-validation}]{\setlength{\rightskip}{0pt plus 5cm}int EngineParamReader::get\_\-cross\_\-validation ()\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{classEngineParamReader_a1c0d37ffe417acf63b4eec01ca0d3836}
+
+
+Getters. 
+
+\hypertarget{classEngineParamReader_a0a165af1235bfe522dae1217821748f7}{
+\index{EngineParamReader@{EngineParamReader}!get\_\-dandelion\_\-pprob@{get\_\-dandelion\_\-pprob}}
+\index{get\_\-dandelion\_\-pprob@{get\_\-dandelion\_\-pprob}!EngineParamReader@{EngineParamReader}}
+\subsubsection[{get\_\-dandelion\_\-pprob}]{\setlength{\rightskip}{0pt plus 5cm}bool EngineParamReader::get\_\-dandelion\_\-pprob ()\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{classEngineParamReader_a0a165af1235bfe522dae1217821748f7}
+\hypertarget{classEngineParamReader_a278f819c297b3f62457823ceb0c69a94}{
+\index{EngineParamReader@{EngineParamReader}!get\_\-dandelion\_\-window@{get\_\-dandelion\_\-window}}
+\index{get\_\-dandelion\_\-window@{get\_\-dandelion\_\-window}!EngineParamReader@{EngineParamReader}}
+\subsubsection[{get\_\-dandelion\_\-window}]{\setlength{\rightskip}{0pt plus 5cm}int EngineParamReader::get\_\-dandelion\_\-window ()\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{classEngineParamReader_a278f819c297b3f62457823ceb0c69a94}
+\hypertarget{classEngineParamReader_af2226b8cad9a09be1acb47244266ce70}{
+\index{EngineParamReader@{EngineParamReader}!get\_\-division\_\-threshold@{get\_\-division\_\-threshold}}
+\index{get\_\-division\_\-threshold@{get\_\-division\_\-threshold}!EngineParamReader@{EngineParamReader}}
+\subsubsection[{get\_\-division\_\-threshold}]{\setlength{\rightskip}{0pt plus 5cm}double EngineParamReader::get\_\-division\_\-threshold ()\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{classEngineParamReader_af2226b8cad9a09be1acb47244266ce70}
+\hypertarget{classEngineParamReader_a1bf555e1267a06976f5241e8aa46e5d9}{
+\index{EngineParamReader@{EngineParamReader}!get\_\-dprime\_\-fmt@{get\_\-dprime\_\-fmt}}
+\index{get\_\-dprime\_\-fmt@{get\_\-dprime\_\-fmt}!EngineParamReader@{EngineParamReader}}
+\subsubsection[{get\_\-dprime\_\-fmt}]{\setlength{\rightskip}{0pt plus 5cm}int EngineParamReader::get\_\-dprime\_\-fmt ()\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{classEngineParamReader_a1bf555e1267a06976f5241e8aa46e5d9}
+\hypertarget{classEngineParamReader_a466e0c76542221a4e0d98b91a670cc75}{
+\index{EngineParamReader@{EngineParamReader}!get\_\-dprime\_\-smartpairs@{get\_\-dprime\_\-smartpairs}}
+\index{get\_\-dprime\_\-smartpairs@{get\_\-dprime\_\-smartpairs}!EngineParamReader@{EngineParamReader}}
+\subsubsection[{get\_\-dprime\_\-smartpairs}]{\setlength{\rightskip}{0pt plus 5cm}bool EngineParamReader::get\_\-dprime\_\-smartpairs ()\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{classEngineParamReader_a466e0c76542221a4e0d98b91a670cc75}
+\hypertarget{classEngineParamReader_a27e98726d5628e58e036c5f3a5d53a8f}{
+\index{EngineParamReader@{EngineParamReader}!get\_\-dprime\_\-window@{get\_\-dprime\_\-window}}
+\index{get\_\-dprime\_\-window@{get\_\-dprime\_\-window}!EngineParamReader@{EngineParamReader}}
+\subsubsection[{get\_\-dprime\_\-window}]{\setlength{\rightskip}{0pt plus 5cm}int EngineParamReader::get\_\-dprime\_\-window ()\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{classEngineParamReader_a27e98726d5628e58e036c5f3a5d53a8f}
+\hypertarget{classEngineParamReader_a0e58d3172ab16c243a207651cb39cae0}{
+\index{EngineParamReader@{EngineParamReader}!get\_\-engine\_\-type@{get\_\-engine\_\-type}}
+\index{get\_\-engine\_\-type@{get\_\-engine\_\-type}!EngineParamReader@{EngineParamReader}}
+\subsubsection[{get\_\-engine\_\-type}]{\setlength{\rightskip}{0pt plus 5cm}{\bf ParamReader::EngineTypes} EngineParamReader::get\_\-engine\_\-type ()\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{classEngineParamReader_a0e58d3172ab16c243a207651cb39cae0}
+\hypertarget{classEngineParamReader_ace42820941952d215dd2648794b95187}{
+\index{EngineParamReader@{EngineParamReader}!get\_\-haplo\_\-thresh@{get\_\-haplo\_\-thresh}}
+\index{get\_\-haplo\_\-thresh@{get\_\-haplo\_\-thresh}!EngineParamReader@{EngineParamReader}}
+\subsubsection[{get\_\-haplo\_\-thresh}]{\setlength{\rightskip}{0pt plus 5cm}int EngineParamReader::get\_\-haplo\_\-thresh ()\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{classEngineParamReader_ace42820941952d215dd2648794b95187}
+\hypertarget{classEngineParamReader_a4338ed4d4978b04d6368cb10da68ccbd}{
+\index{EngineParamReader@{EngineParamReader}!get\_\-number\_\-of\_\-bags@{get\_\-number\_\-of\_\-bags}}
+\index{get\_\-number\_\-of\_\-bags@{get\_\-number\_\-of\_\-bags}!EngineParamReader@{EngineParamReader}}
+\subsubsection[{get\_\-number\_\-of\_\-bags}]{\setlength{\rightskip}{0pt plus 5cm}int EngineParamReader::get\_\-number\_\-of\_\-bags ()\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{classEngineParamReader_a4338ed4d4978b04d6368cb10da68ccbd}
+\hypertarget{classEngineParamReader_a70ca973f1da2ca59547f9ac87ed83558}{
+\index{EngineParamReader@{EngineParamReader}!get\_\-number\_\-of\_\-nodes@{get\_\-number\_\-of\_\-nodes}}
+\index{get\_\-number\_\-of\_\-nodes@{get\_\-number\_\-of\_\-nodes}!EngineParamReader@{EngineParamReader}}
+\subsubsection[{get\_\-number\_\-of\_\-nodes}]{\setlength{\rightskip}{0pt plus 5cm}int EngineParamReader::get\_\-number\_\-of\_\-nodes ()\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{classEngineParamReader_a70ca973f1da2ca59547f9ac87ed83558}
+\hypertarget{classEngineParamReader_a0e8c6905841556a37fdaa536d3067cfb}{
+\index{EngineParamReader@{EngineParamReader}!get\_\-output\_\-geno@{get\_\-output\_\-geno}}
+\index{get\_\-output\_\-geno@{get\_\-output\_\-geno}!EngineParamReader@{EngineParamReader}}
+\subsubsection[{get\_\-output\_\-geno}]{\setlength{\rightskip}{0pt plus 5cm}bool EngineParamReader::get\_\-output\_\-geno ()\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{classEngineParamReader_a0e8c6905841556a37fdaa536d3067cfb}
+\hypertarget{classEngineParamReader_a70a565ae28a5c9fdc927dcdf7a43024b}{
+\index{EngineParamReader@{EngineParamReader}!get\_\-output\_\-haplo@{get\_\-output\_\-haplo}}
+\index{get\_\-output\_\-haplo@{get\_\-output\_\-haplo}!EngineParamReader@{EngineParamReader}}
+\subsubsection[{get\_\-output\_\-haplo}]{\setlength{\rightskip}{0pt plus 5cm}bool EngineParamReader::get\_\-output\_\-haplo ()\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{classEngineParamReader_a70a565ae28a5c9fdc927dcdf7a43024b}
+\hypertarget{classEngineParamReader_a84cb9683c21d88007a5cb730ec670730}{
+\index{EngineParamReader@{EngineParamReader}!get\_\-output\_\-hwe@{get\_\-output\_\-hwe}}
+\index{get\_\-output\_\-hwe@{get\_\-output\_\-hwe}!EngineParamReader@{EngineParamReader}}
+\subsubsection[{get\_\-output\_\-hwe}]{\setlength{\rightskip}{0pt plus 5cm}bool EngineParamReader::get\_\-output\_\-hwe ()\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{classEngineParamReader_a84cb9683c21d88007a5cb730ec670730}
+\hypertarget{classEngineParamReader_abb93491da0bbba648a51ff2f785b6513}{
+\index{EngineParamReader@{EngineParamReader}!get\_\-output\_\-val@{get\_\-output\_\-val}}
+\index{get\_\-output\_\-val@{get\_\-output\_\-val}!EngineParamReader@{EngineParamReader}}
+\subsubsection[{get\_\-output\_\-val}]{\setlength{\rightskip}{0pt plus 5cm}bool EngineParamReader::get\_\-output\_\-val ()\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{classEngineParamReader_abb93491da0bbba648a51ff2f785b6513}
+\hypertarget{classEngineParamReader_ac4beadc882ffad47d90c2a4a6b6f1b44}{
+\index{EngineParamReader@{EngineParamReader}!get\_\-snpgwa\_\-dohap@{get\_\-snpgwa\_\-dohap}}
+\index{get\_\-snpgwa\_\-dohap@{get\_\-snpgwa\_\-dohap}!EngineParamReader@{EngineParamReader}}
+\subsubsection[{get\_\-snpgwa\_\-dohap}]{\setlength{\rightskip}{0pt plus 5cm}bool EngineParamReader::get\_\-snpgwa\_\-dohap ()\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{classEngineParamReader_ac4beadc882ffad47d90c2a4a6b6f1b44}
+\hypertarget{classEngineParamReader_aaf990b2dfcdb336b1ae0ee368518bca5}{
+\index{EngineParamReader@{EngineParamReader}!get\_\-threshold\_\-of\_\-bags@{get\_\-threshold\_\-of\_\-bags}}
+\index{get\_\-threshold\_\-of\_\-bags@{get\_\-threshold\_\-of\_\-bags}!EngineParamReader@{EngineParamReader}}
+\subsubsection[{get\_\-threshold\_\-of\_\-bags}]{\setlength{\rightskip}{0pt plus 5cm}int EngineParamReader::get\_\-threshold\_\-of\_\-bags ()\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{classEngineParamReader_aaf990b2dfcdb336b1ae0ee368518bca5}
+\hypertarget{classEngineParamReader_ade1f5ccf0bd5c7cb748ca66fd332cbd0}{
+\index{EngineParamReader@{EngineParamReader}!getRegressionConditionNumberThreshold@{getRegressionConditionNumberThreshold}}
+\index{getRegressionConditionNumberThreshold@{getRegressionConditionNumberThreshold}!EngineParamReader@{EngineParamReader}}
+\subsubsection[{getRegressionConditionNumberThreshold}]{\setlength{\rightskip}{0pt plus 5cm}double EngineParamReader::getRegressionConditionNumberThreshold ()\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{classEngineParamReader_ade1f5ccf0bd5c7cb748ca66fd332cbd0}
+\hypertarget{classEngineParamReader_a6205586b208453840260a6203f605037}{
+\index{EngineParamReader@{EngineParamReader}!read\_\-parameters@{read\_\-parameters}}
+\index{read\_\-parameters@{read\_\-parameters}!EngineParamReader@{EngineParamReader}}
+\subsubsection[{read\_\-parameters}]{\setlength{\rightskip}{0pt plus 5cm}void EngineParamReader::read\_\-parameters (vector$<$ string $>$ $\ast$ {\em params})}}
+\label{classEngineParamReader_a6205586b208453840260a6203f605037}
+
+
+\subsection{Field Documentation}
+\hypertarget{classEngineParamReader_aa014c5a4566d1732eb0a14435330f379}{
+\index{EngineParamReader@{EngineParamReader}!bag\_\-type@{bag\_\-type}}
+\index{bag\_\-type@{bag\_\-type}!EngineParamReader@{EngineParamReader}}
+\subsubsection[{bag\_\-type}]{\setlength{\rightskip}{0pt plus 5cm}{\bf BaggingTypes} {\bf EngineParamReader::bag\_\-type}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classEngineParamReader_aa014c5a4566d1732eb0a14435330f379}
+\hypertarget{classEngineParamReader_ac352d87f0967d442b9d1e76757b7aab9}{
+\index{EngineParamReader@{EngineParamReader}!dandelion\_\-pprob@{dandelion\_\-pprob}}
+\index{dandelion\_\-pprob@{dandelion\_\-pprob}!EngineParamReader@{EngineParamReader}}
+\subsubsection[{dandelion\_\-pprob}]{\setlength{\rightskip}{0pt plus 5cm}bool {\bf EngineParamReader::dandelion\_\-pprob}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classEngineParamReader_ac352d87f0967d442b9d1e76757b7aab9}
+\hypertarget{classEngineParamReader_a9a843b871678893b7c8968de092f4b48}{
+\index{EngineParamReader@{EngineParamReader}!dandelion\_\-window@{dandelion\_\-window}}
+\index{dandelion\_\-window@{dandelion\_\-window}!EngineParamReader@{EngineParamReader}}
+\subsubsection[{dandelion\_\-window}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf EngineParamReader::dandelion\_\-window}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classEngineParamReader_a9a843b871678893b7c8968de092f4b48}
+
+
+acceptance of haplotype for testing. 
+
+Used by zaykin (via snpgwa, dandelion) to set threshold of \hypertarget{classEngineParamReader_a9b18c388f784d057fc284be2f372bb1e}{
+\index{EngineParamReader@{EngineParamReader}!division\_\-threshold@{division\_\-threshold}}
+\index{division\_\-threshold@{division\_\-threshold}!EngineParamReader@{EngineParamReader}}
+\subsubsection[{division\_\-threshold}]{\setlength{\rightskip}{0pt plus 5cm}double {\bf EngineParamReader::division\_\-threshold}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classEngineParamReader_a9b18c388f784d057fc284be2f372bb1e}
+\hypertarget{classEngineParamReader_aa5e874ef2077ba99e90ab42f13049dc7}{
+\index{EngineParamReader@{EngineParamReader}!dprime\_\-fmt@{dprime\_\-fmt}}
+\index{dprime\_\-fmt@{dprime\_\-fmt}!EngineParamReader@{EngineParamReader}}
+\subsubsection[{dprime\_\-fmt}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf EngineParamReader::dprime\_\-fmt}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classEngineParamReader_aa5e874ef2077ba99e90ab42f13049dc7}
+\hypertarget{classEngineParamReader_acb567723678ce125c1b29070aadcebf8}{
+\index{EngineParamReader@{EngineParamReader}!dprime\_\-smartpairs@{dprime\_\-smartpairs}}
+\index{dprime\_\-smartpairs@{dprime\_\-smartpairs}!EngineParamReader@{EngineParamReader}}
+\subsubsection[{dprime\_\-smartpairs}]{\setlength{\rightskip}{0pt plus 5cm}bool {\bf EngineParamReader::dprime\_\-smartpairs}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classEngineParamReader_acb567723678ce125c1b29070aadcebf8}
+\hypertarget{classEngineParamReader_a0b24a93f84519a2392fbaab16b6bc82a}{
+\index{EngineParamReader@{EngineParamReader}!dprime\_\-window@{dprime\_\-window}}
+\index{dprime\_\-window@{dprime\_\-window}!EngineParamReader@{EngineParamReader}}
+\subsubsection[{dprime\_\-window}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf EngineParamReader::dprime\_\-window}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classEngineParamReader_a0b24a93f84519a2392fbaab16b6bc82a}
+\hypertarget{classEngineParamReader_a7e6ea61924214939032fdbce1ecba651}{
+\index{EngineParamReader@{EngineParamReader}!engine\_\-type@{engine\_\-type}}
+\index{engine\_\-type@{engine\_\-type}!EngineParamReader@{EngineParamReader}}
+\subsubsection[{engine\_\-type}]{\setlength{\rightskip}{0pt plus 5cm}{\bf ParamReader::EngineTypes} {\bf EngineParamReader::engine\_\-type}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classEngineParamReader_a7e6ea61924214939032fdbce1ecba651}
+\hypertarget{classEngineParamReader_a1a4228fe387a551cc84e1f45e4e55aca}{
+\index{EngineParamReader@{EngineParamReader}!haplo\_\-thresh@{haplo\_\-thresh}}
+\index{haplo\_\-thresh@{haplo\_\-thresh}!EngineParamReader@{EngineParamReader}}
+\subsubsection[{haplo\_\-thresh}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf EngineParamReader::haplo\_\-thresh}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classEngineParamReader_a1a4228fe387a551cc84e1f45e4e55aca}
+\hypertarget{classEngineParamReader_ade5d84964b6eebdb2a0efb86db6d5486}{
+\index{EngineParamReader@{EngineParamReader}!number\_\-of\_\-bags@{number\_\-of\_\-bags}}
+\index{number\_\-of\_\-bags@{number\_\-of\_\-bags}!EngineParamReader@{EngineParamReader}}
+\subsubsection[{number\_\-of\_\-bags}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf EngineParamReader::number\_\-of\_\-bags}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classEngineParamReader_ade5d84964b6eebdb2a0efb86db6d5486}
+\hypertarget{classEngineParamReader_ae664f1cefdf1bfbb3fb93d3dcacac822}{
+\index{EngineParamReader@{EngineParamReader}!number\_\-of\_\-crossvalidations@{number\_\-of\_\-crossvalidations}}
+\index{number\_\-of\_\-crossvalidations@{number\_\-of\_\-crossvalidations}!EngineParamReader@{EngineParamReader}}
+\subsubsection[{number\_\-of\_\-crossvalidations}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf EngineParamReader::number\_\-of\_\-crossvalidations}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classEngineParamReader_ae664f1cefdf1bfbb3fb93d3dcacac822}
+\hypertarget{classEngineParamReader_ac1054fd8623de4a86d2a1cf4085628c0}{
+\index{EngineParamReader@{EngineParamReader}!number\_\-of\_\-nodes@{number\_\-of\_\-nodes}}
+\index{number\_\-of\_\-nodes@{number\_\-of\_\-nodes}!EngineParamReader@{EngineParamReader}}
+\subsubsection[{number\_\-of\_\-nodes}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf EngineParamReader::number\_\-of\_\-nodes}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classEngineParamReader_ac1054fd8623de4a86d2a1cf4085628c0}
+\hypertarget{classEngineParamReader_af1d4d68b8561127a5134090ebaedee56}{
+\index{EngineParamReader@{EngineParamReader}!output\_\-geno@{output\_\-geno}}
+\index{output\_\-geno@{output\_\-geno}!EngineParamReader@{EngineParamReader}}
+\subsubsection[{output\_\-geno}]{\setlength{\rightskip}{0pt plus 5cm}bool {\bf EngineParamReader::output\_\-geno}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classEngineParamReader_af1d4d68b8561127a5134090ebaedee56}
+\hypertarget{classEngineParamReader_a7747cc0a7bc3dbe11dea0df50349a2cc}{
+\index{EngineParamReader@{EngineParamReader}!output\_\-haplo@{output\_\-haplo}}
+\index{output\_\-haplo@{output\_\-haplo}!EngineParamReader@{EngineParamReader}}
+\subsubsection[{output\_\-haplo}]{\setlength{\rightskip}{0pt plus 5cm}bool {\bf EngineParamReader::output\_\-haplo}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classEngineParamReader_a7747cc0a7bc3dbe11dea0df50349a2cc}
+\hypertarget{classEngineParamReader_ad5357c75728cd53b4d6927e1d119b8c3}{
+\index{EngineParamReader@{EngineParamReader}!output\_\-hwe@{output\_\-hwe}}
+\index{output\_\-hwe@{output\_\-hwe}!EngineParamReader@{EngineParamReader}}
+\subsubsection[{output\_\-hwe}]{\setlength{\rightskip}{0pt plus 5cm}bool {\bf EngineParamReader::output\_\-hwe}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classEngineParamReader_ad5357c75728cd53b4d6927e1d119b8c3}
+\hypertarget{classEngineParamReader_adfad9c1511ba0932828906285b9a022d}{
+\index{EngineParamReader@{EngineParamReader}!output\_\-val@{output\_\-val}}
+\index{output\_\-val@{output\_\-val}!EngineParamReader@{EngineParamReader}}
+\subsubsection[{output\_\-val}]{\setlength{\rightskip}{0pt plus 5cm}bool {\bf EngineParamReader::output\_\-val}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classEngineParamReader_adfad9c1511ba0932828906285b9a022d}
+\hypertarget{classEngineParamReader_a3c9b1f9d8ed6b84647e3321faeadabfc}{
+\index{EngineParamReader@{EngineParamReader}!regression\_\-condition\_\-threshold@{regression\_\-condition\_\-threshold}}
+\index{regression\_\-condition\_\-threshold@{regression\_\-condition\_\-threshold}!EngineParamReader@{EngineParamReader}}
+\subsubsection[{regression\_\-condition\_\-threshold}]{\setlength{\rightskip}{0pt plus 5cm}double {\bf EngineParamReader::regression\_\-condition\_\-threshold}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classEngineParamReader_a3c9b1f9d8ed6b84647e3321faeadabfc}
+
+
+Stats engines. 
+
+\hypertarget{classEngineParamReader_ac782b98dc9c201d73458b3ae6c5a53e6}{
+\index{EngineParamReader@{EngineParamReader}!snpgwa\_\-dohaptest@{snpgwa\_\-dohaptest}}
+\index{snpgwa\_\-dohaptest@{snpgwa\_\-dohaptest}!EngineParamReader@{EngineParamReader}}
+\subsubsection[{snpgwa\_\-dohaptest}]{\setlength{\rightskip}{0pt plus 5cm}bool {\bf EngineParamReader::snpgwa\_\-dohaptest}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classEngineParamReader_ac782b98dc9c201d73458b3ae6c5a53e6}
+\hypertarget{classEngineParamReader_ad071b31418cfeeb13b015064bf3714b0}{
+\index{EngineParamReader@{EngineParamReader}!threshold\_\-of\_\-bags@{threshold\_\-of\_\-bags}}
+\index{threshold\_\-of\_\-bags@{threshold\_\-of\_\-bags}!EngineParamReader@{EngineParamReader}}
+\subsubsection[{threshold\_\-of\_\-bags}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf EngineParamReader::threshold\_\-of\_\-bags}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classEngineParamReader_ad071b31418cfeeb13b015064bf3714b0}
+
+
+The documentation for this class was generated from the following files:\begin{DoxyCompactItemize}
+\item 
+param/\hyperlink{engine__param__reader_8h}{engine\_\-param\_\-reader.h}\item 
+param/\hyperlink{engine__param__reader_8cpp}{engine\_\-param\_\-reader.cpp}\end{DoxyCompactItemize}

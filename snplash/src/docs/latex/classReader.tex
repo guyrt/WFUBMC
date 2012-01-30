@@ -1,0 +1,66 @@
+\hypertarget{classReader}{
+\section{Reader Class Reference}
+\label{classReader}\index{Reader@{Reader}}
+}
+
+
+{\ttfamily \#include $<$reader.h$>$}
+
+Inheritance diagram for Reader:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2cm]{classReader}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual \hyperlink{classReader_a78089542fd27a0ac2df6702fffe8725c}{$\sim$Reader} ()
+\item 
+virtual void \hyperlink{classReader_a334a724f607c84262af67759ffcdbd26}{process} (\hyperlink{classSnpData}{SnpData} $\ast$, \hyperlink{classParamReader}{ParamReader} $\ast$)=0
+\item 
+bool \hyperlink{classReader_af1812be4a38c094fd2a34a13b784e554}{getLine} (ifstream $\ast$, vector$<$ string $>$ $\ast$, \hyperlink{classParamReader}{ParamReader} $\ast$, bool check)
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classReader_a78089542fd27a0ac2df6702fffe8725c}{
+\index{Reader@{Reader}!$\sim$Reader@{$\sim$Reader}}
+\index{$\sim$Reader@{$\sim$Reader}!Reader@{Reader}}
+\subsubsection[{$\sim$Reader}]{\setlength{\rightskip}{0pt plus 5cm}Reader::$\sim$Reader ()\hspace{0.3cm}{\ttfamily  \mbox{[}virtual\mbox{]}}}}
+\label{classReader_a78089542fd27a0ac2df6702fffe8725c}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classReader_af1812be4a38c094fd2a34a13b784e554}{
+\index{Reader@{Reader}!getLine@{getLine}}
+\index{getLine@{getLine}!Reader@{Reader}}
+\subsubsection[{getLine}]{\setlength{\rightskip}{0pt plus 5cm}bool Reader::getLine (ifstream $\ast$ {\em infile}, \/  vector$<$ string $>$ $\ast$ {\em line}, \/  {\bf ParamReader} $\ast$ {\em params}, \/  bool {\em check\_\-used})}}
+\label{classReader_af1812be4a38c094fd2a34a13b784e554}
+\hyperlink{classReader_af1812be4a38c094fd2a34a13b784e554}{getLine()}
+
+Returns a single line of arbitrary length from the file, splitting on spaces to create an array.
+
+Clears the array before starting.
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em infile}]An incoming file stream \item[{\em line}]The address of the vector that should hold the tokenized line. \item[{\em params}]A parameter object \item[{\em check\_\-used}]Query this location agains the parameter object's use/not use information \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Result of file-\/$>$eof() 
+\end{DoxyReturn}
+\hypertarget{classReader_a334a724f607c84262af67759ffcdbd26}{
+\index{Reader@{Reader}!process@{process}}
+\index{process@{process}!Reader@{Reader}}
+\subsubsection[{process}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Reader::process ({\bf SnpData} $\ast$, \/  {\bf ParamReader} $\ast$)\hspace{0.3cm}{\ttfamily  \mbox{[}pure virtual\mbox{]}}}}
+\label{classReader_a334a724f607c84262af67759ffcdbd26}
+
+
+Implemented in \hyperlink{classArffReader_af12ed42f6e726a6e336f22381ca84082}{ArffReader}, \hyperlink{classBinaryBedReader_a2132af8b71a683550c19ec4ac3ec3db2}{BinaryBedReader}, and \hyperlink{classLinkageReader_a808d3be4b0a2b3af8a7ec7fea963960b}{LinkageReader}.
+
+
+
+The documentation for this class was generated from the following files:\begin{DoxyCompactItemize}
+\item 
+reader/\hyperlink{reader_8h}{reader.h}\item 
+reader/\hyperlink{reader_8cpp}{reader.cpp}\end{DoxyCompactItemize}

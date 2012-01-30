@@ -1,0 +1,358 @@
+\hypertarget{classADTree}{
+\section{ADTree Class Reference}
+\label{classADTree}\index{ADTree@{ADTree}}
+}
+
+
+{\ttfamily \#include $<$adtree.h$>$}
+
+Inheritance diagram for ADTree:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3cm]{classADTree}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classADTree_a4cc267cd53158a78c5812416b15477c6}{ADTree} ()
+\item 
+\hyperlink{classADTree_ae5069f6f5e8fc92a8fa8f687d0c6e911}{ADTree} (\hyperlink{classDataAccess}{DataAccess} $\ast$)
+\item 
+\hyperlink{classADTree_a42f89fabb90e742c8609af4618fc5fb7}{$\sim$ADTree} ()
+\item 
+virtual void \hyperlink{classADTree_a70b34e300c187fb817bc6d8ba31aceaa}{init} ()
+\begin{DoxyCompactList}\small\item\em Must declare these as part of \hyperlink{classEngine}{Engine} abstract class. \item\end{DoxyCompactList}\item 
+virtual void \hyperlink{classADTree_a18b7ad4befedb9073a83c39106628d3b}{preProcess} ()
+\item 
+virtual void \hyperlink{classADTree_acbdd5c7a248305933868e00bd875fd33}{process} ()
+\item 
+virtual void \hyperlink{classADTree_a4e89d611e7dc79fa8826efa742f9ce42}{enslave} (\hyperlink{classEngineParamReader}{EngineParamReader} $\ast$)
+\item 
+virtual void \hyperlink{classADTree_ac4183a7e36602b90e36e3717deef102c}{test} ()
+\item 
+void \hyperlink{classADTree_a544f723a8c49a74f554fb04d3a78cea6}{report} (map$<$ string, int $>$ \&, map$<$ string, \hyperlink{classAD__Rule}{AD\_\-Rule} $>$ \&)
+\item 
+void \hyperlink{classADTree_ab1fb3de26e2af354385c44eba2d17a98}{report\_\-leaves} (map$<$ string, int $>$ \&, map$<$ string, \hyperlink{classAD__Rule}{AD\_\-Rule} $>$ \&)
+\item 
+\hyperlink{classAD__Data}{AD\_\-Data} \hyperlink{classADTree_acd4ffcfe3f27fff312b143689b7add52}{get\_\-tree} ()
+\item 
+string \hyperlink{classADTree_a9b3d523c53bbfffe1988d72fb9791c87}{print\_\-tree} ()
+\item 
+void \hyperlink{classADTree_abb780d1ef5e6d66128dc990ce0189554}{print\_\-tree\_\-to\_\-file} ()
+\item 
+virtual void \hyperlink{classADTree_a335cdf83f845638ae6c74fa1d7e7e4b8}{classify} (int a\mbox{[}4\mbox{]})
+\begin{DoxyCompactList}\small\item\em Classification. \item\end{DoxyCompactList}\item 
+virtual void \hyperlink{classADTree_a498b7a7830dba60118e89d5f5bb7cbd3}{classify} (int a\mbox{[}4\mbox{]}, \hyperlink{classSnpData}{SnpData} $\ast$)
+\item 
+virtual int \hyperlink{classADTree_a266a816ec8750b5ceb1549ff610fb67b}{classify} (vector$<$ short $>$ \&)
+\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{classADTree_a726e3f99718496cce2dbcf88c06e6b35}{weights} (double $\ast$, int, long, \hyperlink{classCondition_af41afbd9545b1fb2e2cb4a4792d52408}{Condition::comparison}, short)
+\item 
+void \hyperlink{classADTree_a75995e4c656f386c74450e7571b0dfcb}{weights2} (double $\ast$, int, long)
+\item 
+void \hyperlink{classADTree_a9026beb206f3f2f82c75e948876122da}{weights} (double $\ast$)
+\item 
+double \hyperlink{classADTree_a6e496b6bfad8f6b5db794728d7eaa426}{score\_\-categorical} (int, long, \hyperlink{classCondition_af41afbd9545b1fb2e2cb4a4792d52408}{Condition::comparison} \&, short \&)
+\item 
+double \hyperlink{classADTree_ab9b3c82b61aff738c450bd3b03a27631}{score\_\-ordinal} (int, long, short \&, vector$<$ double $>$ \&\hyperlink{classADTree_a3fdcc9137b95113198be7c4861516df0}{weight\_\-vec})
+\item 
+double \hyperlink{classADTree_a9afd1374b2b77b24cd766be6f4450db7}{minimize} (int $\ast$, long $\ast$, \hyperlink{classCondition_af41afbd9545b1fb2e2cb4a4792d52408}{Condition::comparison} $\ast$, short $\ast$)
+\item 
+double \hyperlink{classADTree_af44335915afb5cde9d3dcd59ab5de99c}{minimize\_\-ordinal} (int \&, long \&, \hyperlink{classCondition_af41afbd9545b1fb2e2cb4a4792d52408}{Condition::comparison} \&, short \&)
+\item 
+bool \hyperlink{classADTree_af693c7a7151e15c4c14af80a06fc971c}{keep\_\-going} ()
+\item 
+void \hyperlink{classADTree_ae6466f8f99be68c8f887b06c3d962964}{delete\_\-my\_\-innards} ()
+\item 
+void \hyperlink{classADTree_acd444c9e1e4fb4a95ee662f1be89c1cb}{processNoCov} ()
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+bool \hyperlink{classADTree_a7d81e0601304461d086b9bc134342a36}{haveOwner}
+\item 
+double \hyperlink{classADTree_a2e99a6dba3ab1a84e7323c8bd0990f02}{fudge}
+\item 
+vector$<$ double $>$ \hyperlink{classADTree_a3fdcc9137b95113198be7c4861516df0}{weight\_\-vec}
+\item 
+\hyperlink{classEngineParamReader}{EngineParamReader} $\ast$ \hyperlink{classADTree_a4640db912fa2d1f7c7798466d4a4bdc9}{ad\_\-param}
+\item 
+int \hyperlink{classADTree_ade70783ee662b06ea7e1030dbd25a978}{order\_\-in\_\-bag}
+\item 
+vector$<$ double $>$ \hyperlink{classADTree_a506c3976eb2bbfc129bdfe852886c801}{percentTrue}
+\begin{DoxyCompactList}\small\item\em Used in stopping criteria. \item\end{DoxyCompactList}\item 
+\hyperlink{classAD__Data}{AD\_\-Data} \hyperlink{classADTree_a8bfb36a2d5ded97c2d4ce61046996694}{tree}
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classADTree_a4cc267cd53158a78c5812416b15477c6}{
+\index{ADTree@{ADTree}!ADTree@{ADTree}}
+\index{ADTree@{ADTree}!ADTree@{ADTree}}
+\subsubsection[{ADTree}]{\setlength{\rightskip}{0pt plus 5cm}ADTree::ADTree ()\hspace{0.3cm}{\ttfamily  \mbox{[}explicit\mbox{]}}}}
+\label{classADTree_a4cc267cd53158a78c5812416b15477c6}
+Set up the param\_\-reader, data classes. Leave the reader for init. \hypertarget{classADTree_ae5069f6f5e8fc92a8fa8f687d0c6e911}{
+\index{ADTree@{ADTree}!ADTree@{ADTree}}
+\index{ADTree@{ADTree}!ADTree@{ADTree}}
+\subsubsection[{ADTree}]{\setlength{\rightskip}{0pt plus 5cm}ADTree::ADTree ({\bf DataAccess} $\ast$ {\em d})\hspace{0.3cm}{\ttfamily  \mbox{[}explicit\mbox{]}}}}
+\label{classADTree_ae5069f6f5e8fc92a8fa8f687d0c6e911}
+\hypertarget{classADTree_a42f89fabb90e742c8609af4618fc5fb7}{
+\index{ADTree@{ADTree}!$\sim$ADTree@{$\sim$ADTree}}
+\index{$\sim$ADTree@{$\sim$ADTree}!ADTree@{ADTree}}
+\subsubsection[{$\sim$ADTree}]{\setlength{\rightskip}{0pt plus 5cm}ADTree::$\sim$ADTree ()}}
+\label{classADTree_a42f89fabb90e742c8609af4618fc5fb7}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classADTree_a266a816ec8750b5ceb1549ff610fb67b}{
+\index{ADTree@{ADTree}!classify@{classify}}
+\index{classify@{classify}!ADTree@{ADTree}}
+\subsubsection[{classify}]{\setlength{\rightskip}{0pt plus 5cm}int ADTree::classify (vector$<$ short $>$ \& {\em data})\hspace{0.3cm}{\ttfamily  \mbox{[}virtual\mbox{]}}}}
+\label{classADTree_a266a816ec8750b5ceb1549ff610fb67b}
+Return the classification for this individual. \begin{DoxyReturn}{Returns}
+int 1 or -\/1 based on sign. 
+\end{DoxyReturn}
+
+
+Implements \hyperlink{classClassifies_a5e3d218b44024ec2c3ab3398e3dbd2e3}{Classifies}.
+
+\hypertarget{classADTree_a498b7a7830dba60118e89d5f5bb7cbd3}{
+\index{ADTree@{ADTree}!classify@{classify}}
+\index{classify@{classify}!ADTree@{ADTree}}
+\subsubsection[{classify}]{\setlength{\rightskip}{0pt plus 5cm}void ADTree::classify (int {\em a}\mbox{[}4\mbox{]}, \/  {\bf SnpData} $\ast$ {\em data})\hspace{0.3cm}{\ttfamily  \mbox{[}virtual\mbox{]}}}}
+\label{classADTree_a498b7a7830dba60118e89d5f5bb7cbd3}
+
+
+Implements \hyperlink{classClassifies_a7d2ae89f04af1a74eb6dd35be8eda476}{Classifies}.
+
+\hypertarget{classADTree_a335cdf83f845638ae6c74fa1d7e7e4b8}{
+\index{ADTree@{ADTree}!classify@{classify}}
+\index{classify@{classify}!ADTree@{ADTree}}
+\subsubsection[{classify}]{\setlength{\rightskip}{0pt plus 5cm}void ADTree::classify (int {\em a}\mbox{[}4\mbox{]})\hspace{0.3cm}{\ttfamily  \mbox{[}virtual\mbox{]}}}}
+\label{classADTree_a335cdf83f845638ae6c74fa1d7e7e4b8}
+
+
+Classification. 
+
+name: \hyperlink{classADTree_a335cdf83f845638ae6c74fa1d7e7e4b8}{ADTree::classify} 
+\begin{DoxyParams}{Parameters}
+\item[{\em int}]a\mbox{[}4\mbox{]} will contain TP,FP,FN,TN counts for the individuals in this test set. Controls classified as controls would be in a\mbox{[}0\mbox{]} P and N are defined as $>$=, $<$ 0. \end{DoxyParams}
+
+
+Implements \hyperlink{classClassifies_a15864d3a95edfde2bf48384c9b25c6d8}{Classifies}.
+
+\hypertarget{classADTree_ae6466f8f99be68c8f887b06c3d962964}{
+\index{ADTree@{ADTree}!delete\_\-my\_\-innards@{delete\_\-my\_\-innards}}
+\index{delete\_\-my\_\-innards@{delete\_\-my\_\-innards}!ADTree@{ADTree}}
+\subsubsection[{delete\_\-my\_\-innards}]{\setlength{\rightskip}{0pt plus 5cm}void ADTree::delete\_\-my\_\-innards ()\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classADTree_ae6466f8f99be68c8f887b06c3d962964}
+\hypertarget{classADTree_a4e89d611e7dc79fa8826efa742f9ce42}{
+\index{ADTree@{ADTree}!enslave@{enslave}}
+\index{enslave@{enslave}!ADTree@{ADTree}}
+\subsubsection[{enslave}]{\setlength{\rightskip}{0pt plus 5cm}void ADTree::enslave ({\bf EngineParamReader} $\ast$ {\em b})\hspace{0.3cm}{\ttfamily  \mbox{[}virtual\mbox{]}}}}
+\label{classADTree_a4e89d611e7dc79fa8826efa742f9ce42}
+Delete current adparam reader and replace it with the referant. 
+
+Implements \hyperlink{classEngine_a023e094182312b1732fe53754c2fe5cb}{Engine}.
+
+\hypertarget{classADTree_acd4ffcfe3f27fff312b143689b7add52}{
+\index{ADTree@{ADTree}!get\_\-tree@{get\_\-tree}}
+\index{get\_\-tree@{get\_\-tree}!ADTree@{ADTree}}
+\subsubsection[{get\_\-tree}]{\setlength{\rightskip}{0pt plus 5cm}{\bf AD\_\-Data} ADTree::get\_\-tree ()\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{classADTree_acd4ffcfe3f27fff312b143689b7add52}
+\hypertarget{classADTree_a70b34e300c187fb817bc6d8ba31aceaa}{
+\index{ADTree@{ADTree}!init@{init}}
+\index{init@{init}!ADTree@{ADTree}}
+\subsubsection[{init}]{\setlength{\rightskip}{0pt plus 5cm}void ADTree::init ()\hspace{0.3cm}{\ttfamily  \mbox{[}virtual\mbox{]}}}}
+\label{classADTree_a70b34e300c187fb817bc6d8ba31aceaa}
+
+
+Must declare these as part of \hyperlink{classEngine}{Engine} abstract class. 
+
+\hyperlink{classADTree_a70b34e300c187fb817bc6d8ba31aceaa}{init()}
+
+Set up the reader and input all data. Call the data checker in the snp\_\-data method. 
+
+Implements \hyperlink{classEngine_aaa054d596fb8ced6e3eb4bee208f8c3d}{Engine}.
+
+\hypertarget{classADTree_af693c7a7151e15c4c14af80a06fc971c}{
+\index{ADTree@{ADTree}!keep\_\-going@{keep\_\-going}}
+\index{keep\_\-going@{keep\_\-going}!ADTree@{ADTree}}
+\subsubsection[{keep\_\-going}]{\setlength{\rightskip}{0pt plus 5cm}bool ADTree::keep\_\-going ()\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classADTree_af693c7a7151e15c4c14af80a06fc971c}
+calculate stopping criteria for the main loop. The simplest scheme is to go based only on size. A more nuanced scheme will rely on sufficient decrease or (even better) on a mix of the two. \begin{DoxyReturn}{Returns}
+boolean true if perform another round. 
+\end{DoxyReturn}
+\hypertarget{classADTree_a9afd1374b2b77b24cd766be6f4450db7}{
+\index{ADTree@{ADTree}!minimize@{minimize}}
+\index{minimize@{minimize}!ADTree@{ADTree}}
+\subsubsection[{minimize}]{\setlength{\rightskip}{0pt plus 5cm}double ADTree::minimize (int $\ast$ {\em precon}, \/  long $\ast$ {\em attribute}, \/  {\bf Condition::comparison} $\ast$ {\em test}, \/  short $\ast$ {\em val})\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classADTree_a9afd1374b2b77b24cd766be6f4450db7}
+Minimize the value Z(p,c) given in white paper.
+
+Note: this will need to be done in parallel soon...
+
+For each snp for each locus for each condition (roll this together) for each precondition get score and compare. \hypertarget{classADTree_af44335915afb5cde9d3dcd59ab5de99c}{
+\index{ADTree@{ADTree}!minimize\_\-ordinal@{minimize\_\-ordinal}}
+\index{minimize\_\-ordinal@{minimize\_\-ordinal}!ADTree@{ADTree}}
+\subsubsection[{minimize\_\-ordinal}]{\setlength{\rightskip}{0pt plus 5cm}double ADTree::minimize\_\-ordinal (int \& {\em precon}, \/  long \& {\em attribute}, \/  {\bf Condition::comparison} \& {\em test}, \/  short \& {\em val})\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classADTree_af44335915afb5cde9d3dcd59ab5de99c}
+Perform a minimization using each possible score from the set \{1,2,4\} \hypertarget{classADTree_a18b7ad4befedb9073a83c39106628d3b}{
+\index{ADTree@{ADTree}!preProcess@{preProcess}}
+\index{preProcess@{preProcess}!ADTree@{ADTree}}
+\subsubsection[{preProcess}]{\setlength{\rightskip}{0pt plus 5cm}void ADTree::preProcess ()\hspace{0.3cm}{\ttfamily  \mbox{[}virtual\mbox{]}}}}
+\label{classADTree_a18b7ad4befedb9073a83c39106628d3b}
+\hyperlink{classADTree_a18b7ad4befedb9073a83c39106628d3b}{preProcess()}
+
+Push the head node onto the stack. 
+
+Implements \hyperlink{classEngine_aec7076b8979a13c96eceb362437dc68c}{Engine}.
+
+\hypertarget{classADTree_a9b3d523c53bbfffe1988d72fb9791c87}{
+\index{ADTree@{ADTree}!print\_\-tree@{print\_\-tree}}
+\index{print\_\-tree@{print\_\-tree}!ADTree@{ADTree}}
+\subsubsection[{print\_\-tree}]{\setlength{\rightskip}{0pt plus 5cm}string ADTree::print\_\-tree ()\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{classADTree_a9b3d523c53bbfffe1988d72fb9791c87}
+\hypertarget{classADTree_abb780d1ef5e6d66128dc990ce0189554}{
+\index{ADTree@{ADTree}!print\_\-tree\_\-to\_\-file@{print\_\-tree\_\-to\_\-file}}
+\index{print\_\-tree\_\-to\_\-file@{print\_\-tree\_\-to\_\-file}!ADTree@{ADTree}}
+\subsubsection[{print\_\-tree\_\-to\_\-file}]{\setlength{\rightskip}{0pt plus 5cm}void ADTree::print\_\-tree\_\-to\_\-file ()}}
+\label{classADTree_abb780d1ef5e6d66128dc990ce0189554}
+Print the tree to a file. \hypertarget{classADTree_acbdd5c7a248305933868e00bd875fd33}{
+\index{ADTree@{ADTree}!process@{process}}
+\index{process@{process}!ADTree@{ADTree}}
+\subsubsection[{process}]{\setlength{\rightskip}{0pt plus 5cm}void ADTree::process ()\hspace{0.3cm}{\ttfamily  \mbox{[}virtual\mbox{]}}}}
+\label{classADTree_acbdd5c7a248305933868e00bd875fd33}
+\hyperlink{classADTree_acbdd5c7a248305933868e00bd875fd33}{process()}
+
+This calls the guts. Start the algorithm and run it.
+
+If there are covariates, run them first. 
+
+Implements \hyperlink{classEngine_a005f8e277c3dea16ea05803fba223db7}{Engine}.
+
+\hypertarget{classADTree_acd444c9e1e4fb4a95ee662f1be89c1cb}{
+\index{ADTree@{ADTree}!processNoCov@{processNoCov}}
+\index{processNoCov@{processNoCov}!ADTree@{ADTree}}
+\subsubsection[{processNoCov}]{\setlength{\rightskip}{0pt plus 5cm}void ADTree::processNoCov ()\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classADTree_acd444c9e1e4fb4a95ee662f1be89c1cb}
+Build the \hyperlink{classADTree}{ADTree}, assuming no covariates. \hypertarget{classADTree_a544f723a8c49a74f554fb04d3a78cea6}{
+\index{ADTree@{ADTree}!report@{report}}
+\index{report@{report}!ADTree@{ADTree}}
+\subsubsection[{report}]{\setlength{\rightskip}{0pt plus 5cm}void ADTree::report (map$<$ string, int $>$ \& {\em hash}, \/  map$<$ string, {\bf AD\_\-Rule} $>$ \& {\em key})}}
+\label{classADTree_a544f723a8c49a74f554fb04d3a78cea6}
+\hypertarget{classADTree_ab1fb3de26e2af354385c44eba2d17a98}{
+\index{ADTree@{ADTree}!report\_\-leaves@{report\_\-leaves}}
+\index{report\_\-leaves@{report\_\-leaves}!ADTree@{ADTree}}
+\subsubsection[{report\_\-leaves}]{\setlength{\rightskip}{0pt plus 5cm}void ADTree::report\_\-leaves (map$<$ string, int $>$ \& {\em hash}, \/  map$<$ string, {\bf AD\_\-Rule} $>$ \& {\em key})}}
+\label{classADTree_ab1fb3de26e2af354385c44eba2d17a98}
+\hypertarget{classADTree_a6e496b6bfad8f6b5db794728d7eaa426}{
+\index{ADTree@{ADTree}!score\_\-categorical@{score\_\-categorical}}
+\index{score\_\-categorical@{score\_\-categorical}!ADTree@{ADTree}}
+\subsubsection[{score\_\-categorical}]{\setlength{\rightskip}{0pt plus 5cm}double ADTree::score\_\-categorical (int {\em r}, \/  long {\em i}, \/  {\bf Condition::comparison} \& {\em c}, \/  short \& {\em s})\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classADTree_a6e496b6bfad8f6b5db794728d7eaa426}
+score\_\-categorical
+
+Perform scoring for a given precondition and variable.
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em int}]r: \hyperlink{classPrecondition}{Precondition} in use \item[{\em long}]i: SNP in use \item[{\em \hyperlink{classCondition_af41afbd9545b1fb2e2cb4a4792d52408}{Condition::comparison}}]\&: Type of comparison returned. \item[{\em short}]s: Optimal split point. \end{DoxyParams}
+\hypertarget{classADTree_ab9b3c82b61aff738c450bd3b03a27631}{
+\index{ADTree@{ADTree}!score\_\-ordinal@{score\_\-ordinal}}
+\index{score\_\-ordinal@{score\_\-ordinal}!ADTree@{ADTree}}
+\subsubsection[{score\_\-ordinal}]{\setlength{\rightskip}{0pt plus 5cm}double ADTree::score\_\-ordinal (int {\em pre\_\-cond}, \/  long {\em snp}, \/  short \& {\em s}, \/  vector$<$ double $>$ \& {\em temp\_\-weights})\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classADTree_ab9b3c82b61aff738c450bd3b03a27631}
+Score for ordinal, which treats each type separately.
+
+This is a customized version of the minimization in ADTrees that was created by Richard T. Guy and is under current investigation. \hypertarget{classADTree_ac4183a7e36602b90e36e3717deef102c}{
+\index{ADTree@{ADTree}!test@{test}}
+\index{test@{test}!ADTree@{ADTree}}
+\subsubsection[{test}]{\setlength{\rightskip}{0pt plus 5cm}void ADTree::test ()\hspace{0.3cm}{\ttfamily  \mbox{[}virtual\mbox{]}}}}
+\label{classADTree_ac4183a7e36602b90e36e3717deef102c}
+Perform a few tests, see internal comments. 
+
+Implements \hyperlink{classEngine_a2927c4a4263809453063ad482c6434a4}{Engine}.
+
+\hypertarget{classADTree_a9026beb206f3f2f82c75e948876122da}{
+\index{ADTree@{ADTree}!weights@{weights}}
+\index{weights@{weights}!ADTree@{ADTree}}
+\subsubsection[{weights}]{\setlength{\rightskip}{0pt plus 5cm}void ADTree::weights (double $\ast$ {\em ret\_\-weight})\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classADTree_a9026beb206f3f2f82c75e948876122da}
+Simply calculate weights for pos or neg class (1 or 2 in my coding) Completely skip missings.
+
+Returns \mbox{[}phen==2,phen==1\mbox{]} for W\_\-+, W\_\--\/ \hypertarget{classADTree_a726e3f99718496cce2dbcf88c06e6b35}{
+\index{ADTree@{ADTree}!weights@{weights}}
+\index{weights@{weights}!ADTree@{ADTree}}
+\subsubsection[{weights}]{\setlength{\rightskip}{0pt plus 5cm}void ADTree::weights (double $\ast$ {\em ret\_\-weights}, \/  int {\em pre\_\-cond}, \/  long {\em attribute}, \/  {\bf Condition::comparison} {\em test}, \/  short {\em val})\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classADTree_a726e3f99718496cce2dbcf88c06e6b35}
+This is more extensible, but if data is known, use weights2 for speed. Calc total weights of all individuals that satisfy each of the conditions.
+
+W\_\-2 means are a 2 in phenotype.
+
+Passed the weight vector, as well as an index to the rule under the precondition, the attribute to test against test type (see \hyperlink{condition_8h}{condition.h}) and the value we are comparing to. This could also be a \hyperlink{classCondition}{Condition} object but I don't want to build one every time we use this method (waste of cycles...)
+
+Returned in ret\_\-weights: 0 -\/$>$ W\_\-1 for p and c (W\_\-+(p and c)) where W\_\-+ is phenotype 1. 1 -\/$>$ W\_\-2 for p and c (W\_\--\/(p and c)) 2 -\/$>$ W\_\-1 for p and not c (W\_\-+(p and c)) 3 -\/$>$ W\_\-2 for p and not c 4 -\/$>$ W\_\-1 or W\_\-2 and not p
+
+A better strategy would be to return the count for each value of the categorical variable. \hypertarget{classADTree_a75995e4c656f386c74450e7571b0dfcb}{
+\index{ADTree@{ADTree}!weights2@{weights2}}
+\index{weights2@{weights2}!ADTree@{ADTree}}
+\subsubsection[{weights2}]{\setlength{\rightskip}{0pt plus 5cm}void ADTree::weights2 (double $\ast$ {\em ret\_\-weights}, \/  int {\em pre\_\-cond}, \/  long {\em attribute})\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classADTree_a75995e4c656f386c74450e7571b0dfcb}
+Calc W\_\-+ and W\_\--\/ for each possible value of genotype and each value of p \&\& c, p \&\& !c. Also, calculate for !p, which does not differentiate phenotypes.
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em Vector}]of weights to be filled. \item[{\em long}]attribute on which we fill. \end{DoxyParams}
+
+
+\subsection{Field Documentation}
+\hypertarget{classADTree_a4640db912fa2d1f7c7798466d4a4bdc9}{
+\index{ADTree@{ADTree}!ad\_\-param@{ad\_\-param}}
+\index{ad\_\-param@{ad\_\-param}!ADTree@{ADTree}}
+\subsubsection[{ad\_\-param}]{\setlength{\rightskip}{0pt plus 5cm}{\bf EngineParamReader}$\ast$ {\bf ADTree::ad\_\-param}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classADTree_a4640db912fa2d1f7c7798466d4a4bdc9}
+\hypertarget{classADTree_a2e99a6dba3ab1a84e7323c8bd0990f02}{
+\index{ADTree@{ADTree}!fudge@{fudge}}
+\index{fudge@{fudge}!ADTree@{ADTree}}
+\subsubsection[{fudge}]{\setlength{\rightskip}{0pt plus 5cm}double {\bf ADTree::fudge}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classADTree_a2e99a6dba3ab1a84e7323c8bd0990f02}
+\hypertarget{classADTree_a7d81e0601304461d086b9bc134342a36}{
+\index{ADTree@{ADTree}!haveOwner@{haveOwner}}
+\index{haveOwner@{haveOwner}!ADTree@{ADTree}}
+\subsubsection[{haveOwner}]{\setlength{\rightskip}{0pt plus 5cm}bool {\bf ADTree::haveOwner}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classADTree_a7d81e0601304461d086b9bc134342a36}
+\hypertarget{classADTree_ade70783ee662b06ea7e1030dbd25a978}{
+\index{ADTree@{ADTree}!order\_\-in\_\-bag@{order\_\-in\_\-bag}}
+\index{order\_\-in\_\-bag@{order\_\-in\_\-bag}!ADTree@{ADTree}}
+\subsubsection[{order\_\-in\_\-bag}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf ADTree::order\_\-in\_\-bag}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classADTree_ade70783ee662b06ea7e1030dbd25a978}
+\hypertarget{classADTree_a506c3976eb2bbfc129bdfe852886c801}{
+\index{ADTree@{ADTree}!percentTrue@{percentTrue}}
+\index{percentTrue@{percentTrue}!ADTree@{ADTree}}
+\subsubsection[{percentTrue}]{\setlength{\rightskip}{0pt plus 5cm}vector$<$double$>$ {\bf ADTree::percentTrue}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classADTree_a506c3976eb2bbfc129bdfe852886c801}
+
+
+Used in stopping criteria. 
+
+\hypertarget{classADTree_a8bfb36a2d5ded97c2d4ce61046996694}{
+\index{ADTree@{ADTree}!tree@{tree}}
+\index{tree@{tree}!ADTree@{ADTree}}
+\subsubsection[{tree}]{\setlength{\rightskip}{0pt plus 5cm}{\bf AD\_\-Data} {\bf ADTree::tree}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classADTree_a8bfb36a2d5ded97c2d4ce61046996694}
+\hypertarget{classADTree_a3fdcc9137b95113198be7c4861516df0}{
+\index{ADTree@{ADTree}!weight\_\-vec@{weight\_\-vec}}
+\index{weight\_\-vec@{weight\_\-vec}!ADTree@{ADTree}}
+\subsubsection[{weight\_\-vec}]{\setlength{\rightskip}{0pt plus 5cm}vector$<$double$>$ {\bf ADTree::weight\_\-vec}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classADTree_a3fdcc9137b95113198be7c4861516df0}
+
+
+The documentation for this class was generated from the following files:\begin{DoxyCompactItemize}
+\item 
+engine/adtree/\hyperlink{adtree_8h}{adtree.h}\item 
+engine/adtree/\hyperlink{adtree_8cpp}{adtree.cpp}\end{DoxyCompactItemize}

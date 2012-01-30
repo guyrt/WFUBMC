@@ -1,0 +1,80 @@
+\hypertarget{namespacevecops}{
+\section{vecops Namespace Reference}
+\label{namespacevecops}\index{vecops@{vecops}}
+}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$class T $>$ }\\void \hyperlink{namespacevecops_a7b580307abbce16deb2805fe8ba71373}{vecAdd} (std::vector$<$ T $>$ \&v, T a)
+\item 
+{\footnotesize template$<$class T $>$ }\\void \hyperlink{namespacevecops_acec04644239d63fa4a301827c628ce0d}{vecDiv} (std::vector$<$ T $>$ \&v, T a)
+\item 
+{\footnotesize template$<$class T $>$ }\\T \hyperlink{namespacevecops_a8cdfcdb8afb9e355fab4565c9a6293c1}{vecCumSum} (const std::vector$<$ T $>$ \&v)
+\item 
+{\footnotesize template$<$class T $>$ }\\T \hyperlink{namespacevecops_ae2720237efabb24d26fe4e96a96f13f7}{vecVariance} (const std::vector$<$ T $>$ \&v)
+\item 
+std::vector$<$ std::vector$<$ double $>$ $>$ \hyperlink{namespacevecops_abfba65305a1e0f1d0ef498b39c752f15}{getDblVec} (int size1, int size2)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Provide common vector operations.
+
+\begin{DoxyAuthor}{Author}
+Richard T. Guy 
+\end{DoxyAuthor}
+
+
+\subsection{Function Documentation}
+\hypertarget{namespacevecops_abfba65305a1e0f1d0ef498b39c752f15}{
+\index{vecops@{vecops}!getDblVec@{getDblVec}}
+\index{getDblVec@{getDblVec}!vecops@{vecops}}
+\subsubsection[{getDblVec}]{\setlength{\rightskip}{0pt plus 5cm}std::vector$<$ std::vector$<$ double $>$ $>$ vecops::getDblVec (int {\em size1}, \/  int {\em size2})}}
+\label{namespacevecops_abfba65305a1e0f1d0ef498b39c752f15}
+getVec. Get a double vector of the specified size.
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em size1}]Size in first component. \item[{\em size2}]Size in second component. \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+double vector of size (size1, size2) 
+\end{DoxyReturn}
+\hypertarget{namespacevecops_a7b580307abbce16deb2805fe8ba71373}{
+\index{vecops@{vecops}!vecAdd@{vecAdd}}
+\index{vecAdd@{vecAdd}!vecops@{vecops}}
+\subsubsection[{vecAdd}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T $>$ void vecops::vecAdd (std::vector$<$ T $>$ \& {\em v}, \/  T {\em a})\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{namespacevecops_a7b580307abbce16deb2805fe8ba71373}
+vecAdd. Add a double to a vector of doubles.
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em v}]A vector of type T. The return is v .+ a. \item[{\em a}]A T. \end{DoxyParams}
+\hypertarget{namespacevecops_a8cdfcdb8afb9e355fab4565c9a6293c1}{
+\index{vecops@{vecops}!vecCumSum@{vecCumSum}}
+\index{vecCumSum@{vecCumSum}!vecops@{vecops}}
+\subsubsection[{vecCumSum}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T $>$ T vecops::vecCumSum (const std::vector$<$ T $>$ \& {\em v})\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{namespacevecops_a8cdfcdb8afb9e355fab4565c9a6293c1}
+Sum a vector of doubles.
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em v}]Sum the components of this. \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The sum. 
+\end{DoxyReturn}
+\hypertarget{namespacevecops_acec04644239d63fa4a301827c628ce0d}{
+\index{vecops@{vecops}!vecDiv@{vecDiv}}
+\index{vecDiv@{vecDiv}!vecops@{vecops}}
+\subsubsection[{vecDiv}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T $>$ void vecops::vecDiv (std::vector$<$ T $>$ \& {\em v}, \/  T {\em a})\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{namespacevecops_acec04644239d63fa4a301827c628ce0d}
+vecDiv. Divide a vector by a double.
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em v}]A vector of type T. The return is v ./ a. \item[{\em a}]A T. \end{DoxyParams}
+\hypertarget{namespacevecops_ae2720237efabb24d26fe4e96a96f13f7}{
+\index{vecops@{vecops}!vecVariance@{vecVariance}}
+\index{vecVariance@{vecVariance}!vecops@{vecops}}
+\subsubsection[{vecVariance}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T $>$ T vecops::vecVariance (const std::vector$<$ T $>$ \& {\em v})\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{namespacevecops_ae2720237efabb24d26fe4e96a96f13f7}
+vecVariance. Compute variance using E(X$^\wedge$2) -\/ E(X)$^\wedge$2 

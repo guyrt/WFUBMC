@@ -1,0 +1,443 @@
+\hypertarget{classSnpData}{
+\section{SnpData Class Reference}
+\label{classSnpData}\index{SnpData@{SnpData}}
+}
+
+
+{\ttfamily \#include $<$snp\_\-data.hh$>$}
+
+\subsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{structSnpData_1_1MapData}{MapData}
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classSnpData_a67ecd2aa4fd9d991117724c025d4fe8b}{SnpData} ()
+\item 
+\hyperlink{classSnpData_ae8f5c2288be6040daaeacf2a00a6cc5e}{$\sim$SnpData} ()
+\item 
+void \hyperlink{classSnpData_afde9baf5271d4ccd8a47bba6a7a3a25c}{push\_\-map} (string, string, long, char ref=(char) 0)
+\item 
+void \hyperlink{classSnpData_a7154ea651a58dc4d2fa5398acfa85780}{setIndividualName} (unsigned int i, string name)
+\item 
+void \hyperlink{classSnpData_ae6d6c89606d8176f34b11b253b40f191}{cleanIndividualNames} ()
+\item 
+void \hyperlink{classSnpData_a856afb537dc90f0e45c2d3a28d6a8b41}{prep\_\-data} (\hyperlink{classParamReader}{ParamReader} $\ast$)
+\begin{DoxyCompactList}\small\item\em Data cleaning functions. \item\end{DoxyCompactList}\item 
+void \hyperlink{classSnpData_a5f986138c94a1a0491bd56f5d0b9eb14}{categorical\_\-phenotype} (int low, int hi)
+\item 
+void \hyperlink{classSnpData_a6c174381b8ca1a605e7e052990b563ce}{remove\_\-haplotype} ()
+\item 
+int \hyperlink{classSnpData_a0056036c39385fa3e2955162755be872}{remove\_\-phenotype} (double)
+\item 
+int \hyperlink{classSnpData_a9fa11c7060c6eba27c09c38c8366d8d1}{remove\_\-covariate} (double)
+\item 
+int \hyperlink{classSnpData_ac7952b0c911c5c3f7a894ab3c5b9c179}{remove\_\-indiv\_\-with\_\-snp\_\-value} (int)
+\item 
+int \hyperlink{classSnpData_afadaf2a77dc7b57c53c35bfda981bbc8}{remove\_\-missing\_\-geno} ()
+\item 
+bool \hyperlink{classSnpData_adcde7db42d75082f1ff23379c0a52caa}{isUsable} (int i)
+\item 
+bool \hyperlink{classSnpData_a4aed56566f1194ab787b604563783280}{delete\_\-snp} (long l)
+\begin{DoxyCompactList}\small\item\em Data manipulation functions. \item\end{DoxyCompactList}\item 
+void \hyperlink{classSnpData_afc11539758009ab2d5cd4f2b04f7c1bd}{snp\_\-flush} ()
+\item 
+bool \hyperlink{classSnpData_af7caa689a8257f534cd6a92dac45ee82}{delete\_\-indiv} (int i)
+\item 
+void \hyperlink{classSnpData_ad2089f56539d02ab64282473b0ca9bd0}{indiv\_\-flush} ()
+\item 
+void \hyperlink{classSnpData_a55e5ee9b74b0b6057393d8e19dd8fced}{dump\_\-data} ()
+\end{DoxyCompactItemize}
+\subsection*{Data Fields}
+\begin{DoxyCompactItemize}
+\item 
+vector$<$ char $>$ \hyperlink{classSnpData_a3e88fcb82912de7cb1e37e2630bbee71}{character\_\-list}
+\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+vector$<$ short $>$ $\ast$ \hyperlink{classSnpData_af114df61aa4280e4e89e87395b7a22f3}{get\_\-column} (unsigned int)
+\begin{DoxyCompactList}\small\item\em Access functions. \item\end{DoxyCompactList}\item 
+vector$<$ double $>$ $\ast$ \hyperlink{classSnpData_aadd312f6c8d9060a199728bf7e81a1fc}{covariate\_\-column} (int person)
+\item 
+double \hyperlink{classSnpData_a534016cfdc6e5ec19076a4f38d80dce2}{phenotype\_\-at} (int i)
+\item 
+string \hyperlink{classSnpData_a5a23514541160563ae68bf2b5a0e2355}{snp\_\-name} (long l)
+\item 
+string \hyperlink{classSnpData_aa4fa47c8134b674769f5638074ae46f8}{snp\_\-chr} (int i)
+\item 
+void \hyperlink{classSnpData_a1831ac542e4cad682c7235943e531179}{fill\_\-allele\_\-codes} (int i, char \&maj, char \&min, char \&ref)
+\item 
+long \hyperlink{classSnpData_a391d4c15ba2ee87318ffbb6b2f20b890}{snp\_\-size} (unsigned int o)
+\item 
+void \hyperlink{classSnpData_ad7f9a7e9b8635ae55b970786ce791b7b}{normalize} ()
+\item 
+void \hyperlink{classSnpData_afe4142e4ebec9142c79962b229208f7b}{recode\_\-snp} (long)
+\item 
+void \hyperlink{classSnpData_a7a1858e40b26cb6ded5d3e8009ed2b49}{perform\_\-delete\_\-of\_\-snp} (long)
+\item 
+void \hyperlink{classSnpData_a569da0a2d95bb510663ceb71717408e2}{perform\_\-delete\_\-of\_\-indiv} (int)
+\item 
+void \hyperlink{classSnpData_a0762cd9f5ff8576c8d7aee9550201f01}{verify\_\-snp\_\-lengths} ()
+\item 
+void \hyperlink{classSnpData_a726282a904cee0968dae7ef614ea16fe}{verify\_\-data\_\-size\_\-match} ()
+\item 
+void \hyperlink{classSnpData_ab0b29e53a209df1996e3dc008afb2f5b}{verify\_\-map\_\-length} ()
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+vector$<$ vector$<$ short $>$ $>$ \hyperlink{classSnpData_a485f4c48967669c1461fbed3ba32f98b}{snp\_\-data}
+\item 
+vector$<$ vector$<$ double $>$ $>$ \hyperlink{classSnpData_a26418125e4106520772b256d22b3a5c2}{covariance}
+\item 
+vector$<$ double $>$ \hyperlink{classSnpData_a355bd15fc7b63abdf6c0f5201c753e86}{phenotypes}
+\item 
+vector$<$ \hyperlink{structSnpData_1_1MapData}{MapData} $>$ \hyperlink{classSnpData_a603bf0f325e6372f3bd46046751dc4a3}{map}
+\item 
+vector$<$ long $>$ \hyperlink{classSnpData_ae90cb32821113584bc99241e760fdadb}{snp\_\-delete\_\-records}
+\item 
+vector$<$ int $>$ \hyperlink{classSnpData_a0b3e8c850f1bef514eb74c77011557e8}{indiv\_\-delete\_\-records}
+\item 
+vector$<$ bool $>$ \hyperlink{classSnpData_a6a43ad849a99b9ecffa9de59a876187e}{all\_\-missing}
+\item 
+vector$<$ string $>$ \hyperlink{classSnpData_a2c8efb31ae7abca0dffa3ae2e54b4eaa}{individualName}
+\item 
+unsigned int \hyperlink{classSnpData_a06d3ca0ba0949ae98c2b055c6f2402f9}{maxMapLength}
+\item 
+int \hyperlink{classSnpData_a3cf4a8a666a5eac6c78e68466b1858a7}{maxPersonIDLength}
+\item 
+\hyperlink{classRandWH}{RandWH} \hyperlink{classSnpData_afb0a89afa8922e9e20b4826ae5d5cd36}{random}
+\end{DoxyCompactItemize}
+\subsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{classSnpData_aeec22b22ec66cea36cae09979a36d40c}{LinkageReader}
+\item 
+class \hyperlink{classSnpData_a079f8f0072d4d2ed008a2486f38b3834}{DataAccess}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Contains the primary data set for all SNP methods.
+
+The only things we might implement here (later) are methods related to data cleaning, unless this is something that we would want to do on a method specific type.
+
+In the interest of quick access, we are going to implement all data in vectors, which are thread-\/safe for access. Shorts for snps,
+
+0: Missing 1: 1 1 2: 1 2 3: 2 1 4: 2 2 
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classSnpData_a67ecd2aa4fd9d991117724c025d4fe8b}{
+\index{SnpData@{SnpData}!SnpData@{SnpData}}
+\index{SnpData@{SnpData}!SnpData@{SnpData}}
+\subsubsection[{SnpData}]{\setlength{\rightskip}{0pt plus 5cm}SnpData::SnpData ()}}
+\label{classSnpData_a67ecd2aa4fd9d991117724c025d4fe8b}
+\hypertarget{classSnpData_ae8f5c2288be6040daaeacf2a00a6cc5e}{
+\index{SnpData@{SnpData}!$\sim$SnpData@{$\sim$SnpData}}
+\index{$\sim$SnpData@{$\sim$SnpData}!SnpData@{SnpData}}
+\subsubsection[{$\sim$SnpData}]{\setlength{\rightskip}{0pt plus 5cm}SnpData::$\sim$SnpData ()}}
+\label{classSnpData_ae8f5c2288be6040daaeacf2a00a6cc5e}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classSnpData_a5f986138c94a1a0491bd56f5d0b9eb14}{
+\index{SnpData@{SnpData}!categorical\_\-phenotype@{categorical\_\-phenotype}}
+\index{categorical\_\-phenotype@{categorical\_\-phenotype}!SnpData@{SnpData}}
+\subsubsection[{categorical\_\-phenotype}]{\setlength{\rightskip}{0pt plus 5cm}void SnpData::categorical\_\-phenotype (int {\em low}, \/  int {\em hi})}}
+\label{classSnpData_a5f986138c94a1a0491bd56f5d0b9eb14}
+Check for catagorical phenotype then place it in -\/1,1,0 order.
+
+-\/1,1 keep sorted order. \hypertarget{classSnpData_ae6d6c89606d8176f34b11b253b40f191}{
+\index{SnpData@{SnpData}!cleanIndividualNames@{cleanIndividualNames}}
+\index{cleanIndividualNames@{cleanIndividualNames}!SnpData@{SnpData}}
+\subsubsection[{cleanIndividualNames}]{\setlength{\rightskip}{0pt plus 5cm}void SnpData::cleanIndividualNames ()}}
+\label{classSnpData_ae6d6c89606d8176f34b11b253b40f191}
+Some of the vector elements are going to be empty. Fill them in. \hypertarget{classSnpData_aadd312f6c8d9060a199728bf7e81a1fc}{
+\index{SnpData@{SnpData}!covariate\_\-column@{covariate\_\-column}}
+\index{covariate\_\-column@{covariate\_\-column}!SnpData@{SnpData}}
+\subsubsection[{covariate\_\-column}]{\setlength{\rightskip}{0pt plus 5cm}vector$<$ double $>$ $\ast$ SnpData::covariate\_\-column (int {\em person})\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classSnpData_aadd312f6c8d9060a199728bf7e81a1fc}
+\hypertarget{classSnpData_af7caa689a8257f534cd6a92dac45ee82}{
+\index{SnpData@{SnpData}!delete\_\-indiv@{delete\_\-indiv}}
+\index{delete\_\-indiv@{delete\_\-indiv}!SnpData@{SnpData}}
+\subsubsection[{delete\_\-indiv}]{\setlength{\rightskip}{0pt plus 5cm}bool SnpData::delete\_\-indiv (int {\em i})}}
+\label{classSnpData_af7caa689a8257f534cd6a92dac45ee82}
+\hypertarget{classSnpData_a4aed56566f1194ab787b604563783280}{
+\index{SnpData@{SnpData}!delete\_\-snp@{delete\_\-snp}}
+\index{delete\_\-snp@{delete\_\-snp}!SnpData@{SnpData}}
+\subsubsection[{delete\_\-snp}]{\setlength{\rightskip}{0pt plus 5cm}bool SnpData::delete\_\-snp (long {\em l})}}
+\label{classSnpData_a4aed56566f1194ab787b604563783280}
+
+
+Data manipulation functions. 
+
+Push l onto SNP delete vector if it is not already there. For removal of SNPs \hypertarget{classSnpData_a55e5ee9b74b0b6057393d8e19dd8fced}{
+\index{SnpData@{SnpData}!dump\_\-data@{dump\_\-data}}
+\index{dump\_\-data@{dump\_\-data}!SnpData@{SnpData}}
+\subsubsection[{dump\_\-data}]{\setlength{\rightskip}{0pt plus 5cm}void SnpData::dump\_\-data ()}}
+\label{classSnpData_a55e5ee9b74b0b6057393d8e19dd8fced}
+\hypertarget{classSnpData_a1831ac542e4cad682c7235943e531179}{
+\index{SnpData@{SnpData}!fill\_\-allele\_\-codes@{fill\_\-allele\_\-codes}}
+\index{fill\_\-allele\_\-codes@{fill\_\-allele\_\-codes}!SnpData@{SnpData}}
+\subsubsection[{fill\_\-allele\_\-codes}]{\setlength{\rightskip}{0pt plus 5cm}void SnpData::fill\_\-allele\_\-codes (int {\em i}, \/  char \& {\em maj}, \/  char \& {\em min}, \/  char \& {\em ref})\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classSnpData_a1831ac542e4cad682c7235943e531179}
+Retrieve the major and minor alleles as passed into the program.
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em i}]SNP of interest \item[{\em maj}]Character to hold major allele \item[{\em min}]Character to hold minor allele. \item[{\em ref}]Character to hold the reference allele. \end{DoxyParams}
+\hypertarget{classSnpData_af114df61aa4280e4e89e87395b7a22f3}{
+\index{SnpData@{SnpData}!get\_\-column@{get\_\-column}}
+\index{get\_\-column@{get\_\-column}!SnpData@{SnpData}}
+\subsubsection[{get\_\-column}]{\setlength{\rightskip}{0pt plus 5cm}vector$<$ short $>$ $\ast$ SnpData::get\_\-column (unsigned int {\em i})\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classSnpData_af114df61aa4280e4e89e87395b7a22f3}
+
+
+Access functions. 
+
+Retrieve an array pointer from the snp\_\-data set. The result corresponds to an individual's genome.
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em i}]corresponds to an individual. \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+vector$<$short$>$$\ast$ pointer to SNPs for single individual. 
+\end{DoxyReturn}
+\hypertarget{classSnpData_ad2089f56539d02ab64282473b0ca9bd0}{
+\index{SnpData@{SnpData}!indiv\_\-flush@{indiv\_\-flush}}
+\index{indiv\_\-flush@{indiv\_\-flush}!SnpData@{SnpData}}
+\subsubsection[{indiv\_\-flush}]{\setlength{\rightskip}{0pt plus 5cm}void SnpData::indiv\_\-flush ()}}
+\label{classSnpData_ad2089f56539d02ab64282473b0ca9bd0}
+\hypertarget{classSnpData_adcde7db42d75082f1ff23379c0a52caa}{
+\index{SnpData@{SnpData}!isUsable@{isUsable}}
+\index{isUsable@{isUsable}!SnpData@{SnpData}}
+\subsubsection[{isUsable}]{\setlength{\rightskip}{0pt plus 5cm}bool SnpData::isUsable (int {\em i})\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{classSnpData_adcde7db42d75082f1ff23379c0a52caa}
+\hypertarget{classSnpData_ad7f9a7e9b8635ae55b970786ce791b7b}{
+\index{SnpData@{SnpData}!normalize@{normalize}}
+\index{normalize@{normalize}!SnpData@{SnpData}}
+\subsubsection[{normalize}]{\setlength{\rightskip}{0pt plus 5cm}void SnpData::normalize ()\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classSnpData_ad7f9a7e9b8635ae55b970786ce791b7b}
+Check locus counts and flip if no minor allele present. Flip score if necessary. Flip should be 1$<$-\/$>$4 ; 3$<$-\/$>$2
+
+Also store the minor allele. \hypertarget{classSnpData_a569da0a2d95bb510663ceb71717408e2}{
+\index{SnpData@{SnpData}!perform\_\-delete\_\-of\_\-indiv@{perform\_\-delete\_\-of\_\-indiv}}
+\index{perform\_\-delete\_\-of\_\-indiv@{perform\_\-delete\_\-of\_\-indiv}!SnpData@{SnpData}}
+\subsubsection[{perform\_\-delete\_\-of\_\-indiv}]{\setlength{\rightskip}{0pt plus 5cm}void SnpData::perform\_\-delete\_\-of\_\-indiv (int {\em l})\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classSnpData_a569da0a2d95bb510663ceb71717408e2}
+\hypertarget{classSnpData_a7a1858e40b26cb6ded5d3e8009ed2b49}{
+\index{SnpData@{SnpData}!perform\_\-delete\_\-of\_\-snp@{perform\_\-delete\_\-of\_\-snp}}
+\index{perform\_\-delete\_\-of\_\-snp@{perform\_\-delete\_\-of\_\-snp}!SnpData@{SnpData}}
+\subsubsection[{perform\_\-delete\_\-of\_\-snp}]{\setlength{\rightskip}{0pt plus 5cm}void SnpData::perform\_\-delete\_\-of\_\-snp (long {\em l})\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classSnpData_a7a1858e40b26cb6ded5d3e8009ed2b49}
+Remove a SNP from the sample data completely.
+
+Remove from the vector for each individual. Remove from the map vector.
+
+Note: this algorithm is linear in number of elements after l.
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em l}]vector position \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+bool true if completed. 
+\end{DoxyReturn}
+\hypertarget{classSnpData_a534016cfdc6e5ec19076a4f38d80dce2}{
+\index{SnpData@{SnpData}!phenotype\_\-at@{phenotype\_\-at}}
+\index{phenotype\_\-at@{phenotype\_\-at}!SnpData@{SnpData}}
+\subsubsection[{phenotype\_\-at}]{\setlength{\rightskip}{0pt plus 5cm}double SnpData::phenotype\_\-at (int {\em i})\hspace{0.3cm}{\ttfamily  \mbox{[}inline, protected\mbox{]}}}}
+\label{classSnpData_a534016cfdc6e5ec19076a4f38d80dce2}
+\hypertarget{classSnpData_a856afb537dc90f0e45c2d3a28d6a8b41}{
+\index{SnpData@{SnpData}!prep\_\-data@{prep\_\-data}}
+\index{prep\_\-data@{prep\_\-data}!SnpData@{SnpData}}
+\subsubsection[{prep\_\-data}]{\setlength{\rightskip}{0pt plus 5cm}void SnpData::prep\_\-data ({\bf ParamReader} $\ast$ {\em params})}}
+\label{classSnpData_a856afb537dc90f0e45c2d3a28d6a8b41}
+
+
+Data cleaning functions. 
+
+Perform initial analysis of data. Jobs 1) Code data as major allele and minor allele (may have to switch variables) \hypertarget{classSnpData_afde9baf5271d4ccd8a47bba6a7a3a25c}{
+\index{SnpData@{SnpData}!push\_\-map@{push\_\-map}}
+\index{push\_\-map@{push\_\-map}!SnpData@{SnpData}}
+\subsubsection[{push\_\-map}]{\setlength{\rightskip}{0pt plus 5cm}void SnpData::push\_\-map (string {\em c}, \/  string {\em n}, \/  long {\em p}, \/  char {\em ref} = {\ttfamily (char)~0})}}
+\label{classSnpData_afde9baf5271d4ccd8a47bba6a7a3a25c}
+Insert a new map structure into the map array at end.
+
+Also updates the max length for all maps. \hypertarget{classSnpData_afe4142e4ebec9142c79962b229208f7b}{
+\index{SnpData@{SnpData}!recode\_\-snp@{recode\_\-snp}}
+\index{recode\_\-snp@{recode\_\-snp}!SnpData@{SnpData}}
+\subsubsection[{recode\_\-snp}]{\setlength{\rightskip}{0pt plus 5cm}void SnpData::recode\_\-snp (long {\em l})\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classSnpData_afe4142e4ebec9142c79962b229208f7b}
+1$<$-\/$>$4 ; 2$<$-\/$>$3 \hypertarget{classSnpData_a9fa11c7060c6eba27c09c38c8366d8d1}{
+\index{SnpData@{SnpData}!remove\_\-covariate@{remove\_\-covariate}}
+\index{remove\_\-covariate@{remove\_\-covariate}!SnpData@{SnpData}}
+\subsubsection[{remove\_\-covariate}]{\setlength{\rightskip}{0pt plus 5cm}int SnpData::remove\_\-covariate (double {\em d})}}
+\label{classSnpData_a9fa11c7060c6eba27c09c38c8366d8d1}
+Remove anyone with any covariate matching these.
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em d}]All individuals with given covariate are removed. \end{DoxyParams}
+\hypertarget{classSnpData_a6c174381b8ca1a605e7e052990b563ce}{
+\index{SnpData@{SnpData}!remove\_\-haplotype@{remove\_\-haplotype}}
+\index{remove\_\-haplotype@{remove\_\-haplotype}!SnpData@{SnpData}}
+\subsubsection[{remove\_\-haplotype}]{\setlength{\rightskip}{0pt plus 5cm}void SnpData::remove\_\-haplotype ()}}
+\label{classSnpData_a6c174381b8ca1a605e7e052990b563ce}
+Recode all threes in the data as twos for algorithms that do not require haplo information. $\ast$ \hypertarget{classSnpData_ac7952b0c911c5c3f7a894ab3c5b9c179}{
+\index{SnpData@{SnpData}!remove\_\-indiv\_\-with\_\-snp\_\-value@{remove\_\-indiv\_\-with\_\-snp\_\-value}}
+\index{remove\_\-indiv\_\-with\_\-snp\_\-value@{remove\_\-indiv\_\-with\_\-snp\_\-value}!SnpData@{SnpData}}
+\subsubsection[{remove\_\-indiv\_\-with\_\-snp\_\-value}]{\setlength{\rightskip}{0pt plus 5cm}int SnpData::remove\_\-indiv\_\-with\_\-snp\_\-value (int {\em d})}}
+\label{classSnpData_ac7952b0c911c5c3f7a894ab3c5b9c179}
+\hypertarget{classSnpData_afadaf2a77dc7b57c53c35bfda981bbc8}{
+\index{SnpData@{SnpData}!remove\_\-missing\_\-geno@{remove\_\-missing\_\-geno}}
+\index{remove\_\-missing\_\-geno@{remove\_\-missing\_\-geno}!SnpData@{SnpData}}
+\subsubsection[{remove\_\-missing\_\-geno}]{\setlength{\rightskip}{0pt plus 5cm}int SnpData::remove\_\-missing\_\-geno ()}}
+\label{classSnpData_afadaf2a77dc7b57c53c35bfda981bbc8}
+\hypertarget{classSnpData_a0056036c39385fa3e2955162755be872}{
+\index{SnpData@{SnpData}!remove\_\-phenotype@{remove\_\-phenotype}}
+\index{remove\_\-phenotype@{remove\_\-phenotype}!SnpData@{SnpData}}
+\subsubsection[{remove\_\-phenotype}]{\setlength{\rightskip}{0pt plus 5cm}int SnpData::remove\_\-phenotype (double {\em d})}}
+\label{classSnpData_a0056036c39385fa3e2955162755be872}
+Remove anyone with phenotype listed. 
+\begin{DoxyParams}{Parameters}
+\item[{\em d}]All individuals with given phenotype are removed. \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+int Number of individuals that are removed. 
+\end{DoxyReturn}
+\hypertarget{classSnpData_a7154ea651a58dc4d2fa5398acfa85780}{
+\index{SnpData@{SnpData}!setIndividualName@{setIndividualName}}
+\index{setIndividualName@{setIndividualName}!SnpData@{SnpData}}
+\subsubsection[{setIndividualName}]{\setlength{\rightskip}{0pt plus 5cm}void SnpData::setIndividualName (unsigned int {\em i}, \/  string {\em name})}}
+\label{classSnpData_a7154ea651a58dc4d2fa5398acfa85780}
+Insert a person ID into given location and update maxLength. \hypertarget{classSnpData_aa4fa47c8134b674769f5638074ae46f8}{
+\index{SnpData@{SnpData}!snp\_\-chr@{snp\_\-chr}}
+\index{snp\_\-chr@{snp\_\-chr}!SnpData@{SnpData}}
+\subsubsection[{snp\_\-chr}]{\setlength{\rightskip}{0pt plus 5cm}string SnpData::snp\_\-chr (int {\em i})\hspace{0.3cm}{\ttfamily  \mbox{[}inline, protected\mbox{]}}}}
+\label{classSnpData_aa4fa47c8134b674769f5638074ae46f8}
+\hypertarget{classSnpData_afc11539758009ab2d5cd4f2b04f7c1bd}{
+\index{SnpData@{SnpData}!snp\_\-flush@{snp\_\-flush}}
+\index{snp\_\-flush@{snp\_\-flush}!SnpData@{SnpData}}
+\subsubsection[{snp\_\-flush}]{\setlength{\rightskip}{0pt plus 5cm}void SnpData::snp\_\-flush ()}}
+\label{classSnpData_afc11539758009ab2d5cd4f2b04f7c1bd}
+Perform removal and clear the delete vector. For removal of SNPs \hypertarget{classSnpData_a5a23514541160563ae68bf2b5a0e2355}{
+\index{SnpData@{SnpData}!snp\_\-name@{snp\_\-name}}
+\index{snp\_\-name@{snp\_\-name}!SnpData@{SnpData}}
+\subsubsection[{snp\_\-name}]{\setlength{\rightskip}{0pt plus 5cm}string SnpData::snp\_\-name (long {\em l})\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classSnpData_a5a23514541160563ae68bf2b5a0e2355}
+Return the name of a given SNP.
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em l}]SNP index in data set. \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+string Given name. 
+\end{DoxyReturn}
+\hypertarget{classSnpData_a391d4c15ba2ee87318ffbb6b2f20b890}{
+\index{SnpData@{SnpData}!snp\_\-size@{snp\_\-size}}
+\index{snp\_\-size@{snp\_\-size}!SnpData@{SnpData}}
+\subsubsection[{snp\_\-size}]{\setlength{\rightskip}{0pt plus 5cm}long SnpData::snp\_\-size (unsigned int {\em o})\hspace{0.3cm}{\ttfamily  \mbox{[}inline, protected\mbox{]}}}}
+\label{classSnpData_a391d4c15ba2ee87318ffbb6b2f20b890}
+\hypertarget{classSnpData_a726282a904cee0968dae7ef614ea16fe}{
+\index{SnpData@{SnpData}!verify\_\-data\_\-size\_\-match@{verify\_\-data\_\-size\_\-match}}
+\index{verify\_\-data\_\-size\_\-match@{verify\_\-data\_\-size\_\-match}!SnpData@{SnpData}}
+\subsubsection[{verify\_\-data\_\-size\_\-match}]{\setlength{\rightskip}{0pt plus 5cm}void SnpData::verify\_\-data\_\-size\_\-match ()\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classSnpData_a726282a904cee0968dae7ef614ea16fe}
+Verify that num phenotypes == num genotypes. Prints a warning if mismatch, but does not exit because the program is designed to match differently sized files by individual.
+
+name: \hyperlink{classSnpData_a726282a904cee0968dae7ef614ea16fe}{SnpData::verify\_\-data\_\-size\_\-match()} \hypertarget{classSnpData_ab0b29e53a209df1996e3dc008afb2f5b}{
+\index{SnpData@{SnpData}!verify\_\-map\_\-length@{verify\_\-map\_\-length}}
+\index{verify\_\-map\_\-length@{verify\_\-map\_\-length}!SnpData@{SnpData}}
+\subsubsection[{verify\_\-map\_\-length}]{\setlength{\rightskip}{0pt plus 5cm}void SnpData::verify\_\-map\_\-length ()\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classSnpData_ab0b29e53a209df1996e3dc008afb2f5b}
+\hypertarget{classSnpData_a0762cd9f5ff8576c8d7aee9550201f01}{
+\index{SnpData@{SnpData}!verify\_\-snp\_\-lengths@{verify\_\-snp\_\-lengths}}
+\index{verify\_\-snp\_\-lengths@{verify\_\-snp\_\-lengths}!SnpData@{SnpData}}
+\subsubsection[{verify\_\-snp\_\-lengths}]{\setlength{\rightskip}{0pt plus 5cm}void SnpData::verify\_\-snp\_\-lengths ()\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classSnpData_a0762cd9f5ff8576c8d7aee9550201f01}
+Verify that all of the individuals have the same number of snps.
+
+Will call exit(0) if this fails. 
+
+\subsection{Friends And Related Function Documentation}
+\hypertarget{classSnpData_a079f8f0072d4d2ed008a2486f38b3834}{
+\index{SnpData@{SnpData}!DataAccess@{DataAccess}}
+\index{DataAccess@{DataAccess}!SnpData@{SnpData}}
+\subsubsection[{DataAccess}]{\setlength{\rightskip}{0pt plus 5cm}friend class {\bf DataAccess}\hspace{0.3cm}{\ttfamily  \mbox{[}friend\mbox{]}}}}
+\label{classSnpData_a079f8f0072d4d2ed008a2486f38b3834}
+\hypertarget{classSnpData_aeec22b22ec66cea36cae09979a36d40c}{
+\index{SnpData@{SnpData}!LinkageReader@{LinkageReader}}
+\index{LinkageReader@{LinkageReader}!SnpData@{SnpData}}
+\subsubsection[{LinkageReader}]{\setlength{\rightskip}{0pt plus 5cm}friend class {\bf LinkageReader}\hspace{0.3cm}{\ttfamily  \mbox{[}friend\mbox{]}}}}
+\label{classSnpData_aeec22b22ec66cea36cae09979a36d40c}
+
+
+\subsection{Field Documentation}
+\hypertarget{classSnpData_a6a43ad849a99b9ecffa9de59a876187e}{
+\index{SnpData@{SnpData}!all\_\-missing@{all\_\-missing}}
+\index{all\_\-missing@{all\_\-missing}!SnpData@{SnpData}}
+\subsubsection[{all\_\-missing}]{\setlength{\rightskip}{0pt plus 5cm}vector$<$bool$>$ {\bf SnpData::all\_\-missing}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classSnpData_a6a43ad849a99b9ecffa9de59a876187e}
+\hypertarget{classSnpData_a3e88fcb82912de7cb1e37e2630bbee71}{
+\index{SnpData@{SnpData}!character\_\-list@{character\_\-list}}
+\index{character\_\-list@{character\_\-list}!SnpData@{SnpData}}
+\subsubsection[{character\_\-list}]{\setlength{\rightskip}{0pt plus 5cm}vector$<$char$>$ {\bf SnpData::character\_\-list}}}
+\label{classSnpData_a3e88fcb82912de7cb1e37e2630bbee71}
+\hypertarget{classSnpData_a26418125e4106520772b256d22b3a5c2}{
+\index{SnpData@{SnpData}!covariance@{covariance}}
+\index{covariance@{covariance}!SnpData@{SnpData}}
+\subsubsection[{covariance}]{\setlength{\rightskip}{0pt plus 5cm}vector$<$vector$<$ double $>$ $>$ {\bf SnpData::covariance}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classSnpData_a26418125e4106520772b256d22b3a5c2}
+\hypertarget{classSnpData_a0b3e8c850f1bef514eb74c77011557e8}{
+\index{SnpData@{SnpData}!indiv\_\-delete\_\-records@{indiv\_\-delete\_\-records}}
+\index{indiv\_\-delete\_\-records@{indiv\_\-delete\_\-records}!SnpData@{SnpData}}
+\subsubsection[{indiv\_\-delete\_\-records}]{\setlength{\rightskip}{0pt plus 5cm}vector$<$int$>$ {\bf SnpData::indiv\_\-delete\_\-records}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classSnpData_a0b3e8c850f1bef514eb74c77011557e8}
+\hypertarget{classSnpData_a2c8efb31ae7abca0dffa3ae2e54b4eaa}{
+\index{SnpData@{SnpData}!individualName@{individualName}}
+\index{individualName@{individualName}!SnpData@{SnpData}}
+\subsubsection[{individualName}]{\setlength{\rightskip}{0pt plus 5cm}vector$<$string$>$ {\bf SnpData::individualName}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classSnpData_a2c8efb31ae7abca0dffa3ae2e54b4eaa}
+\hypertarget{classSnpData_a603bf0f325e6372f3bd46046751dc4a3}{
+\index{SnpData@{SnpData}!map@{map}}
+\index{map@{map}!SnpData@{SnpData}}
+\subsubsection[{map}]{\setlength{\rightskip}{0pt plus 5cm}vector$<${\bf MapData}$>$ {\bf SnpData::map}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classSnpData_a603bf0f325e6372f3bd46046751dc4a3}
+\hypertarget{classSnpData_a06d3ca0ba0949ae98c2b055c6f2402f9}{
+\index{SnpData@{SnpData}!maxMapLength@{maxMapLength}}
+\index{maxMapLength@{maxMapLength}!SnpData@{SnpData}}
+\subsubsection[{maxMapLength}]{\setlength{\rightskip}{0pt plus 5cm}unsigned int {\bf SnpData::maxMapLength}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classSnpData_a06d3ca0ba0949ae98c2b055c6f2402f9}
+\hypertarget{classSnpData_a3cf4a8a666a5eac6c78e68466b1858a7}{
+\index{SnpData@{SnpData}!maxPersonIDLength@{maxPersonIDLength}}
+\index{maxPersonIDLength@{maxPersonIDLength}!SnpData@{SnpData}}
+\subsubsection[{maxPersonIDLength}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf SnpData::maxPersonIDLength}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classSnpData_a3cf4a8a666a5eac6c78e68466b1858a7}
+\hypertarget{classSnpData_a355bd15fc7b63abdf6c0f5201c753e86}{
+\index{SnpData@{SnpData}!phenotypes@{phenotypes}}
+\index{phenotypes@{phenotypes}!SnpData@{SnpData}}
+\subsubsection[{phenotypes}]{\setlength{\rightskip}{0pt plus 5cm}vector$<$double$>$ {\bf SnpData::phenotypes}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classSnpData_a355bd15fc7b63abdf6c0f5201c753e86}
+\hypertarget{classSnpData_afb0a89afa8922e9e20b4826ae5d5cd36}{
+\index{SnpData@{SnpData}!random@{random}}
+\index{random@{random}!SnpData@{SnpData}}
+\subsubsection[{random}]{\setlength{\rightskip}{0pt plus 5cm}{\bf RandWH} {\bf SnpData::random}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classSnpData_afb0a89afa8922e9e20b4826ae5d5cd36}
+\hypertarget{classSnpData_a485f4c48967669c1461fbed3ba32f98b}{
+\index{SnpData@{SnpData}!snp\_\-data@{snp\_\-data}}
+\index{snp\_\-data@{snp\_\-data}!SnpData@{SnpData}}
+\subsubsection[{snp\_\-data}]{\setlength{\rightskip}{0pt plus 5cm}vector$<$vector$<$ short$>$ $>$ {\bf SnpData::snp\_\-data}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classSnpData_a485f4c48967669c1461fbed3ba32f98b}
+\hypertarget{classSnpData_ae90cb32821113584bc99241e760fdadb}{
+\index{SnpData@{SnpData}!snp\_\-delete\_\-records@{snp\_\-delete\_\-records}}
+\index{snp\_\-delete\_\-records@{snp\_\-delete\_\-records}!SnpData@{SnpData}}
+\subsubsection[{snp\_\-delete\_\-records}]{\setlength{\rightskip}{0pt plus 5cm}vector$<$long$>$ {\bf SnpData::snp\_\-delete\_\-records}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classSnpData_ae90cb32821113584bc99241e760fdadb}
+
+
+The documentation for this class was generated from the following files:\begin{DoxyCompactItemize}
+\item 
+engine/\hyperlink{snp__data_8hh}{snp\_\-data.hh}\item 
+engine/\hyperlink{snp__data_8cpp}{snp\_\-data.cpp}\end{DoxyCompactItemize}

@@ -1,0 +1,139 @@
+\hypertarget{classCrossValidation}{
+\section{CrossValidation Class Reference}
+\label{classCrossValidation}\index{CrossValidation@{CrossValidation}}
+}
+
+
+{\ttfamily \#include $<$cross\_\-val.h$>$}
+
+Inheritance diagram for CrossValidation:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3cm]{classCrossValidation}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classCrossValidation_a855f538ef5541634f1dd94fbf965129b}{CrossValidation} ()
+\item 
+\hyperlink{classCrossValidation_a1e65ae700add864f2f85dcdf82940d74}{$\sim$CrossValidation} ()
+\item 
+virtual void \hyperlink{classCrossValidation_acf88bf85dec8d27f6aa97d9ec04ccf26}{init} ()
+\begin{DoxyCompactList}\small\item\em From engine. \item\end{DoxyCompactList}\item 
+virtual void \hyperlink{classCrossValidation_ad45dad478f034a39696660d7c93b34fa}{preProcess} ()
+\item 
+virtual void \hyperlink{classCrossValidation_a3435a227d91e03af7d1df7e2c6c4fce9}{process} ()
+\item 
+virtual void \hyperlink{classCrossValidation_a50b65a606c324404de92f44dba655154}{enslave} (\hyperlink{classEngineParamReader}{EngineParamReader} $\ast$)
+\item 
+virtual void \hyperlink{classCrossValidation_a1b4664d9123d676b778ff0e89379a1ba}{test} ()
+\item 
+virtual void \hyperlink{classCrossValidation_a6b26e9c496dac46fb066fae0f381fed0}{classify} (int a\mbox{[}4\mbox{]})
+\begin{DoxyCompactList}\small\item\em Classification. \item\end{DoxyCompactList}\item 
+virtual void \hyperlink{classCrossValidation_a237cd67d2e1e6fc7c62abf0fef8bd3e8}{classify} (int a\mbox{[}4\mbox{]}, \hyperlink{classSnpData}{SnpData} $\ast$)
+\item 
+virtual int \hyperlink{classCrossValidation_a4c11570314fe9e98e434abee990ac2d4}{classify} (vector$<$ short $>$ \&)
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classCrossValidation_a855f538ef5541634f1dd94fbf965129b}{
+\index{CrossValidation@{CrossValidation}!CrossValidation@{CrossValidation}}
+\index{CrossValidation@{CrossValidation}!CrossValidation@{CrossValidation}}
+\subsubsection[{CrossValidation}]{\setlength{\rightskip}{0pt plus 5cm}CrossValidation::CrossValidation ()\hspace{0.3cm}{\ttfamily  \mbox{[}explicit\mbox{]}}}}
+\label{classCrossValidation_a855f538ef5541634f1dd94fbf965129b}
+\hypertarget{classCrossValidation_a1e65ae700add864f2f85dcdf82940d74}{
+\index{CrossValidation@{CrossValidation}!$\sim$CrossValidation@{$\sim$CrossValidation}}
+\index{$\sim$CrossValidation@{$\sim$CrossValidation}!CrossValidation@{CrossValidation}}
+\subsubsection[{$\sim$CrossValidation}]{\setlength{\rightskip}{0pt plus 5cm}CrossValidation::$\sim$CrossValidation ()\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{classCrossValidation_a1e65ae700add864f2f85dcdf82940d74}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classCrossValidation_a4c11570314fe9e98e434abee990ac2d4}{
+\index{CrossValidation@{CrossValidation}!classify@{classify}}
+\index{classify@{classify}!CrossValidation@{CrossValidation}}
+\subsubsection[{classify}]{\setlength{\rightskip}{0pt plus 5cm}int CrossValidation::classify (vector$<$ short $>$ \&)\hspace{0.3cm}{\ttfamily  \mbox{[}virtual\mbox{]}}}}
+\label{classCrossValidation_a4c11570314fe9e98e434abee990ac2d4}
+
+
+Implements \hyperlink{classClassifies_a5e3d218b44024ec2c3ab3398e3dbd2e3}{Classifies}.
+
+\hypertarget{classCrossValidation_a237cd67d2e1e6fc7c62abf0fef8bd3e8}{
+\index{CrossValidation@{CrossValidation}!classify@{classify}}
+\index{classify@{classify}!CrossValidation@{CrossValidation}}
+\subsubsection[{classify}]{\setlength{\rightskip}{0pt plus 5cm}void CrossValidation::classify (int {\em a}\mbox{[}4\mbox{]}, \/  {\bf SnpData} $\ast$)\hspace{0.3cm}{\ttfamily  \mbox{[}virtual\mbox{]}}}}
+\label{classCrossValidation_a237cd67d2e1e6fc7c62abf0fef8bd3e8}
+
+
+Implements \hyperlink{classClassifies_a7d2ae89f04af1a74eb6dd35be8eda476}{Classifies}.
+
+\hypertarget{classCrossValidation_a6b26e9c496dac46fb066fae0f381fed0}{
+\index{CrossValidation@{CrossValidation}!classify@{classify}}
+\index{classify@{classify}!CrossValidation@{CrossValidation}}
+\subsubsection[{classify}]{\setlength{\rightskip}{0pt plus 5cm}void CrossValidation::classify (int {\em a}\mbox{[}4\mbox{]})\hspace{0.3cm}{\ttfamily  \mbox{[}virtual\mbox{]}}}}
+\label{classCrossValidation_a6b26e9c496dac46fb066fae0f381fed0}
+
+
+Classification. 
+
+Report classification, which was precomputed. 
+
+Implements \hyperlink{classClassifies_a15864d3a95edfde2bf48384c9b25c6d8}{Classifies}.
+
+\hypertarget{classCrossValidation_a50b65a606c324404de92f44dba655154}{
+\index{CrossValidation@{CrossValidation}!enslave@{enslave}}
+\index{enslave@{enslave}!CrossValidation@{CrossValidation}}
+\subsubsection[{enslave}]{\setlength{\rightskip}{0pt plus 5cm}void CrossValidation::enslave ({\bf EngineParamReader} $\ast$ {\em b})\hspace{0.3cm}{\ttfamily  \mbox{[}virtual\mbox{]}}}}
+\label{classCrossValidation_a50b65a606c324404de92f44dba655154}
+Make this engine controllable by another. 
+
+Implements \hyperlink{classEngine_a023e094182312b1732fe53754c2fe5cb}{Engine}.
+
+\hypertarget{classCrossValidation_acf88bf85dec8d27f6aa97d9ec04ccf26}{
+\index{CrossValidation@{CrossValidation}!init@{init}}
+\index{init@{init}!CrossValidation@{CrossValidation}}
+\subsubsection[{init}]{\setlength{\rightskip}{0pt plus 5cm}void CrossValidation::init ()\hspace{0.3cm}{\ttfamily  \mbox{[}virtual\mbox{]}}}}
+\label{classCrossValidation_acf88bf85dec8d27f6aa97d9ec04ccf26}
+
+
+From engine. 
+
+Open the data and read it into the data class. $\ast$ 
+
+Implements \hyperlink{classEngine_aaa054d596fb8ced6e3eb4bee208f8c3d}{Engine}.
+
+\hypertarget{classCrossValidation_ad45dad478f034a39696660d7c93b34fa}{
+\index{CrossValidation@{CrossValidation}!preProcess@{preProcess}}
+\index{preProcess@{preProcess}!CrossValidation@{CrossValidation}}
+\subsubsection[{preProcess}]{\setlength{\rightskip}{0pt plus 5cm}void CrossValidation::preProcess ()\hspace{0.3cm}{\ttfamily  \mbox{[}virtual\mbox{]}}}}
+\label{classCrossValidation_ad45dad478f034a39696660d7c93b34fa}
+Create all of the engines and set up the master-\/slave system. Create data first. 
+
+Implements \hyperlink{classEngine_aec7076b8979a13c96eceb362437dc68c}{Engine}.
+
+\hypertarget{classCrossValidation_a3435a227d91e03af7d1df7e2c6c4fce9}{
+\index{CrossValidation@{CrossValidation}!process@{process}}
+\index{process@{process}!CrossValidation@{CrossValidation}}
+\subsubsection[{process}]{\setlength{\rightskip}{0pt plus 5cm}void CrossValidation::process ()\hspace{0.3cm}{\ttfamily  \mbox{[}virtual\mbox{]}}}}
+\label{classCrossValidation_a3435a227d91e03af7d1df7e2c6c4fce9}
+Build a model on each of the cross-\/validation parts. Run the model on the left out individuals. Report individuals. 
+
+Implements \hyperlink{classEngine_a005f8e277c3dea16ea05803fba223db7}{Engine}.
+
+\hypertarget{classCrossValidation_a1b4664d9123d676b778ff0e89379a1ba}{
+\index{CrossValidation@{CrossValidation}!test@{test}}
+\index{test@{test}!CrossValidation@{CrossValidation}}
+\subsubsection[{test}]{\setlength{\rightskip}{0pt plus 5cm}void CrossValidation::test ()\hspace{0.3cm}{\ttfamily  \mbox{[}virtual\mbox{]}}}}
+\label{classCrossValidation_a1b4664d9123d676b778ff0e89379a1ba}
+
+
+Implements \hyperlink{classEngine_a2927c4a4263809453063ad482c6434a4}{Engine}.
+
+
+
+The documentation for this class was generated from the following files:\begin{DoxyCompactItemize}
+\item 
+engine/crossval/\hyperlink{cross__val_8h}{cross\_\-val.h}\item 
+engine/crossval/\hyperlink{cross__val_8cpp}{cross\_\-val.cpp}\end{DoxyCompactItemize}

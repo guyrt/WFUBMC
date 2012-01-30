@@ -1,0 +1,188 @@
+\hypertarget{classInterTwoLog}{
+\section{InterTwoLog Class Reference}
+\label{classInterTwoLog}\index{InterTwoLog@{InterTwoLog}}
+}
+
+
+{\ttfamily \#include $<$intertwolog.hh$>$}
+
+Inheritance diagram for InterTwoLog:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2cm]{classInterTwoLog}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classInterTwoLog_a4a7f06e802d741bac0b9934dd68b1fd3}{InterTwoLog} ()
+\item 
+\hyperlink{classInterTwoLog_a95e66b67f292f3bdd719fb6d57adcf1e}{$\sim$InterTwoLog} ()
+\item 
+virtual void \hyperlink{classInterTwoLog_af5dbc57497069c182c6101211fe2b64a}{init} ()
+\item 
+virtual void \hyperlink{classInterTwoLog_a581fcf71571bce5c0861e963c16f220b}{preProcess} ()
+\item 
+virtual void \hyperlink{classInterTwoLog_abd4e1bdf33314432d4a57193de056905}{process} ()
+\item 
+virtual void \hyperlink{classInterTwoLog_aa96d91206c19b781d222f0d6e13bf51d}{enslave} (\hyperlink{classEngineParamReader}{EngineParamReader} $\ast$)
+\item 
+virtual void \hyperlink{classInterTwoLog_a525b88900b11ed13cdefd73f5024e2eb}{test} ()
+\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{classInterTwoLog_a01c7c507e0f2e66d38da544cd68cb76e}{delete\_\-my\_\-innards} ()
+\item 
+void \hyperlink{classInterTwoLog_ac83b4a0881e7d882fad88e25833cc565}{processPair} (int i, int j, \hyperlink{structInterTwoLogMeasures}{InterTwoLogMeasures} \&itlm)
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classEngineParamReader}{EngineParamReader} $\ast$ \hyperlink{classInterTwoLog_a1a1c375b7f30632abd59d0f2f61fc626}{itl\_\-param}
+\item 
+bool \hyperlink{classInterTwoLog_a5e71ddd55de30562ad4f92519bee43de}{haveOwner}
+\item 
+\hyperlink{classInterTwoLogOutput}{InterTwoLogOutput} \hyperlink{classInterTwoLog_a25742365edccdd4b3be23f85a39d942a}{out}
+\item 
+int \hyperlink{classInterTwoLog_abc10f45a18be673c9da60e34e34407a1}{numInitSNPs}
+\item 
+int \hyperlink{classInterTwoLog_aa36dd9a588d9b0ad8a322ac3672f22f0}{numInitPhen}
+\item 
+int \hyperlink{classInterTwoLog_a039b29fdef4854a0c85ae37bd2547a26}{numFinalPhen}
+\item 
+int \hyperlink{classInterTwoLog_ab677684383a49037019f4288a08983f3}{numCase}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\begin{DoxyAuthor}{Author}
+Richard T. Guy
+\end{DoxyAuthor}
+Perform adjusted logistic regression search for interaction using the following model:
+
+logit(y) = beta\_\-0 + beta $\ast$ covariates + beta\_\-\{n-\/2\} $\ast$ snp1 + beta\_\-\{n-\/1\} $\ast$ snp2 + beta\_\-n $\ast$ (snp1-\/mu1) $\ast$ (snp2-\/mu2)
+
+Test H\_\-0: beta\_\-n = 0 using Wald test. 
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classInterTwoLog_a4a7f06e802d741bac0b9934dd68b1fd3}{
+\index{InterTwoLog@{InterTwoLog}!InterTwoLog@{InterTwoLog}}
+\index{InterTwoLog@{InterTwoLog}!InterTwoLog@{InterTwoLog}}
+\subsubsection[{InterTwoLog}]{\setlength{\rightskip}{0pt plus 5cm}InterTwoLog::InterTwoLog ()\hspace{0.3cm}{\ttfamily  \mbox{[}explicit\mbox{]}}}}
+\label{classInterTwoLog_a4a7f06e802d741bac0b9934dd68b1fd3}
+\hypertarget{classInterTwoLog_a95e66b67f292f3bdd719fb6d57adcf1e}{
+\index{InterTwoLog@{InterTwoLog}!$\sim$InterTwoLog@{$\sim$InterTwoLog}}
+\index{$\sim$InterTwoLog@{$\sim$InterTwoLog}!InterTwoLog@{InterTwoLog}}
+\subsubsection[{$\sim$InterTwoLog}]{\setlength{\rightskip}{0pt plus 5cm}InterTwoLog::$\sim$InterTwoLog ()}}
+\label{classInterTwoLog_a95e66b67f292f3bdd719fb6d57adcf1e}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classInterTwoLog_a01c7c507e0f2e66d38da544cd68cb76e}{
+\index{InterTwoLog@{InterTwoLog}!delete\_\-my\_\-innards@{delete\_\-my\_\-innards}}
+\index{delete\_\-my\_\-innards@{delete\_\-my\_\-innards}!InterTwoLog@{InterTwoLog}}
+\subsubsection[{delete\_\-my\_\-innards}]{\setlength{\rightskip}{0pt plus 5cm}void InterTwoLog::delete\_\-my\_\-innards ()\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classInterTwoLog_a01c7c507e0f2e66d38da544cd68cb76e}
+\hypertarget{classInterTwoLog_aa96d91206c19b781d222f0d6e13bf51d}{
+\index{InterTwoLog@{InterTwoLog}!enslave@{enslave}}
+\index{enslave@{enslave}!InterTwoLog@{InterTwoLog}}
+\subsubsection[{enslave}]{\setlength{\rightskip}{0pt plus 5cm}void InterTwoLog::enslave ({\bf EngineParamReader} $\ast$)\hspace{0.3cm}{\ttfamily  \mbox{[}virtual\mbox{]}}}}
+\label{classInterTwoLog_aa96d91206c19b781d222f0d6e13bf51d}
+
+
+Implements \hyperlink{classEngine_a023e094182312b1732fe53754c2fe5cb}{Engine}.
+
+\hypertarget{classInterTwoLog_af5dbc57497069c182c6101211fe2b64a}{
+\index{InterTwoLog@{InterTwoLog}!init@{init}}
+\index{init@{init}!InterTwoLog@{InterTwoLog}}
+\subsubsection[{init}]{\setlength{\rightskip}{0pt plus 5cm}void InterTwoLog::init ()\hspace{0.3cm}{\ttfamily  \mbox{[}virtual\mbox{]}}}}
+\label{classInterTwoLog_af5dbc57497069c182c6101211fe2b64a}
+
+
+Implements \hyperlink{classEngine_aaa054d596fb8ced6e3eb4bee208f8c3d}{Engine}.
+
+\hypertarget{classInterTwoLog_a581fcf71571bce5c0861e963c16f220b}{
+\index{InterTwoLog@{InterTwoLog}!preProcess@{preProcess}}
+\index{preProcess@{preProcess}!InterTwoLog@{InterTwoLog}}
+\subsubsection[{preProcess}]{\setlength{\rightskip}{0pt plus 5cm}void InterTwoLog::preProcess ()\hspace{0.3cm}{\ttfamily  \mbox{[}virtual\mbox{]}}}}
+\label{classInterTwoLog_a581fcf71571bce5c0861e963c16f220b}
+
+
+Implements \hyperlink{classEngine_aec7076b8979a13c96eceb362437dc68c}{Engine}.
+
+\hypertarget{classInterTwoLog_abd4e1bdf33314432d4a57193de056905}{
+\index{InterTwoLog@{InterTwoLog}!process@{process}}
+\index{process@{process}!InterTwoLog@{InterTwoLog}}
+\subsubsection[{process}]{\setlength{\rightskip}{0pt plus 5cm}void InterTwoLog::process ()\hspace{0.3cm}{\ttfamily  \mbox{[}virtual\mbox{]}}}}
+\label{classInterTwoLog_abd4e1bdf33314432d4a57193de056905}
+
+
+Implements \hyperlink{classEngine_a005f8e277c3dea16ea05803fba223db7}{Engine}.
+
+\hypertarget{classInterTwoLog_ac83b4a0881e7d882fad88e25833cc565}{
+\index{InterTwoLog@{InterTwoLog}!processPair@{processPair}}
+\index{processPair@{processPair}!InterTwoLog@{InterTwoLog}}
+\subsubsection[{processPair}]{\setlength{\rightskip}{0pt plus 5cm}void InterTwoLog::processPair (int {\em i}, \/  int {\em j}, \/  {\bf InterTwoLogMeasures} \& {\em itlm})\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classInterTwoLog_ac83b4a0881e7d882fad88e25833cc565}
+Create data and run test for a single pair of SNPs given by i and j.
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em i}]First SNP \item[{\em j}]Second SNP \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+itlm Structure filled with p, beta, se. 
+\end{DoxyReturn}
+\hypertarget{classInterTwoLog_a525b88900b11ed13cdefd73f5024e2eb}{
+\index{InterTwoLog@{InterTwoLog}!test@{test}}
+\index{test@{test}!InterTwoLog@{InterTwoLog}}
+\subsubsection[{test}]{\setlength{\rightskip}{0pt plus 5cm}void InterTwoLog::test ()\hspace{0.3cm}{\ttfamily  \mbox{[}virtual\mbox{]}}}}
+\label{classInterTwoLog_a525b88900b11ed13cdefd73f5024e2eb}
+
+
+Implements \hyperlink{classEngine_a2927c4a4263809453063ad482c6434a4}{Engine}.
+
+
+
+\subsection{Field Documentation}
+\hypertarget{classInterTwoLog_a5e71ddd55de30562ad4f92519bee43de}{
+\index{InterTwoLog@{InterTwoLog}!haveOwner@{haveOwner}}
+\index{haveOwner@{haveOwner}!InterTwoLog@{InterTwoLog}}
+\subsubsection[{haveOwner}]{\setlength{\rightskip}{0pt plus 5cm}bool {\bf InterTwoLog::haveOwner}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classInterTwoLog_a5e71ddd55de30562ad4f92519bee43de}
+\hypertarget{classInterTwoLog_a1a1c375b7f30632abd59d0f2f61fc626}{
+\index{InterTwoLog@{InterTwoLog}!itl\_\-param@{itl\_\-param}}
+\index{itl\_\-param@{itl\_\-param}!InterTwoLog@{InterTwoLog}}
+\subsubsection[{itl\_\-param}]{\setlength{\rightskip}{0pt plus 5cm}{\bf EngineParamReader}$\ast$ {\bf InterTwoLog::itl\_\-param}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classInterTwoLog_a1a1c375b7f30632abd59d0f2f61fc626}
+\hypertarget{classInterTwoLog_ab677684383a49037019f4288a08983f3}{
+\index{InterTwoLog@{InterTwoLog}!numCase@{numCase}}
+\index{numCase@{numCase}!InterTwoLog@{InterTwoLog}}
+\subsubsection[{numCase}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf InterTwoLog::numCase}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classInterTwoLog_ab677684383a49037019f4288a08983f3}
+\hypertarget{classInterTwoLog_a039b29fdef4854a0c85ae37bd2547a26}{
+\index{InterTwoLog@{InterTwoLog}!numFinalPhen@{numFinalPhen}}
+\index{numFinalPhen@{numFinalPhen}!InterTwoLog@{InterTwoLog}}
+\subsubsection[{numFinalPhen}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf InterTwoLog::numFinalPhen}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classInterTwoLog_a039b29fdef4854a0c85ae37bd2547a26}
+\hypertarget{classInterTwoLog_aa36dd9a588d9b0ad8a322ac3672f22f0}{
+\index{InterTwoLog@{InterTwoLog}!numInitPhen@{numInitPhen}}
+\index{numInitPhen@{numInitPhen}!InterTwoLog@{InterTwoLog}}
+\subsubsection[{numInitPhen}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf InterTwoLog::numInitPhen}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classInterTwoLog_aa36dd9a588d9b0ad8a322ac3672f22f0}
+\hypertarget{classInterTwoLog_abc10f45a18be673c9da60e34e34407a1}{
+\index{InterTwoLog@{InterTwoLog}!numInitSNPs@{numInitSNPs}}
+\index{numInitSNPs@{numInitSNPs}!InterTwoLog@{InterTwoLog}}
+\subsubsection[{numInitSNPs}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf InterTwoLog::numInitSNPs}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classInterTwoLog_abc10f45a18be673c9da60e34e34407a1}
+\hypertarget{classInterTwoLog_a25742365edccdd4b3be23f85a39d942a}{
+\index{InterTwoLog@{InterTwoLog}!out@{out}}
+\index{out@{out}!InterTwoLog@{InterTwoLog}}
+\subsubsection[{out}]{\setlength{\rightskip}{0pt plus 5cm}{\bf InterTwoLogOutput} {\bf InterTwoLog::out}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classInterTwoLog_a25742365edccdd4b3be23f85a39d942a}
+
+
+The documentation for this class was generated from the following files:\begin{DoxyCompactItemize}
+\item 
+engine/intertwolog/\hyperlink{intertwolog_8hh}{intertwolog.hh}\item 
+engine/intertwolog/\hyperlink{intertwolog_8cpp}{intertwolog.cpp}\end{DoxyCompactItemize}

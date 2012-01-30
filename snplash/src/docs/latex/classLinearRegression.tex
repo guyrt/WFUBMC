@@ -1,0 +1,101 @@
+\hypertarget{classLinearRegression}{
+\section{LinearRegression Class Reference}
+\label{classLinearRegression}\index{LinearRegression@{LinearRegression}}
+}
+
+
+{\ttfamily \#include $<$linear\_\-regression.hh$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classLinearRegression_afeb4c101e4e8b20a75db3d4ce3f1cbc6}{LinearRegression} ()
+\item 
+vector$<$ double $>$ \hyperlink{classLinearRegression_a37f79d0d49e5fe93cf5a04b20d17d829}{leastSquares} (const vector$<$ vector$<$ double $>$ $>$ \&data, const vector$<$ double $>$ \&response)
+\item 
+void \hyperlink{classLinearRegression_a54ba438eebfb5045c7e6d02545adf346}{sumSquaredStats} (const vector$<$ vector$<$ double $>$ $>$ \&data, const vector$<$ double $>$ \&betas, const vector$<$ double $>$ \&response, double mean, double \&sse, double \&ssr)
+\item 
+vector$<$ double $>$ \hyperlink{classLinearRegression_a1c6ed479606439a1943f75c888e8f2bd}{residuals} (const vector$<$ vector$<$ double $>$ $>$ \&data, const vector$<$ double $>$ \&betas, const vector$<$ double $>$ \&response)
+\item 
+double \hyperlink{classLinearRegression_affb7f28584f32975adf12f3a624cfe15}{anova} (const vector$<$ double $>$ \&response, const vector$<$ double $>$ \&division, double means\mbox{[}4\mbox{]})
+\item 
+void \hyperlink{classLinearRegression_a866934791e5415bf573a9030650ef8cb}{test} ()
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classLinearRegression_afeb4c101e4e8b20a75db3d4ce3f1cbc6}{
+\index{LinearRegression@{LinearRegression}!LinearRegression@{LinearRegression}}
+\index{LinearRegression@{LinearRegression}!LinearRegression@{LinearRegression}}
+\subsubsection[{LinearRegression}]{\setlength{\rightskip}{0pt plus 5cm}LinearRegression::LinearRegression ()}}
+\label{classLinearRegression_afeb4c101e4e8b20a75db3d4ce3f1cbc6}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classLinearRegression_affb7f28584f32975adf12f3a624cfe15}{
+\index{LinearRegression@{LinearRegression}!anova@{anova}}
+\index{anova@{anova}!LinearRegression@{LinearRegression}}
+\subsubsection[{anova}]{\setlength{\rightskip}{0pt plus 5cm}double LinearRegression::anova (const vector$<$ double $>$ \& {\em response}, \/  const vector$<$ double $>$ \& {\em division}, \/  double {\em means}\mbox{[}4\mbox{]})}}
+\label{classLinearRegression_affb7f28584f32975adf12f3a624cfe15}
+Anova of the response variable. In practice, this is called from the genostats::compLinRegStats method using the calculated genotype from the additive model. That is why we expect -\/1,0,1 coding.
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em response}]Vector of response variables. \item[{\em division}]Vector of SNP variables. Expects -\/1,0,1 coding. \item[{\em means\mbox{[}3\mbox{]}}]holds mean(-\/1), mean(0), mean(1), mean(tot) where mean is of response variable. \end{DoxyParams}
+\hypertarget{classLinearRegression_a37f79d0d49e5fe93cf5a04b20d17d829}{
+\index{LinearRegression@{LinearRegression}!leastSquares@{leastSquares}}
+\index{leastSquares@{leastSquares}!LinearRegression@{LinearRegression}}
+\subsubsection[{leastSquares}]{\setlength{\rightskip}{0pt plus 5cm}vector$<$ double $>$ LinearRegression::leastSquares (const vector$<$ vector$<$ double $>$ $>$ \& {\em data}, \/  const vector$<$ double $>$ \& {\em response})}}
+\label{classLinearRegression_a37f79d0d49e5fe93cf5a04b20d17d829}
+Compute the ordinary least squares estimation of the solution to a linear regression
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em data}]The regression input. Each inner vector should be a single variable (so column maj order) \item[{\em response}]The response variable. \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+betas The estimate of regression coefficients 
+\end{DoxyReturn}
+
+
+X'$\ast$X
+
+X'$\ast$beta
+
+tempSquare $\ast$ tempWork 
+
+\hypertarget{classLinearRegression_a1c6ed479606439a1943f75c888e8f2bd}{
+\index{LinearRegression@{LinearRegression}!residuals@{residuals}}
+\index{residuals@{residuals}!LinearRegression@{LinearRegression}}
+\subsubsection[{residuals}]{\setlength{\rightskip}{0pt plus 5cm}vector$<$ double $>$ LinearRegression::residuals (const vector$<$ vector$<$ double $>$ $>$ \& {\em data}, \/  const vector$<$ double $>$ \& {\em betas}, \/  const vector$<$ double $>$ \& {\em response})}}
+\label{classLinearRegression_a1c6ed479606439a1943f75c888e8f2bd}
+Compute the residuals of a given parameter set betas.
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em data}]vector of vectors. \item[{\em betas}]vector of parameters \item[{\em response}]vector of dependent variable values. \end{DoxyParams}
+\hypertarget{classLinearRegression_a54ba438eebfb5045c7e6d02545adf346}{
+\index{LinearRegression@{LinearRegression}!sumSquaredStats@{sumSquaredStats}}
+\index{sumSquaredStats@{sumSquaredStats}!LinearRegression@{LinearRegression}}
+\subsubsection[{sumSquaredStats}]{\setlength{\rightskip}{0pt plus 5cm}void LinearRegression::sumSquaredStats (const vector$<$ vector$<$ double $>$ $>$ \& {\em data}, \/  const vector$<$ double $>$ \& {\em betas}, \/  const vector$<$ double $>$ \& {\em response}, \/  double {\em mean}, \/  double \& {\em sse}, \/  double \& {\em ssr})}}
+\label{classLinearRegression_a54ba438eebfb5045c7e6d02545adf346}
+Compute the sum of squared errors for a given set of beta coefficients.
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em data}]The regression input. Each inner vector is a single variable. \item[{\em betas}]The betas to be compared. \item[{\em response}]The response to compare against. \item[{\em mean}]The mean of the response variable \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+sse The sum squared error 
+
+ssr The sum squared residual. 
+\end{DoxyReturn}
+\hypertarget{classLinearRegression_a866934791e5415bf573a9030650ef8cb}{
+\index{LinearRegression@{LinearRegression}!test@{test}}
+\index{test@{test}!LinearRegression@{LinearRegression}}
+\subsubsection[{test}]{\setlength{\rightskip}{0pt plus 5cm}void LinearRegression::test ()}}
+\label{classLinearRegression_a866934791e5415bf573a9030650ef8cb}
+
+
+The documentation for this class was generated from the following files:\begin{DoxyCompactItemize}
+\item 
+engine/utils/\hyperlink{linear__regression_8hh}{linear\_\-regression.hh}\item 
+engine/utils/\hyperlink{linear__regression_8cpp}{linear\_\-regression.cpp}\end{DoxyCompactItemize}

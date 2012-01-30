@@ -1,0 +1,115 @@
+\hypertarget{classInterTwoLogOutput}{
+\section{InterTwoLogOutput Class Reference}
+\label{classInterTwoLogOutput}\index{InterTwoLogOutput@{InterTwoLogOutput}}
+}
+
+
+{\ttfamily \#include $<$intertwolog\_\-out.hh$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classInterTwoLogOutput_a22e75592762dfde6d82bc911aa810354}{InterTwoLogOutput} ()
+\item 
+\hyperlink{classInterTwoLogOutput_a6e6f407ccb2ae032b2758f9d1331a798}{$\sim$InterTwoLogOutput} ()
+\item 
+bool \hyperlink{classInterTwoLogOutput_a6bf1b2c7e2f158d2484cafaf08ff4a7c}{init} (\hyperlink{classParamReader}{ParamReader} $\ast$, \hyperlink{classEngineParamReader}{EngineParamReader} $\ast$, int maxMapSize, string message)
+\item 
+void \hyperlink{classInterTwoLogOutput_a81ed7b00f76b57d81bc4e504d9f36c66}{close} ()
+\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{classInterTwoLogOutput_ae4cccc1f183d1d224e77360d00b9f3b9}{printLine} (const \hyperlink{structInterTwoLogMeasures}{InterTwoLogMeasures} \&itlo, int order)
+\item 
+void \hyperlink{classInterTwoLogOutput_ac8520bd89a481e5c17cffc75cde31671}{writeMainHeader} (\hyperlink{classParamReader}{ParamReader} $\ast$param)
+\item 
+void \hyperlink{classInterTwoLogOutput_a5cc1b8305c6233048ec3b4274a2323e2}{writeMainLegend} ()
+\item 
+void \hyperlink{classInterTwoLogOutput_a4856f3d92e9d3c691f991797825d1bcc}{writeLogHead} (\hyperlink{classParamReader}{ParamReader} $\ast$param)
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classOutput}{Output} \hyperlink{classInterTwoLogOutput_a66141117813508a67681b020e5113e7e}{out}
+\item 
+int \hyperlink{classInterTwoLogOutput_abb92f43d8630b9695545b28fdece04f5}{mapSize}
+\end{DoxyCompactItemize}
+\subsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{classInterTwoLogOutput_a3e7fc64b26065625ba57d692b5e411ca}{InterTwoLog}
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classInterTwoLogOutput_a22e75592762dfde6d82bc911aa810354}{
+\index{InterTwoLogOutput@{InterTwoLogOutput}!InterTwoLogOutput@{InterTwoLogOutput}}
+\index{InterTwoLogOutput@{InterTwoLogOutput}!InterTwoLogOutput@{InterTwoLogOutput}}
+\subsubsection[{InterTwoLogOutput}]{\setlength{\rightskip}{0pt plus 5cm}InterTwoLogOutput::InterTwoLogOutput ()}}
+\label{classInterTwoLogOutput_a22e75592762dfde6d82bc911aa810354}
+\hypertarget{classInterTwoLogOutput_a6e6f407ccb2ae032b2758f9d1331a798}{
+\index{InterTwoLogOutput@{InterTwoLogOutput}!$\sim$InterTwoLogOutput@{$\sim$InterTwoLogOutput}}
+\index{$\sim$InterTwoLogOutput@{$\sim$InterTwoLogOutput}!InterTwoLogOutput@{InterTwoLogOutput}}
+\subsubsection[{$\sim$InterTwoLogOutput}]{\setlength{\rightskip}{0pt plus 5cm}InterTwoLogOutput::$\sim$InterTwoLogOutput ()}}
+\label{classInterTwoLogOutput_a6e6f407ccb2ae032b2758f9d1331a798}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classInterTwoLogOutput_a81ed7b00f76b57d81bc4e504d9f36c66}{
+\index{InterTwoLogOutput@{InterTwoLogOutput}!close@{close}}
+\index{close@{close}!InterTwoLogOutput@{InterTwoLogOutput}}
+\subsubsection[{close}]{\setlength{\rightskip}{0pt plus 5cm}void InterTwoLogOutput::close ()}}
+\label{classInterTwoLogOutput_a81ed7b00f76b57d81bc4e504d9f36c66}
+\hypertarget{classInterTwoLogOutput_a6bf1b2c7e2f158d2484cafaf08ff4a7c}{
+\index{InterTwoLogOutput@{InterTwoLogOutput}!init@{init}}
+\index{init@{init}!InterTwoLogOutput@{InterTwoLogOutput}}
+\subsubsection[{init}]{\setlength{\rightskip}{0pt plus 5cm}bool InterTwoLogOutput::init ({\bf ParamReader} $\ast$ {\em param}, \/  {\bf EngineParamReader} $\ast$ {\em eparams}, \/  int {\em maxMapSize}, \/  string {\em message})}}
+\label{classInterTwoLogOutput_a6bf1b2c7e2f158d2484cafaf08ff4a7c}
+\hypertarget{classInterTwoLogOutput_ae4cccc1f183d1d224e77360d00b9f3b9}{
+\index{InterTwoLogOutput@{InterTwoLogOutput}!printLine@{printLine}}
+\index{printLine@{printLine}!InterTwoLogOutput@{InterTwoLogOutput}}
+\subsubsection[{printLine}]{\setlength{\rightskip}{0pt plus 5cm}void InterTwoLogOutput::printLine (const {\bf InterTwoLogMeasures} \& {\em itlo}, \/  int {\em order})\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classInterTwoLogOutput_ae4cccc1f183d1d224e77360d00b9f3b9}
+\hypertarget{classInterTwoLogOutput_a4856f3d92e9d3c691f991797825d1bcc}{
+\index{InterTwoLogOutput@{InterTwoLogOutput}!writeLogHead@{writeLogHead}}
+\index{writeLogHead@{writeLogHead}!InterTwoLogOutput@{InterTwoLogOutput}}
+\subsubsection[{writeLogHead}]{\setlength{\rightskip}{0pt plus 5cm}void InterTwoLogOutput::writeLogHead ({\bf ParamReader} $\ast$ {\em param})\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classInterTwoLogOutput_a4856f3d92e9d3c691f991797825d1bcc}
+Write a header to the logging file. \hypertarget{classInterTwoLogOutput_ac8520bd89a481e5c17cffc75cde31671}{
+\index{InterTwoLogOutput@{InterTwoLogOutput}!writeMainHeader@{writeMainHeader}}
+\index{writeMainHeader@{writeMainHeader}!InterTwoLogOutput@{InterTwoLogOutput}}
+\subsubsection[{writeMainHeader}]{\setlength{\rightskip}{0pt plus 5cm}void InterTwoLogOutput::writeMainHeader ({\bf ParamReader} $\ast$ {\em param})\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classInterTwoLogOutput_ac8520bd89a481e5c17cffc75cde31671}
+\hypertarget{classInterTwoLogOutput_a5cc1b8305c6233048ec3b4274a2323e2}{
+\index{InterTwoLogOutput@{InterTwoLogOutput}!writeMainLegend@{writeMainLegend}}
+\index{writeMainLegend@{writeMainLegend}!InterTwoLogOutput@{InterTwoLogOutput}}
+\subsubsection[{writeMainLegend}]{\setlength{\rightskip}{0pt plus 5cm}void InterTwoLogOutput::writeMainLegend ()\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classInterTwoLogOutput_a5cc1b8305c6233048ec3b4274a2323e2}
+
+
+\subsection{Friends And Related Function Documentation}
+\hypertarget{classInterTwoLogOutput_a3e7fc64b26065625ba57d692b5e411ca}{
+\index{InterTwoLogOutput@{InterTwoLogOutput}!InterTwoLog@{InterTwoLog}}
+\index{InterTwoLog@{InterTwoLog}!InterTwoLogOutput@{InterTwoLogOutput}}
+\subsubsection[{InterTwoLog}]{\setlength{\rightskip}{0pt plus 5cm}friend class {\bf InterTwoLog}\hspace{0.3cm}{\ttfamily  \mbox{[}friend\mbox{]}}}}
+\label{classInterTwoLogOutput_a3e7fc64b26065625ba57d692b5e411ca}
+
+
+\subsection{Field Documentation}
+\hypertarget{classInterTwoLogOutput_abb92f43d8630b9695545b28fdece04f5}{
+\index{InterTwoLogOutput@{InterTwoLogOutput}!mapSize@{mapSize}}
+\index{mapSize@{mapSize}!InterTwoLogOutput@{InterTwoLogOutput}}
+\subsubsection[{mapSize}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf InterTwoLogOutput::mapSize}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classInterTwoLogOutput_abb92f43d8630b9695545b28fdece04f5}
+\hypertarget{classInterTwoLogOutput_a66141117813508a67681b020e5113e7e}{
+\index{InterTwoLogOutput@{InterTwoLogOutput}!out@{out}}
+\index{out@{out}!InterTwoLogOutput@{InterTwoLogOutput}}
+\subsubsection[{out}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Output} {\bf InterTwoLogOutput::out}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classInterTwoLogOutput_a66141117813508a67681b020e5113e7e}
+
+
+The documentation for this class was generated from the following files:\begin{DoxyCompactItemize}
+\item 
+engine/output/\hyperlink{intertwolog__out_8hh}{intertwolog\_\-out.hh}\item 
+engine/output/\hyperlink{intertwolog__out_8cpp}{intertwolog\_\-out.cpp}\end{DoxyCompactItemize}

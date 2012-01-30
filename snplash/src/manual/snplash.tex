@@ -1,0 +1,69 @@
+\section{SNPlash}
+\label{sec:snplash}
+
+\subsection{Description}
+SNPLASH (\underline{S}ingle \underline{N}ucleotide \underline{P}olymorphism
+\underline{l}inkage \underline{a}ssociation \underline{s}oftware
+\underline{h}ub) is a toolkit for genome-wide association studies.  It provides
+facilities for calculating allele frequencies, Hardy-Weinberg statistics,
+linkage disequilibrium, associaction (logistic and linear regression) and more.
+
+SNPLASH contains the following modules which are described in more detail in the
+sections following:
+
+\begin{description}
+
+  \item[ADTree]  \hfill \\
+    This is what ADTree does
+
+  \item[BADTree] \hfill \\
+    (\underline{B}agged \underline{A}lternating \underline{D}ecision Tree)
+    Detect sets of SNPs that associate with disease.
+
+  \item[Dandelion] \hfill \\
+    Infer haplotypes using Zaykin's method\cite{Zaykin02}.
+
+  \item[DPrime] \hfill \\
+    Calculate the $r^2$ and $D'$ statistic for all combinations of SNPs
+
+  \item[InterTwoLog] \hfill \\
+    Logistic test for association using a two-way interaction term.
+  \item[QSNPGWA] \hfill \\
+    \underline{Q}uantitative \underline{SNP} \underline{G}enome \underline{W}ide
+    \underline{A}ssociation.  Linear regression association tests with a
+    quantitative trait and optional covariates.
+  \item[SNPGWA] \hfill \\
+    Logistic regression with a binomial trait (case/control) and optional
+    covariates. 
+\end{description}
+
+\subsection{Usage}
+SNPLASH reads data in linkage format. Usage common to all modules is:
+
+\begin{verbatim}
+  snplash -engine <engine> -geno <filename> -phen <filename> \
+          -map <filename> -out <filename> [OPTIONS]
+
+where,
+
+  -engine   One of adtree, bagging, dandelion, dprime, intertwo-
+            log, qsnpgwa or snpgwa (required)
+
+  -geno     Genotype file in linkage format (required)
+  -phen     Phenotype file in linkage format (required)
+  -map      Map file in linkage foramt (required)
+  -out      Filename for output (required)
+  -skipcols Comma-separated list of columns to skip in the geno-
+            type file; this is processed before -beg and -end
+  -beg      Column with the first SNP to include
+  -end      Column with the last SNP
+  -ign      Exclude individuals with missing data for any SNP
+  -v        Control level of printing (not supported by all algo-
+            rithms), select 1,2 or 3
+\end{verbatim}                       
+      
+\subsection{Output}
+
+A header section is printed with information about the files read and options
+used.  The variable labels are typically multi-line.  A listing of the output
+variables is given for each module.

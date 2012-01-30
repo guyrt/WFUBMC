@@ -1,0 +1,129 @@
+\hypertarget{classLinkageOutput}{
+\section{LinkageOutput Class Reference}
+\label{classLinkageOutput}\index{LinkageOutput@{LinkageOutput}}
+}
+
+
+{\ttfamily \#include $<$dprime\_\-out.h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classLinkageOutput_abc8ce9e012b6b659931451b78d43ff1d}{LinkageOutput} ()
+\item 
+\hyperlink{classLinkageOutput_a931ff7e88c2f277cb22825426667ee1d}{$\sim$LinkageOutput} ()
+\item 
+bool \hyperlink{classLinkageOutput_a5ede81b8e05550065e1914183c3333dc}{init} (int, \hyperlink{classParamReader}{ParamReader} $\ast$, int maxMapSize)
+\item 
+bool \hyperlink{classLinkageOutput_a656d4a5dec84bb23f3bbf98aef753f12}{init} (int, string filename, \hyperlink{classParamReader}{ParamReader} $\ast$, int maxMapSize)
+\item 
+void \hyperlink{classLinkageOutput_a26276f1a377014bd7a4cd851397daca2}{close} ()
+\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{classLinkageOutput_aac04c2920f8bde831a448e49f1ac170f}{printLine} (\hyperlink{structLinkageMeasures}{LinkageMeasures} m, int order)
+\item 
+void \hyperlink{classLinkageOutput_a2b5c651367922b51027f2ceae3244dc2}{create\_\-fmt2\_\-output} ()
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classOutput}{Output} \hyperlink{classLinkageOutput_a5ec16dbe108da0445df84a95839637d6}{out}
+\item 
+int \hyperlink{classLinkageOutput_a8f1a7689bf42f566a0efcd602023937d}{outputType}
+\item 
+map$<$ int, map$<$ int, \hyperlink{structLinkageMeasures}{LinkageMeasures} $>$ $>$ \hyperlink{classLinkageOutput_aa9c87193fee4917ca92ac64e72bedf61}{fmt2\_\-storage}
+\item 
+int \hyperlink{classLinkageOutput_aac75f7a820c77bb69abc5ee925d6e56d}{mapSize}
+\item 
+int \hyperlink{classLinkageOutput_a414495118232cbda3297645f8eabd538}{beginSNP}
+\end{DoxyCompactItemize}
+\subsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{classLinkageOutput_a07cd45779d19a552153e61c58105cbf2}{LinkageDisequilibrium}
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classLinkageOutput_abc8ce9e012b6b659931451b78d43ff1d}{
+\index{LinkageOutput@{LinkageOutput}!LinkageOutput@{LinkageOutput}}
+\index{LinkageOutput@{LinkageOutput}!LinkageOutput@{LinkageOutput}}
+\subsubsection[{LinkageOutput}]{\setlength{\rightskip}{0pt plus 5cm}LinkageOutput::LinkageOutput ()}}
+\label{classLinkageOutput_abc8ce9e012b6b659931451b78d43ff1d}
+\hypertarget{classLinkageOutput_a931ff7e88c2f277cb22825426667ee1d}{
+\index{LinkageOutput@{LinkageOutput}!$\sim$LinkageOutput@{$\sim$LinkageOutput}}
+\index{$\sim$LinkageOutput@{$\sim$LinkageOutput}!LinkageOutput@{LinkageOutput}}
+\subsubsection[{$\sim$LinkageOutput}]{\setlength{\rightskip}{0pt plus 5cm}LinkageOutput::$\sim$LinkageOutput ()}}
+\label{classLinkageOutput_a931ff7e88c2f277cb22825426667ee1d}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classLinkageOutput_a26276f1a377014bd7a4cd851397daca2}{
+\index{LinkageOutput@{LinkageOutput}!close@{close}}
+\index{close@{close}!LinkageOutput@{LinkageOutput}}
+\subsubsection[{close}]{\setlength{\rightskip}{0pt plus 5cm}void LinkageOutput::close ()}}
+\label{classLinkageOutput_a26276f1a377014bd7a4cd851397daca2}
+\hypertarget{classLinkageOutput_a2b5c651367922b51027f2ceae3244dc2}{
+\index{LinkageOutput@{LinkageOutput}!create\_\-fmt2\_\-output@{create\_\-fmt2\_\-output}}
+\index{create\_\-fmt2\_\-output@{create\_\-fmt2\_\-output}!LinkageOutput@{LinkageOutput}}
+\subsubsection[{create\_\-fmt2\_\-output}]{\setlength{\rightskip}{0pt plus 5cm}void LinkageOutput::create\_\-fmt2\_\-output ()\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classLinkageOutput_a2b5c651367922b51027f2ceae3244dc2}
+\hypertarget{classLinkageOutput_a656d4a5dec84bb23f3bbf98aef753f12}{
+\index{LinkageOutput@{LinkageOutput}!init@{init}}
+\index{init@{init}!LinkageOutput@{LinkageOutput}}
+\subsubsection[{init}]{\setlength{\rightskip}{0pt plus 5cm}bool LinkageOutput::init (int {\em outputType}, \/  string {\em filename}, \/  {\bf ParamReader} $\ast$ {\em param}, \/  int {\em maxMapSize})}}
+\label{classLinkageOutput_a656d4a5dec84bb23f3bbf98aef753f12}
+\hypertarget{classLinkageOutput_a5ede81b8e05550065e1914183c3333dc}{
+\index{LinkageOutput@{LinkageOutput}!init@{init}}
+\index{init@{init}!LinkageOutput@{LinkageOutput}}
+\subsubsection[{init}]{\setlength{\rightskip}{0pt plus 5cm}bool LinkageOutput::init (int {\em outputType}, \/  {\bf ParamReader} $\ast$ {\em param}, \/  int {\em maxMapSize})}}
+\label{classLinkageOutput_a5ede81b8e05550065e1914183c3333dc}
+\hypertarget{classLinkageOutput_aac04c2920f8bde831a448e49f1ac170f}{
+\index{LinkageOutput@{LinkageOutput}!printLine@{printLine}}
+\index{printLine@{printLine}!LinkageOutput@{LinkageOutput}}
+\subsubsection[{printLine}]{\setlength{\rightskip}{0pt plus 5cm}void LinkageOutput::printLine ({\bf LinkageMeasures} {\em m}, \/  int {\em order})\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classLinkageOutput_aac04c2920f8bde831a448e49f1ac170f}
+
+
+\subsection{Friends And Related Function Documentation}
+\hypertarget{classLinkageOutput_a07cd45779d19a552153e61c58105cbf2}{
+\index{LinkageOutput@{LinkageOutput}!LinkageDisequilibrium@{LinkageDisequilibrium}}
+\index{LinkageDisequilibrium@{LinkageDisequilibrium}!LinkageOutput@{LinkageOutput}}
+\subsubsection[{LinkageDisequilibrium}]{\setlength{\rightskip}{0pt plus 5cm}friend class {\bf LinkageDisequilibrium}\hspace{0.3cm}{\ttfamily  \mbox{[}friend\mbox{]}}}}
+\label{classLinkageOutput_a07cd45779d19a552153e61c58105cbf2}
+
+
+\subsection{Field Documentation}
+\hypertarget{classLinkageOutput_a414495118232cbda3297645f8eabd538}{
+\index{LinkageOutput@{LinkageOutput}!beginSNP@{beginSNP}}
+\index{beginSNP@{beginSNP}!LinkageOutput@{LinkageOutput}}
+\subsubsection[{beginSNP}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf LinkageOutput::beginSNP}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classLinkageOutput_a414495118232cbda3297645f8eabd538}
+\hypertarget{classLinkageOutput_aa9c87193fee4917ca92ac64e72bedf61}{
+\index{LinkageOutput@{LinkageOutput}!fmt2\_\-storage@{fmt2\_\-storage}}
+\index{fmt2\_\-storage@{fmt2\_\-storage}!LinkageOutput@{LinkageOutput}}
+\subsubsection[{fmt2\_\-storage}]{\setlength{\rightskip}{0pt plus 5cm}map$<$int, map$<$int, {\bf LinkageMeasures}$>$ $>$ {\bf LinkageOutput::fmt2\_\-storage}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classLinkageOutput_aa9c87193fee4917ca92ac64e72bedf61}
+\hypertarget{classLinkageOutput_aac75f7a820c77bb69abc5ee925d6e56d}{
+\index{LinkageOutput@{LinkageOutput}!mapSize@{mapSize}}
+\index{mapSize@{mapSize}!LinkageOutput@{LinkageOutput}}
+\subsubsection[{mapSize}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf LinkageOutput::mapSize}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classLinkageOutput_aac75f7a820c77bb69abc5ee925d6e56d}
+\hypertarget{classLinkageOutput_a5ec16dbe108da0445df84a95839637d6}{
+\index{LinkageOutput@{LinkageOutput}!out@{out}}
+\index{out@{out}!LinkageOutput@{LinkageOutput}}
+\subsubsection[{out}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Output} {\bf LinkageOutput::out}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classLinkageOutput_a5ec16dbe108da0445df84a95839637d6}
+\hypertarget{classLinkageOutput_a8f1a7689bf42f566a0efcd602023937d}{
+\index{LinkageOutput@{LinkageOutput}!outputType@{outputType}}
+\index{outputType@{outputType}!LinkageOutput@{LinkageOutput}}
+\subsubsection[{outputType}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf LinkageOutput::outputType}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classLinkageOutput_a8f1a7689bf42f566a0efcd602023937d}
+
+
+The documentation for this class was generated from the following files:\begin{DoxyCompactItemize}
+\item 
+engine/output/\hyperlink{dprime__out_8h}{dprime\_\-out.h}\item 
+engine/output/\hyperlink{dprime__out_8cpp}{dprime\_\-out.cpp}\end{DoxyCompactItemize}

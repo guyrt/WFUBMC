@@ -1,0 +1,352 @@
+\hypertarget{classPopStats}{
+\section{PopStats Class Reference}
+\label{classPopStats}\index{PopStats@{PopStats}}
+}
+
+
+{\ttfamily \#include $<$popstats.hh$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classPopStats_a4ffd944436becd97e62cc17c7571f5b1}{PopStats} (\hyperlink{classDataAccess}{DataAccess} $\ast$)
+\item 
+bool \hyperlink{classPopStats_a9e1f510002cc848f241ce4c2984ccfd1}{prepPopStatsForOutput} (int snp, \hyperlink{structPopStatsResults}{PopStatsResults} \&results)
+\item 
+bool \hyperlink{classPopStats_a4978bba774ba8083ae8c145ab2754645}{minorAlleleFreq} (int snp)
+\item 
+bool \hyperlink{classPopStats_a41ed10737d6c1180b1f70ecd93576256}{numCategories} (int snp)
+\item 
+bool \hyperlink{classPopStats_a6dd383cd1ae923ca78c6f6f38ea76ae8}{missingStats} (int snp)
+\item 
+bool \hyperlink{classPopStats_ad1cf6860b6145938aeb53567941121a1}{hwEquilibruim} (int snp)
+\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static double \hyperlink{classPopStats_ad40f3901d6684bed72e1fb359dbd8ab0}{exactTest} (double numPP, double numPQ, double numQQ)
+\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{classPopStats_ab4fb5cd7b7b44529e91fcd6bb6abb7d4}{reinit} ()
+\item 
+bool \hyperlink{classPopStats_aa2ceb900a4674a55faf006776c7a7776}{pullData} (int build)
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classDataAccess}{DataAccess} $\ast$ \hyperlink{classPopStats_ab8e2c80b263739bdf74f96cda7748641}{data}
+\item 
+int \hyperlink{classPopStats_ad2f6320ab9374d3a41db9442d5aa09e5}{lastBuild}
+\item 
+vector$<$ short $>$ \hyperlink{classPopStats_aa9ae8c1f4f068085d3865bc95f3ad378}{snp\_\-data}
+\item 
+vector$<$ double $>$ \hyperlink{classPopStats_a10660ebe8a9e2e2e764323ca4b0450c6}{phen\_\-data}
+\item 
+int \hyperlink{classPopStats_aa30d8fe670d6df9b809850c9f87552e4}{numMissingCase}
+\item 
+int \hyperlink{classPopStats_af2e6df2b17b5c5cfff07d741bf5c4ded}{numMissingCntrl}
+\item 
+int \hyperlink{classPopStats_a12affeff0b6a75ab261a03b97c4012cd}{numMissingTotal}
+\item 
+int \hyperlink{classPopStats_a666ffd1a39165fd8eabba4392fdc11ec}{casesNonMissing}
+\item 
+int \hyperlink{classPopStats_a5c9ad628d03a382c17984ff173d715ad}{cntrlsNonMissing}
+\item 
+int \hyperlink{classPopStats_a6d6250c75148627d06f610cdf3e12a6e}{numTotalCases}
+\item 
+int \hyperlink{classPopStats_ac49a970c1ad1867f7a829e64ac71b949}{numTotalCntrls}
+\item 
+double \hyperlink{classPopStats_a91e20648d527864a50ccc91d376467fd}{minorAlleleFreqCases}
+\item 
+double \hyperlink{classPopStats_acaeb5d354c694c7ede568b63afe0a56d}{minorAlleleFreqCntrls}
+\item 
+int \hyperlink{classPopStats_ad054f051a5d1f63e6f4e56e0a415020c}{ppCases}
+\item 
+int \hyperlink{classPopStats_a3924fd6d691da0ec9588cdc82f576b60}{pqCases}
+\item 
+int \hyperlink{classPopStats_a5853b66b49a213cc8dda8438c2283691}{qqCases}
+\item 
+int \hyperlink{classPopStats_ac3a9fad2b63da4e68b9c5b407485e58e}{ppCntrls}
+\item 
+int \hyperlink{classPopStats_ad5b2ca615dc22f4b99f9ec771432fae7}{pqCntrls}
+\item 
+int \hyperlink{classPopStats_a7670a2e68b37265b82b79da99140548e}{qqCntrls}
+\item 
+double \hyperlink{classPopStats_aae66e0c889d3c9dfbda08f9de5ab2838}{percentMissingTotal}
+\item 
+double \hyperlink{classPopStats_ac3c162696a1b86b32e5ed498a30d9fc8}{percentMissingCases}
+\item 
+double \hyperlink{classPopStats_af3fdc0236ca8dd90a68cdb108ebae84e}{percentMissingControls}
+\item 
+double \hyperlink{classPopStats_a8c72ad0a95989deb8ffc1955e15992fb}{differentialMissingPval}
+\item 
+double \hyperlink{classPopStats_a6eef6428b6254c26f2ae3a0fda4a7d4c}{differentialMissingOR}
+\item 
+double \hyperlink{classPopStats_aa6c1d435077da61fab3cf3b490a60009}{caseExpTotal} \mbox{[}3\mbox{]}
+\item 
+double \hyperlink{classPopStats_a80d6048c07b310b4c6863e113ebce157}{caseChiSquare}
+\item 
+double \hyperlink{classPopStats_a4d4ef66ca48bd4b070bec2ca2167f925}{caseChiSquarePValue}
+\item 
+double \hyperlink{classPopStats_aad5482320541a8d206923e0adc97ba3b}{caseExactTestPVal}
+\item 
+double \hyperlink{classPopStats_afb00bcd4403e7659b9b6db0dee19dcf1}{cntrlExpTotal} \mbox{[}3\mbox{]}
+\item 
+double \hyperlink{classPopStats_aa6327d3f5bb38e65a7ca7032e7d53b51}{cntrlChiSquare}
+\item 
+double \hyperlink{classPopStats_a762931d6d585d87dcde127b519fe8c1b}{cntrlChiSquarePValue}
+\item 
+double \hyperlink{classPopStats_a1c089d409f74e0c404a503ec2aae94e2}{cntrlExactTestPVal}
+\item 
+double \hyperlink{classPopStats_af9bbdcf46f5d861e351101e3709f9dc7}{cmbdExpTotal} \mbox{[}3\mbox{]}
+\item 
+double \hyperlink{classPopStats_a50cc2cf59e308d8f170353904ba3c6da}{cmbdChiSquare}
+\item 
+double \hyperlink{classPopStats_af9e0fd78b6e56a5e26efca7051580a05}{cmbdChiSquarePValue}
+\item 
+double \hyperlink{classPopStats_a4aec72b54ad655ce10b862d4e4319d9a}{cmbdExactTestPVal}
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classPopStats_a4ffd944436becd97e62cc17c7571f5b1}{
+\index{PopStats@{PopStats}!PopStats@{PopStats}}
+\index{PopStats@{PopStats}!PopStats@{PopStats}}
+\subsubsection[{PopStats}]{\setlength{\rightskip}{0pt plus 5cm}PopStats::PopStats ({\bf DataAccess} $\ast$ {\em d})}}
+\label{classPopStats_a4ffd944436becd97e62cc17c7571f5b1}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classPopStats_ad40f3901d6684bed72e1fb359dbd8ab0}{
+\index{PopStats@{PopStats}!exactTest@{exactTest}}
+\index{exactTest@{exactTest}!PopStats@{PopStats}}
+\subsubsection[{exactTest}]{\setlength{\rightskip}{0pt plus 5cm}double PopStats::exactTest (double {\em numPP}, \/  double {\em numPQ}, \/  double {\em numQQ})\hspace{0.3cm}{\ttfamily  \mbox{[}static\mbox{]}}}}
+\label{classPopStats_ad40f3901d6684bed72e1fb359dbd8ab0}
+\hypertarget{classPopStats_ad1cf6860b6145938aeb53567941121a1}{
+\index{PopStats@{PopStats}!hwEquilibruim@{hwEquilibruim}}
+\index{hwEquilibruim@{hwEquilibruim}!PopStats@{PopStats}}
+\subsubsection[{hwEquilibruim}]{\setlength{\rightskip}{0pt plus 5cm}bool PopStats::hwEquilibruim (int {\em snp})}}
+\label{classPopStats_ad1cf6860b6145938aeb53567941121a1}
+\hypertarget{classPopStats_a4978bba774ba8083ae8c145ab2754645}{
+\index{PopStats@{PopStats}!minorAlleleFreq@{minorAlleleFreq}}
+\index{minorAlleleFreq@{minorAlleleFreq}!PopStats@{PopStats}}
+\subsubsection[{minorAlleleFreq}]{\setlength{\rightskip}{0pt plus 5cm}bool PopStats::minorAlleleFreq (int {\em snp})}}
+\label{classPopStats_a4978bba774ba8083ae8c145ab2754645}
+Calculate the minor allele frequency for a given SNP. \hypertarget{classPopStats_a6dd383cd1ae923ca78c6f6f38ea76ae8}{
+\index{PopStats@{PopStats}!missingStats@{missingStats}}
+\index{missingStats@{missingStats}!PopStats@{PopStats}}
+\subsubsection[{missingStats}]{\setlength{\rightskip}{0pt plus 5cm}bool PopStats::missingStats (int {\em snp})}}
+\label{classPopStats_a6dd383cd1ae923ca78c6f6f38ea76ae8}
+\hypertarget{classPopStats_a41ed10737d6c1180b1f70ecd93576256}{
+\index{PopStats@{PopStats}!numCategories@{numCategories}}
+\index{numCategories@{numCategories}!PopStats@{PopStats}}
+\subsubsection[{numCategories}]{\setlength{\rightskip}{0pt plus 5cm}bool PopStats::numCategories (int {\em snp})}}
+\label{classPopStats_a41ed10737d6c1180b1f70ecd93576256}
+Compute number of cases and controls with information at this locus. \hypertarget{classPopStats_a9e1f510002cc848f241ce4c2984ccfd1}{
+\index{PopStats@{PopStats}!prepPopStatsForOutput@{prepPopStatsForOutput}}
+\index{prepPopStatsForOutput@{prepPopStatsForOutput}!PopStats@{PopStats}}
+\subsubsection[{prepPopStatsForOutput}]{\setlength{\rightskip}{0pt plus 5cm}bool PopStats::prepPopStatsForOutput (int {\em snp}, \/  {\bf PopStatsResults} \& {\em results})}}
+\label{classPopStats_a9e1f510002cc848f241ce4c2984ccfd1}
+\hypertarget{classPopStats_aa2ceb900a4674a55faf006776c7a7776}{
+\index{PopStats@{PopStats}!pullData@{pullData}}
+\index{pullData@{pullData}!PopStats@{PopStats}}
+\subsubsection[{pullData}]{\setlength{\rightskip}{0pt plus 5cm}bool PopStats::pullData (int {\em snp})\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classPopStats_aa2ceb900a4674a55faf006776c7a7776}
+Repopulate the vector with the new SNP if necessary. If we run all our statistics on a single SNP at one time, we save serious time.
+
+Return true if it was recomputed. \hypertarget{classPopStats_ab4fb5cd7b7b44529e91fcd6bb6abb7d4}{
+\index{PopStats@{PopStats}!reinit@{reinit}}
+\index{reinit@{reinit}!PopStats@{PopStats}}
+\subsubsection[{reinit}]{\setlength{\rightskip}{0pt plus 5cm}void PopStats::reinit ()\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classPopStats_ab4fb5cd7b7b44529e91fcd6bb6abb7d4}
+
+
+\subsection{Field Documentation}
+\hypertarget{classPopStats_a80d6048c07b310b4c6863e113ebce157}{
+\index{PopStats@{PopStats}!caseChiSquare@{caseChiSquare}}
+\index{caseChiSquare@{caseChiSquare}!PopStats@{PopStats}}
+\subsubsection[{caseChiSquare}]{\setlength{\rightskip}{0pt plus 5cm}double {\bf PopStats::caseChiSquare}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classPopStats_a80d6048c07b310b4c6863e113ebce157}
+\hypertarget{classPopStats_a4d4ef66ca48bd4b070bec2ca2167f925}{
+\index{PopStats@{PopStats}!caseChiSquarePValue@{caseChiSquarePValue}}
+\index{caseChiSquarePValue@{caseChiSquarePValue}!PopStats@{PopStats}}
+\subsubsection[{caseChiSquarePValue}]{\setlength{\rightskip}{0pt plus 5cm}double {\bf PopStats::caseChiSquarePValue}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classPopStats_a4d4ef66ca48bd4b070bec2ca2167f925}
+\hypertarget{classPopStats_aad5482320541a8d206923e0adc97ba3b}{
+\index{PopStats@{PopStats}!caseExactTestPVal@{caseExactTestPVal}}
+\index{caseExactTestPVal@{caseExactTestPVal}!PopStats@{PopStats}}
+\subsubsection[{caseExactTestPVal}]{\setlength{\rightskip}{0pt plus 5cm}double {\bf PopStats::caseExactTestPVal}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classPopStats_aad5482320541a8d206923e0adc97ba3b}
+\hypertarget{classPopStats_aa6c1d435077da61fab3cf3b490a60009}{
+\index{PopStats@{PopStats}!caseExpTotal@{caseExpTotal}}
+\index{caseExpTotal@{caseExpTotal}!PopStats@{PopStats}}
+\subsubsection[{caseExpTotal}]{\setlength{\rightskip}{0pt plus 5cm}double {\bf PopStats::caseExpTotal}\mbox{[}3\mbox{]}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classPopStats_aa6c1d435077da61fab3cf3b490a60009}
+\hypertarget{classPopStats_a666ffd1a39165fd8eabba4392fdc11ec}{
+\index{PopStats@{PopStats}!casesNonMissing@{casesNonMissing}}
+\index{casesNonMissing@{casesNonMissing}!PopStats@{PopStats}}
+\subsubsection[{casesNonMissing}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf PopStats::casesNonMissing}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classPopStats_a666ffd1a39165fd8eabba4392fdc11ec}
+\hypertarget{classPopStats_a50cc2cf59e308d8f170353904ba3c6da}{
+\index{PopStats@{PopStats}!cmbdChiSquare@{cmbdChiSquare}}
+\index{cmbdChiSquare@{cmbdChiSquare}!PopStats@{PopStats}}
+\subsubsection[{cmbdChiSquare}]{\setlength{\rightskip}{0pt plus 5cm}double {\bf PopStats::cmbdChiSquare}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classPopStats_a50cc2cf59e308d8f170353904ba3c6da}
+\hypertarget{classPopStats_af9e0fd78b6e56a5e26efca7051580a05}{
+\index{PopStats@{PopStats}!cmbdChiSquarePValue@{cmbdChiSquarePValue}}
+\index{cmbdChiSquarePValue@{cmbdChiSquarePValue}!PopStats@{PopStats}}
+\subsubsection[{cmbdChiSquarePValue}]{\setlength{\rightskip}{0pt plus 5cm}double {\bf PopStats::cmbdChiSquarePValue}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classPopStats_af9e0fd78b6e56a5e26efca7051580a05}
+\hypertarget{classPopStats_a4aec72b54ad655ce10b862d4e4319d9a}{
+\index{PopStats@{PopStats}!cmbdExactTestPVal@{cmbdExactTestPVal}}
+\index{cmbdExactTestPVal@{cmbdExactTestPVal}!PopStats@{PopStats}}
+\subsubsection[{cmbdExactTestPVal}]{\setlength{\rightskip}{0pt plus 5cm}double {\bf PopStats::cmbdExactTestPVal}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classPopStats_a4aec72b54ad655ce10b862d4e4319d9a}
+\hypertarget{classPopStats_af9bbdcf46f5d861e351101e3709f9dc7}{
+\index{PopStats@{PopStats}!cmbdExpTotal@{cmbdExpTotal}}
+\index{cmbdExpTotal@{cmbdExpTotal}!PopStats@{PopStats}}
+\subsubsection[{cmbdExpTotal}]{\setlength{\rightskip}{0pt plus 5cm}double {\bf PopStats::cmbdExpTotal}\mbox{[}3\mbox{]}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classPopStats_af9bbdcf46f5d861e351101e3709f9dc7}
+\hypertarget{classPopStats_aa6327d3f5bb38e65a7ca7032e7d53b51}{
+\index{PopStats@{PopStats}!cntrlChiSquare@{cntrlChiSquare}}
+\index{cntrlChiSquare@{cntrlChiSquare}!PopStats@{PopStats}}
+\subsubsection[{cntrlChiSquare}]{\setlength{\rightskip}{0pt plus 5cm}double {\bf PopStats::cntrlChiSquare}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classPopStats_aa6327d3f5bb38e65a7ca7032e7d53b51}
+\hypertarget{classPopStats_a762931d6d585d87dcde127b519fe8c1b}{
+\index{PopStats@{PopStats}!cntrlChiSquarePValue@{cntrlChiSquarePValue}}
+\index{cntrlChiSquarePValue@{cntrlChiSquarePValue}!PopStats@{PopStats}}
+\subsubsection[{cntrlChiSquarePValue}]{\setlength{\rightskip}{0pt plus 5cm}double {\bf PopStats::cntrlChiSquarePValue}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classPopStats_a762931d6d585d87dcde127b519fe8c1b}
+\hypertarget{classPopStats_a1c089d409f74e0c404a503ec2aae94e2}{
+\index{PopStats@{PopStats}!cntrlExactTestPVal@{cntrlExactTestPVal}}
+\index{cntrlExactTestPVal@{cntrlExactTestPVal}!PopStats@{PopStats}}
+\subsubsection[{cntrlExactTestPVal}]{\setlength{\rightskip}{0pt plus 5cm}double {\bf PopStats::cntrlExactTestPVal}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classPopStats_a1c089d409f74e0c404a503ec2aae94e2}
+\hypertarget{classPopStats_afb00bcd4403e7659b9b6db0dee19dcf1}{
+\index{PopStats@{PopStats}!cntrlExpTotal@{cntrlExpTotal}}
+\index{cntrlExpTotal@{cntrlExpTotal}!PopStats@{PopStats}}
+\subsubsection[{cntrlExpTotal}]{\setlength{\rightskip}{0pt plus 5cm}double {\bf PopStats::cntrlExpTotal}\mbox{[}3\mbox{]}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classPopStats_afb00bcd4403e7659b9b6db0dee19dcf1}
+\hypertarget{classPopStats_a5c9ad628d03a382c17984ff173d715ad}{
+\index{PopStats@{PopStats}!cntrlsNonMissing@{cntrlsNonMissing}}
+\index{cntrlsNonMissing@{cntrlsNonMissing}!PopStats@{PopStats}}
+\subsubsection[{cntrlsNonMissing}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf PopStats::cntrlsNonMissing}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classPopStats_a5c9ad628d03a382c17984ff173d715ad}
+\hypertarget{classPopStats_ab8e2c80b263739bdf74f96cda7748641}{
+\index{PopStats@{PopStats}!data@{data}}
+\index{data@{data}!PopStats@{PopStats}}
+\subsubsection[{data}]{\setlength{\rightskip}{0pt plus 5cm}{\bf DataAccess}$\ast$ {\bf PopStats::data}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classPopStats_ab8e2c80b263739bdf74f96cda7748641}
+\hypertarget{classPopStats_a6eef6428b6254c26f2ae3a0fda4a7d4c}{
+\index{PopStats@{PopStats}!differentialMissingOR@{differentialMissingOR}}
+\index{differentialMissingOR@{differentialMissingOR}!PopStats@{PopStats}}
+\subsubsection[{differentialMissingOR}]{\setlength{\rightskip}{0pt plus 5cm}double {\bf PopStats::differentialMissingOR}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classPopStats_a6eef6428b6254c26f2ae3a0fda4a7d4c}
+\hypertarget{classPopStats_a8c72ad0a95989deb8ffc1955e15992fb}{
+\index{PopStats@{PopStats}!differentialMissingPval@{differentialMissingPval}}
+\index{differentialMissingPval@{differentialMissingPval}!PopStats@{PopStats}}
+\subsubsection[{differentialMissingPval}]{\setlength{\rightskip}{0pt plus 5cm}double {\bf PopStats::differentialMissingPval}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classPopStats_a8c72ad0a95989deb8ffc1955e15992fb}
+\hypertarget{classPopStats_ad2f6320ab9374d3a41db9442d5aa09e5}{
+\index{PopStats@{PopStats}!lastBuild@{lastBuild}}
+\index{lastBuild@{lastBuild}!PopStats@{PopStats}}
+\subsubsection[{lastBuild}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf PopStats::lastBuild}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classPopStats_ad2f6320ab9374d3a41db9442d5aa09e5}
+\hypertarget{classPopStats_a91e20648d527864a50ccc91d376467fd}{
+\index{PopStats@{PopStats}!minorAlleleFreqCases@{minorAlleleFreqCases}}
+\index{minorAlleleFreqCases@{minorAlleleFreqCases}!PopStats@{PopStats}}
+\subsubsection[{minorAlleleFreqCases}]{\setlength{\rightskip}{0pt plus 5cm}double {\bf PopStats::minorAlleleFreqCases}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classPopStats_a91e20648d527864a50ccc91d376467fd}
+\hypertarget{classPopStats_acaeb5d354c694c7ede568b63afe0a56d}{
+\index{PopStats@{PopStats}!minorAlleleFreqCntrls@{minorAlleleFreqCntrls}}
+\index{minorAlleleFreqCntrls@{minorAlleleFreqCntrls}!PopStats@{PopStats}}
+\subsubsection[{minorAlleleFreqCntrls}]{\setlength{\rightskip}{0pt plus 5cm}double {\bf PopStats::minorAlleleFreqCntrls}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classPopStats_acaeb5d354c694c7ede568b63afe0a56d}
+\hypertarget{classPopStats_aa30d8fe670d6df9b809850c9f87552e4}{
+\index{PopStats@{PopStats}!numMissingCase@{numMissingCase}}
+\index{numMissingCase@{numMissingCase}!PopStats@{PopStats}}
+\subsubsection[{numMissingCase}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf PopStats::numMissingCase}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classPopStats_aa30d8fe670d6df9b809850c9f87552e4}
+\hypertarget{classPopStats_af2e6df2b17b5c5cfff07d741bf5c4ded}{
+\index{PopStats@{PopStats}!numMissingCntrl@{numMissingCntrl}}
+\index{numMissingCntrl@{numMissingCntrl}!PopStats@{PopStats}}
+\subsubsection[{numMissingCntrl}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf PopStats::numMissingCntrl}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classPopStats_af2e6df2b17b5c5cfff07d741bf5c4ded}
+\hypertarget{classPopStats_a12affeff0b6a75ab261a03b97c4012cd}{
+\index{PopStats@{PopStats}!numMissingTotal@{numMissingTotal}}
+\index{numMissingTotal@{numMissingTotal}!PopStats@{PopStats}}
+\subsubsection[{numMissingTotal}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf PopStats::numMissingTotal}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classPopStats_a12affeff0b6a75ab261a03b97c4012cd}
+\hypertarget{classPopStats_a6d6250c75148627d06f610cdf3e12a6e}{
+\index{PopStats@{PopStats}!numTotalCases@{numTotalCases}}
+\index{numTotalCases@{numTotalCases}!PopStats@{PopStats}}
+\subsubsection[{numTotalCases}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf PopStats::numTotalCases}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classPopStats_a6d6250c75148627d06f610cdf3e12a6e}
+\hypertarget{classPopStats_ac49a970c1ad1867f7a829e64ac71b949}{
+\index{PopStats@{PopStats}!numTotalCntrls@{numTotalCntrls}}
+\index{numTotalCntrls@{numTotalCntrls}!PopStats@{PopStats}}
+\subsubsection[{numTotalCntrls}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf PopStats::numTotalCntrls}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classPopStats_ac49a970c1ad1867f7a829e64ac71b949}
+\hypertarget{classPopStats_ac3c162696a1b86b32e5ed498a30d9fc8}{
+\index{PopStats@{PopStats}!percentMissingCases@{percentMissingCases}}
+\index{percentMissingCases@{percentMissingCases}!PopStats@{PopStats}}
+\subsubsection[{percentMissingCases}]{\setlength{\rightskip}{0pt plus 5cm}double {\bf PopStats::percentMissingCases}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classPopStats_ac3c162696a1b86b32e5ed498a30d9fc8}
+\hypertarget{classPopStats_af3fdc0236ca8dd90a68cdb108ebae84e}{
+\index{PopStats@{PopStats}!percentMissingControls@{percentMissingControls}}
+\index{percentMissingControls@{percentMissingControls}!PopStats@{PopStats}}
+\subsubsection[{percentMissingControls}]{\setlength{\rightskip}{0pt plus 5cm}double {\bf PopStats::percentMissingControls}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classPopStats_af3fdc0236ca8dd90a68cdb108ebae84e}
+\hypertarget{classPopStats_aae66e0c889d3c9dfbda08f9de5ab2838}{
+\index{PopStats@{PopStats}!percentMissingTotal@{percentMissingTotal}}
+\index{percentMissingTotal@{percentMissingTotal}!PopStats@{PopStats}}
+\subsubsection[{percentMissingTotal}]{\setlength{\rightskip}{0pt plus 5cm}double {\bf PopStats::percentMissingTotal}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classPopStats_aae66e0c889d3c9dfbda08f9de5ab2838}
+\hypertarget{classPopStats_a10660ebe8a9e2e2e764323ca4b0450c6}{
+\index{PopStats@{PopStats}!phen\_\-data@{phen\_\-data}}
+\index{phen\_\-data@{phen\_\-data}!PopStats@{PopStats}}
+\subsubsection[{phen\_\-data}]{\setlength{\rightskip}{0pt plus 5cm}vector$<$double$>$ {\bf PopStats::phen\_\-data}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classPopStats_a10660ebe8a9e2e2e764323ca4b0450c6}
+\hypertarget{classPopStats_ad054f051a5d1f63e6f4e56e0a415020c}{
+\index{PopStats@{PopStats}!ppCases@{ppCases}}
+\index{ppCases@{ppCases}!PopStats@{PopStats}}
+\subsubsection[{ppCases}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf PopStats::ppCases}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classPopStats_ad054f051a5d1f63e6f4e56e0a415020c}
+\hypertarget{classPopStats_ac3a9fad2b63da4e68b9c5b407485e58e}{
+\index{PopStats@{PopStats}!ppCntrls@{ppCntrls}}
+\index{ppCntrls@{ppCntrls}!PopStats@{PopStats}}
+\subsubsection[{ppCntrls}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf PopStats::ppCntrls}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classPopStats_ac3a9fad2b63da4e68b9c5b407485e58e}
+\hypertarget{classPopStats_a3924fd6d691da0ec9588cdc82f576b60}{
+\index{PopStats@{PopStats}!pqCases@{pqCases}}
+\index{pqCases@{pqCases}!PopStats@{PopStats}}
+\subsubsection[{pqCases}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf PopStats::pqCases}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classPopStats_a3924fd6d691da0ec9588cdc82f576b60}
+\hypertarget{classPopStats_ad5b2ca615dc22f4b99f9ec771432fae7}{
+\index{PopStats@{PopStats}!pqCntrls@{pqCntrls}}
+\index{pqCntrls@{pqCntrls}!PopStats@{PopStats}}
+\subsubsection[{pqCntrls}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf PopStats::pqCntrls}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classPopStats_ad5b2ca615dc22f4b99f9ec771432fae7}
+\hypertarget{classPopStats_a5853b66b49a213cc8dda8438c2283691}{
+\index{PopStats@{PopStats}!qqCases@{qqCases}}
+\index{qqCases@{qqCases}!PopStats@{PopStats}}
+\subsubsection[{qqCases}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf PopStats::qqCases}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classPopStats_a5853b66b49a213cc8dda8438c2283691}
+\hypertarget{classPopStats_a7670a2e68b37265b82b79da99140548e}{
+\index{PopStats@{PopStats}!qqCntrls@{qqCntrls}}
+\index{qqCntrls@{qqCntrls}!PopStats@{PopStats}}
+\subsubsection[{qqCntrls}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf PopStats::qqCntrls}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classPopStats_a7670a2e68b37265b82b79da99140548e}
+\hypertarget{classPopStats_aa9ae8c1f4f068085d3865bc95f3ad378}{
+\index{PopStats@{PopStats}!snp\_\-data@{snp\_\-data}}
+\index{snp\_\-data@{snp\_\-data}!PopStats@{PopStats}}
+\subsubsection[{snp\_\-data}]{\setlength{\rightskip}{0pt plus 5cm}vector$<$short$>$ {\bf PopStats::snp\_\-data}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classPopStats_aa9ae8c1f4f068085d3865bc95f3ad378}
+
+
+The documentation for this class was generated from the following files:\begin{DoxyCompactItemize}
+\item 
+engine/snpgwa/\hyperlink{popstats_8hh}{popstats.hh}\item 
+engine/snpgwa/\hyperlink{popstats_8cpp}{popstats.cpp}\end{DoxyCompactItemize}

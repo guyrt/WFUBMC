@@ -1,0 +1,224 @@
+\hypertarget{classDandelion}{
+\section{Dandelion Class Reference}
+\label{classDandelion}\index{Dandelion@{Dandelion}}
+}
+
+
+{\ttfamily \#include $<$dandelion.hh$>$}
+
+Inheritance diagram for Dandelion:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2cm]{classDandelion}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classDandelion_a8acd2b60d257ea45b85db1b0313c5fc2}{Dandelion} ()
+\item 
+\hyperlink{classDandelion_a94b7ff6276f9b31f3c1d25472480a062}{Dandelion} (\hyperlink{classDataAccess}{DataAccess} $\ast$)
+\item 
+\hyperlink{classDandelion_a48cd43f23ee97a671a5d5f55199545cb}{$\sim$Dandelion} ()
+\item 
+virtual void \hyperlink{classDandelion_a6c58019c7b1d8fb5a80c2031afb01374}{init} ()
+\item 
+virtual void \hyperlink{classDandelion_a21fa4068a4293d3c5068d53627e49393}{preProcess} ()
+\item 
+virtual void \hyperlink{classDandelion_a3de169eab0899f277a3747a57c94bb0b}{process} ()
+\item 
+virtual void \hyperlink{classDandelion_ac95a20aaaff8170c4539e047cb7a551a}{enslave} (\hyperlink{classEngineParamReader}{EngineParamReader} $\ast$)
+\item 
+virtual void \hyperlink{classDandelion_aad49aeddeaaf1aa98da869d94777e130}{test} ()
+\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{classDandelion_adafc0b99e228f6bdfba301f129e17145}{delete\_\-my\_\-innards} ()
+\item 
+vector$<$ char $>$ \hyperlink{classDandelion_ac02d091e91f5ffc64665e1c986a843c4}{prepAlleles} (unsigned int row, int divisor, int beg, int end)
+\item 
+void \hyperlink{classDandelion_a7d005ed3065f6d59bcdb569ac60a80d1}{computeHaplotypeTest} (\hyperlink{structDandelionHaploInfo}{DandelionHaploInfo} \&d)
+\item 
+void \hyperlink{classDandelion_adf05e6be9d35362f836768eb1b7f22d8}{runSet} (int begin, int end)
+\end{DoxyCompactItemize}
+\subsection*{Static Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static double \hyperlink{classDandelion_a8679c05d30fc55999636726595c070ad}{EPS} ()
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classEngineParamReader}{EngineParamReader} $\ast$ \hyperlink{classDandelion_a6be9455eb19cec16f641f4b1e38dd12f}{ld\_\-param}
+\item 
+bool \hyperlink{classDandelion_a515b2e24d0761fb1278fc61818af02da}{haveOwner}
+\item 
+\hyperlink{classDandelionOutput}{DandelionOutput} \hyperlink{classDandelion_ae3ac17eb2241e0c91255789c941dde82}{output}
+\item 
+int \hyperlink{classDandelion_af9f4a50b7b9d5ec2876f87244f171fde}{numInitSNPs}
+\item 
+int \hyperlink{classDandelion_aa966dd7a7a67dd93522d912aacba581c}{numInitPhen}
+\item 
+int \hyperlink{classDandelion_a7cb5314914aee687a770cfa31af761f4}{numFinalPhen}
+\item 
+int \hyperlink{classDandelion_a1b502dbaf2cbdcaaaf375632840d562e}{numCase}
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classDandelion_a8acd2b60d257ea45b85db1b0313c5fc2}{
+\index{Dandelion@{Dandelion}!Dandelion@{Dandelion}}
+\index{Dandelion@{Dandelion}!Dandelion@{Dandelion}}
+\subsubsection[{Dandelion}]{\setlength{\rightskip}{0pt plus 5cm}Dandelion::Dandelion ()\hspace{0.3cm}{\ttfamily  \mbox{[}explicit\mbox{]}}}}
+\label{classDandelion_a8acd2b60d257ea45b85db1b0313c5fc2}
+\hypertarget{classDandelion_a94b7ff6276f9b31f3c1d25472480a062}{
+\index{Dandelion@{Dandelion}!Dandelion@{Dandelion}}
+\index{Dandelion@{Dandelion}!Dandelion@{Dandelion}}
+\subsubsection[{Dandelion}]{\setlength{\rightskip}{0pt plus 5cm}Dandelion::Dandelion ({\bf DataAccess} $\ast$)\hspace{0.3cm}{\ttfamily  \mbox{[}explicit\mbox{]}}}}
+\label{classDandelion_a94b7ff6276f9b31f3c1d25472480a062}
+\hypertarget{classDandelion_a48cd43f23ee97a671a5d5f55199545cb}{
+\index{Dandelion@{Dandelion}!$\sim$Dandelion@{$\sim$Dandelion}}
+\index{$\sim$Dandelion@{$\sim$Dandelion}!Dandelion@{Dandelion}}
+\subsubsection[{$\sim$Dandelion}]{\setlength{\rightskip}{0pt plus 5cm}Dandelion::$\sim$Dandelion ()}}
+\label{classDandelion_a48cd43f23ee97a671a5d5f55199545cb}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classDandelion_a7d005ed3065f6d59bcdb569ac60a80d1}{
+\index{Dandelion@{Dandelion}!computeHaplotypeTest@{computeHaplotypeTest}}
+\index{computeHaplotypeTest@{computeHaplotypeTest}!Dandelion@{Dandelion}}
+\subsubsection[{computeHaplotypeTest}]{\setlength{\rightskip}{0pt plus 5cm}void Dandelion::computeHaplotypeTest ({\bf DandelionHaploInfo} \& {\em d})\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classDandelion_a7d005ed3065f6d59bcdb569ac60a80d1}
+Compute the statistics for this haplotype.
+
+\begin{Desc}
+\item[\hyperlink{deprecated__deprecated000001}{Deprecated}]This is currently a simple chi2 test. Needs to be done with LR. This code is NOT tested and should never be included in production app.\end{Desc}
+\hypertarget{classDandelion_adafc0b99e228f6bdfba301f129e17145}{
+\index{Dandelion@{Dandelion}!delete\_\-my\_\-innards@{delete\_\-my\_\-innards}}
+\index{delete\_\-my\_\-innards@{delete\_\-my\_\-innards}!Dandelion@{Dandelion}}
+\subsubsection[{delete\_\-my\_\-innards}]{\setlength{\rightskip}{0pt plus 5cm}void Dandelion::delete\_\-my\_\-innards ()\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classDandelion_adafc0b99e228f6bdfba301f129e17145}
+\hypertarget{classDandelion_ac95a20aaaff8170c4539e047cb7a551a}{
+\index{Dandelion@{Dandelion}!enslave@{enslave}}
+\index{enslave@{enslave}!Dandelion@{Dandelion}}
+\subsubsection[{enslave}]{\setlength{\rightskip}{0pt plus 5cm}void Dandelion::enslave ({\bf EngineParamReader} $\ast$ {\em e})\hspace{0.3cm}{\ttfamily  \mbox{[}virtual\mbox{]}}}}
+\label{classDandelion_ac95a20aaaff8170c4539e047cb7a551a}
+
+
+Implements \hyperlink{classEngine_a023e094182312b1732fe53754c2fe5cb}{Engine}.
+
+\hypertarget{classDandelion_a8679c05d30fc55999636726595c070ad}{
+\index{Dandelion@{Dandelion}!EPS@{EPS}}
+\index{EPS@{EPS}!Dandelion@{Dandelion}}
+\subsubsection[{EPS}]{\setlength{\rightskip}{0pt plus 5cm}static double Dandelion::EPS ()\hspace{0.3cm}{\ttfamily  \mbox{[}inline, static, protected\mbox{]}}}}
+\label{classDandelion_a8679c05d30fc55999636726595c070ad}
+\hypertarget{classDandelion_a6c58019c7b1d8fb5a80c2031afb01374}{
+\index{Dandelion@{Dandelion}!init@{init}}
+\index{init@{init}!Dandelion@{Dandelion}}
+\subsubsection[{init}]{\setlength{\rightskip}{0pt plus 5cm}void Dandelion::init ()\hspace{0.3cm}{\ttfamily  \mbox{[}virtual\mbox{]}}}}
+\label{classDandelion_a6c58019c7b1d8fb5a80c2031afb01374}
+Performs several functions, not all documented here.
+
+Main tasks: get engine specific parameters and read and prep data.
+
+Param checks: map file present (does not currently exit) 
+
+Implements \hyperlink{classEngine_aaa054d596fb8ced6e3eb4bee208f8c3d}{Engine}.
+
+\hypertarget{classDandelion_ac02d091e91f5ffc64665e1c986a843c4}{
+\index{Dandelion@{Dandelion}!prepAlleles@{prepAlleles}}
+\index{prepAlleles@{prepAlleles}!Dandelion@{Dandelion}}
+\subsubsection[{prepAlleles}]{\setlength{\rightskip}{0pt plus 5cm}vector$<$ char $>$ Dandelion::prepAlleles (unsigned int {\em row}, \/  int {\em divisor}, \/  int {\em beg}, \/  int {\em end})\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classDandelion_ac02d091e91f5ffc64665e1c986a843c4}
+Prep allele list by breaking number apart and pulling either major or minor allele.
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em row}]An integer that signifies a haplotype. \item[{\em divisor}]The coding for divisor. Default is 2, but some codings use something else. \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+vector$<$char$>$ List of haplotypes. 
+\end{DoxyReturn}
+\hypertarget{classDandelion_a21fa4068a4293d3c5068d53627e49393}{
+\index{Dandelion@{Dandelion}!preProcess@{preProcess}}
+\index{preProcess@{preProcess}!Dandelion@{Dandelion}}
+\subsubsection[{preProcess}]{\setlength{\rightskip}{0pt plus 5cm}void Dandelion::preProcess ()\hspace{0.3cm}{\ttfamily  \mbox{[}virtual\mbox{]}}}}
+\label{classDandelion_a21fa4068a4293d3c5068d53627e49393}
+
+
+Implements \hyperlink{classEngine_aec7076b8979a13c96eceb362437dc68c}{Engine}.
+
+\hypertarget{classDandelion_a3de169eab0899f277a3747a57c94bb0b}{
+\index{Dandelion@{Dandelion}!process@{process}}
+\index{process@{process}!Dandelion@{Dandelion}}
+\subsubsection[{process}]{\setlength{\rightskip}{0pt plus 5cm}void Dandelion::process ()\hspace{0.3cm}{\ttfamily  \mbox{[}virtual\mbox{]}}}}
+\label{classDandelion_a3de169eab0899f277a3747a57c94bb0b}
+Compute \hyperlink{classDandelion}{Dandelion} throughout.
+
+Two paths: 1) If window was set then multiple runs are required. 2) If not, then run the whole set. 
+
+Implements \hyperlink{classEngine_a005f8e277c3dea16ea05803fba223db7}{Engine}.
+
+\hypertarget{classDandelion_adf05e6be9d35362f836768eb1b7f22d8}{
+\index{Dandelion@{Dandelion}!runSet@{runSet}}
+\index{runSet@{runSet}!Dandelion@{Dandelion}}
+\subsubsection[{runSet}]{\setlength{\rightskip}{0pt plus 5cm}void Dandelion::runSet (int {\em begin}, \/  int {\em end})\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classDandelion_adf05e6be9d35362f836768eb1b7f22d8}
+Perform dandelion computation on a single set of SNPs. These should be in order in the data set, and should include both begin and end.
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em begin}]The first SNP to use. \item[{\em end}]The final SNP to use. All in between begin and end are used. \end{DoxyParams}
+\hypertarget{classDandelion_aad49aeddeaaf1aa98da869d94777e130}{
+\index{Dandelion@{Dandelion}!test@{test}}
+\index{test@{test}!Dandelion@{Dandelion}}
+\subsubsection[{test}]{\setlength{\rightskip}{0pt plus 5cm}void Dandelion::test ()\hspace{0.3cm}{\ttfamily  \mbox{[}virtual\mbox{]}}}}
+\label{classDandelion_aad49aeddeaaf1aa98da869d94777e130}
+
+
+Implements \hyperlink{classEngine_a2927c4a4263809453063ad482c6434a4}{Engine}.
+
+
+
+\subsection{Field Documentation}
+\hypertarget{classDandelion_a515b2e24d0761fb1278fc61818af02da}{
+\index{Dandelion@{Dandelion}!haveOwner@{haveOwner}}
+\index{haveOwner@{haveOwner}!Dandelion@{Dandelion}}
+\subsubsection[{haveOwner}]{\setlength{\rightskip}{0pt plus 5cm}bool {\bf Dandelion::haveOwner}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classDandelion_a515b2e24d0761fb1278fc61818af02da}
+\hypertarget{classDandelion_a6be9455eb19cec16f641f4b1e38dd12f}{
+\index{Dandelion@{Dandelion}!ld\_\-param@{ld\_\-param}}
+\index{ld\_\-param@{ld\_\-param}!Dandelion@{Dandelion}}
+\subsubsection[{ld\_\-param}]{\setlength{\rightskip}{0pt plus 5cm}{\bf EngineParamReader}$\ast$ {\bf Dandelion::ld\_\-param}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classDandelion_a6be9455eb19cec16f641f4b1e38dd12f}
+\hypertarget{classDandelion_a1b502dbaf2cbdcaaaf375632840d562e}{
+\index{Dandelion@{Dandelion}!numCase@{numCase}}
+\index{numCase@{numCase}!Dandelion@{Dandelion}}
+\subsubsection[{numCase}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf Dandelion::numCase}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classDandelion_a1b502dbaf2cbdcaaaf375632840d562e}
+\hypertarget{classDandelion_a7cb5314914aee687a770cfa31af761f4}{
+\index{Dandelion@{Dandelion}!numFinalPhen@{numFinalPhen}}
+\index{numFinalPhen@{numFinalPhen}!Dandelion@{Dandelion}}
+\subsubsection[{numFinalPhen}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf Dandelion::numFinalPhen}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classDandelion_a7cb5314914aee687a770cfa31af761f4}
+\hypertarget{classDandelion_aa966dd7a7a67dd93522d912aacba581c}{
+\index{Dandelion@{Dandelion}!numInitPhen@{numInitPhen}}
+\index{numInitPhen@{numInitPhen}!Dandelion@{Dandelion}}
+\subsubsection[{numInitPhen}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf Dandelion::numInitPhen}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classDandelion_aa966dd7a7a67dd93522d912aacba581c}
+\hypertarget{classDandelion_af9f4a50b7b9d5ec2876f87244f171fde}{
+\index{Dandelion@{Dandelion}!numInitSNPs@{numInitSNPs}}
+\index{numInitSNPs@{numInitSNPs}!Dandelion@{Dandelion}}
+\subsubsection[{numInitSNPs}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf Dandelion::numInitSNPs}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classDandelion_af9f4a50b7b9d5ec2876f87244f171fde}
+\hypertarget{classDandelion_ae3ac17eb2241e0c91255789c941dde82}{
+\index{Dandelion@{Dandelion}!output@{output}}
+\index{output@{output}!Dandelion@{Dandelion}}
+\subsubsection[{output}]{\setlength{\rightskip}{0pt plus 5cm}{\bf DandelionOutput} {\bf Dandelion::output}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classDandelion_ae3ac17eb2241e0c91255789c941dde82}
+
+
+The documentation for this class was generated from the following files:\begin{DoxyCompactItemize}
+\item 
+engine/dandelion/\hyperlink{dandelion_8hh}{dandelion.hh}\item 
+engine/dandelion/\hyperlink{dandelion_8cpp}{dandelion.cpp}\end{DoxyCompactItemize}

@@ -1,0 +1,131 @@
+\section{SNPGWA}
+\label{sec:snpgwa}
+\subsection{Description}
+
+\subsection{Usage}
+\begin{verbatim}
+  snplash -engine snpgwa -geno <filename> -phen <filename> \
+          -out <filename> -map <filename> -cov <name1,...> \
+          --haplo_file --hwe_file --haplo_thresh <integer> \
+          --snpgwa_nohap --val
+
+where
+
+  --snpgwa_nohap  Do not calculate haplotype tests (saves
+                  run-time)
+
+and the other options are as for QSNPGWA
+\end{verbatim}
+
+\subsection{Output}
+
+\vspace{1em}
+\begin{supertabular}{r p{5in}}
+  General & ~ \\
+    Chr: & The chromosomal location for the feature \\
+    Marker: & The marker label \\
+    Position: & The position of the feature on the chromosome \\
+    Difference: & \\[1em]
+  Individuals & ~ \\
+    Cases  &  \\
+    Controls  &  \\[1em]
+  Reference Allele Frequency & ~ \\
+    Cases  &  \\
+    Controls  &  \\[1em]
+  Percent Missing & ~ \\
+    Combined  &  \\
+    Cases  &  \\
+    Controls  &  \\
+    Pvalue  &  \\
+    Odds Ratio  &  \\[1em]
+  (??Category??) & ~ \\
+    P  &  \\
+    Q  &  \\
+    Ref  &  \\[1em]
+  Hardy-Weinberg Analysis & ~ \\[1em]
+    Cntl PP  &  \\
+    Case PP  &  \\
+    ENumPP  &  \\
+    Cntl PQ  &  \\
+    Case PQ  &  \\
+    ENumPQ  &  \\
+    Cntl QQ  &  \\
+    Case QQ  &  \\
+    ENumQQ  &  \\
+    X\^2\_PValue  &  \\
+    Combined Prob\_HWE  &  \\
+    Case Prob\_HWE  &  \\
+    Control Prob\_HWE  &  \\[1em]
+  Genotypic Association & ~ \\
+  ~ & ~ \\
+  2 Deg Fr & ~ \\
+    PV\_2DF  &  \\
+  ~ & ~ \\
+  Dominant Test & ~ \\
+    PV\_Dom  &  \\
+    OR  &  \\
+    LCI  &  \\
+    UCI  &  \\
+    Sens  &  \\
+    Spec  &  \\
+    C-St  &  \\
+  ~ & ~ \\
+  Additive Test & ~ \\
+    PV\_Add  &  \\
+    OR  &  \\
+    LCI  &  \\
+    UCI  &  \\
+    NN v RN Sens  &  \\
+    NN v RN Spec  &  \\
+    NN v RR Sens  &  \\
+    NN v RR Spec  &  \\
+    NR v RR Sens  &  \\
+    NR v RR Spec  &  \\
+    NR v RR C-St  &  \\
+  ~ & ~ \\
+  Recessive Test & ~ \\
+    PV\_Rec  &  \\
+    OR  &  \\
+    LCI  &  \\
+    UCI  &  \\
+    Sens  &  \\
+    Spec  &  \\
+    C-St  &  \\
+  ~ & ~ \\
+  Lack Fit & ~ \\
+    PV\_LOF  &  \\
+  ~ & ~ \\
+    D\_Prime  &  \\
+    R\_Squared  &  \\
+    Allelic Test PValue  &  \\
+  ~ & ~ \\
+  Two Marker Haplotype Analysis & ~ \\
+    LRS\_PValue  &  \\
+    Cases FreqPP  &  \\
+    Cases FreqPQ  &  \\
+    Cases FreqQP  &  \\
+    Cases FreqQQ  &  \\
+    Controls FreqPP  &  \\
+    Controls FreqPQ  &  \\
+    Controls FreqQP  &  \\
+    Controls FreqQQ  &  \\
+  ~ & ~ \\
+  Three Marker Haplotype Analysis & ~ \\
+    LRS\_PValue  &  \\
+    Cases FreqPPP  &  \\
+    Cases FreqPPQ  &  \\
+    Cases FreqPQP  &  \\
+    Cases FreqPQQ  &  \\
+    Cases FreqQPP  &  \\
+    Cases FreqQPQ  &  \\
+    Cases FreqQQP  &  \\
+    Cases FreqQQQ  &  \\
+    Controls FreqPPP  &  \\
+    Controls FreqPPQ  &  \\
+    Controls FreqPQP  &  \\
+    Controls FreqPQQ  &  \\
+    Controls FreqQPP  &  \\
+    Controls FreqQPQ  &  \\
+    Controls FreqQQP  &  \\
+    Controls FreqQQQ  &  \\
+\end{supertabular} 

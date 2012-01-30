@@ -1,0 +1,39 @@
+2010-10-14  Richard T. Guy  <guy@cs.toronto.edu>
+
+ * Dandelion person prob now shows people IDs.  This required
+   work in the input system as well as altering snp_data.{cpp,hh}
+   to store that information.
+
+2010-05-29  Richard T. Guy  <guyrt7@wfu.edu>
+
+ * messed with strnutils.cpp, especially double printing.
+
+
+2010-05-26  Richard T. Guy  <guyrt7@wfu.edu>
+
+ * utils/exception.h
+ * Updated exception catchers.
+
+
+2010-05-20  Richard T. Guy  <guyrt7@wfu.edu>
+
+ * ld.cpp/ld.h
+
+
+2010-05-19  Richard T. Guy  <guyrt@guyrt7@wfu.edu>
+
+ * Began SNPGWA port
+ * Created engine/snpgwa/*
+ * param_reader.cpp
+ * snpadt.cpp
+
+
+2010-05-17  Richard T. Guy  <guyrt7@wfu.edu>
+
+ * Started this changelog.
+ * ld.cpp
+ * engine_params.cpp
+ * dprime_out.cpp
+ * param_reader.cpp
+
+
