@@ -39,8 +39,6 @@ bool PopStats::prepPopStatsForOutput(int snp, PopStatsResults &results){
 	ret &= missingStats(snp);
 	ret &= hwEquilibruim(snp);
 
-//	results.caseCount = numTotalCases;
-//	results.cntrlCount = numTotalCntrls;
 	results.caseCount = numTotalCases - numMissingCase;  //or = casesNonMissing;
 	results.cntrlCount = numTotalCntrls - numMissingCntrl;// or = cntrlsNonMissing;
 	results.caseRefFreq = minorAlleleFreqCases;

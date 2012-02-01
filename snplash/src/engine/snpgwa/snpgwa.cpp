@@ -275,9 +275,9 @@ void Snpgwa::initToZero(PopStatsResults &p, HaploStatsResults &r, GenoStatsResul
 	p.cntrlCount = 0;
 	p.caseRefFreq = 0;
 	p.cntrlRefFreq = 0;
-	p.pMissingCombined = 0;
-	p.pMissingCase = 0;
-	p.pMissingCntrl = 0;
+	p.pMissingCombined = 1.0;
+	p.pMissingCase = 1.0;
+	p.pMissingCntrl = 1.0;
 	p.missingPVal = 2.0;
 	p.missingOR = -1.0;
 	p.cntrlPP = 0;
