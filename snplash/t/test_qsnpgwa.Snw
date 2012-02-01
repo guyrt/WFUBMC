@@ -1,0 +1,372 @@
+% test_qsnpgwa.Snw
+%
+% Suite of tests to compare snplash/qsnpgwa output to reference data
+% produced by R.
+%
+% This file is written using the literate programming tools of R-Sweave.
+% Code following '<<>>=' is evaluated by the R interpreter, up to the next '@'
+% in the first column.  Code following this is LateX.  The report can be
+% run from the command line with 'R CMD Sweaver <this_file_name>' if the
+% necessary files are present.
+%
+% David R. McWillliams <dmcwilli@wfubmc.edu>
+%
+% 15-Aug-2011
+
+\documentclass{article}
+
+\usepackage{amsmath}
+\usepackage{amscd}
+
+\title{SNPLASH-QSNPGWA Tests}
+\author{}
+
+\SweaveOpts{strip.white=TRUE, prefix.string=figures/qsnpgwa}
+
+\begin{document}
+\maketitle
+\setkeys{Gin}{width=0.7\textwidth}
+
+<<echo=F>>=
+this.test <- "test_qsnpgwa.Snw"
+log.file  <- "run_stat_tests.log"
+
+log.it <- function(msg) {
+  cat(msg, file=log.file, append=TRUE)
+}
+
+files <- c("hisp.additive.lm.txt",
+           "hisp.dominant.lm.txt",
+           "hisp.recessive.lm.txt",
+           "hisp.dprime.snpmatrix.txt",
+           "hisp.rsquare.snpmatrix.txt",
+           "hisp.plink.hwe.txt",
+           "hisp.qsnpgwa.out.txt"
+           )
+
+for(f in files) {
+  if( !file_test("-f", f) ) {
+    log.it(paste("Missing input file ", f, ". Aborting ", this.test, "\n", sep=""))
+    return(1)
+   }
+}
+
+wrap.head <- function(x) {
+  for(i in 1:length(x)) {
+    if(nchar(x[i]) == 0) {
+      cat("\n")
+      next
+    }
+    if(length(grep("\\*+", x[i]))>0) {
+      cat("\n")
+      next
+    }
+    writeLines(strwrap(x[i]))
+  }
+ }
+@
+Statistics from SNPLASH with engine QSNPGWA are compared to the corresponding
+values generated in R and PLINK on the data set 'hisp'.
+
+\section{Input Data}
+\subsection{QSNPGWA Header}
+The output header is here for documentation purposes and is wrapped to fit the page.
+<<echo=F>>=
+lines15 <- readLines(con="./hisp.qsnpgwa.out.txt", n=15)
+Header <- lines15[2:14]
+wrap.head(Header)
+@
+\subsection{Files}
+<<echo=F>>=
+files
+@
+\newpage{}
+\section{Regression p-Values}
+Regression p-values are compared as -log10(p).
+<<echo=F>>=
+add.df <- read.table("hisp.additive.lm.txt",  as.is=T, row.names=NULL, header=T)
+rec.df <- read.table("hisp.recessive.lm.txt", as.is=T, row.names=NULL, header=T)
+dom.df <- read.table("hisp.dominant.lm.txt",  as.is=T, row.names=NULL, header=T)
+
+dp.df  <- read.table("hisp.dprime.snpmatrix.txt",  as.is=T, row.names=NULL, header=F)
+rsq.df <- read.table("hisp.rsquare.snpmatrix.txt", as.is=T, row.names=NULL, header=F)
+
+hwe.df <- read.table("hisp.plink.hwe.txt", as.is=T, row.names=NULL, header=T)
+
+hisp.df <- read.table("hisp.qsnpgwa.out.txt", as.is=T, row.names=NULL, header=F, skip=20)
+
+names(hisp.df) <- c("chr", "marker", "pos", "diff", "ind.tot",
+                    "maf", "pc.miss", "pc.miss.pval", "p", "q",
+                    "ref.af", "numpp.hw", "enumpp.hw", "numpq.hw", "enumpq.hw",
+                    "numqq.hw", "enumqq.hw", "x2.pval", "prob.hwe", "pv.2df.dom",
+                    "pv.dom", "beta.dom", "se.dom", "pv.add", "beta.add",
+                    "se.add", "pv.rec", "beta.rec", "se.rec", "pv.lof",
+                    "mean.AA", "sd.AA", "mean.Aa", "sd.Aa", "mean.aa",
+                    "sd.aa", "mean.AA.Aa", "sd.AA.Aa", "mean.Aa.aa", "sd.Aa.aa",
+                    "d.prime", "r.sqr")
+
+@
+\begin{center}
+<<fig=T, echo=F>>=
+
+x <- -log10(add.df$p.val)
+y <- -log10(hisp.df$pv.add)
+plot(x, y,
+     xlab = "R",
+     ylab = "QSNGQA",
+     cex  = 0.85,
+     col  = "grey65",
+     main = "Additive"
+     )
+
+plot.lims <- par("usr")
+t.x  <- plot.lims[1] + 0.75*(plot.lims[2] - plot.lims[1])
+t.y  <- plot.lims[3] + 0.20*(plot.lims[4] - plot.lims[3])
+text(t.x, t.y,
+     paste("r = ", round(cor(x, y, use="complete"), 6), sep=""))
+abline(0,1)
+@
+<<fig=T, echo=F>>=
+
+x <- -log10(rec.df$p.val)
+y <- -log10(hisp.df$pv.rec)
+plot(x, y,
+     xlab = "R",
+     ylab = "QSNGQA",
+     cex  = 0.85,
+     col  = "grey65",
+     main = "Recessive"
+     )
+
+plot.lims <- par("usr")
+t.x  <- plot.lims[1] + 0.75*(plot.lims[2] - plot.lims[1])
+t.y  <- plot.lims[3] + 0.20*(plot.lims[4] - plot.lims[3])
+text(t.x, t.y,
+     paste("r = ", round(cor(x, y, use="complete"), 6), sep=""))
+abline(0,1)
+@
+<<fig=T, echo=F>>=
+
+x <- -log10(dom.df$p.val)
+y <- -log10(hisp.df$pv.dom)
+plot(x, y,
+     xlab = "R",
+     ylab = "QSNGQA",
+     cex  = 0.85,
+     col  = "grey65",
+     main = "Dominant"
+     )
+
+plot.lims <- par("usr")
+t.x  <- plot.lims[1] + 0.75*(plot.lims[2] - plot.lims[1])
+t.y  <- plot.lims[3] + 0.20*(plot.lims[4] - plot.lims[3])
+text(t.x, t.y,
+     paste("r = ", round(cor(x, y, use="complete"), 6), sep=""))
+abline(0,1)
+@
+\end{center}
+
+\newpage{}
+\section{Regression Coefficient Standard Error}
+
+\begin{center}
+<<fig=T, echo=F>>=
+
+x <- add.df$std.err
+y <- hisp.df$se.add
+plot(x, y,
+     xlab = "R",
+     ylab = "QSNGQA",
+     cex  = 0.85,
+     col  = "grey65",
+     main = "Additive"
+     )
+
+plot.lims <- par("usr")
+t.x  <- plot.lims[1] + 0.75*(plot.lims[2] - plot.lims[1])
+t.y  <- plot.lims[3] + 0.20*(plot.lims[4] - plot.lims[3])
+text(t.x, t.y,
+     paste("r = ", round(cor(x, y, use="complete"), 6), sep=""))
+abline(0,1)
+
+@
+<<fig=T, echo=F>>=
+
+x <- rec.df$std.err
+y <- hisp.df$se.rec
+plot(x, y,
+     xlab = "R",
+     ylab = "QSNGQA",
+     cex  = 0.85,
+     col  = "grey65",
+     main = "Recessive"
+     )
+
+plot.lims <- par("usr")
+t.x  <- plot.lims[1] + 0.75*(plot.lims[2] - plot.lims[1])
+t.y  <- plot.lims[3] + 0.20*(plot.lims[4] - plot.lims[3])
+text(t.x, t.y,
+     paste("r = ", round(cor(x, y, use="complete"), 6), sep=""))
+abline(0,1)
+@
+<<fig=T, echo=F>>=
+
+x <- dom.df$std.err
+y <- hisp.df$se.dom
+plot(x, y,
+     xlab = "R",
+     ylab = "QSNGQA",
+     cex  = 0.85,
+     col  = "grey65",
+     main = "Dominant"
+     )
+
+plot.lims <- par("usr")
+t.x  <- plot.lims[1] + 0.75*(plot.lims[2] - plot.lims[1])
+t.y  <- plot.lims[3] + 0.20*(plot.lims[4] - plot.lims[3])
+text(t.x, t.y,
+     paste("r = ", round(cor(x, y, use="complete"), 6), sep=""))
+abline(0,1)
+@
+\end{center}
+
+\newpage{}
+\section{Regression Coefficient}
+
+\begin{center}
+<<fig=T, echo=F>>=
+x <-add.df$coef
+y <- hisp.df$beta.add
+plot(x, y,
+     xlab = "R",
+     ylab = "QSNGQA",
+     cex  = 0.85,
+     col  = "grey65",
+     main = "Additive"
+     )
+
+plot.lims <- par("usr")
+t.x  <- plot.lims[1] + 0.75*(plot.lims[2] - plot.lims[1])
+t.y  <- plot.lims[3] + 0.20*(plot.lims[4] - plot.lims[3])
+text(t.x, t.y,
+     paste("r = ", round(cor(x, y, use="complete"), 6), sep=""))
+abline(0,1)
+@
+<<fig=T, echo=F>>=
+x <- rec.df$coef
+y <- hisp.df$beta.rec
+plot(x, y,
+     xlab = "R",
+     ylab = "QSNGQA",
+     cex  = 0.85,
+     col  = "grey65",
+     main = "Recessive"
+     )
+
+plot.lims <- par("usr")
+t.x  <- plot.lims[1] + 0.75*(plot.lims[2] - plot.lims[1])
+t.y  <- plot.lims[3] + 0.20*(plot.lims[4] - plot.lims[3])
+text(t.x, t.y,
+     paste("r = ", round(cor(x, y, use="complete"), 6), sep=""))
+abline(0,1)
+@
+<<fig=T, echo=F>>=
+x <- dom.df$coef
+y <- hisp.df$beta.dom
+plot(x, y,
+     xlab = "R",
+     ylab = "QSNGQA",
+     cex  = 0.85,
+     col  = "grey65",
+     main = "Dominant"
+     )
+
+plot.lims <- par("usr")
+t.x  <- plot.lims[1] + 0.75*(plot.lims[2] - plot.lims[1])
+t.y  <- plot.lims[3] + 0.20*(plot.lims[4] - plot.lims[3])
+text(t.x, t.y,
+     paste("r = ", round(cor(x, y, use="complete"), 6), sep=""))
+abline(0,1)
+@
+\end{center}
+
+\newpage{}
+\section{Hardy-Weinberg p-Values}
+Reference Hardy-Weinberg p-values were generated with PLINK and are compared as
+-log10(p).
+
+\begin{center}
+
+<<fig=T, echo=F>>=
+
+x <- -log10(hwe.df$p)
+y <- -log10(hisp.df$prob.hwe)
+plot(x, y,
+     xlab = "PLINK p",
+     ylab = "QSNPGWA",
+     col  = "grey65",
+     cex  = 0.85,
+     )
+
+plot.lims <- par("usr")
+t.x  <- plot.lims[1] + 0.75*(plot.lims[2] - plot.lims[1])
+t.y  <- plot.lims[3] + 0.20*(plot.lims[4] - plot.lims[3])
+text(t.x, t.y,
+     paste("r = ", round(cor(x, y, use="complete"),6), sep="")
+     )
+abline(0,1)
+@
+\end{center}
+
+\newpage{}
+\section{Comparison of $D'$ and $r^2$}
+Reference $D'$ and $r^2$ were calculated in R using the snpMatrix package.  Seventy-six missing
+values generated for 'hisp' are excluded.  These correspond to the signal value
+'-99' for QSNPGWA.
+
+\begin{center}
+<<fig=T, echo=F>>=
+sub.df <- data.frame(snpmatrix=dp.df[,1], qsnpgwa=hisp.df$d.prime[1:1489])
+x <- sub.df$snpmatrix[!is.na(sub.df$snpmatrix)]
+y <- sub.df$qsnpgwa[!is.na(sub.df$snpmatrix)]
+plot(x, y,
+     xlab = "R snpMatrix D\'",
+     ylab = "SNPGWA D\'",
+     col  = "grey65",
+     cex  = 0.85,
+     main = "D-Prime"
+     )
+
+plot.lims <- par("usr")
+t.x  <- plot.lims[1] + 0.75*(plot.lims[2] - plot.lims[1])
+t.y  <- plot.lims[3] + 0.20*(plot.lims[4] - plot.lims[3])
+text(t.x, t.y,
+     paste("r = ", round(cor(x, y, use="complete"),6), sep="")
+     )
+abline(0,1)
+
+@
+<<fig=T, echo=F>>=
+sub.df <- data.frame(snpmatrix=rsq.df[,1], qsnpgwa=hisp.df$r.sqr[1:1489])
+x <- sub.df$snpmatrix[!is.na(sub.df$snpmatrix)]
+y <- sub.df$qsnpgwa[!is.na(sub.df$snpmatrix)]
+plot(x, y,
+     xlab = expression(paste("R snpMatrix ", r^2)),
+     ylab = expression(paste("SNPGWA ", r^2)),
+     col  = "grey70",
+     cex  = 0.85,
+     main = expression(R^2),
+     )
+
+plot.lims <- par("usr")
+t.x  <- plot.lims[1] + 0.75*(plot.lims[2] - plot.lims[1])
+t.y  <- plot.lims[3] + 0.20*(plot.lims[4] - plot.lims[3])
+text(t.x, t.y,
+     paste("r = ", round(cor(x, y, use="complete"),6), sep="")
+     )
+abline(0,1)
+
+@
+\end{center}
+
+\end{document}

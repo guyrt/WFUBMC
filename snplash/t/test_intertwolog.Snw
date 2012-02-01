@@ -1,0 +1,178 @@
+% test_intertwolog.Snw
+%
+% Suite of tests to compare snplash/intertwolog output to reference data
+% produced by R.
+%
+% This file is written using the literate programming tools of R-Sweave.
+% Code following '<<>>=' is evaluated by the R interpreter, up to the next '@'
+% in the first column.  Code following this is LateX.  The report can be
+% run from the command line with 'R CMD Sweave <this_file_name>' if the
+% necessary files are present.
+%
+% David R. McWillliams <dmcwilli@wfubmc.edu>
+%
+% 17-Aug-2011
+
+\documentclass{article}
+
+\usepackage{amsmath}
+\usepackage{amscd}
+
+\title{SNPLASH-Intertwolog Tests}
+\author{}
+
+\SweaveOpts{strip.white=TRUE, prefix.string=figures/intertwolog}
+
+\begin{document}
+\maketitle
+\setkeys{Gin}{width=0.7\textwidth}
+
+<<echo=F>>=
+this.test <- "test_intertwolog.Snw"
+log.file  <- "run_stat_tests.log"
+
+log.it <- function(msg) {
+  cat(msg, file=log.file, append=TRUE)
+}
+
+files <- c("sim2000.results.20110526.sub.txt",
+           "sim2000.intertwolog.out.txt")
+
+for(f in files) {
+  if( !file_test("-f", f) ) {
+    log.it(paste("Missing input file ", f, ". Aborting ", this.test, "\n", sep=""))
+    return(1)
+   }
+}
+
+source("./Rcode/wrap.head.R")
+source("./Rcode/put.cor.R")
+
+@
+\noindent{}Statistics from SNPLASH with engine Intertwolog are compared to the corresponding
+values generated in R and PLINK on the data set 'hisp'.
+
+Plots are a subset to minimize rendering time, but statistics are given for all
+observations.
+
+\section{Input Data}
+\subsection{Intertwolog Header}
+The output header is here for documentation purposes and is wrapped to fit the page.
+<<echo=F>>=
+lines19 <- readLines(con="sim2000.intertwolog.out.txt", n=19)
+Header <- lines19[2:19]
+wrap.head(Header)
+@
+\subsection{Files}
+<<echo=F>>=
+files
+@
+<<echo=F>>=
+snpl.i2l.df <- read.table("sim2000.intertwolog.out.txt", as.is=T, row.names=NULL, header=F, skip=23)
+names(snpl.i2l.df) <- c("m1.idx", "m1.name", "m2.idx", "m2.name", "int.beta", "int.p", "int.se")
+
+r.i2l.df <- read.table("sim2000.results.20110526.sub.txt", as.is=T, row.names=NULL, header=T)
+n.row <- nrow(snpl.i2l.df)
+selection <- sample(1:n.row, 20000)
+@
+\newpage{}
+\section{Regression p-Values}
+
+\begin{center}
+  The p-values for the interaction $\beta$ are plotted as $-log_{10}p$.
+<<fig=T, echo=F>>=
+x <- -log10(r.i2l.df$b1.b2.p[selection])
+y <- -log10(snpl.i2l.df$int.p[selection])
+
+plot(x, y,     
+     cex  = 0.85,
+     col  = "grey55",
+     xlab = "R",
+     ylab = "Intertwolog")
+
+abline(0,1)
+put.cor(x,y)
+
+@
+\end{center}
+\newpage{}
+\section{Coefficient Standard Error}
+\begin{center}
+
+<<fig=T, echo=F>>=
+
+x <- r.i2l.df$b1.b2.se[selection]
+y <- snpl.i2l.df$int.se[selection]
+plot(x, y,
+     cex  = 0.85,
+     col  = "grey65",
+     xlab = "R",
+     ylab = "Intertwolog")
+
+abline(0,1)
+put.cor(x,y)
+
+@
+\end{center}
+This correlation calculated for those values of standard error less than two.
+
+\begin{center}
+<<fig=T, echo=F>>=
+x <- r.i2l.df$b1.b2.se[selection]
+y <- snpl.i2l.df$int.se[selection]
+
+x2 <- x[x>0 & x<1.7 & y>0 & y<1.7]
+y2 <- y[x>0 & x<1.7 & y>0 & y<1.7]
+plot(x2, y2,
+     xlim = c(0,1.6),
+     ylim = c(0,1.6),
+     cex  = 0.85,
+     col  = "grey65",
+     xlab = "R",
+     ylab = "Intertwolog")
+
+put.cor(x2, y2)
+abline(0,1)
+@
+\end{center}
+
+\newpage{}
+\section{Coefficients}
+\begin{center}
+<<fig=T, echo=F>>=
+
+x <- r.i2l.df$b1.b2[selection]
+y <- snpl.i2l.df$int.beta[selection]
+
+plot(x, y,
+     cex  = 0.85,
+     col  = "grey65",
+     xlab = "R",
+     ylab = "Intertwolog")
+
+put.cor(x,y)
+abline(0,1)
+@
+\end{center}
+The following plot and correlations are for those coefficients $-3 < \beta < 3$.
+\begin{center}
+<<fig=T, echo=F=>>=
+
+x <- r.i2l.df$b1.b2[selection]
+y <- snpl.i2l.df$int.beta[selection]
+
+x2 <- x[x>-3 & x<3 & y>-3 & y<3]
+y2 <- y[x>-3 & x<3 & y>-3 & y<3]
+
+plot(x2, y2,
+     cex  = 0.85,
+     col  = "grey65",
+     xlab = "R",
+     ylab = "Intertwolog")
+
+put.cor(x2, y2)
+abline(0,1)
+@
+\end{center}
+
+\end{document}

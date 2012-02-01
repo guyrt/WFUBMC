@@ -1,0 +1,434 @@
+% test_snpgwa.Snw
+%
+% Suite of tests to compare snplash/snpgwa output to reference data
+% produced by R.
+%
+% This file is written using the literate programming tools of R-Sweave.
+% Code following '<<>>=' is evaluated by the R interpreter, up to the next '@'
+% in the first column.  Code following this is LateX.  The report can be
+% run from the command line with 'R CMD Sweaver <this_file_name>' if the
+% necessary files are present.
+%
+% David R. McWillliams <dmcwilli@wfubmc.edu>
+%
+% 11-Aug-2011
+% 24-Aug-2011 Add reports for lof and 2df parameters
+
+\documentclass{article}
+
+\usepackage{amsmath}
+\usepackage{amscd}
+
+\title{SNPLASH-SNPGWA Tests}
+\author{}
+
+\SweaveOpts{strip.white=TRUE, prefix.string=figures/snpgwa}
+
+\begin{document}
+\maketitle
+
+\setkeys{Gin}{width=0.7\textwidth}
+
+<<echo=FALSE>>=
+this.test <- "test_snpgwa.Snw"
+
+snpl.df <- NULL
+log.file <- "run_stat_tests.log"
+
+files <- c("sim2000.snpgwa.out.txt",
+           "sim2000.plink.hwe.txt",
+           "sim2000.rsquare.snpmatrix.txt",
+           "sim2000.logistic.cov.additive.txt",
+           "sim2000.logistic.cov.dominant.txt",
+           "sim2000.logistic.cov.recessive.txt",
+           "sim2000.logistic.cov.lof.txt",
+           "sim2000.logistic.cov.2df.20110824.txt")
+
+log.it <- function(msg) {
+  cat(msg, file=log.file, append=TRUE)
+}
+
+for(f in files) {
+  if( !file_test("-f", f) ) {
+    log.it(paste("Missing input file ", f, ". Aborting ", this.test, "\n", sep=""))
+    return(1)
+   }
+}
+
+snpl.df <- read.table("sim2000.snpgwa.out.txt", as.is=T, row.names=NULL, header=F, skip=36)
+add.df  <- read.table("sim2000.logistic.cov.additive.txt", as.is=T, row.names=NULL, header=T)
+rec.df  <- read.table("sim2000.logistic.cov.recessive.txt", as.is=T, row.names=NULL, header=T)
+dom.df  <- read.table("sim2000.logistic.cov.dominant.txt", as.is=T, row.names=NULL, header=T)
+lof.df  <- read.table("sim2000.logistic.cov.lof.txt", as.is=T, row.names=NULL, header=T)
+two.df  <- read.table("sim2000.logistic.cov.2df.20110824.txt", as.is=T, row.names=NULL, header=T)
+hwe.df  <- read.table("sim2000.plink.hwe.txt", as.is=T, row.names=NULL, header=T)
+dp.df   <- read.table("sim2000.dprime.snpmatrix.txt", as.is=T, row.names=NULL, header=T)
+r2.df   <- read.table("sim2000.rsquare.snpmatrix.txt", as.is=T, row.names=NULL, header=T)
+
+snpgwa.names <- c("chr", "marker", "loc", "diff", "case.ind",
+                  "ctrl.ind", "case.raf", "ctrl.raf", "comb.miss", "case.miss",
+                  "ctrl.miss", "pval.miss", "or.miss", "p", "q", "ref", "ctrl.pp.hw",
+                  "case.pp.hw", "enum.pp.hw", "ctrl.pq.hw", "case.pq.hw", "enum.pq.hw",
+                  "ctrl.qq.hw", "case.qq.hw", "enum.qq.hw", "x2.pval.hw", "comb.hwe.hw",
+                  "case.hwe.hw", "ctrl.hwe.hw", "pv.2df", "pv.dom", "or.dom", "lci.dom",
+                  "uci.dom", "sens.dom", "spec.dom", "cst.dom", "pv.add", "or.add",
+                  "lci.add", "uci.add", "nn.rn.sens.add", "nn.rn.spec.add",
+                  "nn.rr.sens.add", "nn.rr.spec.add", "nr.rr.sens.add",
+                  "nn.rr.spec.add", "cst.add", "pv.rec", "or.rec", "lci.rec", "uci.rec",
+                  "sens.rec", "spec.rec", "cst.rec", "pv.lof", "d.prime", "r.sq",
+                  "allele.p", "lrs.p.2mark", "case.freqpp.2mark", "case.freqpq.2mark",
+                  "case.freqqp.2mark", "case.freqqq.2mark", "ctrl.freqpp.2mark",
+                  "ctrl.freqpq.2mark", "ctrl.freqqp.2mark", "ctrl.freqqq.2mark",
+                  "lrs.p.3mark", "case.freqppp.3mark", "case.freqppq.3mark",
+                  "case.freqpqp.3mark", "case.freqpqq.3mark", "case.freqqpp.3mark",
+                  "case.freqqpq.3mark", "case.freqqqp.3mark", "case.freqqqq.3mark",
+                  "ctrl.freqppp.3mark", "ctrl.freqppq.3mark", "ctrl.freqpqp.3mark",
+                  "ctrl.freqpqq.3mark", "ctrl.freqqpp.3mark", "ctrl.freqqpq.3mark",
+                  "ctrl.freqqqp.3mark", "ctrl.freqqqq.3mark")
+
+names(snpl.df) <- snpgwa.names
+
+source("./Rcode/wrap.head.R")
+source("./Rcode/put.cor.R")
+
+@
+Statistics from SNPLASH with engine SNPGWA are compared to the corresponding
+values generated in R and PLINK on the data set 'Sim2000'.
+
+\section{Input Data}
+\subsection{SNPLASH Header}
+The output header is here for documentation purposes and is wrapped to fit the page.
+<<echo=F>>=
+Header <- readLines(con="./sim2000.snpgwa.out.txt", n=31)
+wrap.head(Header)
+@ 
+\subsection{Files}
+<<echo=F>>=
+files
+@ 
+\newpage{}
+\section{Regression p-Values}
+Regression p-values are compared as -log10(p).
+\begin{center}
+
+<<fig=TRUE, echo=FALSE>>=
+
+x <- -log10(add.df$b1.p)
+y <- -log10(snpl.df$pv.add)
+plot(x, y,
+     xlab = "R Logistic",
+     ylab = "SNPGWA",
+     col  = "grey65",
+     cex  = 0.85,
+     main = "Additive Model")
+
+put.cor(x,y)
+abline(0,1)
+@ 
+<<fig=TRUE, echo=FALSE>>=
+
+x <- -log10(rec.df$b1.p)
+y <- -log10(snpl.df$pv.rec)
+plot(x, y,
+     xlab = "R Logistic",
+     ylab = "SNPGWA",
+     col  = "grey65",
+     cex  = 0.85,
+     main = "Recessive Model")
+
+put.cor(x,y)
+abline(0,1)
+@ 
+<<fig=TRUE, echo=FALSE>>=
+
+x <- -log10(dom.df$b1.p)
+y <- -log10(snpl.df$pv.dom)
+plot(x, y,
+     xlab = "R Logistic",
+     ylab = "SNPGWA",
+     col  = "grey65",
+     cex  = 0.85,
+     main = "Dominant Model")
+
+put.cor(x,y)
+abline(0,1)
+
+@
+<<fig=TRUE, echo=FALSE>>=
+
+x <- -log10(lof.df$b1.p)
+y <- -log10(snpl.df$pv.lof)
+plot(x, y,
+     xlab = "R Logistic",
+     ylab = "SNPGWA",
+     col  = "grey65",
+     cex  = 0.85,
+     main = "Lack of Fit")
+
+put.cor(x,y)
+abline(0,1)
+@
+\end{center}
+
+\newpage{}
+\section{Two-Degree-of-Freedom Test}
+The two-degree-of-freedom test was performed with the Wald test from R package
+\textbf{aod} (wald.test).  Tests that were 'NA' in R and '$2$' in SNPGWA were
+excluded from the correlation below.\\
+<<echo=F>>=
+x.na   <- length(two.df$p.2df[is.na(two.df$p.2df)])
+y.na   <- length(snpl.df$pv.2df[snpl.df$pv.2df==2])
+xy.int <- (is.na(two.df$p.2df) & (snpl.df$pv.2df==2))
+xy     <- length(xy.int[xy.int==TRUE])
+@ 
+
+\begin{center}
+  \begin{tabular}{r l}
+    R/Wald results that returned missing (NA): & \Sexpr{x.na}  \\
+    SNPGWA results that returned '$2$':        & \Sexpr{y.na } \\
+    Number that were 'NA' and '$2$':           & \Sexpr{xy}    \\
+  \end{tabular}
+\end{center}
+
+\noindent{}The correlation is for the un-transformed $p$, the plots are of $-log_{10}p$.
+\begin{center}
+<<fig=T, echo=F>>=
+x <- two.df$p.2df[!xy.int]
+y <- snpl.df$pv.2df[!xy.int]
+plot(-log10(x), -log10(y),
+     xlab = "Wald Test P",
+     ylab = "SNPGWA",
+     col  = "grey55",
+     cex  = 0.85,
+     main = "Two Degree of Freedom Test")
+
+put.cor(x,y)
+abline(0,1)
+@ 
+\end{center}
+
+\newpage{}
+\section{Odds Ratios}
+SNPLASH/SNPGWA odds ratios with the signal value $-1$ were removed before
+executing the comparison.
+\subsection{Additive Model}
+\begin{center}
+<<fig=T, echo=F>>=
+
+aberrant <- (snpl.df$or.add == -1)
+x <- exp(add.df$b1[!aberrant])
+y <- snpl.df$or.add[!aberrant]
+
+plot(x, y,
+     xlab = "R",
+     ylab = "SNPGWA",
+     col  = "grey60",
+     cex  = 0.85,
+     main = "Additive Model Odds Ratio")
+
+put.cor(x, y)
+abline(0,1)
+@ 
+<<fig=T, echo=F>>=
+aberrant <- (snpl.df$uci.add == -1)
+x <- exp(add.df$b1[!aberrant] + 1.96*add.df$b1.se[!aberrant])
+y <- snpl.df$uci.add[!aberrant]
+plot(x, y,
+     xlab = "R",
+     ylab = "SNPGWA",
+     col  = "grey60",
+     cex  = 0.85,
+     main = "Additive Model Odds Ratio UCI")
+put.cor(x,y)
+abline(0,1)
+@ 
+<<fig=T, echo=F>>=
+aberrant <- (snpl.df$lci.add == -1)
+x <- exp(add.df$b1[!aberrant] - 1.96*add.df$b1.se[!aberrant])
+y <- snpl.df$lci.add[!aberrant]
+plot(x, y,
+     xlab = "R",
+     ylab = "SNPGWA",
+     col  = "grey60",
+     cex  = 0.85,
+     main = "Additive Model Odds Ratio LCI")
+put.cor(x,y)
+abline(0,1)
+
+@ 
+\end{center}
+\subsection{Recessive Model}
+\begin{center}
+<<fig=T, echo=F>>=
+aberrant <- (snpl.df$or.rec == -1)
+x <- exp(rec.df$b1[!aberrant])
+y <- snpl.df$or.rec[!aberrant]
+
+plot(x, y,
+     xlab = "R",
+     ylab = "SNPGWA",
+     col  = "grey60",
+     cex  = 0.85,
+     main = "Recessive Model Odds Ratio")
+
+put.cor(x, y)
+abline(0,1)
+@ 
+<<fig=T, echo=F>>=
+aberrant <- (snpl.df$uci.rec == -1)
+x <- exp(rec.df$b1[!aberrant] + 1.96*rec.df$b1.se[!aberrant])
+y <- snpl.df$uci.rec[!aberrant]
+plot(x, y,
+     xlab = "R",
+     ylab = "SNPGWA",
+     col  = "grey60",
+     cex  = 0.85,
+     main = "Recessive Model Odds Ratio UCI")
+put.cor(x,y)
+abline(0,1)
+@ 
+<<fig=T, echo=F>>=
+aberrant <- (snpl.df$lci.rec == -1)
+x <- exp(rec.df$b1[!aberrant] - 1.96*rec.df$b1.se[!aberrant])
+y <- snpl.df$lci.rec[!aberrant]
+plot(x, y,
+     xlab = "R",
+     ylab = "SNPGWA",
+     col  = "grey60",
+     cex  = 0.85,
+     main = "Recessive Model Odds Ratio LCI")
+put.cor(x,y)
+abline(0,1)
+@ 
+\end{center}
+\subsection{Dominant Model}
+\begin{center}
+<<fig=T, echo=F>>=
+aberrant <- (snpl.df$or.dom == -1)
+x <- exp(dom.df$b1[!aberrant])
+y <- snpl.df$or.dom[!aberrant]
+
+plot(x, y,
+     xlab = "R",
+     ylab = "SNPGWA",
+     col  = "grey60",
+     cex  = 0.85,
+     main = "Dominant Model Odds Ratio")
+
+put.cor(x, y)
+abline(0,1)
+@ 
+<<fig=T, echo=F>>=
+aberrant <- (snpl.df$uci.dom == -1)
+x <- exp(dom.df$b1[!aberrant] + 1.96*dom.df$b1.se[!aberrant])
+y <- snpl.df$uci.dom[!aberrant]
+plot(x, y,
+     xlab = "R",
+     ylab = "SNPGWA",
+     col  = "grey60",
+     cex  = 0.85,
+     main = "Dominant Model Odds Ratio UCI")
+put.cor(x,y)
+abline(0,1)
+@ 
+<<fig=T, echo=F>>=
+aberrant <- (snpl.df$lci.dom == -1)
+x <- exp(dom.df$b1[!aberrant] - 1.96*dom.df$b1.se[!aberrant])
+y <- snpl.df$lci.dom[!aberrant]
+plot(x, y,
+     xlab = "R",
+     ylab = "SNPGWA",
+     col  = "grey60",
+     cex  = 0.85,
+     main = "Dominant Model Odds Ratio LCI")
+put.cor(x,y)
+abline(0,1)
+
+@ 
+\end{center}
+\newpage{}
+\section{Hardy-Weinberg p-Values}
+Regression p-values are compared as -log10(p).
+\begin{center}
+<<fig=TRUE, echo=FALSE>>=
+
+x <- -log10(hwe.df$p[hwe.df$test=="ALL"])
+y <- -log10(snpl.df$comb.hwe.hw)
+plot(x, y,
+     xlab = "Plink, Test=ALL",
+     ylab = "SNPGWA",
+     col  = "grey65",
+     cex  = 0.85,
+     main = "Combined"
+     )
+
+put.cor(x,y)
+abline(0,1)
+@ 
+<<fig=TRUE, echo=FALSE>>=
+x <- -log10(hwe.df$p[hwe.df$test=="AFF"]) 
+y <- -log10(snpl.df$case.hwe.hw)
+plot(x, y,
+     xlab = "Plink, Test=AFF",
+     ylab = "SNPGWA",
+     col  = "grey65",
+     cex  = 0.85,
+     main = "Case"
+     )
+
+put.cor(x,y)
+abline(0,1)
+@ 
+<<fig=TRUE, echo=FALSE>>=
+
+x <- -log10(hwe.df$p[hwe.df$test=="UNAFF"])
+y <- -log10(snpl.df$ctrl.hwe.hw)
+plot(x, y,
+     xlab = "Plink, Test=UNAFF",
+     ylab = "SNPGWA",
+     col  = "grey65",
+     cex  = 0.85,
+     main = "Control"
+     )
+
+put.cor(x,y)
+abline(0,1)
+@ 
+\end{center}
+
+\newpage{}
+\section{Comparison of $D'$ and $r^2$}
+$D'$ and $r^2$ calculated in R using the snpMatrix package.
+\begin{center}
+<<fig=TRUE, echo=FALSE>>=
+
+x <- -log10(dp.df[,1])
+y <- -log10(snpl.df$d.prime[1:1999])
+plot(x, y,
+     xlab = "R snpMatrix D\'",
+     ylab = "SNPGWA D\'",
+     col  = "grey65",
+     cex  = 0.85,
+     main = "D-Prime"
+     )
+
+put.cor(x,y)
+abline(0,1)
+@ 
+<<fig=TRUE, echo=FALSE>>=
+
+x <- -log10(r2.df[,1])
+y <- -log10(snpl.df$r.sq[1:1999])
+plot(x, y,
+     xlab = expression(paste("R snpMatrix ", r^2)),
+     ylab = expression(paste("SNPGWA ", r^2)),
+     col  = "grey65",
+     cex  = 0.85,
+     main = expression(R^2),
+     )
+
+put.cor(x,y)
+abline(0,1)
+@ 
+\end{center}
+\end{document}

@@ -1,0 +1,143 @@
+% test_dprime.Snw
+%
+% Suite of tests to compare snplash/dprime output to reference data
+% produced by R.
+%
+% This file is written using the literate programming tools of R-Sweave.
+% Code following '<<>>=' is evaluated by the R interpreter, up to the next '@'
+% in the first column.  Code following this is LateX.  The report can be
+% run from the command line with 'R CMD Sweave <this_file_name>' if the
+% necessary files are present.
+%
+% David R. McWillliams <dmcwilli@wfubmc.edu>
+%
+% 17-Aug-2011
+
+\documentclass{article}
+
+\usepackage{amsmath}
+\usepackage{amscd}
+
+\title{SNPLASH-Dprime Tests}
+\author{}
+
+\SweaveOpts{strip.white=TRUE, prefix.string=figures/dprime}
+
+\begin{document}
+\maketitle
+\setkeys{Gin}{width=0.7\textwidth}
+
+<<echo=F>>=
+this.test <- "test_dprime.Snw"
+log.file  <- "run_stat_tests.log"
+
+log.it <- function(msg) {
+  cat(msg, file=log.file, append=TRUE)
+}
+
+files <- c("sim2000.dprime.out.txt",
+           "sim2000.dprime.snpmatrix.txt")
+
+for(f in files) {
+  if( !file_test("-f", f) ) {
+    log.it(paste("Missing input file ", f, ". Aborting ", this.test, "\n", sep=""))
+    return(1)
+   }
+}
+
+wrap.head <- function(x) {
+  for(i in 1:length(x)) {
+    if(nchar(x[i]) == 0) {
+      cat("\n")
+      next
+    }
+    if(length(grep("\\*+", x[i]))>0) {
+      cat("\n")
+      next
+    }
+    writeLines(strwrap(x[i]))
+  }
+ }
+@
+Statistics from SNPLASH with engine Dprime are compared to the corresponding
+values generated in R on the data set 'hisp'.
+
+\section{Input Data}
+\subsection{Dprime Header}
+The output header is here for documentation purposes and is wrapped to fit the page.
+<<echo=F>>=
+lines18 <- readLines(con="sim2000.dprime.out.txt", n=12)
+Header <- lines18[2:12]
+wrap.head(Header)
+@
+\subsection{Files}
+<<echo=F>>=
+files
+@
+<<echo=F>>=
+snpl.dp.df <- read.table("sim2000.dprime.just100.out.txt",
+                         as.is=T, row.names=NULL, header=F)
+names(snpl.dp.df) <- c("m1.name", "m2.name", "d", "dp.multi", "rsq.bi", "delta.bi")
+
+r.dp.df <- read.table("sim2000.dprime.snpmatrix.txt", as.is=T, row.names=NULL, header=T)
+r.dp    <- as.vector(t(as.matrix(r.dp.df[1:1900,])))
+
+r.rsq.df <- read.table("sim2000.rsquare.snpmatrix.txt", as.is=T, row.names=NULL, header=T)
+r.rsq    <- as.vector(t(as.matrix(r.rsq.df[1:1900,])))
+@
+
+\newpage{}
+\section{$D'$}
+The R package snpMatrix calculates $D'$ between a snp and the following 100,
+with data listed by row. When there are less than 100 snps following, it puts
+zero.  Only the complete rows are used here, i.e. 1 through 1900. The
+corresponding rows of 'Mutli-allelic D Prime' in SNPLASH/Dprime are used.
+
+A sample of 20000 of the approximately 200,000 data points are plotted to
+minimize rendering time.  The correlation is over all the data.
+
+\begin{center}
+<<fig=T, echo=F>>=
+
+subset <- sample(1:length(r.dp), 20000)
+x <- r.dp
+y <- snpl.dp.df[,4]
+plot(x[subset], y[subset],
+     xlab = "R",
+     ylab = "DPrime",
+     col  = "grey55",
+     main = "SNPLASH/DPrime D'")
+
+abline(0,1)
+
+plot.lims <- par("usr")
+t.x  <- plot.lims[1] + 0.75*(plot.lims[2] - plot.lims[1])
+t.y  <- plot.lims[3] + 0.20*(plot.lims[4] - plot.lims[3])
+text(t.x, t.y,
+     paste("r = ", round(cor(x,y, use="complete"), 6)))
+@
+\end{center}
+\newpage{}
+\section{$R^2$}
+\noindent{}Qualifications as for $D'$.
+\begin{center}
+<<fig=T, echo=F>>=
+x <- r.rsq
+y <- snpl.dp.df[,5]
+plot(x[subset], y[subset],
+     xlab = "R",
+     ylab = "DPrime",
+     col  = "grey55",
+     main = expression(paste("SNPLASH/DPrime ", r^2)))
+
+abline(0,1)
+
+plot.lims <- par("usr")
+t.x  <- plot.lims[1] + 0.75*(plot.lims[2] - plot.lims[1])
+t.y  <- plot.lims[3] + 0.20*(plot.lims[4] - plot.lims[3])
+text(t.x, t.y,
+     paste("r = ", round(cor(x,y, use="complete"), 6)))
+@
+\end{center}
+
+\end{document}
