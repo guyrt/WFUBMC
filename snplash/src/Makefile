@@ -93,13 +93,13 @@ engine/qsnpgwa/cont_popstats.o : engine/qsnpgwa/cont_popstats.cpp engine/qsnpgwa
 engine/snpgwa/genostats.o : engine/snpgwa/genostats.cpp engine/snpgwa/genostats.hh engine/utils/lr.hh engine/output/snpgwa_out.hh logger/log.hh
 	$(CMP) -o $@ $<
 
-engine/snpgwa/haplostats.o : engine/snpgwa/haplostats.cpp engine/snpgwa/haplostats.hh  engine/output/snpgwa_out.hh engine/utils/zaykin.hh logger/log.hh
+engine/snpgwa/haplostats.o : engine/snpgwa/haplostats.cpp engine/snpgwa/haplostats.hh  engine/output/snpgwa_out.hh engine/utils/zaykin.hh logger/log.hh engine/em/em.o
 	$(CMP) -o $@ $<
 
 engine/snpgwa/popstats.o: engine/snpgwa/popstats.cpp engine/snpgwa/popstats.hh engine/output/snpgwa_out.hh logger/log.hh
 	$(CMP) -o $@ $<
 
-engine/snpgwa/snpgwa.o : engine/snpgwa/snpgwa.cpp engine/snpgwa/snpgwa.h engine/output/snpgwa_out.hh $(ENGINE_INCLUDE) logger/log.hh
+engine/snpgwa/snpgwa.o : engine/snpgwa/snpgwa.cpp engine/snpgwa/snpgwa.h engine/output/snpgwa_out.hh $(ENGINE_INCLUDE) logger/log.hh engine/snpgwa/haplostats.o engine/snpgwa/genostats.o engine/snpgwa/popstats.o
 	$(CMP) -o $@ $<
 
 engine/utils/linear_regression.o : engine/utils/linear_regression.cpp engine/utils/linear_regression.hh engine/utils/exceptions.h
