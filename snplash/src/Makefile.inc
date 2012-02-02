@@ -11,12 +11,16 @@ DPRIME_V = -D'DPRIME_VERSION="4.0.$(SVNDEV_T)"'
 
 
 VERSION_INFO = $(SVNDEV) $(SNPLASH_V) 
+
+# Change to 0 to turn off parallel, which enables easier debugging.
+RUN_IN_PARALLEL = -D'RUN_IN_PARALLEL=1' 
+
 # removed -ipo
-#CMP = icpc -O3 -no-prec-div -static -openmp -c -g -Wall -wd981 -wd383 $(VERSION_INFO)
+#CMP = icpc -O3 -no-prec-div -static -openmp -c -g -Wall -wd981 -wd383 $(VERSION_INFO) $(RUN_IN_PARALLEL)
 #LINK = icpc -O3 -no-prec-div -static -openmp -g -Wall -wd981 -wd383
 #AR = xiar rvs
 
-CMP = g++ -O3 -fopenmp -g -c -Wall -Wunused $(VERSION_INFO)
+CMP = g++ -O3 -fopenmp -g -c -Wall -Wunused $(VERSION_INFO) $(RUN_IN_PARALLEL)
 LINK = g++ -O3 -fopenmp -g -Wall -Wunused
 AR = ar rvs 
 

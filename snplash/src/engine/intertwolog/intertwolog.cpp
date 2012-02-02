@@ -122,7 +122,7 @@ void InterTwoLog::process(){
 	
 	for(int i=0;i < sz; i++){
 		
-		#if RUN_IN_PARALLEL_INTER
+		#if RUN_IN_PARALLEL
 		#pragma omp parallel shared(sz, idx) 
 		{
 			#pragma omp for schedule(static)
@@ -151,7 +151,7 @@ void InterTwoLog::process(){
 				cout << "Running " << i << " " << j << " done." << endl;
 			#endif
 		}
-		#if RUN_IN_PARALLEL_INTER
+		#if RUN_IN_PARALLEL
 		}
 		#endif
 		idx += sz-i-1;

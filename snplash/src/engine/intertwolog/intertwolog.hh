@@ -37,8 +37,6 @@
 
 // Very verbose: primary use is for hangups.
 #define INTERTWOLOG_TESTLOOP  0
-// Turn on to enable parallel. SHOULD be on unless you enter debugging.
-#define RUN_IN_PARALLEL_INTER 1
 // Turn on to get a glimpse of statistics for all elements of model (instead of just intercept)
 #define INTERTWOLOG_TESTSTATS 0
 // Turn on to get a peak at the raw data before it enters the LR engine.

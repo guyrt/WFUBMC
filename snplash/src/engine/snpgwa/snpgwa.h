@@ -46,7 +46,7 @@
 #include "../ld/ld.h"
 
 #define DB_V_SNPGWA 0 // CHANGE TO 1 TO GET A PLAY BY PLAY
-#define RUN_IN_PARALLEL 1 // Change to 0 to turn off parallel, which enables easier debugging.
+
 
 using namespace std;
 
