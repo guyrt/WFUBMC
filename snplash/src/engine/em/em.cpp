@@ -1,11 +1,21 @@
 #include "em.h"
 using namespace std;
 
-EM::EM(): numHaps(0), numSplits(4), setFor(0){}
+EM::EM(): numHaps(0), numSplits(4), setFor(0){
+	
+	hap1Indices = 0;
+	hap2Indices = 0;
+	
+	}
 
 EM::~EM(){
 	for(unsigned int i=0;i < incompleteTable.size();i++)
 		delete incompleteTable.at(i);
+		
+	if (hap1Indices != 0)
+		delete[] hap1Indices;
+	if (hap2Indices != 0)
+		delete[] hap2Indices;
 }
 
 /**
@@ -24,7 +34,6 @@ void EM::setup(const vector<vector<short> > &data){
 	numAlleles.clear();
 	for(unsigned int i=0; i < data.size(); i++)
 		numAlleles.push_back(uniqueElements(data.at(i)));
-//		numAlleles.push_back(2);
 
 	numHaps = 1;
 	for(unsigned int i=0; i < numAlleles.size(); i++)
@@ -42,7 +51,7 @@ void EM::setup(const vector<vector<short> > &data){
 		emFrequencies.push_back(0);
 	}
 
-	numSplits = 1 << data.size();//pow(2, data.size());
+	numSplits = 1 << data.size();
 
 	haplotype *nextHaplotype;
 	for(int ihap = 0; ihap < numHaps; ihap++){
@@ -95,6 +104,10 @@ void EM::setup(const vector<vector<short> > &data){
 		t1.clear();
 		t2.clear();
 	}
+	
+	// Last, initialize the haplotype storage arrays.
+	hap1Indices = new int[numAlleles.size()];
+	hap2Indices = new int[numAlleles.size()];
 }
 
 
@@ -591,13 +604,17 @@ void EM::getRelHaps(int indiv, int split, int &newHapNum1, int &newHapNum2){
 	newHapNum1 = newHapNum2 = 0;
 	int mask, bit;
 	int weight1, weight2;
+	
+	haplotype1.at(indiv).allIndices2Alleles(numAlleles, hap1Indices);
+	haplotype2.at(indiv).allIndices2Alleles(numAlleles, hap2Indices);
+	
 	for (unsigned int imark=0; imark < numAlleles.size(); ++imark){
 		// Grab weights
-		weight1 = haplotype1.at(indiv).index2Allele(imark, numAlleles);
-		weight2 = haplotype2.at(indiv).index2Allele(imark, numAlleles);
-		
+		weight1 = hap1Indices[imark];//haplotype1.at(indiv).index2Allele(imark, numAlleles);
+		weight2 = hap2Indices[imark];//haplotype2.at(indiv).index2Allele(imark, numAlleles);
+
 		// Calculate the correct bit.
-		mask = 1<<(numAlleles.size() - imark - 1);//static_cast<int>(pow(2.0, (static_cast<int>(numAlleles.size()) - imark - 1)));
+		mask = 1<<(numAlleles.size() - imark - 1);
 		bit = (split & mask);
 		if (bit > 0){
 			// equiv of old getRelHap1.
@@ -608,6 +625,7 @@ void EM::getRelHaps(int indiv, int split, int &newHapNum1, int &newHapNum2){
 			newHapNum2 = (numAlleles[imark] + 1)*newHapNum2 + weight1;
 		}
 	}
+
 }
 
 

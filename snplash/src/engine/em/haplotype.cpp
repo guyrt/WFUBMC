@@ -122,7 +122,9 @@ int haplotype::alleles2Index(vector<int> &numAlleles) const
    return hapIndex;
 }
 
-int haplotype::index2Allele(int imark, vector<int> &numAlleles) const
+// This ends up getting called for each value of imark between
+// 0 and numAlleles.size(). We should precompute.
+int haplotype::index2Allele(int imark, const vector<int> &numAlleles) const
 {
    int jmark;
    int product = 1;
@@ -132,6 +134,8 @@ int haplotype::index2Allele(int imark, vector<int> &numAlleles) const
    }
    return static_cast<int>((haplotypeIndex/product) % (numAlleles[imark] + 1));
 }
+
+
 
 void haplotype::fillinDescendents(int numMarkers, int *numAlleles)
 {

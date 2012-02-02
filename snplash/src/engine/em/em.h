@@ -103,6 +103,10 @@ class EM {
 		// Used in the get personal probabilities method.
 		// Declared outside the stack for size reasons.
 		vector<vector<double> > personalProb; 
+		
+		
+		// These are declared here purely for speed reasons.
+		int *hap1Indices, *hap2Indices;
 };
 
 #endif

@@ -30,7 +30,31 @@ class haplotype
 		int alleles2Index(int *numAlleles) const;
 		int alleles2Index(vector<int> &numAlleles) const;
 		int index2Allele(int imark, int numMarkers, int *numAlleles) const;
-		int index2Allele(int imark, vector<int> &numAlleles) const;
+		int index2Allele(int imark, const vector<int> &numAlleles) const;
+		
+
+		/**
+		 * 
+		 * @param numAlleles The vector of alleles for this haplotype.
+		 * @return pointer to alloced object containing the index of that allele.
+		 * 
+		 */
+		inline
+		void * allIndices2Alleles(const vector<int> &numAlleles, int *product) const {
+		    
+		    int jmark;
+		    
+		    int currentProduct = 1;
+		    
+		    for (jmark = static_cast<int>(numAlleles.size()) - 1; jmark > 0;--jmark){
+		        
+		        product[jmark] = (haplotypeIndex / currentProduct) % (numAlleles[jmark] + 1);
+		        currentProduct *= numAlleles[jmark-1]+1;
+		    }
+		    product[jmark] = (haplotypeIndex / currentProduct) % (numAlleles[jmark] + 1);
+		    return product;
+		    
+		}
 		
 		int getNumDescendents() const { return numDescendents; }
 		int getDescendent(int idesc) const { return descendents[idesc]; }
