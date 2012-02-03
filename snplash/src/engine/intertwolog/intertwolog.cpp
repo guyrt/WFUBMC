@@ -19,6 +19,10 @@
 
 #include "intertwolog.hh"
 
+#include "../utils/lr.hh"
+#include "../../logger/log.hh"
+
+
 InterTwoLog::InterTwoLog(){
 	this->param_reader = ParamReader::Instance();
 	this->data = new DataAccess;

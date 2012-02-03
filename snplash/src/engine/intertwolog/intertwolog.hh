@@ -50,9 +50,6 @@
 #include "../../param/engine_param_reader.h"
 #include "../engine.h"
 #include "../output/intertwolog_out.hh"
-#include "../utils/lr.hh"
-
-#include "../../logger/log.hh"
 
 using namespace std;
 
