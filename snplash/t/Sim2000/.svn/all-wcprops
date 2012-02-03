@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/svn_langefeld/!svn/ver/317/slash/trunk/t/Sim2000
+END
+runTests.pl
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/svn_langefeld/!svn/ver/234/slash/trunk/t/Sim2000/runTests.pl
+END
+sim2000.geno
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/svn_langefeld/!svn/ver/234/slash/trunk/t/Sim2000/sim2000.geno
+END
+sim2000.map
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/svn_langefeld/!svn/ver/234/slash/trunk/t/Sim2000/sim2000.map
+END
+run_intertwolog.sh
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/svn_langefeld/!svn/ver/317/slash/trunk/t/Sim2000/run_intertwolog.sh
+END
+sim2000.covphen
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/svn_langefeld/!svn/ver/234/slash/trunk/t/Sim2000/sim2000.covphen
+END
