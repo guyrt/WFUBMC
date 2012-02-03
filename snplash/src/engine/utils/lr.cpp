@@ -671,6 +671,7 @@ vector<double> LogisticRegression::newtonRaphson(const vector<vector<double> > &
 		
 		double stop = 0.0;
 		// Could be computed as a 1-norm.
+		// This should be done as a sum of abs diff.
 		for(int i=0;i < numSamples;i++){
 			stop += abs(expY(i) - oldExpY(i));
 		}
