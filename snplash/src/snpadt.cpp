@@ -20,15 +20,16 @@
  */
 // IDEA: add an include file that incorporates all of these.
 #include "reader/linkage_reader.h"
-#include "engine/adtree/adtree.h"
-#include "engine/bagging/bagging.h"
-#include "engine/crossval/cross_val.h"
+#include "engine/machineLearning/adtree.h"
+#include "engine/machineLearning/bagging.h"
+#include "engine/machineLearning/cross_val.h"
 #include "engine/utils/statistics.h"
 #include "engine/qsnpgwa/qsnpgwa.hh"
 #include "engine/snpgwa/snpgwa.h"
 #include "engine/dandelion/dandelion.hh"
 #include "engine/intertwolog/intertwolog.hh"
 #include "engine/ld/ld.h"
+#include "snplashConfig.h"
 #include <iostream>
 #include <string>
 #include <typeinfo>

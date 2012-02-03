@@ -18,6 +18,12 @@
 //      MA 02110-1301, USA.
 
 #include "linear_regression.hh"
+#include "../utils/exceptions.h"
+#include "../utils/statistics.h"
+#include "../utils/float_ops.hh"
+#include "../linalg/linalg.h" // used for condition number.
+#include "../linalg/alglibinternal.h"
+#include "../linalg/blas.h"
 
 LinearRegression::LinearRegression(){
 }

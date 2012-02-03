@@ -20,6 +20,8 @@
 
 #include "intertwolog_out.hh"
 
+#include "../../snplashConfig.h"
+
 InterTwoLogOutput::InterTwoLogOutput(){
 }
 

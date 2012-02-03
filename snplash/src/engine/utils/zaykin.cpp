@@ -19,6 +19,10 @@
 
 #include "zaykin.hh"
 
+#include "../linalg/linalg.h" // used for condition number.
+#include "../linalg/alglibinternal.h"
+#include "../linalg/blas.h"
+
 Zaykin::Zaykin(EngineParamReader *p){
 	params = p;
 	keepThresh = 20;

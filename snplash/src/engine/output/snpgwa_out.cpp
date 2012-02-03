@@ -19,6 +19,7 @@
 
 
 #include "snpgwa_out.hh"
+#include "../../snplashConfig.h"
 
 SnpgwaOutput::SnpgwaOutput(){
 	writeGenoFiles = writeHWEFiles = writeHaploFiles = false;

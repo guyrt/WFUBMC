@@ -30,12 +30,7 @@
 #define LINEAR_REGRESSION_H
 
 #include "../engine.h"
-#include "../utils/exceptions.h"
-#include "../utils/statistics.h"
-#include "../utils/float_ops.hh"
-#include "../libs/linalg.h" // used for condition number.
-#include "../libs/alglibinternal.h"
-#include "../libs/blas.h"
+
 
 using namespace std;
 

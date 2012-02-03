@@ -1,5 +1,5 @@
 #include "dprime_out.h"
-
+#include "../../snplashConfig.h"
 
 LinkageOutput::LinkageOutput(){
 	outputType = 0;
