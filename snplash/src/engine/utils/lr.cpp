@@ -19,6 +19,10 @@
 
 #include "lr.hh"
 
+#include "../linalg/linalg.h" // used for condition number.
+#include "../linalg/alglibinternal.h"
+#include "../linalg/blas.h"
+
 LogisticRegression::LogisticRegression(){
 	 condition_number_limit = 1e-12;
 }

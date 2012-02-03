@@ -32,10 +32,6 @@
 #include "../utils/float_ops.hh"
 #include "vecops.hh"
 
-#include "../libs/linalg.h" // used for condition number.
-#include "../libs/alglibinternal.h"
-#include "../libs/blas.h"
-
 #include <math.h>
 
 
