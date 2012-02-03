@@ -1,1 +1,0 @@
-die on no map (done) - snpgwa, qsnpgwa do adjust per snp, triallelic compl dont die, do . different than 0, add missing denotation flag, warn if not numeric or ATCGBatcgb
