@@ -1,5 +1,7 @@
 #include "genostats.hh"
-
+#include "../linalg/linalg.h" // used for condition number.
+#include "../linalg/alglibinternal.h"
+#include "../linalg/blas.h"
 /**
  * Assign the data access.
  * 

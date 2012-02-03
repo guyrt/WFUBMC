@@ -297,8 +297,8 @@ void Snpgwa::initToZero(PopStatsResults &p, HaploStatsResults &r, GenoStatsResul
 	p.expcmbdQQ = 0;
 
 	p.cmbdTestStat  = -1;
-    	p.caseTestStat = -1;
-    	p.cntrlTestStat = -1;
+   	p.caseTestStat = -1;
+   	p.cntrlTestStat = -1;
 
 	p.cmbdPVal = 2;
 	p.casePVal = 2;
