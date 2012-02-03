@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 2.6)
 
 project(SNPLASH)
 
-set(CMAKE_CXX_FLAGS "-O3 -fopenmp -g -c -Wall -Wunused")
+set(CMAKE_CXX_FLAGS "-O3 -fopenmp -g -Wall -Wunused")
 
 # The version number.
 set (SNPLASH_VERSION_MAJOR 1)
