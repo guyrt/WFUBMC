@@ -1,0 +1,3 @@
+// the configured options and settings for Tutorial
+#define SNPLASH_VERSION_MAJOR @SNPLASH_VERSION_MAJOR@
+#define SNPLASH_VERSION_MINOR @SNPLASH_VERSION_MINOR@
