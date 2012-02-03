@@ -29,7 +29,7 @@
  */
 
 #include "../combinable.h"
-#include "../adtree/adtree.h"
+#include "adtree.h"
 #include "../../param/engine_param_reader.h"
 #include "../../param/param_reader.h"
 #include <fstream>

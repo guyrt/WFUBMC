@@ -22,8 +22,8 @@
 #define CROSSVAL_H
 
 #include "../engine.h"
-#include "../adtree/adtree.h"
-#include "../bagging/bagging.h"
+#include "adtree.h"
+#include "bagging.h"
 //#include <omp.h> // So we can have OpenMP threads.
 #include "../../param/param_reader.h"
 #include <fstream>
