@@ -27,10 +27,6 @@
 #include "output.h"
 #include "../../param/param_reader.h"
 #include "../../param/engine_param_reader.h"
-#include <sstream> // Used to create and manage the string.
-#include "../utils/stringutils.h"
-
-#include "../../logger/log.hh"
 
 using namespace std;
 struct InterTwoLogMeasures{

@@ -20,6 +20,12 @@
 
 #include "intertwolog_out.hh"
 
+#include <sstream> // Used to create and manage the string.
+#include "../utils/stringutils.h"
+
+#include "../../logger/log.hh"
+
+
 InterTwoLogOutput::InterTwoLogOutput(){
 }
 

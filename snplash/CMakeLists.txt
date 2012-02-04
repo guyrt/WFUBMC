@@ -1,8 +1,10 @@
-cmake_minimum_required(VERSION 2.0)
+cmake_minimum_required(VERSION 2.6)
 
 project(SNPLASH)
 
-set(CMAKE_CXX_FLAGS "-O3 -fopenmp -g -c -Wall -Wunused $(VERSION_INFO) $(RUN_IN_PARALLEL)")
+set(VERSION_INFO "-DVERSION_INFO=1.2")
+
+set(CMAKE_CXX_FLAGS "-O3 -fopenmp -g -c -Wall -Wunused $(VERSION_INFO) ")
 
 # The version number.
 set (SNPLASH_VERSION_MAJOR 1)
