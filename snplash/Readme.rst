@@ -1,4 +1,4 @@
-Build instruction:
+Build instruction for most systems:
 
 ::
 
@@ -7,6 +7,11 @@ Build instruction:
   > cmake ..
   > make
 
-The executable is currently in the /src/ dir.
+If you plan to use the Intel compiler, which is sometimes a bit faster than g++, then type
 
+::
+
+  > sh buildForIntelCompiler.sh
+  > cd build
+  > make
 
