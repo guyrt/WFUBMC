@@ -25,7 +25,8 @@ END
 die $usage
   unless scalar @ARGV > 0 ;
 
-my $snplash = "../src/snplash" ;
+my $snplash = "../snplash" ;
+# my $snplash = "/home/drm/proj/snplash/WFUBMC/snplash" ;
 
 my $sim2000_geno    = "./Sim2000/sim2000.geno" ;
 my $sim2000_pheno   = "./Sim2000/sim2000.covphen" ;
