@@ -68,7 +68,7 @@ void BinaryBedReader::getBedFile(SnpData *data, ParamReader *params){
 		// byte includes a row end. Check for all zeros for sanity.
 		if (personCntr == data->numIndividuals()){
 			
-			if ((c & 0b11111100) != 0){
+			if ((c & 0xFC) != 0){
 				cerr << "Error in row " << rowCntr << " col 1 end of row expected but not found." << endl << "Aborting." << endl;
 				exit(0);
 			}
@@ -81,7 +81,7 @@ void BinaryBedReader::getBedFile(SnpData *data, ParamReader *params){
 		data->get_column(personCntr++)->push_back(binToCode(t));
 		if (personCntr == data->numIndividuals()){
 			
-			if ((c & 0b11110000) != 0){
+			if ((c & 0xf0) != 0){
 				cerr << "Error in row " << rowCntr << " col 2 end of row expected but not found." << endl << "Aborting." << endl;
 				exit(0);
 			}
@@ -94,7 +94,7 @@ void BinaryBedReader::getBedFile(SnpData *data, ParamReader *params){
 		t = (c & 0x30) >> 4;
 		data->get_column(personCntr++)->push_back(binToCode(t));
 		if (personCntr == data->numIndividuals()){
-			if ((c & 0b11000000) != 0){
+			if ((c & 0xCF) != 0){
 				cerr << "Error in row " << rowCntr << " col 3 end of row expected but not found." << endl << "Aborting." << endl;
 				exit(0);
 			}
