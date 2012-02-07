@@ -6,7 +6,7 @@
 % This file is written using the literate programming tools of R-Sweave.
 % Code following '<<>>=' is evaluated by the R interpreter, up to the next '@'
 % in the first column.  Code following this is LateX.  The report can be
-% run from the command line with 'R CMD Sweaver <this_file_name>' if the
+% run from the command line with 'R CMD Sweave <this_file_name>' if the
 % necessary files are present.
 %
 % David R. McWillliams <dmcwilli@wfubmc.edu>
