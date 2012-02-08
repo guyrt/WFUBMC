@@ -117,7 +117,8 @@ int SnpData::remove_indiv_with_snp_value(int d){
 void SnpData::prep_data(ParamReader * params){
 
 	remove_missing_geno();
-	normalize();
+	if (params->get_input_type() == ParamReader::LINKAGE)
+		normalize();
 
 }
 

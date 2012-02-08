@@ -167,6 +167,7 @@ void LinkageReader::getGenotype(SnpData *data, ParamReader *params){
 			s1 = *(line.at(i).c_str());
 			s2 = *(line.at(i+1).c_str());
 
+			// Check for a specified set of characters. Warn on others.
 			if(highVerbosity){
 				if(!warned && !((s1 >= '0' && s1 <= '9' ) || s1 == 'A'|| s1 == 'C'|| s1 == 'T'|| s1 == 'G'|| s1 == 'a'|| s1 == 'c'|| s1 == 'g'|| s1 == 't'|| s1 == 'B'|| s1 == 'b'|| s1 == '.')){
 					warned = true;

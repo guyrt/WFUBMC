@@ -11,8 +11,6 @@
 
 using namespace std;
 
-#define DBG_PROGRESS 0
-
 class BinaryBedReader : public Reader {
 
 public:

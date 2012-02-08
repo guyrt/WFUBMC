@@ -1,5 +1,8 @@
 #include "binary_bed_reader.h"
+#include <stdio.h>
+#include <stdlib.h>
 
+#define DBG_PROGRESS 0
 
 BinaryBedReader::BinaryBedReader(){
 	
@@ -17,7 +20,38 @@ BinaryBedReader::~BinaryBedReader(){}
 void BinaryBedReader::process(SnpData *data, ParamReader *params){
 		
 	this->getPhenotype(data, params);
+	
+	// Create a vector per person.
+	long l = data->numIndividuals();
+	for(long i=0;i<l;i++){
+		vector<short> vec;
+		data->snp_data.push_back(vec);
+	}
+	
+#if DBG_PROGRESS
+	cout << "Binary reader has " << l << " individuals." << endl;
+#endif
+	
+	this->getBedFile(data, params);
+	// don't need to verify this forever but for now, yes.
+	// Take out if we implement map based readin.
+	data->verify_data_size_match();
 
+
+	if( 0 != ( params->get_linkage_map_file().compare("none"))){
+		// If we have a map file, process it.
+		this->getMapFile(data, params);
+	}else{
+		// Build a dummy map file.
+		for(unsigned long i=0; i < data->snp_data.at(0).size(); i++){
+			stringstream ss;
+			ss << i+params->get_begin();
+			data->push_map("0",ss.str(),0);
+		}
+	}
+
+	data->verify_map_length();
+	data->cleanIndividualNames();
 }
 
 /** getGenotype()
@@ -28,17 +62,14 @@ void BinaryBedReader::getBedFile(SnpData *data, ParamReader *params){
 	char file_buffer[4];
 
 	FILE *in;
-	unsigned long fileLen;
 	
 	// Open file (rb for read binary)
-	in = fopen(params->get_linkage_geno_file().c_str(), "rb");
-	if(in == NULL){printf("Error opening file\n.");}
+	in = fopen(params->get_binary_geno_file().c_str(), "rb");
+	if(in == NULL){
+		cerr << "Error opening file " << params->get_linkage_geno_file() << endl;
+		exit(0);
+	}
 
-	//Get file length
-	fseek(in, 0, SEEK_END);
-	fileLen=ftell(in);
-	fseek(in, 0, SEEK_SET);	
-	
 	// Check the 3-byte header.
 	int numBytes = fread(file_buffer, sizeof(char), 3, in);
 	if (numBytes < 3){
@@ -53,6 +84,10 @@ void BinaryBedReader::getBedFile(SnpData *data, ParamReader *params){
 		cerr << "File is not SNP-major format" << params->get_linkage_geno_file() << endl;
 		exit(0);
 	}
+
+#if DBG_PROGRESS
+	cout << "Binary reader ready to start." << endl;
+#endif
 
 	// Read SNP 1 for all people, SNP2 for all people, etc (SNP-major mode)
 	int personCntr = 0;
@@ -109,10 +144,15 @@ void BinaryBedReader::getBedFile(SnpData *data, ParamReader *params){
 		if (personCntr == data->numIndividuals()){
 			personCntr = 0;
 			rowCntr++;
+#if DBG_PROGRESS
+	cout << "SNP done." << endl;
+#endif
 			continue;
+
 		}
 		
 		personCntr %= data->numIndividuals();
+
 	}
 	
 
