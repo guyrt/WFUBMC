@@ -79,6 +79,7 @@ class ParamReader {
 
 		/// Keep all parameters private and use getter/setters
 		string get_linkage_geno_file() {return linkage_geno_file;}
+		string get_binary_geno_file() {return binary_geno_file;}
 		
 		string get_linkage_pheno_file() {return linkage_pheno_file;}
 		
@@ -137,6 +138,7 @@ class ParamReader {
 		vector<string> engine_specific_params; // Hold any parameters that start with '--'
 
 		/// Input file types
+		string binary_geno_file;
 		string linkage_geno_file;
 		string linkage_pheno_file;
 		string linkage_map_file;   // init to "none"

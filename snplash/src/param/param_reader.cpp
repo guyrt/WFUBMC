@@ -33,6 +33,7 @@ ParamReader* ParamReader::Instance()
 
 ParamReader::ParamReader(){
 
+	binary_geno_file = "none";
 	linkage_map_file = "none";
 	linkage_geno_file = "none";
 	linkage_pheno_file = "none";
@@ -81,6 +82,8 @@ bool ParamReader::process_parameters(int argc, char * argv[]){
 
 		if(token.find("--") == 0 ){
 			resolve_engine_params(argc, i, token, argv);
+		}else if(token.compare("-bed") == 0){
+			bad_start = bad_start || resolve_single_string(argc, i, this->binary_geno_file, token, argv);
 		}else if(token.compare("-geno") == 0){
 			bad_start = bad_start || resolve_single_string(argc, i, this->linkage_geno_file, token, argv);
 		}else if(token.compare("-pheno") == 0 || token.compare("-phen") == 0){
@@ -172,10 +175,9 @@ bool ParamReader::process_parameters(int argc, char * argv[]){
 
 /**
  * Resolves input type according to Enum InputTypes
- *
- * Decision made based on the defined input types.
- *
- * linkage_foo_files imply LINKAGE
+
+ * binary_geno_file implies BINARY
+ * linkage_geno_file implies LINKAGE
  * arff_file implies ARFF.
  *
  * Return: bool true if we found a problem.
@@ -187,16 +189,21 @@ bool ParamReader::resolve_input_type(){
 
 	int num_hits = 0; // should be one at end.
 
+	if (binary_geno_file.compare("none") != 0){
+		this->file_type = BINARY;
+		num_hits++;
+		cout << "Reading linkage file." << endl;
+	}
 	if(arff_file.compare("none") != 0 ){
 		this->file_type = ARFF;
 		num_hits++;
 		cout << "Arff file: " << arff_file.length() << endl;
 	}
-	if(linkage_geno_file.compare("none") != 0 || linkage_pheno_file.compare("none") != 0 ||
-		linkage_map_file.compare("none") != 0)
+	if(linkage_geno_file.compare("none") != 0)
 	{
 		this->file_type = LINKAGE;
 		num_hits++;
+		cout << "Reading linkage file." << endl;
 	}
 
 	if(num_hits > 1){
@@ -283,9 +290,18 @@ void ParamReader::print_usage(){
 	stringstream ss;
 	ss << "Snplash! by Richard T. Guy, Joshua D. Grab, Matt L. Stiegert, and Carl D. Langefeld." << endl;
 	ss << "Command line usage:" << endl;
+	ss << endl;
+	ss << "For text input documents:" << endl;
 	ss << "    -geno <geno file>      Input file for genetic data." << endl;
 	ss << "    -phen <phenotype file> The phenotype input file." << endl;
-	ss << "    -map <map file>        (Optional) Contains information about the SNPs." << endl;
+	ss << "    -map <map file>        Contains information about the SNPs." << endl;
+	ss << endl;
+	ss << "For binary input documents:" << endl;
+	ss << "    -bed <geno file>      Input file for genetic data in Plink format v0.991 or later." << endl;
+	ss << "    -phen <phenotype file> The phenotype input file." << endl;
+	ss << "    -map <map file>        Contains information about the SNPs." << endl;
+	ss << endl;
+	ss << endl;
 	ss << "    -out <output file>     The primary output file.  Some engines may create several files by appending extra information." << endl;
 	ss << endl;
 	ss << "    -trait <string>    An element of the header in the phenotype file.  Optional, with the default being the second column in the phenotype file." << endl;
