@@ -78,6 +78,7 @@ class SnpData {
 		// Input function(s)
 		// Used to insert an element into the map array.
 		void push_map(string, string, long, char ref = (char) 0);
+		void push_map(string, string, long, char ref, char min);
 		void setIndividualName(unsigned int i, string name);
 		void cleanIndividualNames(); // Clean this up.
 		

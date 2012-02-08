@@ -271,7 +271,9 @@ void BinaryBedReader::getPhenotype(SnpData *data, ParamReader *params){
  *
  * Retrieve and process all information from the map file.
  *
- * Expects five columns:
+ * Expects four columns plus two optional:
+ * chr     snp             zero    pos     <a1>      <a2>
+ * 1       SNP_A-8575125   0       554484  <T>       <C>
  *
  */
 void BinaryBedReader::getMapFile(SnpData *data, ParamReader *params){
@@ -290,14 +292,24 @@ void BinaryBedReader::getMapFile(SnpData *data, ParamReader *params){
 		// Pull line apart and put it in data.
 		if(line.size() < 4){
 			cerr << "Map line " << l << " has poor format.  Use format " << endl;
-			cerr << "chr name 0 pos <opt ref>" << endl << "example: 22 rs1000 0 32432 [A]" << endl;
+			cerr << "chr name 0 pos <opt ref> <opt minor>" << endl << "example: 22 rs1000 0 32432 [A] [T]" << endl;
 			exit(0);
 		}
 		if( params->in_window(l)){
 			if(line.size() == 4){
 				data->push_map(line.at(0), line.at(1), atol(line.at(3).c_str()));
-			}else{
+				data->character_list.push_back(' ');
+				data->character_list.push_back(' ');
+			}else if (line.size() == 5){
 				data->push_map(line.at(0), line.at(1), atol(line.at(3).c_str()), line.at(4).at(0));
+				// push min then maj allele onto character list.
+				data->character_list.push_back(' ');
+				data->character_list.push_back(line.at(4).at(0));
+			}else if (line.size() > 5){
+				data->push_map(line.at(0), line.at(1), atol(line.at(3).c_str()), line.at(4).at(0));
+				// push min then maj allele onto character list.
+				data->character_list.push_back(line.at(5).at(0));
+				data->character_list.push_back(line.at(4).at(0));
 			}
 		}
 		l++;

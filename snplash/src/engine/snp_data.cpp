@@ -312,6 +312,17 @@ void SnpData::push_map(string c, string n, long p, char ref){
 
 	if(n.length() > maxMapLength) maxMapLength = n.length();
 }
+void SnpData::push_map(string c, string n, long p, char ref, char minor){
+	MapData m;
+	m.chr = c;
+	m.name = n;
+	m.pos = p;
+	m.refAllele = ref;
+	m.flipped = false;
+	map.push_back(m);
+
+	if(n.length() > maxMapLength) maxMapLength = n.length();
+}
 
 /**
  * Some of the vector elements are going to be empty.  Fill them in.
