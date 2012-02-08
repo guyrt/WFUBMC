@@ -70,11 +70,7 @@ void Snpgwa::init(){
 	}
 
 
-	if(param_reader->get_input_type() == ParamReader::LINKAGE){
-		reader = new LinkageReader;
-	}else{
-		cerr << "Other types don't work yet." << endl;
-	}
+	initializeReader(); // defined in engine.h
 
 	Logger::Instance()->init(param_reader->get_out_file() + ".log");
 

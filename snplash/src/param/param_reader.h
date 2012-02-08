@@ -69,7 +69,7 @@ class ParamReader {
 
 
 		// For now, only LINKAGE is used.  Will add more.
-		enum InputTypes { ARFF , LINKAGE };
+		enum InputTypes { ARFF , LINKAGE, BINARY };
 		enum EngineTypes { UNASSIGNED , BAGGING , ADTREE , SNPGWA , FORMAT, CROSSVAL , DPRIME, QSNPGWA, DANDELION, INTERTWOLOG};
 
 		/// Skip related function

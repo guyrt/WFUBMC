@@ -71,12 +71,7 @@ void Bagging::init(){
 
 	bag_param->read_parameters(param_reader->get_engine_specific_params());
 
-	if(param_reader->get_input_type() == ParamReader::LINKAGE){
-		reader = new LinkageReader;
-	}else{
-		cerr << "Other types don't work yet." << endl;
-		return;
-	}
+	initializeReader(); // defined in engine.h
 	
 	this->outstream.open(this->param_reader->get_out_file().c_str() );
 	if(!this->outstream.is_open()){

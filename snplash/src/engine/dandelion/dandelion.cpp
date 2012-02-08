@@ -53,14 +53,7 @@ void Dandelion::init(){
 	
 	ld_param->read_parameters(param_reader->get_engine_specific_params());
 
-	
-
-
-	if(param_reader->get_input_type() == ParamReader::LINKAGE){
-		reader = new LinkageReader;
-	}else{
-		cerr << "Other types don't work yet." << endl;
-	}
+	initializeReader(); // defined in engine.h
 
 	if(param_reader->get_linkage_map_file().compare("none") == 0){
 		cerr << "Dandelion requires that you enter a map file.  Aborting." << endl;

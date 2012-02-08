@@ -66,11 +66,7 @@ void ADTree::init(){
 	
 	ad_param->read_parameters(param_reader->get_engine_specific_params());
 
-	if(param_reader->get_input_type() == ParamReader::LINKAGE){
-		reader = new LinkageReader;
-	}else{
-		cerr << "Other types don't work yet." << endl;
-	}
+	initializeReader(); // defined in engine.h
 
 	reader->process(data->getDataObject(), param_reader);
 	

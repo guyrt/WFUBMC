@@ -47,11 +47,7 @@ void LinkageDisequilibrium::init(){
 		cerr << "All pairs will be computed, but the overhead will be slightly higher." << endl;
 	}
 
-	if(param_reader->get_input_type() == ParamReader::LINKAGE){
-		reader = new LinkageReader;
-	}else{
-		cerr << "Other types don't work yet." << endl;
-	}
+	initializeReader(); // defined in engine.h
 
 	reader->process(data->getDataObject(), param_reader);
 

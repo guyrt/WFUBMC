@@ -10,6 +10,7 @@
 #include "../param/engine_param_reader.h"
 #include "../reader/reader.h"
 #include "../reader/linkage_reader.h"
+#include "../reader/binary_bed_reader.h"
 #include "data_plugin.h"
 #include <math.h>
 
@@ -29,7 +30,17 @@ public:
 protected:
 	Reader *reader;
 	ParamReader *param_reader; // Hold a pointer to the singleton parameter reader.
-	DataAccess *data;	
+	DataAccess *data;
+	
+	void initializeReader(){
+		if(param_reader->get_input_type() == ParamReader::LINKAGE){
+			reader = new LinkageReader;
+		}else if (param_reader->get_input_type() == ParamReader::BINARY){
+			reader = new BinaryBedReader;
+		}else{
+			cerr << "Other types don't work yet." << endl;
+		}
+	}
 	
 };
 
