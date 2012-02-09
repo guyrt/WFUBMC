@@ -97,12 +97,12 @@ void BinaryBedReader::getBedFile(SnpData *data, ParamReader *params){
 	int personCntr = 0;
 	short t; // hold the new bits.
 	char c;
-	long rowCntr=0;
+	long rowCntr=1;
 	while (fread(file_buffer, sizeof(char), 1, in) > 0){
 	
 		c = file_buffer[0];
 		t = c & 0x3;
-		if (rowCntr >= minSnp-1 && rowCntr < maxSnp)
+		if (params->in_window(rowCntr))
 			data->get_column(personCntr++)->push_back(binToCode(t));
 		// These lines ensure that the rest of the byte is discarded if the
 		// byte includes a row end. Check for all zeros for sanity.
@@ -118,7 +118,7 @@ void BinaryBedReader::getBedFile(SnpData *data, ParamReader *params){
 		}
 		
 		t = (c & 0xc) >> 2;
-		if (rowCntr >= minSnp-1 && rowCntr < maxSnp)
+		if (params->in_window(rowCntr))
 			data->get_column(personCntr++)->push_back(binToCode(t));
 		if (personCntr == data->numIndividuals()){
 			
@@ -133,7 +133,7 @@ void BinaryBedReader::getBedFile(SnpData *data, ParamReader *params){
 		
 		
 		t = (c & 0x30) >> 4;
-		if (rowCntr >= minSnp-1 && rowCntr < maxSnp)
+		if (params->in_window(rowCntr))
 			data->get_column(personCntr++)->push_back(binToCode(t));
 		if (personCntr == data->numIndividuals()){
 			if ((c & 0xCF) != 0){
@@ -147,7 +147,7 @@ void BinaryBedReader::getBedFile(SnpData *data, ParamReader *params){
 		
 		
 		t = (c & 0xc0) >> 6;
-		if (rowCntr >= minSnp-1 && rowCntr < maxSnp)
+		if (params->in_window(rowCntr))
 			data->get_column(personCntr++)->push_back(binToCode(t));
 		if (personCntr == data->numIndividuals()){
 			personCntr = 0;
@@ -155,16 +155,7 @@ void BinaryBedReader::getBedFile(SnpData *data, ParamReader *params){
 			continue;
 
 		}
-		
-		if (personCntr >= data->numIndividuals()){
-			personCntr %= data->numIndividuals();
-			rowCntr++;
-		}
-
-
 	}
-	
-
 
 }
 

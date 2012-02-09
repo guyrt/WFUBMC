@@ -279,6 +279,15 @@ bool ParamReader::check_necessary(){
 bool ParamReader::check_conflicting(){
 	bool ret_type = false;
 
+	if (this->file_type == BINARY){
+		if (skip_cols.size() > 0){
+			cerr << "Warning: binary file type (-bed) option does not support the ";
+			cerr << "-skipcols option. You can use the -beg and -end flags to process ";
+			cerr << "a contiguous region of SNPs in a larger file." << endl;
+		}
+	}
+
+
 	return ret_type;
 }
 
