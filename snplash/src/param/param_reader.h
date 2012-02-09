@@ -160,7 +160,7 @@ class ParamReader {
 
 		/// Data localization parameters
 		int begin, end;  // Start and end of the data we want to use.  (1 based)
-		int window;		 // Defines window of SNPs to use. (1 based)  (How to use?)
+		int window;		 // UNUSED.
 		vector<int> skip_cols; // vector of skipped columns.  (1 based)
 
 		/// Data localization helper fxns

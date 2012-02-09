@@ -63,6 +63,10 @@ void BinaryBedReader::getBedFile(SnpData *data, ParamReader *params){
 
 	FILE *in;
 	
+	long minSnp = params->get_begin();
+	long maxSnp = params->get_end();
+	
+	
 	// Open file (rb for read binary)
 	in = fopen(params->get_binary_geno_file().c_str(), "rb");
 	if(in == NULL){
@@ -93,12 +97,13 @@ void BinaryBedReader::getBedFile(SnpData *data, ParamReader *params){
 	int personCntr = 0;
 	short t; // hold the new bits.
 	char c;
-	int rowCntr=0;
+	long rowCntr=0;
 	while (fread(file_buffer, sizeof(char), 1, in) > 0){
 	
 		c = file_buffer[0];
 		t = c & 0x3;
-		data->get_column(personCntr++)->push_back(binToCode(t));
+		if (rowCntr >= minSnp-1 && rowCntr < maxSnp)
+			data->get_column(personCntr++)->push_back(binToCode(t));
 		// These lines ensure that the rest of the byte is discarded if the
 		// byte includes a row end. Check for all zeros for sanity.
 		if (personCntr == data->numIndividuals()){
@@ -113,7 +118,8 @@ void BinaryBedReader::getBedFile(SnpData *data, ParamReader *params){
 		}
 		
 		t = (c & 0xc) >> 2;
-		data->get_column(personCntr++)->push_back(binToCode(t));
+		if (rowCntr >= minSnp-1 && rowCntr < maxSnp)
+			data->get_column(personCntr++)->push_back(binToCode(t));
 		if (personCntr == data->numIndividuals()){
 			
 			if ((c & 0xf0) != 0){
@@ -127,7 +133,8 @@ void BinaryBedReader::getBedFile(SnpData *data, ParamReader *params){
 		
 		
 		t = (c & 0x30) >> 4;
-		data->get_column(personCntr++)->push_back(binToCode(t));
+		if (rowCntr >= minSnp-1 && rowCntr < maxSnp)
+			data->get_column(personCntr++)->push_back(binToCode(t));
 		if (personCntr == data->numIndividuals()){
 			if ((c & 0xCF) != 0){
 				cerr << "Error in row " << rowCntr << " col 3 end of row expected but not found." << endl << "Aborting." << endl;
@@ -140,18 +147,20 @@ void BinaryBedReader::getBedFile(SnpData *data, ParamReader *params){
 		
 		
 		t = (c & 0xc0) >> 6;
-		data->get_column(personCntr++)->push_back(binToCode(t));
+		if (rowCntr >= minSnp-1 && rowCntr < maxSnp)
+			data->get_column(personCntr++)->push_back(binToCode(t));
 		if (personCntr == data->numIndividuals()){
 			personCntr = 0;
 			rowCntr++;
-#if DBG_PROGRESS
-	cout << "SNP done." << endl;
-#endif
 			continue;
 
 		}
 		
-		personCntr %= data->numIndividuals();
+		if (personCntr >= data->numIndividuals()){
+			personCntr %= data->numIndividuals();
+			rowCntr++;
+		}
+
 
 	}
 	
