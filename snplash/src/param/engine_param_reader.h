@@ -63,9 +63,9 @@ class EngineParamReader {
 		int get_haplo_thresh() const {return haplo_thresh;}
 		
 		bool get_dandelion_pprob() const {return dandelion_pprob;}
-		const int get_dandelion_window() const {return dandelion_window;}
+		int get_dandelion_window() const {return dandelion_window;}
 		
-		const double getRegressionConditionNumberThreshold() const {return regression_condition_threshold;}
+		double getRegressionConditionNumberThreshold() const {return regression_condition_threshold;}
 		
 	protected :
 
