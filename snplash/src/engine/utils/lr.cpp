@@ -23,6 +23,8 @@
 #include "../linalg/alglibinternal.h"
 #include "../linalg/blas.h"
 
+#include "../../logger/log.hh"
+
 LogisticRegression::LogisticRegression(){
 	 condition_number_limit = 1e-12;
 }
@@ -103,6 +105,9 @@ LRStats LogisticRegression::getSingleStats(const vector<double> &betas, const ve
 		ret.UCI = -1;
 		ret.LCI = -1;
 	}else if(ret.OR >= 10000.0){
+		stringstream ss;
+		ss << "Large odds ratio detected and rewritten: OR was " << ret.OR << "." << endl;
+		Logger::Instance()->writeLine(ss.str());
 		ret.OR = 9999.0;
 		ret.UCI = 9999.0;
 		ret.LCI = 9999.0;
