@@ -292,6 +292,27 @@ LRStats GenoStats::runSingleLRTest(const vector<vector<double> > &in, const vect
 		try{
 			betas = lr.newtonRaphson(in, phen, inv_infmatrix, startVal);
 			l = lr.getSingleStats(betas, inv_infmatrix, betas.size()-1);
+			
+			if(l.OR != l.OR){
+				stringstream ss;
+				ss << "Odds ratio was NaN";
+				retry = 4;
+				handleException(l, startVal, retry, ss.str(), errorData);
+				l.OR = -1;
+				l.UCI = -1;
+				l.LCI = -1;
+			}else if(l.OR >= 10000.0){
+				stringstream ss;
+				ss << "Large odds ratio detected and rewritten: OR was " << l.OR << ".";
+				retry = 4;
+				handleException(l, startVal, retry, ss.str(), errorData);
+				
+				l.OR = 9999.0;
+				l.UCI = 9999.0;
+				l.LCI = 9999.0;
+			}
+    
+			
 			break;
 		}catch(NewtonRaphsonFailureEx){
 			handleException(l, startVal, retry, "newton-raphson setup failure.", errorData);

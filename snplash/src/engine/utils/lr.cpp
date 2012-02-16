@@ -100,19 +100,6 @@ LRStats LogisticRegression::getSingleStats(const vector<double> &betas, const ve
     ret.LCI = exp(beta - 1.96*sqrt(invInf));
     ret.UCI = exp(beta + 1.96*sqrt(invInf));
     
-    if(ret.OR != ret.OR){
-        ret.OR = -1;
-        ret.UCI = -1;
-        ret.LCI = -1;
-    }else if(ret.OR >= 10000.0){
-        stringstream ss;
-        ss << "Large odds ratio detected and rewritten: OR was " << ret.OR << "." << endl;
-        Logger::Instance()->writeLine(ss.str());
-        ret.OR = 9999.0;
-        ret.UCI = 9999.0;
-        ret.LCI = 9999.0;
-    }
-    
     double z;
     z = beta/sqrt(invInf);
     if(!equal(z , z )){
