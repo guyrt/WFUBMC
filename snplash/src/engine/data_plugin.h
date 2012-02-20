@@ -1,7 +1,7 @@
 /*
  *      data_plugin.h
  *      
- *      Copyright 2010 Richard T. Guy <guyrt@guyrt-lappy>
+ *      Copyright 2010-2012 Richard T. Guy <richardtguy84@gmail.com>
  *      
  *      This program is free software; you can redistribute it and/or modify
  *      it under the terms of the GNU General Public License as published by
@@ -37,7 +37,9 @@ class DataAccess {
 	public:
 	
 		DataAccess();
-		void init(SnpData *);
+	
+        /* Initialize the access to a data object. */	
+        void init(SnpData *);
 		~DataAccess();
 		
 		/* Set up the process. */
