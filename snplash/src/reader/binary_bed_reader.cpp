@@ -63,8 +63,8 @@ void BinaryBedReader::getBedFile(SnpData *data, ParamReader *params){
 
 	FILE *in;
 	
-	long minSnp = params->get_begin();
-	long maxSnp = params->get_end();
+	//long minSnp = params->get_begin();
+	//long maxSnp = params->get_end();
 	
 	
 	// Open file (rb for read binary)

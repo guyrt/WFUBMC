@@ -51,7 +51,7 @@ TEST_F(LR_Engine_Test, test_newton_raphson) {
   
 	vector<vector<double> > invInfMatrix = vecops::getDblVec(inMat.size(), inMat.size());
 	vector<double> betas = lr.newtonRaphson(inMat, phenotype, invInfMatrix);
-	ASSERT_DOUBLE_EQ(betas[0], 0.367508472 );
+	ASSERT_DOUBLE_EQ(betas[0], 0.36750847348763349);
 }
 
 
