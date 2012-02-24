@@ -2,7 +2,12 @@
 
 /**
  * Correctly format left justified string with lead and trailing spaces.
- * 
+ * The output will be at least the size of string s plus buffer. This method currently
+ * fails silently if numspaces is too small. 
+ *
+ * @params numspaces: Total number of spaces. This will appear as right padding. Current
+ *                    implementation actually specifies that numspaces includes the space for s
+ * @params buffer:    Amount to buffer the string on the left. 
  */
 std::string strnutils::spaced_string(std::string s, int numspaces, int buffer){
 	#if DB_V_STRNUTILS
@@ -126,8 +131,9 @@ std::string strnutils::spaced_number(double number, int numspaces, int precision
 }
 
 
-// Return the integer logarithm, so the log rounded down.  
+// Return the integer logarithm of the absolute value, so the log rounded down.  
 // Possible to use a very cheap algorithm.
+// This is for spacing, so we've set log(0) == 0 and log(n) = log(-n).
 int strnutils::int_log(int i){
 	if(i < 0) i *= -1;
 	int r = 10;
@@ -143,7 +149,7 @@ int strnutils::int_log(double i){
 	if(i < 0) i *= -1;
 	double r = 10;
 	int c = 0;
-	while(i > r){
+	while(i >= r){
 		r *= 10;
 		c++;
 	}
