@@ -37,9 +37,22 @@ namespace strnutils{
 std::string spaced_string(std::string s, int numspaces, int buffer=0);
 std::string spaced_number(int number, int numspaces, int buffer=0);
 std::string spaced_number(double number, int numspaces, int precision, int buffer=0);
-int int_log(int i);
-int int_log(double i);
 int small_log(double i);
+
+// Return the integer logarithm of the absolute value, so the log rounded down.
+// Possible to use a very cheap algorithm.
+// This is for spacing, so we've set log(0) == 0 and log(n) = log(-n).
+template<class T>
+int int_log(T i){
+        if(i < 0) i *= -1;
+        int r = 10;
+        int c = 0;
+        while(i >= r){
+                r *= 10;
+                c++;
+        }
+        return c;
+}
 
 /** test the strnutils methods. **/
 void test();

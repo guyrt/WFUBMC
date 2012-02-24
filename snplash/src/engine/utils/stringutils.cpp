@@ -130,31 +130,6 @@ std::string strnutils::spaced_number(double number, int numspaces, int precision
 	return ss.str();
 }
 
-
-// Return the integer logarithm of the absolute value, so the log rounded down.  
-// Possible to use a very cheap algorithm.
-// This is for spacing, so we've set log(0) == 0 and log(n) = log(-n).
-int strnutils::int_log(int i){
-	if(i < 0) i *= -1;
-	int r = 10;
-	int c = 0;
-	while(i >= r){
-		r *= 10;
-		c++;
-	}
-	return c;
-}
-int strnutils::int_log(double i){
-	
-	if(i < 0) i *= -1;
-	double r = 10;
-	int c = 0;
-	while(i >= r){
-		r *= 10;
-		c++;
-	}
-	return c;
-}
 /* Return number of digits in exponent. */
 int strnutils::small_log(double i){
 	
@@ -168,8 +143,10 @@ int strnutils::small_log(double i){
 		return 1;
 	}else if(i >= 10e-100){
 		return 2;
+	}else if (i >= 10e-1000){
+		return 3;
 	}
-	return 3;
+	return 4;
 }
 
 /**
