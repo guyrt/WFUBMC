@@ -25,13 +25,15 @@ configure_file (
 add_subdirectory (src) 
 
 # This is the directory that holds the doxygen doxyfile template (doxy.conf.in)
-SET( DOC_INPUT_DIR ${CYCLUS_SRC_DIR}/doc)
+SET( DOC_INPUT_DIR ${PROJECT_SOURCE_DIR}/docs)
 
 # If doxygen exists, use the doc/CMakeLists.txt file for further instructions. 
 FIND_PACKAGE(Doxygen)
 IF (DOXYGEN_FOUND)
 	ADD_SUBDIRECTORY(docs)
-	SET( DOC_OUTPUT_DIR ${CMAKE_BINARY_DIR}/../docs )
+	SET( DOC_OUTPUT_DIR ${PROJECT_SOURCE_DIR}/docs )
+	MESSAGE(STATUS "Doxy out: ${DOC_OUTPUT_DIR}")
+	MESSAGE(STATUS "Doxy in: ${DOC_INPUT_DIR}")
 ELSE (DOXYGEN_FOUND)
 	MESSAGE(STATUS "WARNING: Doxygen not found - doc won't be created")
 ENDIF (DOXYGEN_FOUND)
