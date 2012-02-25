@@ -2,6 +2,8 @@ cmake_minimum_required(VERSION 2.8)
 
 project(SNPLASH)
 
+SET(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR})
+
 set(CMAKE_CXX_FLAGS "-O3 -fopenmp -g -Wall -Wunused")
 
 # Edit for the Intel compiler

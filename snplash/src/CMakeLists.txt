@@ -90,16 +90,16 @@ if (CMAKE_USE_PTHREADS_INIT)
 endif()
 
 INCLUDE_DIRECTORIES(Testing/Googletest) # necessary?
-add_executable(Testing/snplashUnitTestDriver
+add_executable(snplashUnitTestDriver
   Testing/snplashUnitTestDriver.cpp ${TestSource}
   ${GENERATED_TEST_SOURCE}
 )
 
-target_link_libraries ( Testing/snplashUnitTestDriver dl ${SNPLASH_LIBRARIES} 
+target_link_libraries ( snplashUnitTestDriver dl ${SNPLASH_LIBRARIES} 
   ${INTERFACE_LIBRARIES} dl ${LIBS} gtest)
 
 # Here we add all the tests
-add_google_tests ( ${EXECUTABLE_OUTPUT_PATH}/Testing/snplashUnitTestDriver ${TestSource} 
+add_google_tests ( ${EXECUTABLE_OUTPUT_PATH}/snplashUnitTestDriver ${TestSource} 
   ${INTERFACE_LIBRARIES})
 
 
