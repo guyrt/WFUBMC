@@ -5,9 +5,9 @@
  * The output will be at least the size of string s plus buffer. This method currently
  * fails silently if numspaces is too small. 
  *
- * @params numspaces: Total number of spaces. This will appear as right padding. Current
+ * @param numspaces Total number of spaces. This will appear as right padding. Current
  *                    implementation actually specifies that numspaces includes the space for s
- * @params buffer:    Amount to buffer the string on the left. 
+ * @param buffer    Amount to buffer the string on the left. 
  */
 std::string strnutils::spaced_string(std::string s, int numspaces, int buffer){
 	#if DB_V_STRNUTILS

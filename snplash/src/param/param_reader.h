@@ -42,16 +42,16 @@ using namespace std;
  *
  * Available parameters:
  * Linkage file format (mutually exclusive with arff format.)
- * 	-geno <file>
- * 	-phen <file>
- * 	-map <file>
+ * 	-geno \<file\>
+ * 	-phen \<file\>
+ * 	-map \<file\>
  * Arff format
  * 	-arff <file>
  * Engine specification:
  * 	-engine <adtree | bagging>
  *
  * Windowing parameters:
- * 	-beg <int> -end <int> paired
+ * 	-beg \<int\> -end \<int\> paired
  *  -win <int> alone.  (two are exclusive)
  *
  * 	-skip <cols>
@@ -68,7 +68,7 @@ class ParamReader {
 										// records rest in engine_specific_params.
 
 
-		// For now, only LINKAGE is used.  Will add more.
+		// For now, only LINKAGE and BINARY work.  Will add more.
 		enum InputTypes { ARFF , LINKAGE, BINARY };
 		enum EngineTypes { UNASSIGNED , BAGGING , ADTREE , SNPGWA , FORMAT, CROSSVAL , DPRIME, QSNPGWA, DANDELION, INTERTWOLOG};
 

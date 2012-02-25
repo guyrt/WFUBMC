@@ -17,7 +17,7 @@
 //      Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
 //      MA 02110-1301, USA.
 
-/*
+/**
  * String utilities designed to return a string object using different formatting
  * patterns. 
  */
@@ -32,6 +32,14 @@
 #include <math.h>
 #include <iostream>
 
+/**
+ * @brief String formatting utilities.
+ *
+ * This contains several string related operations that are used to perform output-related 
+ * string formatting. The primary reason for these functions is to quickly calculate spacing.
+ * 
+ * @author Richard T. Guy
+ */
 namespace strnutils{
 
 std::string spaced_string(std::string s, int numspaces, int buffer=0);
