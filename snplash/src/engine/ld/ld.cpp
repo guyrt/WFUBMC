@@ -22,14 +22,18 @@ LinkageDisequilibrium::LinkageDisequilibrium(DataAccess *data){
 }
 
 LinkageDisequilibrium::~LinkageDisequilibrium(){
-	if(!haveOwner) delete_my_innards();
+	if(!haveOwner){ 
+		delete_my_innards();
+	}
 }
 
 void LinkageDisequilibrium::delete_my_innards(){
 	
-	this->param_reader = NULL;
+	this->param_reader = NULL;	
 	delete this->data;
 	data = NULL;
+	
+	
 	delete this->ld_param;
 	ld_param = NULL;
 }
@@ -204,12 +208,14 @@ void LinkageDisequilibrium::process(){
 }
 
 /**
- * Enslave this LD engine. For an LD engine, enslavement means that the output
- * file name has to change and the format becomes 2.
- * 
+ * Enslave this LD engine. For now, nothing changes.
  */
 void LinkageDisequilibrium::enslave(EngineParamReader *e){
+	if (!haveOwner){
+		delete this->ld_param;
+	}
 	haveOwner = true;
+	this->ld_param = e;
 }
 
 void LinkageDisequilibrium::test(){
