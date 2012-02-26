@@ -399,7 +399,8 @@ vector<EMPersonalProbsResults> EM::getPersonalProbabilities(){
 			}
 		}
 	}
-
+	delete[] newhap;
+	delete[] partnerhap;
 	return ret;
 }
 
