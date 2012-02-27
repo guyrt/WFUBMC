@@ -33,6 +33,7 @@ QSnpgwa::~QSnpgwa(){
 }
 
 void QSnpgwa::delete_my_innards(){
+	delete this->param_reader;
 	this->param_reader = NULL;
 	delete this->data;
 	data = NULL;

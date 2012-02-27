@@ -32,7 +32,7 @@ Snpgwa::~Snpgwa(){
 
 void Snpgwa::delete_my_innards(){
 	
-	
+	delete this->param_reader;
 	delete this->data;
 	data = NULL;
 	delete this->snp_param;
