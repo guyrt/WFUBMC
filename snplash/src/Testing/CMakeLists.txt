@@ -25,13 +25,17 @@ macro(ADD_GOOGLE_TESTS executable)
     foreach(hit ${AllTests})
       string(REGEX REPLACE ".*\\(( *[A-Za-z_0-9]+)[, ]*([A-Za-z_0-9]+) *\\).*" "\\1.\\2" test_name ${hit})
       set ( AllTestsHits ${AllTestsHits} ${test_name} )
-    endforeach()
-  endforeach()
+    endforeach(hit)
+  endforeach(source)
 
-  list ( SORT AllTestsHits )
+  MESSAGE("--tests: |${AllTestsHits}|")
+  if(AllTestsHits STREQUAL "") 
+    list ( SORT AllTestsHits)
+  endif(AllTestsHits STREQUAL "")
+
   # Add all the remaining tests to CTest's test list
   foreach(hit ${AllTestsHits})
     add_test(${hit} ${executable} --gtest_filter=${hit})
-  endforeach()
-endmacro()
+  endforeach(hit)
+endmacro(ADD_GOOGLE_TESTS)
 

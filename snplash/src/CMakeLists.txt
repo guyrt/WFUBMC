@@ -62,7 +62,7 @@ option ( USE_TESTING "Build testing" ON )
 if ( USE_TESTING )
   enable_testing()
   include(CTest)
-endif()
+endif(USE_TESTING)
 
 ADD_SUBDIRECTORY(Testing)
 SET(TestSource 
@@ -76,7 +76,7 @@ SET(TestSource
 find_package(Threads)
 if (CMAKE_USE_PTHREADS_INIT)  # The pthreads library is available.
   set(cxx_base_flags "${cxx_base_flags} -DGTEST_HAS_PTHREAD=1")
-endif()
+endif(CMAKE_USE_PTHREADS_INIT)
 
 # Build Google Testing
 set ( GTest
@@ -87,7 +87,7 @@ include_directories ( Testing ) # necessary?
 add_library(gtest ${GTest})
 if (CMAKE_USE_PTHREADS_INIT)
   target_link_libraries(gtest ${CMAKE_THREAD_LIBS_INIT})
-endif()
+endif(CMAKE_USE_PTHREADS_INIT)
 
 INCLUDE_DIRECTORIES(Testing/Googletest) # necessary?
 add_executable(snplashUnitTestDriver
@@ -99,8 +99,7 @@ target_link_libraries ( snplashUnitTestDriver dl ${SNPLASH_LIBRARIES}
   ${INTERFACE_LIBRARIES} dl ${LIBS} gtest)
 
 # Here we add all the tests
-add_google_tests ( ${EXECUTABLE_OUTPUT_PATH}/snplashUnitTestDriver ${TestSource} 
-  ${INTERFACE_LIBRARIES})
+ADD_GOOGLE_TESTS ( ${EXECUTABLE_OUTPUT_PATH}/snplashUnitTestDriver ${TestSource} ${INTERFACE_LIBRARIES} )
 
 
 
