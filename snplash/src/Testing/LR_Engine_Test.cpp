@@ -3,6 +3,8 @@
 #include "../engine/utils/lr.hh"
 #include "../engine/utils/vecops.hh"
 
+#define NEAR_THRESH 1e-7
+
 class LR_Engine_Test : public ::testing::Test {
 
 	protected:
@@ -81,9 +83,12 @@ TEST_F(LR_Engine_Test, test_newton_raphson) {
   
 	vector<vector<double> > invInfMatrix = vecops::getDblVec(inMat.size(), inMat.size());
 	vector<double> betas = lr.newtonRaphson(inMat, phenotype, invInfMatrix);
-	ASSERT_DOUBLE_EQ(betas[0], 0.36750847348763349);
-	ASSERT_DOUBLE_EQ(betas[1], 1.4467808518431764);
-	ASSERT_DOUBLE_EQ(betas[2], -1.5618476151485159);
+	double relErr = (0.36750847348763349-betas[0])/0.36750847348763349;
+	ASSERT_NEAR(relErr,0.0,NEAR_THRESH);
+	relErr = (1.4467808518431764-betas[1])/1.4467808518431764;
+	ASSERT_NEAR(relErr,0.0,NEAR_THRESH);
+	relErr = (-1.5618476151485159-betas[2])/-1.5618476151485159;
+	ASSERT_NEAR(relErr,0.0,NEAR_THRESH);
 }
 
 TEST_F(LR_Separable_Test, test_separable) {
