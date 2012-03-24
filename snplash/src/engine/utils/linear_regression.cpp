@@ -19,11 +19,11 @@
 
 #include "linear_regression.hh"
 #include "../utils/exceptions.h"
-#include "../utils/statistics.h"
 #include "../utils/float_ops.hh"
 #include "../linalg/linalg.h" // used for condition number.
 #include "../linalg/alglibinternal.h"
 #include "../linalg/blas.h"
+#include "../linalg/specialfunctions.h"
 
 LinearRegression::LinearRegression(){
 }
@@ -185,7 +185,7 @@ double LinearRegression::anova(const vector<double> &response, const vector<doub
 	
 	stat = ( (division.size() - 3) / 2 ) * bss / wss;
 	try{
-		retval = Statistics::fdist(stat, 2, response.size() - 3);
+		retval = alglib::fdistribution(2, response.size() - 3, stat);
 	}catch(...){
 		retval = 2.0;
 	}

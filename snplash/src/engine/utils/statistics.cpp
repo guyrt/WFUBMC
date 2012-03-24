@@ -1,34 +1,6 @@
 #include "statistics.h"
 
 /**
- * Compute f-statistic for a given input. 
- * 
- * @author Matt Steiger
- * 
- * @param x The test statistic
- * @param mval Degrees of freedom explained
- * @param nval Degrees of freedom unexplained.
- * @return double The probability under the F(mval,nval) of observing x or less extreme.
- */
-double Statistics::fdist(double x, int mval, int nval)
-{
-   double pvalue;
-
-   if(x <= 0.0){
-      pvalue = 0.0;
-   }
-   else{
-      double arg1, arg2, arg3;
-      arg1 = 0.5 * static_cast<double>(nval);
-      arg2 = 0.5 * static_cast<double>(mval);
-      arg3 = static_cast<double>(nval)/(static_cast<double>(nval) + static_cast<double>(mval) * x);
-	  pvalue = beta_inc(arg1, arg2, arg3);
-   }
-   
-   return(pvalue);
-}
-
-/**
  * Compute p-value for the T distribution
  * 
  * @param t - the T statistic

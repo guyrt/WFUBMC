@@ -56,7 +56,6 @@ class Statistics {
 		static double chi2prob(double chi2val, double df); // Calculate degrees of freedom.
 		static double normalPValue(double value);
 		static double tdist(double t, int df);
-		static double fdist(double x, int mval, int nval);
 		
 		/// Helpers for chi2prob
 		static double gammq(double, double);
