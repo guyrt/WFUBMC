@@ -1,8 +1,9 @@
-t/*pdf
-t/*div
-t/*log
-t/*aux
-t/*tex
-t/figures/*
+*/t/*pdf
+*/t/*div
+*/t/*log
+*/t/*aux
+*/t/*tex
+*/t/figures/*
 build/*
 */QsnpgwaTest/*
+
