@@ -89,24 +89,13 @@ void QSnpgwa::process(){
 	
 	// This is the primary loop.
 	for(int i=0;i < sz;i++){
-		
-		#if DB_V_QSNP
-			cout << i << " starting" << endl;
-		#endif
-		
+
 		SnpInfo s;
 		ContPopStatsResults p;
 		ContGenoStatsResults g;
 		s.index = i+param_reader->get_begin();
 
-		#if DB_V_QSNP
-			cout << i << " start setup" << endl;
-		#endif
 		data->get_map_info(i, s.chr, s.name, s.position);
-		#if DB_V_QSNP
-			cout << i << " end setup" << endl;
-		#endif
-		
 		
 		data->get_allele_codes(i, s.majAllele, s.minAllele, s.refAllele);
 		if(s.majAllele == ' '){
@@ -144,27 +133,11 @@ void QSnpgwa::process(){
 	
 			LinkageDisequilibrium ld(data);
 			ld.enslave(snp_param); // VERY IMPORTANT.  We have to do this or the ld engine will think
-									// that it owns the data and might will erase it.
+								   // that it owns the data and might erase it.
 									
 			LinkageMeasures lr;
-			
-			#if DB_V_QSNP
-			cout << i << " start pop_calc" << endl;
-			#endif
-			
 			pop_calc.prepPopStatsForOutput(i,p);
-			
-			#if DB_V_QSNP
-			cout << i << " end pop_calc" << endl;
-			cout << i << " start gen_calc" << endl;
-			#endif
 			gen_calc.prepGenoStatsForOutput(i,g);
-			
-			#if DB_V_QSNP
-			cout << i << " end gen_calc" << endl;
-			cout << i << " start ld calc" << endl;
-			#endif		
-	
 			if(i + 1 < data->geno_size()){
 				ld.dprimeOnPair(i, i+1, lr);
 				g.rsquare = lr.rsquare;
@@ -173,20 +146,10 @@ void QSnpgwa::process(){
 				g.rsquare = g.dprime = -1.0;
 			}
 			
-			#if DB_V_QSNP
-			cout << i << " end ld calc" << endl;
-			#endif
-	
 		}else{
 			initToZero(p, g);
 		}
-		#if DB_V_QSNP
-			cout << i << " write start" << endl;
-		#endif
 		out.writeLine(i, s,p,g);
-		#if DB_V_QSNP
-			cout << i << " write end" << endl;
-		#endif
 	}
 	out.close();
 }

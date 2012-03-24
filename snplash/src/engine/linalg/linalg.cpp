@@ -16,7 +16,7 @@ A copy of the GNU General Public License is available at
 http://www.fsf.org/licensing/licenses
 >>> END OF LICENSE >>>
 *************************************************************************/
-
+#include "stdafx.h"
 #include "linalg.h"
 
 // disable some irrelevant warnings
@@ -24563,17 +24563,15 @@ static void rcond_cmatrixestimatenorm(ae_int_t n,
 {
     ae_int_t itmax;
     ae_int_t i;
-    // RTG updated these values with a starting value. This removes some compiler
-    // warnings under g++.
-    ae_int_t iter = 0;
-    ae_int_t j = 0;
-    ae_int_t jlast = 0;
+    ae_int_t iter;
+    ae_int_t j;
+    ae_int_t jlast;
     ae_int_t jump;
-    double absxi = 0.0;
-    double altsgn = 0.0;
-    double estold = 0.0;
-    double safmin = 0.0;
-    double temp = 0.0;
+    double absxi;
+    double altsgn;
+    double estold;
+    double safmin;
+    double temp;
 
 
     

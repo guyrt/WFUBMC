@@ -18,6 +18,7 @@
 //      MA 02110-1301, USA.
 
 #include "cont_genostats.hh"
+#include "../linalg/specialfunctions.h"
 
 ContGenoStats::ContGenoStats(DataAccess *d){
 	data = d;
@@ -350,7 +351,8 @@ ContGenoStats::statisticsOutput ContGenoStats::computeSingleStats(const vector<v
 		cout << "deg freedom:  " << 1 << " " << response.size() - 2 << endl;
 		#endif
 		
-		ret.pVal = Statistics::fdist(f, 1, response.size() - 2);
+		ret.pVal = alglib::fdistribution(1, response.size() - 2, f);
+		//ret.pVal = Statistics::fdist(f, 1, response.size() - 2);
 	}catch(ConditionNumberEx){
 		stringstream ss;
 		ss << "Error on snp " << currentSNP << " " << failMessage << " condition number exception in single stats." << endl;
