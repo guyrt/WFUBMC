@@ -185,7 +185,7 @@ double LinearRegression::anova(const vector<double> &response, const vector<doub
 	
 	stat = ( (division.size() - 3) / 2 ) * bss / wss;
 	try{
-		retval = alglib::fdistribution(2, response.size() - 3, stat);
+		retval = 1.0 - alglib::fdistribution(2, response.size() - 3, stat);
 	}catch(...){
 		retval = 2.0;
 	}

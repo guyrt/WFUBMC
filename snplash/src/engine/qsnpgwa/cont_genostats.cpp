@@ -351,7 +351,7 @@ ContGenoStats::statisticsOutput ContGenoStats::computeSingleStats(const vector<v
 		cout << "deg freedom:  " << 1 << " " << response.size() - 2 << endl;
 		#endif
 		
-		ret.pVal = alglib::fdistribution(1, response.size() - 2, f);
+		ret.pVal = 1.0 - alglib::fdistribution(1, response.size() - 2, f);
 		//ret.pVal = Statistics::fdist(f, 1, response.size() - 2);
 	}catch(ConditionNumberEx){
 		stringstream ss;
