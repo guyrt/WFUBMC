@@ -227,6 +227,12 @@ void ContGenoStats::computeLinRegStats(int snp, ContGenoStatsResults &results){
 	results.add_pval = stats.pVal;
 	results.add_beta = stats.beta;
 	results.add_se 	 = stats.se;
+	results.add_sse = stats.sse;
+	results.add_ssr = stats.ssr;
+	results.add_fStat = stats.fStat;
+	results.add_n1 = stats.n1;
+	results.add_n2 = stats.n2;
+
 	
 	#if CONT_GENOSTATS_STATS
 		cout << "Beta: " << setprecision(9) << stats.beta << endl;
@@ -238,13 +244,23 @@ void ContGenoStats::computeLinRegStats(int snp, ContGenoStatsResults &results){
 	results.dom_pval = stats.pVal;
 	results.dom_beta = stats.beta;
 	results.dom_se 	 = stats.se;
-	
+	results.dom_sse = stats.sse;
+	results.dom_ssr = stats.ssr;
+	results.dom_fStat = stats.fStat;
+	results.dom_n1 = stats.n1;
+	results.dom_n2 = stats.n2;
+
 	
 	stats = computeSingleStats(rec_in, residuals, meanResidual, "Recessive test", snp+1);
 	results.rec_pval = stats.pVal;
 	results.rec_beta = stats.beta;
 	results.rec_se 	 = stats.se;
-	
+	results.rec_sse = stats.sse;
+	results.rec_ssr = stats.ssr;
+	results.rec_fStat = stats.fStat;
+	results.rec_n1 = stats.n1;
+	results.rec_n2 = stats.n2;
+
 	// Compute the two degree of freedom test.
 	double means[4];
 	means[0] = results.meanAA; means[1] = results.meanAa; means[2] = results.meanaa;
@@ -253,7 +269,13 @@ void ContGenoStats::computeLinRegStats(int snp, ContGenoStatsResults &results){
 		results.twodegfree_pval = 2.0;
 	}else{
 		LinearRegression lr;
-		results.twodegfree_pval = lr.anova(residuals, add, means);
+		LinRegStats stats = lr.anova(residuals, add, means);
+		results.twodegfree_pval = stats.pvalue;
+		results.twodegfree_fStat = stats.f_stat;
+		results.twodegfree_n1 = stats.n1;
+		results.twodegfree_n2 = stats.n2;
+		results.twodegfree_sse = stats.sse;
+		results.twodegfree_ssr = stats.ssr;
 	}
 	
 }
@@ -302,8 +324,13 @@ void ContGenoStats::computeLackOfFit(int snp, ContGenoStatsResults &results){
 
 	statisticsOutput stats = computeSingleStats(in, residuals, meanResidual, "Lack of fit test", snp+1);
 	results.lof_pval = stats.pVal;
-	
-	
+	results.lof_fStat = stats.fStat;
+	results.lof_sse = stats.sse;
+	results.lof_ssr = stats.ssr;
+	results.lof_beta = stats.beta;
+	results.lof_se = stats.se;
+	results.lof_n1 = stats.n1;
+	results.lof_n2 = stats.n2;
 }
 
 /**
@@ -352,7 +379,11 @@ ContGenoStats::statisticsOutput ContGenoStats::computeSingleStats(const vector<v
 		#endif
 		
 		ret.pVal = 1.0 - alglib::fdistribution(1, response.size() - 2, f);
-		//ret.pVal = Statistics::fdist(f, 1, response.size() - 2);
+		ret.fStat = f;
+		ret.n1 = 1;
+		ret.n2 = response.size() - 2;
+		ret.sse = sse;
+		ret.ssr = ssr;
 	}catch(ConditionNumberEx){
 		stringstream ss;
 		ss << "Error on snp " << currentSNP << " " << failMessage << " condition number exception in single stats." << endl;
@@ -361,6 +392,12 @@ ContGenoStats::statisticsOutput ContGenoStats::computeSingleStats(const vector<v
 		ret.pVal = 2.000;
 		ret.se = -1;
 		ret.beta = -1;
+		
+		ret.fStat = -1.0;
+		ret.n1 = -1;
+		ret.n2 = -1;
+		ret.sse = -1.0;
+		ret.ssr = -1.0;
 	}catch(LinearRegressionException){
 		stringstream ss;
 		ss << "Error on snp " << currentSNP << " " << failMessage << " singular matrix exception in single stats." << endl;
@@ -369,6 +406,12 @@ ContGenoStats::statisticsOutput ContGenoStats::computeSingleStats(const vector<v
 		ret.pVal = 2.000;
 		ret.se = -1;
 		ret.beta = -1;
+
+		ret.fStat = -1;
+		ret.n1 = -1;
+		ret.n2 = -1;
+		ret.sse = -1;
+		ret.ssr = -1;
 	}catch(...){
 		stringstream ss;
 		ss << "Error on snp " << currentSNP << " " << failMessage << " unknown exception in single stats." << endl;
@@ -376,6 +419,12 @@ ContGenoStats::statisticsOutput ContGenoStats::computeSingleStats(const vector<v
 		ret.pVal = 2.000;
 		ret.se = -1;
 		ret.beta = -1;
+
+		ret.fStat = -1;
+		ret.n1 = -1;
+		ret.n2 = -1;
+		ret.sse = -1;
+		ret.ssr = -1;
 	}
 
 	return ret;
@@ -395,16 +444,34 @@ void ContGenoStats::blankLinRegStats(ContGenoStatsResults &results){
 	results.add_pval = 2;
 	results.add_beta = -1;
 	results.add_se = -1;
+	results.add_sse = -1;
+	results.add_ssr = -1;
+	results.add_n1 = -1;
+	results.add_n2 = -1;
 	
 	results.dom_pval = 2;
 	results.dom_beta = -1;
 	results.dom_se = -1;
+	results.dom_sse = -1;
+	results.dom_ssr = -1;
+	results.dom_n1 = -1;
+	results.dom_n2 = -1;
 	
 	results.rec_pval = 2;
 	results.rec_beta = -1;
 	results.rec_se = -1;
+	results.rec_sse = -1;
+	results.rec_ssr = -1;
+	results.rec_n1 = -1;
+	results.rec_n2 = -1;
 	
 	results.lof_pval = 2.0;
+	results.lof_beta = -1;
+	results.lof_se = -1;
+	results.lof_sse = -1;
+	results.lof_ssr = -1;
+	results.lof_n1 = -1;
+	results.lof_n2 = -1;
 	
 }
 

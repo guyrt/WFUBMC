@@ -35,7 +35,12 @@
 using namespace std;
 
 struct LinRegStats{
-		int i;
+	double pvalue;
+	double f_stat;
+	double ssr;
+	double sse;
+	int n1;
+	int n2;
 };
 
 class LinearRegression{
@@ -59,7 +64,7 @@ class LinearRegression{
 			/*
 			 * Perform an anova on response variable.
 			 */
-			double anova(const vector<double> &response, const vector<double> &division, double means[4]);
+			LinRegStats anova(const vector<double> &response, const vector<double> &division, double means[4]);
 			
 			void test();
 		

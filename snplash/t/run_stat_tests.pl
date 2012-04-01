@@ -358,6 +358,7 @@ sub run_qsnpgwa {
                  "-phen",   $hisp_pheno,
                  "-map",    $hisp_map,
                  "-trait",  "response",
+                 "--val", " ",
                  "-out",    $outfile) ;
 
   system($cmd) ;

@@ -158,12 +158,13 @@ vector<double> LinearRegression::residuals(const vector<vector<double> > &data, 
  * @param division Vector of SNP variables.  Expects -1,0,1 coding.
  * @param means[3] holds mean(-1), mean(0), mean(1), mean(tot) where mean is of response variable.
  */
-double LinearRegression::anova(const vector<double> &response, const vector<double> &division, double means[4]){
+LinRegStats LinearRegression::anova(const vector<double> &response, const vector<double> &division, double means[4]){
+	
+	LinRegStats returnStats;
 	
 	double partialAA = 0, partialAa = 0, partialaa = 0;
-	double wss = 0, bss = 0;
+	double sse = 0, ssr = 0;
 	double stat;
-	double retval = 0;
 	int AA = 0, Aa = 0, aa = 0;
 	
 	for(unsigned int i=0;i<response.size();i++){
@@ -180,16 +181,26 @@ double LinearRegression::anova(const vector<double> &response, const vector<doub
 		}
 	}
 	
-	bss = static_cast<double>(AA) * pow( means[0] - means[3] , 2) + Aa * pow(means[1]-means[3],2) + aa * pow(means[2]-means[3],2);
-	wss = partialAA + partialAa + partialaa;
+	ssr = static_cast<double>(AA) * pow( means[0] - means[3] , 2) + Aa * pow(means[1]-means[3],2) + aa * pow(means[2]-means[3],2);
+	sse = partialAA + partialAa + partialaa;
 	
-	stat = ( (division.size() - 3) / 2 ) * bss / wss;
+	stat = ( (division.size() - 3) / 2 ) * ssr / sse;
 	try{
-		retval = 1.0 - alglib::fdistribution(2, response.size() - 3, stat);
+		returnStats.pvalue = 1.0 - alglib::fdistribution(2, response.size() - 3, stat);
+		returnStats.f_stat = stat;
+		returnStats.n1 = 2;
+		returnStats.n2 = response.size() - 3;
+		returnStats.ssr = ssr;
+		returnStats.sse = sse;
 	}catch(...){
-		retval = 2.0;
+		returnStats.pvalue = 2.0;
+		returnStats.f_stat = -1;
+		returnStats.n1 = -1;
+		returnStats.n2 = -1;
+		returnStats.ssr = -1.0;
+		returnStats.sse = -1.0;
 	}
-	return retval;
+	return returnStats;
 }
 
 void LinearRegression::test(){

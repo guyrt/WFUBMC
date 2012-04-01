@@ -21,21 +21,21 @@
 #include "../../snplashConfig.h"
 
 QSnpgwaOutput::QSnpgwaOutput(){
-	writeGenoFiles = writeHWEFiles = writeRefFile = false;
-	writeMainFileMap = false;
-	writeMainFileHap = true;
+    writeGenoFiles = writeHWEFiles = writeRefFile = false;
+    writeMainFileMap = false;
+    writeMainFileHap = true;
 }
 
 QSnpgwaOutput::~QSnpgwaOutput(){
 }
 
 void QSnpgwaOutput::close(){
-	outMain.close();
-	outGeno1.close();
-	outGeno2.close();
-	outGeno3.close();
-	outHWE.close();
-	outRefAllele.close();
+    outMain.close();
+    outGeno1.close();
+    outGeno2.close();
+    outGeno3.close();
+    outHWE.close();
+    outRefAllele.close();
 }
 
 /*
@@ -46,242 +46,342 @@ void QSnpgwaOutput::close(){
  */
 bool QSnpgwaOutput::init(ParamReader *param, EngineParamReader *eparams, int maxMapSize, string message){
 
-	mapSize = maxMapSize;
-	if(mapSize < 6) mapSize = 6;
+    mapSize = maxMapSize;
+    if(mapSize < 6) mapSize = 6;
 
-	if(param->get_linkage_map_file().compare("none") != 0) writeMainFileMap = true;
-	
-	writeHWEFiles = eparams->get_output_haplo();
-	writeGenoFiles = eparams->get_output_geno();
+    if(param->get_linkage_map_file().compare("none") != 0) writeMainFileMap = true;
+    
+    writeHWEFiles = eparams->get_output_haplo();
+    writeGenoFiles = eparams->get_output_geno();
+    writeValFile = eparams->get_output_val();
 
-	bool ret = outMain.init(param->get_out_file());
+    bool ret = outMain.init(param->get_out_file());
 
-	string t = param->get_out_file();
+    string t = param->get_out_file();
 
-	if(writeGenoFiles){
-		ret = ret && outGeno1.init(t + ".geno1");
-		ret = ret && outGeno2.init(t + ".geno2");
-		ret = ret && outGeno3.init(t + ".geno3");
-	}
+    if(writeGenoFiles){
+        ret = ret && outGeno1.init(t + ".geno1");
+        ret = ret && outGeno2.init(t + ".geno2");
+        ret = ret && outGeno3.init(t + ".geno3");
+    }
 
-	if(writeHWEFiles){
-		ret = ret && outHWE.init(t + ".hwe");
-	}
+    if(writeHWEFiles){
+        ret = ret && outHWE.init(t + ".hwe");
+    }
 
-	if(writeRefFile) ret = ret && outRefAllele.init(t + ".ref");
+    if(writeRefFile) ret = ret && outRefAllele.init(t + ".ref");
+    
+    if(writeValFile) ret = ret && outVal.init(t + ".statvals");
 
-	if(ret){
-		writeMainHeader(outMain, param);
-		outMain.write_header(message);
-		writeMainLegend(outMain);
+    if(ret){
+        writeMainHeader(outMain, param);
+        outMain.write_header(message);
+        writeMainLegend(outMain);
 
-		if(writeGenoFiles){
-			writeMainHeader(outGeno1, param);
-			outGeno1.write_header("specific");
-			writeMainHeader(outGeno2, param);
-			outGeno2.write_header("specific");
-			writeMainHeader(outGeno3, param);
-			outGeno3.write_header("specific");
-		}
-		if(writeHWEFiles){
-			writeMainHeader(outHWE, param);
-			writeHWELegend(outHWE);
-		}
-		if(writeRefFile){
-			writeMainHeader(outRefAllele, param);
-			outRefAllele.write_header("specific");
-		}
-	}
+        if(writeGenoFiles){
+            writeMainHeader(outGeno1, param);
+            outGeno1.write_header("specific");
+            writeMainHeader(outGeno2, param);
+            outGeno2.write_header("specific");
+            writeMainHeader(outGeno3, param);
+            outGeno3.write_header("specific");
+        }
+        if(writeHWEFiles){
+            writeMainHeader(outHWE, param);
+            writeHWELegend(outHWE);
+        }
+        if(writeRefFile){
+            writeMainHeader(outRefAllele, param);
+            outRefAllele.write_header("specific");
+        }
+        if(writeValFile){
+            writeMainHeader(outVal, param);
+            writeValLegend(outVal);
+        }
+    }
 
-	return ret;
+    return ret;
 }
 
 /**
  * Write the header for the main output.
  */
 void QSnpgwaOutput::writeMainHeader(Output &out,ParamReader *param){
-	
-	out.write_header("**************************************************************************************\n");
-	out.write_header("Qsnpgwa, a part of SNPLAST Version ");
-	out.write_header(SNPLASH_VERSION);
-	out.write_header("\nDeveloped by: Richard T. Guy, Matt L. Stiegert, Carl D. Langefeld, and Joshua D. Grab\n");
-	out.write_header("Incorporated into SNPadt by Richard T. Guy\n");
-	out.write_header("INPUT/OUTPUT PARAMETERS AND OPTIONS\n");
-	out.write_header("***********************************\n");
-	out.write_header("GENOTYPE FILE:          ");
-	out.write_header(param->get_linkage_geno_file());
-	out.write_header("\nPHENOTYPE FILE:         ");
-	out.write_header(param->get_linkage_pheno_file());
-	out.write_header("\nOUTPUT FILE:            ");
-	out.write_header(param->get_out_file());
-	
-	out.write_header("\n\nTRAIT NAME:             ");
-	string temp = param->get_trait();
-	if(temp.compare("none") == 0){
-		out.write_header("default");
-	}else{
-		out.write_header(temp);
-	}
+    
+    out.write_header("**************************************************************************************\n");
+    out.write_header("Qsnpgwa, a part of SNPLAST Version ");
+    out.write_header(SNPLASH_VERSION);
+    out.write_header("\nDeveloped by: Richard T. Guy, Matt L. Stiegert, Carl D. Langefeld, and Joshua D. Grab\n");
+    out.write_header("Incorporated into SNPadt by Richard T. Guy\n");
+    out.write_header("INPUT/OUTPUT PARAMETERS AND OPTIONS\n");
+    out.write_header("***********************************\n");
+    out.write_header("GENOTYPE FILE:          ");
+    out.write_header(param->get_linkage_geno_file());
+    out.write_header("\nPHENOTYPE FILE:         ");
+    out.write_header(param->get_linkage_pheno_file());
+    out.write_header("\nOUTPUT FILE:            ");
+    out.write_header(param->get_out_file());
+    
+    out.write_header("\n\nTRAIT NAME:             ");
+    string temp = param->get_trait();
+    if(temp.compare("none") == 0){
+        out.write_header("default");
+    }else{
+        out.write_header(temp);
+    }
 
-	out.write_header("\nCOVARIATE NAME(S):             ");
-	vector<string> tempCov = param->get_covariates();
-	if(tempCov.size() > 0){
-		for(unsigned int i=0;i < tempCov.size();++i){
-			out.write_header(tempCov.at(i));
-			out.write_header("  ");
-		}
-	}else{
-		out.write_header("none");
-	}
-	out.write_header("\n");
+    out.write_header("\nCOVARIATE NAME(S):             ");
+    vector<string> tempCov = param->get_covariates();
+    if(tempCov.size() > 0){
+        for(unsigned int i=0;i < tempCov.size();++i){
+            out.write_header(tempCov.at(i));
+            out.write_header("  ");
+        }
+    }else{
+        out.write_header("none");
+    }
+    out.write_header("\n");
 }
 
 /**
  * Write the main output legend.
  */
 void QSnpgwaOutput::writeMainLegend(Output &out){
-	
-	out.write_header("\n\n   "); 
-	for(int i=0;i < mapSize;i++)
+    
+    out.write_header("\n\n   "); 
+    for(int i=0;i < mapSize;i++)
+        out.write_header(" ");
+    out.write_header("                          ");
+    out.write_header("Total   Minor                                      <------------------------Hardy-Weinberg Analysis------------------------>    <------------------------------------------------------------------------------------------------------Quantitative Genotypic Association------------------------------------------------------------------------------------------------------>\n");
+    
+    // line 2
+    out.write_header("   ");
+    for(int i=0;i < mapSize;i++)
+        out.write_header(" ");
+    out.write_header("                          ");
+    out.write_header("Number  Allele                                                                                                                  <-2 Deg Fr-> <---------Dominant Test----------> <---------Additive Test----------> <---------Recessive Test---------> <-Lack Fit-> <---------------------------------------Means and Standard Deviations--------------------------------------->\n"); 
+    
+    // line 3
+    out.write_header("Chr Marker");
+    for(int i=0;i < mapSize-6;i++)
+        out.write_header(" ");
+    out.write_header(" Position   Difference   ");
+    out.write_header("Indivs  Freq    %_Miss %_Miss PVal    P  Q Ref(a)  NumPP   ENumPP  NumPQ   ENumPQ  NumQQ   ENumQQ  X^2_PValue   Prob_HWE        PV_2DF       PV_Dom       Dom_Beta   Dom_SE     PV_Add       Add_Beta   Add_SE     PV_Rec       Rec_Beta   Rec_SE     PV_LOF       Mean_AA    SD_AA      Mean_Aa    SD_Aa      Mean_aa    SD_aa      Mean_AA&Aa SD_AA&Aa   Mean_Aa&aa SD_Aa&aa      D_Prime R_Sqr\n");
+    
+    out.write_header("--- ------");
+    for(int i=0;i < mapSize-6;i++)
+        out.write_header("-");
+    out.write_header(" ---------- ----------   ");  
+    out.write_header("------  ------  ------ ------------  -- -- ------  ------- ------- ------- ------- ------- ------- ------------ ------------    ------------ ------------ ---------- ---------- ------------ ---------- ---------- ------------ ---------- ---------- ------------ ---------- ---------- ---------- ---------- ---------- ---------- ---------- ---------- ---------- ----------    ------- -------\n");
+    
+    
+}
+
+void QSnpgwaOutput::writeValLegend(Output &out){
+
+	for (int i = 0; i < mapSize; i++)
+	{
 		out.write_header(" ");
-	out.write_header("                          ");
-	out.write_header("Total   Minor                                      <------------------------Hardy-Weinberg Analysis------------------------>    <------------------------------------------------------------------------------------------------------Quantitative Genotypic Association------------------------------------------------------------------------------------------------------>\n");
-	
-	// line 2
-	out.write_header("   ");
-	for(int i=0;i < mapSize;i++)
+	}
+	out.write_header("                     2 Degree of Freedom Test                                           Dominant Test                                                  Additive Test                                                  Recessive Test                                              Lack of Fit Test                         \n");
+	out.write_header("SNP");
+	for (int i = 0; i < mapSize-3; i++)
+	{
 		out.write_header(" ");
-	out.write_header("                          ");
-	out.write_header("Number  Allele                                                                                                                  <-2 Deg Fr-> <---------Dominant Test----------> <---------Additive Test----------> <---------Recessive Test---------> <-Lack Fit-> <---------------------------------------Means and Standard Deviations--------------------------------------->\n");	
-	
-	// line 3
-	out.write_header("Chr Marker");
-	for(int i=0;i < mapSize-6;i++)
-		out.write_header(" ");
-	out.write_header(" Position   Difference   ");
-	out.write_header("Indivs  Freq    %_Miss %_Miss PVal    P  Q Ref(a)  NumPP   ENumPP  NumPQ   ENumPQ  NumQQ   ENumQQ  X^2_PValue   Prob_HWE        PV_2DF       PV_Dom       Dom_Beta   Dom_SE     PV_Add       Add_Beta   Add_SE     PV_Rec       Rec_Beta   Rec_SE     PV_LOF       Mean_AA    SD_AA      Mean_Aa    SD_Aa      Mean_aa    SD_aa      Mean_AA&Aa SD_AA&Aa   Mean_Aa&aa SD_Aa&aa      D_Prime R_Sqr\n");
-	
-	out.write_header("--- ------");
-	for(int i=0;i < mapSize-6;i++)
-		out.write_header("-");
-	out.write_header(" ---------- ----------   ");	
-	out.write_header("------  ------  ------ ------------  -- -- ------  ------- ------- ------- ------- ------- ------- ------------ ------------    ------------ ------------ ---------- ---------- ------------ ---------- ---------- ------------ ---------- ---------- ------------ ---------- ---------- ---------- ---------- ---------- ---------- ---------- ---------- ---------- ----------    ------- -------\n");
-	
-	
+	}
+	out.write_header("     F              SSE            SSR             n1 n2            F              SSE            SSR             n1 n2            F              SSE            SSR             n1 n2            F              SSE            SSR             n1 n2            F              SSE            SSR             n1 n2         \n");
 }
 
 /**
  * Write legend for HWE
  */
 void QSnpgwaOutput::writeHWELegend(Output &out){
-	
+    
 out.write_header("           Total  Minor                                   <---------------Hardy-Weinberg Analysis---------------->\n");
 out.write_header("           Number Allele                                                                                          \n");
 out.write_header("Marker     Indivs Freq   %_Miss %_Miss PVal   P  Q Ref(a) NumPP ENumPP NumPQ ENumPQ NumQQ ENumQQ X^2_PVal Prob_HWE\n");
 out.write_header("---------- ------ ------ ------ ------------ -- -- ------ ----- ------ ----- ------ ----- ------ -------- --------\n");
-	
+    
 }
 
 /**
  * Write a line.
  */
 void QSnpgwaOutput::writeLine(int idx, SnpInfo &q, const ContPopStatsResults &cp
-	, const ContGenoStatsResults &cg){
-		
-	stringstream ss;
-	// print starting information.
-	q.print(ss, mapSize);
-	
-	ss << strnutils::spaced_number(cp.totalIndiv, 6,3);
-	ss << strnutils::spaced_number(cp.maf,6,4,2);
-	
-	ss << strnutils::spaced_number(cp.perMissing,6,2,2);
-	ss << strnutils::spaced_number(cp.perMissingPVal,12,10,1);
-	
-	ss << "  " << q.majAllele << "  " << q.minAllele << "   " << q.refAllele;
-	
-	// HWE
-	
-	ss << strnutils::spaced_number(cp.numPP,7,6);
-	ss << strnutils::spaced_number(cp.expPP,7,1,1);
-	ss << strnutils::spaced_number(cp.numPQ,7,1);
-	ss << strnutils::spaced_number(cp.expPQ,7,1,1);
-	ss << strnutils::spaced_number(cp.numQQ,7,1);
-	ss << strnutils::spaced_number(cp.expQQ,7,1,1);
-	ss << strnutils::spaced_number(cp.chiSqPval,12,10,1);
-	ss << strnutils::spaced_number(cp.pHWE,12,10,1);
-	
-	// Regression
-	
-	ss << strnutils::spaced_number(cg.twodegfree_pval,12,10,4);
-	
-	ss << strnutils::spaced_number(cg.dom_pval,12,10,1);
-	ss << strnutils::spaced_number(cg.dom_beta,10,5,1);
-	ss << strnutils::spaced_number(cg.dom_se,10,5,1);
-	
-	ss << strnutils::spaced_number(cg.add_pval,12,10,1);
-	ss << strnutils::spaced_number(cg.add_beta,10,5,1);
-	ss << strnutils::spaced_number(cg.add_se,10,5,1);
-	
-	ss << strnutils::spaced_number(cg.rec_pval,12,10,1);
-	ss << strnutils::spaced_number(cg.rec_beta,10,5,1);
-	ss << strnutils::spaced_number(cg.rec_se,10,5,1);
-	
-	ss << strnutils::spaced_number(cg.lof_pval, 12, 10, 1);
+    , const ContGenoStatsResults &cg){
+        
+    stringstream ss;
+    // print starting information.
+    q.print(ss, mapSize);
+    
+    ss << strnutils::spaced_number(cp.totalIndiv, 6,3);
+    ss << strnutils::spaced_number(cp.maf,6,4,2);
+    
+    ss << strnutils::spaced_number(cp.perMissing,6,2,2);
+    ss << strnutils::spaced_number(cp.perMissingPVal,12,10,1);
+    
+    ss << "  " << q.majAllele << "  " << q.minAllele << "   " << q.refAllele;
+    
+    // HWE
+    
+    ss << strnutils::spaced_number(cp.numPP,7,6);
+    ss << strnutils::spaced_number(cp.expPP,7,1,1);
+    ss << strnutils::spaced_number(cp.numPQ,7,1);
+    ss << strnutils::spaced_number(cp.expPQ,7,1,1);
+    ss << strnutils::spaced_number(cp.numQQ,7,1);
+    ss << strnutils::spaced_number(cp.expQQ,7,1,1);
+    ss << strnutils::spaced_number(cp.chiSqPval,12,10,1);
+    ss << strnutils::spaced_number(cp.pHWE,12,10,1);
+    
+    // Regression
+    
+    ss << strnutils::spaced_number(cg.twodegfree_pval,12,10,4);
+    
+    ss << strnutils::spaced_number(cg.dom_pval,12,10,1);
+    ss << strnutils::spaced_number(cg.dom_beta,10,5,1);
+    ss << strnutils::spaced_number(cg.dom_se,10,5,1);
+    
+    ss << strnutils::spaced_number(cg.add_pval,12,10,1);
+    ss << strnutils::spaced_number(cg.add_beta,10,5,1);
+    ss << strnutils::spaced_number(cg.add_se,10,5,1);
+    
+    ss << strnutils::spaced_number(cg.rec_pval,12,10,1);
+    ss << strnutils::spaced_number(cg.rec_beta,10,5,1);
+    ss << strnutils::spaced_number(cg.rec_se,10,5,1);
+    
+    ss << strnutils::spaced_number(cg.lof_pval, 12, 10, 1);
 
-	// Moments
-	
-	ss << strnutils::spaced_number(cg.meanAA,10,4,1);
-	ss << strnutils::spaced_number(cg.sdAA,10,4,1);
-	ss << strnutils::spaced_number(cg.meanAa,10,4,1);
-	ss << strnutils::spaced_number(cg.sdAa,10,4,1);
-	ss << strnutils::spaced_number(cg.meanaa,10,4,1);
-	ss << strnutils::spaced_number(cg.sdaa,10,4,1);
-	ss << strnutils::spaced_number(cg.meanAA_Aa,10,4,1);
-	ss << strnutils::spaced_number(cg.sdAA_Aa,10,4,1);
-	ss << strnutils::spaced_number(cg.meanAa_aa,10,4,1);
-	ss << strnutils::spaced_number(cg.sdAa_aa,10,4,1);
-	
-	// LD
-	ss << strnutils::spaced_number(cg.dprime, 7, 5, 4);
-	ss << strnutils::spaced_number(cg.rsquare, 7, 5, 1);
-	
-	ss << endl;
-	outMain.write_line(ss.str(), idx);
-	
-	if(writeHWEFiles) writeHWELine(idx, q, cp);
+    // Moments
+    
+    ss << strnutils::spaced_number(cg.meanAA,10,4,1);
+    ss << strnutils::spaced_number(cg.sdAA,10,4,1);
+    ss << strnutils::spaced_number(cg.meanAa,10,4,1);
+    ss << strnutils::spaced_number(cg.sdAa,10,4,1);
+    ss << strnutils::spaced_number(cg.meanaa,10,4,1);
+    ss << strnutils::spaced_number(cg.sdaa,10,4,1);
+    ss << strnutils::spaced_number(cg.meanAA_Aa,10,4,1);
+    ss << strnutils::spaced_number(cg.sdAA_Aa,10,4,1);
+    ss << strnutils::spaced_number(cg.meanAa_aa,10,4,1);
+    ss << strnutils::spaced_number(cg.sdAa_aa,10,4,1);
+    
+    // LD
+    ss << strnutils::spaced_number(cg.dprime, 7, 5, 4);
+    ss << strnutils::spaced_number(cg.rsquare, 7, 5, 1);
+    
+    ss << endl;
+    outMain.write_line(ss.str(), idx);
+    
+    if(writeHWEFiles) writeHWELine(idx, q, cp);
+    if(writeValFile) writeValLine(idx, q, cp, cg);
 }
 
 void QSnpgwaOutput::writeHWELine(int idx, const SnpInfo &s, const ContPopStatsResults &p){
-	
+    
+    stringstream ss;
+    
+    if(s.name.size() > 0){
+        ss << strnutils::spaced_string(s.name, 10);
+    }else{
+        ss << strnutils::spaced_number(s.index, 10);
+    }
+    
+    ss << strnutils::spaced_number(p.totalIndiv, 9,1);
+    ss << strnutils::spaced_number(p.maf, 11, 6, 4);
+    
+    ss << strnutils::spaced_number(100*p.perMissing, 9, 2, 4);
+    ss << strnutils::spaced_number(p.perMissingPVal, 12, 10, 4);
+    
+    ss << " " << s.majAllele;
+    ss << " " << s.minAllele;
+    
+    ss << "     " << s.refAllele;
+    
+    ss << strnutils::spaced_number(p.numPP, 5,2);
+    ss << strnutils::spaced_number(p.expPP, 5,2);
+    
+    ss << strnutils::spaced_number(p.numPQ, 5,2);
+    ss << strnutils::spaced_number(p.expPQ, 5,2);
+    
+    ss << strnutils::spaced_number(p.numQQ, 5,2);
+    ss << strnutils::spaced_number(p.expQQ, 5,2);
+    
+    ss << strnutils::spaced_number(p.chiSqPval, 8,6);
+    ss << strnutils::spaced_number(p.pHWE, 8,6);
+}
+
+/**
+ * Write output line for the value file.  This is a separate file that contains
+ * test statistics rather than their corresponding p-values.
+ * 
+ * @param ids Index in final file (for asynchronous update)
+ * @param s Contains SNP info to write.
+ * @param p Contains population stats results to write.
+ * @param h Contains haplotype stats results to write.
+ * @param g Contains genotypic stats results to write.
+ */
+void QSnpgwaOutput::writeValLine(int ids, SnpInfo &q, const ContPopStatsResults &cp,
+    const ContGenoStatsResults &cg){
+
 	stringstream ss;
-	
-	if(s.name.size() > 0){
-		ss << strnutils::spaced_string(s.name, 10);
+
+	if(q.name.size() > 0){
+		ss << strnutils::spaced_string(q.name, 10);
 	}else{
-		ss << strnutils::spaced_number(s.index, 10);
+		ss << strnutils::spaced_number(q.index, 10);
 	}
 	
-	ss << strnutils::spaced_number(p.totalIndiv, 9,1);
-	ss << strnutils::spaced_number(p.maf, 11, 6, 4);
+	ss << strnutils::spaced_number(cg.twodegfree_fStat, 14, 12, 1);
+	ss << strnutils::spaced_number(cg.twodegfree_sse, 14, 12, 1);
+	ss << strnutils::spaced_number(cg.twodegfree_ssr, 14, 12, 1);
+	ss << strnutils::spaced_number(cg.twodegfree_n1, 4, 0, 1);
+	ss << strnutils::spaced_number(cg.twodegfree_n2, 4, 0, 1);
 	
-	ss << strnutils::spaced_number(100*p.perMissing, 9, 2, 4);
-	ss << strnutils::spaced_number(p.perMissingPVal, 12, 10, 4);
+	ss << strnutils::spaced_number(cg.dom_fStat, 14, 12, 3);
+	ss << strnutils::spaced_number(cg.dom_sse, 14, 12, 1);
+	ss << strnutils::spaced_number(cg.dom_ssr, 14, 12, 1);
+	ss << strnutils::spaced_number(cg.dom_n1, 4, 0, 1);
+	ss << strnutils::spaced_number(cg.dom_n2, 4, 0, 1);
 	
-	ss << " " << s.majAllele;
-	ss << " " << s.minAllele;
+	ss << strnutils::spaced_number(cg.add_fStat, 14, 12, 3);
+	ss << strnutils::spaced_number(cg.add_sse, 14, 12, 1);
+	ss << strnutils::spaced_number(cg.add_ssr, 14, 12, 1);
+	ss << strnutils::spaced_number(cg.add_n1, 4, 0, 1);
+	ss << strnutils::spaced_number(cg.add_n2, 4, 0, 1);
 	
-	ss << "     " << s.refAllele;
+	ss << strnutils::spaced_number(cg.rec_fStat, 14, 12, 3);
+	ss << strnutils::spaced_number(cg.rec_sse, 14, 12, 1);
+	ss << strnutils::spaced_number(cg.rec_ssr, 14, 12, 1);
+	ss << strnutils::spaced_number(cg.rec_n1, 4, 0, 1);
+	ss << strnutils::spaced_number(cg.rec_n2, 4, 0, 1);
 	
-	ss << strnutils::spaced_number(p.numPP, 5,2);
-	ss << strnutils::spaced_number(p.expPP, 5,2);
+	ss << strnutils::spaced_number(cg.lof_fStat, 14, 12, 3);
+	ss << strnutils::spaced_number(cg.lof_sse, 14, 12, 1);
+	ss << strnutils::spaced_number(cg.lof_ssr, 14, 12, 1);
+	ss << strnutils::spaced_number(cg.lof_n1, 4, 0, 1);
+	ss << strnutils::spaced_number(cg.lof_n2, 4, 0, 1);
 	
-	ss << strnutils::spaced_number(p.numPQ, 5,2);
-	ss << strnutils::spaced_number(p.expPQ, 5,2);
 	
-	ss << strnutils::spaced_number(p.numQQ, 5,2);
-	ss << strnutils::spaced_number(p.expQQ, 5,2);
-	
-	ss << strnutils::spaced_number(p.chiSqPval, 8,6);
-	ss << strnutils::spaced_number(p.pHWE, 8,6);
+/*
+	ss << strnutils::spaced_number(p.cmbdTestStat, 14,12,1);
+	ss << strnutils::spaced_number(p.caseTestStat, 14,12,1);
+	ss << strnutils::spaced_number(p.cntrlTestStat, 14,12,1);
+
+	ss << strnutils::spaced_number(g.twodegTestStat, 14,12,4);
+	ss << strnutils::spaced_number(g.domTestStat, 14,12,1);
+	ss << strnutils::spaced_number(g.addTestStat, 14,12,1);
+	ss << strnutils::spaced_number(g.recTestStat, 14,12,1);
+	ss << strnutils::spaced_number(g.lofTestStat, 14,12,1);
+
+	ss << strnutils::spaced_number(h.allelicChiS, 14,12,4);
+	ss << strnutils::spaced_number(h.allelicDF, 4,0,1);
+
+	ss << strnutils::spaced_number(h.twoMarkerChiS, 14,12,4);
+	ss << strnutils::spaced_number(h.twoMarkerDF, 4,0,1);
+	ss << strnutils::spaced_number(h.threeMarkerChiS, 14,12,4);
+	ss << strnutils::spaced_number(h.threeMarkerDF, 4,0,1);
+*/
+	ss << endl;
+
+	outVal.write_line(ss.str(), ids);
+
 }

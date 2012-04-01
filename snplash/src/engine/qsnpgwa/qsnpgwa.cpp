@@ -125,14 +125,13 @@ void QSnpgwa::process(){
 			s.diff = -999;
 		}
 
-		// This if statement passes only if this is a useable snp.
 		if(data->getDataObject()->isUsable(i)){
 			
 			ContPopStats pop_calc(data);
 			ContGenoStats gen_calc(data);
 	
 			LinkageDisequilibrium ld(data);
-			ld.enslave(snp_param); // VERY IMPORTANT.  We have to do this or the ld engine will think
+			ld.enslave(snp_param); // We have to do this or the ld engine will think
 								   // that it owns the data and might erase it.
 									
 			LinkageMeasures lr;

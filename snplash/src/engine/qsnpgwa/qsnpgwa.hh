@@ -19,24 +19,24 @@
 
 /**
  * @class QSnpgwa
- * 
- * 
+ *
+ *
  * Perform single locus tests using a quantitative phenotype and zero or
  * more covariates.
- * 
+ *
  * @author Richard T. Guy
  * @author Joshua Grab
  * @author Matt Steigert
  * @author Carl D. Langefeld
- * 
+ *
  */
 
 #ifndef QSNPGWA_H
 #define QSNPGWA_H
 
 // A 1 means spit out checkpoints (for infinite loop debugging)
-#define DB_V_QSNP 0 
-// A 
+#define DB_V_QSNP 0
+// A
 
 #include "../../param/engine_param_reader.h"
 #include "../engine.h"
@@ -52,7 +52,7 @@ class QSnpgwa : public Engine {
 	public:
 
 		explicit QSnpgwa();
-		
+
 		~QSnpgwa();
 
 		virtual void init();		// Do setup including *** data reading ***
@@ -66,7 +66,7 @@ class QSnpgwa : public Engine {
 
 		EngineParamReader *snp_param;
 		void delete_my_innards();
-		
+
 		void initToZero(ContPopStatsResults &p, ContGenoStatsResults &ge);
 
 		QSnpgwaOutput out;

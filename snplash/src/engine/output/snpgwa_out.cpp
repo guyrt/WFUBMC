@@ -379,7 +379,7 @@ void SnpgwaOutput::writeHWELine(int idx, const SnpInfo &s, const PopStatsResults
 }
 
 /**
- * 
+ * TODO: finish?
  */
 void SnpgwaOutput::writeHaploLine(int idx, const SnpInfo &s, const HaploStatsResults &p){
 	
