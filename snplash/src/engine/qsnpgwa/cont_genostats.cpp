@@ -269,13 +269,13 @@ void ContGenoStats::computeLinRegStats(int snp, ContGenoStatsResults &results){
 		results.twodegfree_pval = 2.0;
 	}else{
 		LinearRegression lr;
-		LinRegStats stats = lr.anova(residuals, add, means);
-		results.twodegfree_pval = stats.pvalue;
-		results.twodegfree_fStat = stats.f_stat;
-		results.twodegfree_n1 = stats.n1;
-		results.twodegfree_n2 = stats.n2;
-		results.twodegfree_sse = stats.sse;
-		results.twodegfree_ssr = stats.ssr;
+		LinRegStats twodeg_stats = lr.anova(residuals, add, means);
+		results.twodegfree_pval = twodeg_stats.pvalue;
+		results.twodegfree_fStat = twodeg_stats.f_stat;
+		results.twodegfree_n1 = twodeg_stats.n1;
+		results.twodegfree_n2 = twodeg_stats.n2;
+		results.twodegfree_sse = twodeg_stats.sse;
+		results.twodegfree_ssr = twodeg_stats.ssr;
 	}
 	
 }
