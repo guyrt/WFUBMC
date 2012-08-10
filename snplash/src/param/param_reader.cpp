@@ -351,6 +351,11 @@ void ParamReader::print_usage(){
 	ss << "DANDELION " << endl;
 	ss << "     --dandelion_pprob  If present, create a file <outfile>.pprob and list each individual's personal probability of having each possible haplotype.  " << endl;
 	ss << "     --dandelion_window <int> If present, perform dandelion on each set of <int> SNPs contiguously through the file." << endl;
+	ss << endl;
+	ss << "DPRIME " << endl;
+	ss << "     --dprime_window <int> Specify the window around each SNPs on which we should compute LD on SNP pairs  " << endl;
+	ss << "     --dprime_fmt <int> Output format. These mimic the old dprime." << endl;
+	ss << "     --dprime_smartpairs <int> Only compute dprime on SNP pairs from the same chromosome. " << endl;
 	ss << "Send bug reports, including your computer's operating system, the full command line, and any additional information to dmcwilli@wfubmc.edu" << endl;
 	cout << ss.str();
 }
