@@ -72,6 +72,7 @@ class Snpgwa : private Engine{
 		void delete_my_innards();
 		
 		void initToZero(PopStatsResults &p, HaploStatsResults &r, GenoStatsResults &ge);
+		void initHaploStats(HaploStatsResults &r);
 
 		SnpgwaOutput out;
 		
