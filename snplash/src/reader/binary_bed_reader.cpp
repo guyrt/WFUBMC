@@ -254,7 +254,7 @@ void BinaryBedReader::getPhenotype(SnpData *data, ParamReader *params){
 			data->covariance.at(data->covariance.size() - 1).push_back(t);
 		}
 
-		if(order_in_file.count(line.at(0)) > 0){
+		if(order_in_file.count(line.at(1)) > 0){
 			cerr << "Phenotype " << line.at(0) << " was repeated on line " << line_no + 2<< " and " << order_in_file[line.at(0)] + 2 << " in the phenotype file.  Aborting." << endl;
 			exit(0);
 		}

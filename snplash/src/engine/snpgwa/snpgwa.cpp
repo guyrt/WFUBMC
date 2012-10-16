@@ -231,15 +231,8 @@ void Snpgwa::process(){
 			}
 
 			else{
-				hr.rsquare = hr.dprime = -1.0;
-				for(int ii=0;ii < 4;ii++){
-					hr.twoMarkerCaseFreq.push_back(0);
-					hr.twoMarkerCntrlFreq.push_back(0);
-				}
-				for(int ii=0;ii < 8;ii++){
-					hr.threeMarkerCaseFreq.push_back(0);
-					hr.threeMarkerCntrlFreq.push_back(0);
-				}
+				initHaploStats(hr);
+				std::cout << hr.twoMarkerCaseFreq[0] << std::endl;
 			}
 
 		}else{
@@ -340,9 +333,20 @@ void Snpgwa::initToZero(PopStatsResults &p, HaploStatsResults &r, GenoStatsResul
 	ge.lofTestStat = -1;
 	ge.lofPVal = 2;
 
+	initHaploStats(r);
+}
+
+/**
+ * Default all haplostats information.
+ * 
+ * Note that the output code does not allow printing negatives, which means the -1 frequencies
+ * in here are printed to -1.0
+ */
+void Snpgwa::initHaploStats(HaploStatsResults &r){
+
 	r.dprime = -1;
 	r.rsquare = -1;
-
+	
 	r.allelicChiS = -1;
 	r.allelicDF = -1;
 	r.allelicPval = 2.0;
@@ -356,12 +360,12 @@ void Snpgwa::initToZero(PopStatsResults &p, HaploStatsResults &r, GenoStatsResul
 	r.threeMarkerPval = 2;
 
 	for(int i=0;i < 4;i++){
-		r.twoMarkerCaseFreq.push_back(0);
-		r.twoMarkerCntrlFreq.push_back(0);
+		r.twoMarkerCaseFreq.push_back(-1.0);
+		r.twoMarkerCntrlFreq.push_back(-1.0);
 	}
 	for(int i=0;i < 8;i++){
-		r.threeMarkerCaseFreq.push_back(0);
-		r.threeMarkerCntrlFreq.push_back(0);
+		r.threeMarkerCaseFreq.push_back(-1.0);
+		r.threeMarkerCntrlFreq.push_back(-1.0);
 	}
 
 }
