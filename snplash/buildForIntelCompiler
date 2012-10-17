@@ -1,0 +1,32 @@
+#!/bin/bash
+
+# buildForIntelCompiler
+#
+# Create the environment and directory structure to compile SNPLASH
+# with the Intel compiler suite.  This script is written to use the
+# 'modules' system (http://modules.sourceforge.net) for setting
+# environment variables.  You probably will have to edit this file and
+# the Intel compiler information in CMakeLists.txt to adapt to your
+# system.
+
+# Authored by: Richard T. Guy <guy@cs.toronto.edu>
+# Modified by: David R. McWilliams <dmcwilli@wakehealth.edu>
+
+mkdir build
+cd build
+
+module load openmpi/1.6-intel
+
+# The 'module load' command sets the compiler environment variable $MPICC.  Absent
+# the modules system, set the Intel compiler as in one of the examples below.
+
+# Intel compiler command:
+# ICPC=`which icpc`
+# MPICC=`which mpicc`
+
+# And adjust the compiler command in the following if necessary.
+cmake -D CMAKE_CXX_COMPILER=$MPICC -D ICPC=TRUE ..
+
+echo "Now cd into ./build and type \'make\'. The executable will be in this directory."
+
+

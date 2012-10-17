@@ -11,7 +11,7 @@ If you plan to use the Intel compiler, which is sometimes a bit faster than g++,
 
 ::
 
-  > sh buildForIntelCompiler.sh
+  > ./buildForIntelCompiler
   > cd build
   > make
 

@@ -1,3 +1,9 @@
+# CMakeLists.txt
+#
+# Created by Richard T. Guy <gu@cs.toronto.edu>
+# Modifications by David R. McWillams <dmcwilli@wakehealth.edu>
+#
+
 cmake_minimum_required(VERSION 2.4)
 
 project(SNPLASH)
@@ -6,9 +12,15 @@ SET(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR})
 
 set(CMAKE_CXX_FLAGS "-O3 -fopenmp -g -Wall -Wunused")
 
-# Edit for the Intel compiler
+# Edit appropriately for the Intel compiler.  The options below were
+# chosen using the Intel 'Link Line Advisor v2.2' at
+# http://software.intel.com/en-us/articles/intel-mkl-link-line-advisor/
+
 if (ICPC)
-    set(CMAKE_CXX_FLAGS "-O3 -no-prec-div  -openmp -g -Wall -Wunused -wd981 -wd383 ")
+    # set(CMAKE_CXX_FLAGS "-O3 -no-prec-div  -openmp -g -Wall -Wunused -wd981 -wd383 ")
+    set(LINKER_OPTS "-L$(MKLROOT)/lib/intel64 -lmkl_intel_lp64 -lmkl_sequential -lmkl_core -lmkl_blacs_intelmpi_lp64 -lpthread -lm")
+    set(COMP_OPTS "-I$(MKLROOT)/include")
+    set(CMAKE_CXX_FLAGS "-O3 -no-prec-div -g Wall $COMP_OPTS $LINKER_OPTS")
 endif (ICPC) 
 
 #SET(EXECUTABLE_OUTPUT_PATH ${PROJECT_BINARY_DIR}/..)
