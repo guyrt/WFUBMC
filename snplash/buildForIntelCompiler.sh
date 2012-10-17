@@ -1,9 +1,21 @@
+#!bin/sh
+
+# buildForIntelCompiler
+#
+# Create the environment and directory structure to compile SNPLASH
+# with the Intel compiler suite.
+
 mkdir build
 cd build
 
-ICPC=`which icpc`
+module load compilers/intel-2012-lp64
 
-cmake -D CMAKE_CXX_COMPILER=$ICPC -D ICPC=TRUE ..
+# ICPC=`which icpc`
+
+# Intel compiler command
+MPICC=`which MPICC`
+
+cmake -D CMAKE_CXX_COMPILER=$MPICC -D ICPC=TRUE ..
 
 echo "Now cd into build and type make. The executable will be in this directory."
 
