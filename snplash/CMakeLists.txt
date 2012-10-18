@@ -35,7 +35,7 @@ set(CMAKE_CXX_FLAGS "-O3 -fopenmp -g -Wall -Wunused")
 if (ICPC)
     # set(CMAKE_CXX_FLAGS "-O3 -no-prec-div  -openmp -g -Wall -Wunused -wd981 -wd383 ")
     set(COMP_OPTS "-I${MKLROOT}/include")
-    set(CMAKE_CXX_FLAGS "-xSSE4.2 -O3 -no-prec-div -openmp -mkl=parallel -g -Wall -Wunused -wd981 -wd383 ${COMP_OPTS}")
+    set(CMAKE_CXX_FLAGS "-xSSE4.1 -O3 -no-prec-div -openmp -mkl=parallel -g -Wall -Wunused -wd981 -wd383 ${COMP_OPTS}")
 endif (ICPC) 
 
 # SET(EXECUTABLE_OUTPUT_PATH ${PROJECT_BINARY_DIR}/..)
