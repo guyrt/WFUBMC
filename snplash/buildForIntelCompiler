@@ -15,7 +15,8 @@
 mkdir build
 cd build
 
-module load openmpi/1.6-intel
+. /etc/profile.d/modules.sh
+module load compilers/intel-2012-lp64
 
 # The 'module load' command sets the compiler environment variable $MPICC.  Absent
 # the modules system, set the Intel compiler as in one of the examples below.
@@ -25,8 +26,8 @@ module load openmpi/1.6-intel
 # MPICC=`which mpicc`
 
 # And adjust the compiler command in the following if necessary.
-cmake -D CMAKE_CXX_COMPILER=$MPICC -D ICPC=TRUE ..
+cmake -D CMAKE_CXX_COMPILER=$CXX -D ICPC=TRUE ..
 
-echo "Now cd into ./build and type \'make\'. The executable will be in this directory."
+echo "Now cd into ./build and type 'make'. The executable will be in this directory."
 
 
