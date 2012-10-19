@@ -17,7 +17,7 @@ use strict ;
 use warnings ;
 use Getopt::Long ;
 
-my $debug = 1 ;
+my $debug = 0 ;
 
 my $lf = "run_stat_tests.log" ;
 open LOG, ">", $lf or
@@ -29,10 +29,10 @@ $| = 1 ;
 select($oldfh) ;
 
 my $msg ;
-my $here = "main" ;
+my $fnx = "main" ;
 
 $msg = "Starting $0 ". scalar localtime ;
-logr($here, $msg) ;
+logr($fnx, $msg) ;
 
 my $param = get_opts() ;
 
@@ -63,11 +63,9 @@ if (grep(/all/i, @ARGV)) {
 }
 
 $msg = join(" ", "Engines:", @to_do, "requested.") ;
-logr($here, $msg) ;
+logr($fnx, $msg) ;
 
 print_param($param) if $debug ;
-
-__END__
 
 my $failed = 0 ;
 
@@ -83,16 +81,20 @@ foreach my $engine (sort @to_do) {
       next TEST ;
     }
   } else {
-    print LOG "Do not recognize engine \"$engine\". Skipping.\n" ;
+    $msg = "Do not recognize engine \"$engine\". Skipping.\n" ;
+    logr($fnx, $msg) ;
     next TEST ;
   }
-  print LOG "Done with $engine, ", scalar localtime(), ".\n" ;
+  $msg = "Done with $engine, ", scalar localtime(), ".\n" ;
+  logr($fnx, $msg) ;
+
 } # end foreach engine
 
-print "There were $failed tests; check log and output.\n"
+print "There were $failed failed tests; check log and output.\n"
   if $failed ;
 
-print LOG "Finished snplash evaluation ", scalar localtime(), ".\n" ;
+$msg = "Finished snplash evaluation ", scalar localtime(), ".\n" ;
+logr($fnx, $msg) ;
 
 exit 0 ;
 
@@ -282,32 +284,44 @@ sub initialize {
 
 
 sub run_adtree {
-  print LOG "No test for --engine adtree yet.\n" ;
+  my $fnx = "run_adtree" ;
+  my $msg = "No test for --engine adtree yet.\n" ;
+  logr($fnx, $msg) ;
   return 0 ;
 } # end run_adtree
 
 sub test_adtree {
-  print LOG "No test for --engine adtree yet.\n" ;
+  my $fnx = "test_adtree" ;
+  my $msg = "No test for --engine adtree yet.\n" ;
+  logr($fnx, $msg) ;
   return 0 ;
 } # end test_adtree
 
 sub run_bagging {
-  print LOG "No test for --engine bagging yet.\n" ;
+  my $fnx = "run_bagging" ;
+  my $msg = "No test for --engine bagging yet.\n" ;
+  logr($fnx, $msg) ;
   return 0 ;
 } # end run_bagging
 
 sub test_bagging {
-  print LOG "No test for --engine bagging yet.\n" ;
+  my $fnx = "test_bagging" ;
+  my $msg = "No test for --engine bagging yet.\n" ;
+  logr($fnx, $msg) ;
   return 0 ;
 } # end test_bagging
 
 sub run_dandelion {
-  print LOG "No test for --engine dandelion yet.\n" ;
+  my $fnx = "run_dandelion" ;
+  my $msg = "No test for --engine dandelion yet.\n" ;
+  logr($fnx, $msg) ;
   return 0 ;
 } # end run_dandelion
 
 sub test_dandelion {
-  print LOG "No test for --engine dandelion yet.\n" ;
+  my $fnx = "test_dandelion" ;
+  my $msg ="No test for --engine dandelion yet.\n" ;
+  logr($fnx, $msg) ;
   return 0 ;
 } # end test_dandelion
 
@@ -315,24 +329,25 @@ sub test_dandelion {
 #
 # parse_dprime
 #
-# Parse the dprime output to make it conform to the R output.
+# Parse the dprime output to make it conform to the R output.  Reference global
+# parameters hash.
 #
 # Accepts: Scalar with name of file to parse
 # Returns: Success
 #
 # 01-Sep-2011
-#
+# 19-Oct-2012 Implement reading global hash and revised logging
 
 sub parse_dprime {
-  my $p  = shift ;              # parameters hash
   my $fh = shift ;
+  my $p  = $param ;
 
   my $fnx = "parse_dprime" ;
   my $msg = "Parsing $fh";
   logr($fnx, $msg) ;
 
   unless (open DP, "<", $fh) {
-    $msg = "run_stat_tests::parse_dprime: Could not open $fh for input: $!" ;
+    $msg = "Could not open $fh for input: $!" ;
     logr($fnx, $msg) ;
     return 1 ;
   }
@@ -340,7 +355,7 @@ sub parse_dprime {
   # This is the file name used in test_dprime.Snw
   my $fout = "$p->{out}{dir}/sim2000.dprime.just100.out.txt" ;
   unless (open OUT, ">", $fout) {
-    $msg = "run_stat_tests::parse_dprime: Could not open $fout for output: $!" ;
+    $msg = "Could not open $fout for output: $!" ;
     logr($msg) ;
     return 1 ;
   }
@@ -381,7 +396,7 @@ sub parse_dprime {
 }  # end parse_dprime
 
 sub run_dprime {
-  my $p = shift ;
+  my $p = $param ;
   my $outfile = "$p->{out}{dir}/sim2000.dprime.out.txt" ;
 
   my $fnx = "run_dprime" ;
@@ -390,9 +405,9 @@ sub run_dprime {
 
   my $cmd = join(" ", $p->{cms}{snplash},
                  "-engine", "dprime",
-                 "-geno",   $p->{sim2000}{sim2000_geno},
-                 "-phen",   $p->{sim2000}{sim2000_pheno},
-                 "-map",    $p->{sim2000}{sim2000_map},
+                 "-geno",   $p->{bin}{dir}/$p->{bin}{geno},
+                 "-phen",   $p->{bin}{dir}/$p->{bin}{phen},
+                 "-map",    $p->{bin}{dir}/$p->{bin}{map},
                  "-trait",  "ds",
                  "-out",    $outfile) ;
 
@@ -427,22 +442,28 @@ sub run_dprime {
 } # end run_dprime
 
 sub test_dprime {
-  my $p = shift ;               # parameters hash
-  my $file = "test_dprime.Snw" ;
+  my $p = $param ;
+  my $file = "$p->{sweave}{dir}/test_dprime.Snw" ;
+
+  my $fnx = "test_dprime" ;
+  my $msg ;
 
   my $cmd = join(" ", "R CMD Sweave", $file) ;
+
+  $msg = "Running |$cmd|" ;
+  logr($fnx, $msg) ;
 
   system($cmd) ;
   my $val = $? ;
 
   print $val, "\n" ;
   if ($val) {
-    print LOG "run_stat_tests::test_dprime: Procedure test_dprime failed; system returned: $val.\n" ;
+    $msg = " Procedure test_dprime failed; system returned: $val.\n" ;
     return 1 ;
   }
 
-  unless (-e "test_dprime.tex") {
-    print LOG "run_stat_tests::test_dprime: test_qnspgwa.tex not produced.\n" ;
+  unless (-e "$p->{out}/test_dprime.tex") {
+    $msg = "test_qnspgwa.tex not produced.\n" ;
     return 1 ;
   }
   $cmd = "pdflatex test_dprime.tex" ;
@@ -450,11 +471,13 @@ sub test_dprime {
 
   $val = $? ;
   if ($val) {
-    print LOG "run_stat_tests::test_dprime: pdflatex failed; final report not produced.\n" ;
+    $msg = "pdflatex failed; final report not produced.\n" ;
+    logr($fnx, $msg) ;
     return 1 ;
   }
 
-  print LOG "run_stat_tests::test_dprime: R tests ran ok.\n" ;
+  $msg = "R tests ran ok.\n" ;
+  logr($fnx, $msg) ;
 
   unlink("test_dprime.aux") ;
   unlink("test_dprime.log") ;
@@ -464,12 +487,17 @@ sub test_dprime {
 } # end test_dprime
 
 sub run_intertwolog {
-  my $outfile = "sim2000.intertwolog.out.txt" ;
-  my $cmd = join(" ", $snplash,
+  my $p = $param ;
+  my $outfile = "$p->{out}{dir}/sim2000.intertwolog.out.txt" ;
+
+  my $fnx = "run_intertwolog" ;
+  my $mgs ;
+
+  my $cmd = join(" ", $p->{cmd}{snplash},
                  "-engine", "intertwolog",
-                 "-geno",   $sim2000_geno,
-                 "-phen",   $sim2000_pheno,
-                 "-map",    $sim2000_map,
+                 "-geno",   $p->{bin}{dir}/$p->{bin}{geno},
+                 "-phen",   $p->{bin}{dir}/$p->{bin}{phen},
+                 "-map",    $p->{bin}{dir}/$p->{bin}{map},
                  "-cov",    "cov1,cov2",
                  "-trait",  "ds",
                  "-out",    $outfile) ;
@@ -479,22 +507,30 @@ sub run_intertwolog {
 
   print $val, "\n" ;
   if ($val) {
-    print LOG "run_stat_tests::run_intertwolog: Procedure run_intertwolog failed; system returned: $val.\n" ;
+    $msg = "Procedure run_intertwolog failed; system returned: $val.\n" ;
+    logr($fnx, $msg) ;
     return 1 ;
   }
 
   unless (-e $outfile) {
-    print LOG "run_stat_tests::run_intertwolog: Output from snplash/intertwolog not produced.\n" ;
+    $msg = "Output from snplash/intertwolog not produced.\n" ;
+    logr($fnx, $msg) ;
     return 1 ;
   }
 
-  print LOG "run_stat_tests::run_intertwolog: intertwolog ran ok.\n" ;
+  $msg = "snplash/intertwolog ran ok.\n" ;
+  logr($fnx, $msg) ;
+
   return 0 ;
 
 } # end run_intertwolog
 
 sub test_intertwolog {
-  my $file = "test_intertwolog.Snw" ;
+  my $p = $param ;
+  my $file = "$p->{sweave}{dir}/test_intertwolog.Snw" ;
+
+  my $fnx = "test_intertwolog" ;
+  my $msg ;
 
   my $cmd = join(" ", "R CMD Sweave", $file) ;
 
@@ -503,24 +539,29 @@ sub test_intertwolog {
 
   print $val, "\n" ;
   if ($val) {
-    print LOG "run_stat_tests::test_intertwolog: Procedure test_intertwolog failed; system returned: $val.\n" ;
+    $msg = "Test of intertwolog failed; system returned: $val.\n" ;
+    logr($fnx, $msg) ;
     return 1 ;
   }
 
   unless (-e "test_intertwolog.tex") {
-    print LOG "run_stat_tests::test_intertwolog: test_qnspgwa.tex not produced.\n" ;
-    return 1 ;
+   $msg = "File test_qnspgwa.tex not produced.\n" ;
+   logr($fnx, $msg) ;
+   return 1 ;
   }
+
   $cmd = "pdflatex test_intertwolog.tex" ;
   system($cmd) ;
 
   $val = $? ;
   if ($val) {
-    print LOG "run_stat_tests::test_intertwolog: pdflatex failed; final report not produced.\n" ;
+    $msg = "pdflatex failed; final report not produced.\n" ;
+    logr($fnx, $msg) ;
     return 1 ;
   }
 
-  print LOG "run_stat_tests::test_intertwolog: R tests ran ok.\n" ;
+  $msg = "R tests ran ok.\n" ;
+  logr($fnx, $msg) ;
 
   unlink("test_intertwolog.aux") ;
   unlink("test_intertwolog.log") ;
@@ -530,12 +571,17 @@ sub test_intertwolog {
 } # end test_intertwolog
 
 sub run_qsnpgwa {
-  my $outfile = "hisp.qsnpgwa.out.txt" ;
-  my $cmd = join(" ", $snplash,
+  my $p = $param ;
+  my $outfile = "$p->{out}{dir}/hisp.qsnpgwa.out.txt" ;
+
+  my $fnx = "run_qsnpgwa" ;
+  my $msg ;
+
+  my $cmd = join(" ", $p->{cmd}{snplash},
                  "-engine", "qsnpgwa",
-                 "-geno",   $hisp_geno,
-                 "-phen",   $hisp_pheno,
-                 "-map",    $hisp_map,
+                 "-geno",   "$p->{quant}{dir}/$p->{quant}{geno}",
+                 "-phen",   "$p->{quant}{dir}/$p->{quant}{phen}",
+                 "-map",    "$p->{quant}{dir}/$p->{quant}{map}",
                  "-trait",  "response",
                  "--val", " ",
                  "-out",    $outfile) ;
@@ -545,23 +591,30 @@ sub run_qsnpgwa {
 
   print $val, "\n" ;
   if ($val) {
-    print LOG "run_stat_tests::run_qsnpgwa: Procedure run_qsnpgwa failed; system returned: $val.\n" ;
+    $msg = "snplash/qsnpgwa failed; system returned: $val.\n" ;
+    logr($fnx, $msg) ;
     return 1 ;
   }
 
   unless (-e $outfile) {
-    print LOG "run_stat_tests::run_qsnpgwa: Output from snplash/qsnpgwa not produced.\n" ;
+    $msg = "Output from snplash/qsnpgwa not produced.\n" ;
+    logr($fnx, $msg) ;
     return 1 ;
   }
 
-  print LOG "run_stat_tests::run_qsnpgwa: qsnpgwa ran ok.\n" ;
+  $msg = "snplash/qsnpgwa ran ok.\n" ;
+  logr($fnx, $msg) ;
   return 0 ;
 
 } # end run_qsnpgwa
 
 
 sub test_qsnpgwa {
-  my $file = "test_qsnpgwa.Snw" ;
+  my $p = $param ;
+  my $file = "$p->{sweave}{dir}/test_qsnpgwa.Snw" ;
+
+  my $fnx = "test_qsnpgwa" ;
+  my $msg ;
 
   my $cmd = join(" ", "R CMD Sweave", $file) ;
 
@@ -570,24 +623,29 @@ sub test_qsnpgwa {
 
   print $val, "\n" ;
   if ($val) {
-    print LOG "run_stat_tests::test_qsnpgwa: Procedure test_qsnpgwa failed; system returned: $val.\n" ;
+    $msg = "Testing snplash/qsnpgwa failed; system returned: $val.\n" ;
+    logr($fnx, $msg) ;
     return 1 ;
   }
 
   unless (-e "test_qsnpgwa.tex") {
-    print LOG "run_stat_tests::test_qsnpgwa: test_qnspgwa.tex not produced.\n" ;
+    $msg = "File test_qnspgwa.tex not produced.\n" ;
+    logr($fnx, $msg) ;
     return 1 ;
   }
+
   $cmd = "pdflatex test_qsnpgwa.tex" ;
   system($cmd) ;
 
   $val = $? ;
   if ($val) {
-    print LOG "run_stat_tests::test_qsnpgwa: pdflatex failed; final report not produced.\n" ;
+   $msg = "pdflatex failed; final report not produced.\n" ;
+   logr($fnx, $msg) ;
     return 1 ;
   }
 
-  print LOG "run_stat_tests::test_qsnpgwa: R tests ran ok.\n" ;
+  $msg = "R tests ran ok.\n" ;
+  logr($fnx, $msg) ;
 
   unlink("test_qsnpgwa.aux") ;
   unlink("test_qsnpgwa.log") ;
@@ -597,13 +655,18 @@ sub test_qsnpgwa {
 } # end test_qsnpgwa
 
 sub run_snpgwa {
-  my $outfile = "sim2000.snpgwa.out.txt" ;
-  my $cmd = join(" ", $snplash,
+  my $p = $param ;
+  my $outfile = "$p->{out}{dir}/sim2000.snpgwa.out.txt" ;
+
+  my $fnx = "run_snpgwa" ;
+  my $msg ;
+
+  my $cmd = join(" ", $p->{cmd}{snplash},
                  "-engine", "snpgwa",
-                 "-geno",   $sim2000_geno,
-                 "-phen",   $sim2000_pheno,
+                 "-geno",   $p->{bin}{dir}/$p->{bin}{geno},
+                 "-phen",   $p->{bin}{dir}/$p->{bin}{phen},
                  "-trait",  "ds",
-                 "-map",    $sim2000_map,
+                 "-map",    $p->{bin}{dir}/$p->{bin}{map},
                  "-cov",    "cov1,cov2",
                  "--val",
                  "-out",    $outfile) ;
@@ -613,22 +676,30 @@ sub run_snpgwa {
 
   print $val, "\n" ;
   if ($val) {
-    print LOG "run_stat_tests::run_snpgwa: Procedure run_snpgwa failed; system returned: $val.\n" ;
+    $msg = "snplash/snpgwa failed; system returned: $val.\n" ;
+    logr($fnx, $msg) ;
     return 1 ;
   }
 
   unless (-e $outfile) {
-    print LOG "run_stat_tests::run_snpgwa: Output from snplash/snpgwa not produced.\n" ;
+    $msg = "Output from snplash/snpgwa not produced.\n" ;
+    logr($fnx, $msg) ;
     return 1 ;
   }
 
-  print LOG "run_stat_tests::run_snpgwa: snpgwa ran ok.\n" ;
+  $msg = "snplash/snpgwa ran ok.\n" ;
+  logr($fnx, $msg) ;
+
   return 0 ;
 
 } # end run snpgwa
 
 sub test_snpgwa {
-  my $file = "test_snpgwa.Snw" ;
+  my $p = $param ;
+  my $file = "$p->{sweave}{dir}/test_snpgwa.Snw" ;
+
+  my $fnx = "test_snpgwa" ;
+  my $msg ;
 
   my $cmd = join(" ", "R CMD Sweave", $file) ;
 
@@ -637,11 +708,13 @@ sub test_snpgwa {
 
   print $val, "\n" ;
   if ($val) {
-    print LOG "run_stat_tests::test_snpgwa: Procedure test_snpgwa failed; system returned: $val.\n" ;
+    $msg = "test_snpgwa failed; system returned: $val.\n" ;
+    logr($fnx, $msg) ;
     return 1 ;
   }
   unless (-e "test_snpgwa.tex") {
-    print LOG "run_stat_tests::test_snpgwa: test_snpgwa.tex not produced.\n" ;
+    $msg = "File test_snpgwa.tex not produced.\n" ;
+    logr($fnx, $msg) ;
     return 1 ;
   }
 
@@ -650,11 +723,13 @@ sub test_snpgwa {
 
   $val = $? ;
   if ($val) {
-    print LOG "run_stat_tests::test_snpgwa: pdflatex failed; final report not produced.\n" ;
+    $msg = "pdflatex failed; final report not produced.\n" ;
+    logr($fnx, $msg) ;
     return 1
   }
 
-  print LOG "run_stat_tests::test_snpgwa: R tests ran ok.\n" ;
+  $msg = " R tests ran ok.\n" ;
+  logr($fnx, $msg) ;
 
   unlink("test_snpgwa.aux") ;
   unlink("test_snpgwa.log") ;
