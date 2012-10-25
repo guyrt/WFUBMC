@@ -22,7 +22,7 @@
 \title{SNPLASH-SNPGWA Tests}
 \author{}
 
-\SweaveOpts{strip.white=TRUE, prefix.string=figures/snpgwa}
+\SweaveOpts{strip.white=true, prefix.string=figures/snpgwa}
 
 \begin{document}
 \maketitle
@@ -35,14 +35,14 @@ this.test <- "test_snpgwa.Snw"
 snpl.df <- NULL
 log.file <- "run_stat_tests.log"
 
-files <- c("sim2000.snpgwa.out.txt",
-           "sim2000.plink.hwe.txt",
-           "sim2000.rsquare.snpmatrix.txt",
-           "sim2000.logistic.cov.additive.txt",
-           "sim2000.logistic.cov.dominant.txt",
-           "sim2000.logistic.cov.recessive.txt",
-           "sim2000.logistic.cov.lof.txt",
-           "sim2000.logistic.cov.2df.20110824.txt")
+files <- c("./sim2000.snpgwa.out.txt",
+           "./ref_data/sim2000.plink.hwe.txt",
+           "./ref_data/sim2000.rsquare.snpmatrix.txt",
+           "./ref_data/sim2000.logistic.cov.additive.txt",
+           "./ref_data/sim2000.logistic.cov.dominant.txt",
+           "./ref_data/sim2000.logistic.cov.recessive.txt",
+           "./ref_data/sim2000.logistic.cov.lof.txt",
+           "./ref_data/sim2000.logistic.cov.2df.20110824.txt")
 
 log.it <- function(msg) {
   cat(msg, file=log.file, append=TRUE)
@@ -55,15 +55,15 @@ for(f in files) {
    }
 }
 
-snpl.df <- read.table("sim2000.snpgwa.out.txt", as.is=T, row.names=NULL, header=F, skip=36)
-add.df  <- read.table("sim2000.logistic.cov.additive.txt", as.is=T, row.names=NULL, header=T)
-rec.df  <- read.table("sim2000.logistic.cov.recessive.txt", as.is=T, row.names=NULL, header=T)
-dom.df  <- read.table("sim2000.logistic.cov.dominant.txt", as.is=T, row.names=NULL, header=T)
-lof.df  <- read.table("sim2000.logistic.cov.lof.txt", as.is=T, row.names=NULL, header=T)
-two.df  <- read.table("sim2000.logistic.cov.2df.20110824.txt", as.is=T, row.names=NULL, header=T)
-hwe.df  <- read.table("sim2000.plink.hwe.txt", as.is=T, row.names=NULL, header=T)
-dp.df   <- read.table("sim2000.dprime.snpmatrix.txt", as.is=T, row.names=NULL, header=T)
-r2.df   <- read.table("sim2000.rsquare.snpmatrix.txt", as.is=T, row.names=NULL, header=T)
+snpl.df <- read.table("./sim2000.snpgwa.out.txt", as.is=T, row.names=NULL, header=F, skip=36)
+add.df  <- read.table("./ref_data/sim2000.logistic.cov.additive.txt", as.is=T, row.names=NULL, header=T)
+rec.df  <- read.table("./ref_data/sim2000.logistic.cov.recessive.txt", as.is=T, row.names=NULL, header=T)
+dom.df  <- read.table("./ref_data/sim2000.logistic.cov.dominant.txt", as.is=T, row.names=NULL, header=T)
+lof.df  <- read.table("./ref_data/sim2000.logistic.cov.lof.txt", as.is=T, row.names=NULL, header=T)
+two.df  <- read.table("./ref_data/sim2000.logistic.cov.2df.20110824.txt", as.is=T, row.names=NULL, header=T)
+hwe.df  <- read.table("./ref_data/sim2000.plink.hwe.txt", as.is=T, row.names=NULL, header=T)
+dp.df   <- read.table("./ref_data/sim2000.dprime.snpmatrix.txt", as.is=T, row.names=NULL, header=T)
+r2.df   <- read.table("./ref_data/sim2000.rsquare.snpmatrix.txt", as.is=T, row.names=NULL, header=T)
 
 snpgwa.names <- c("chr", "marker", "loc", "diff", "case.ind",
                   "ctrl.ind", "case.raf", "ctrl.raf", "comb.miss", "case.miss",
@@ -210,7 +210,10 @@ abline(0,1)
 \newpage{}
 \section{Odds Ratios}
 SNPLASH/SNPGWA odds ratios with the signal value $-1$ were removed before
-executing the comparison.
+executing the comparison.  In addition, SNPs 168, 486 and 677, which have wildly
+different extreme values for the R reference and SNPGWA in the recessive model,
+are removed for this comparison.
+
 \subsection{Additive Model}
 \begin{center}
 <<fig=T, echo=F>>=
@@ -261,6 +264,8 @@ abline(0,1)
 \begin{center}
 <<fig=T, echo=F>>=
 aberrant <- (snpl.df$or.rec == -1)
+aberrant[c(168,486,677)] <- TRUE
+
 x <- exp(rec.df$b1[!aberrant])
 y <- snpl.df$or.rec[!aberrant]
 
@@ -276,6 +281,8 @@ abline(0,1)
 @ 
 <<fig=T, echo=F>>=
 aberrant <- (snpl.df$uci.rec == -1)
+aberrant[c(168,486,677)] <- TRUE
+
 x <- exp(rec.df$b1[!aberrant] + 1.96*rec.df$b1.se[!aberrant])
 y <- snpl.df$uci.rec[!aberrant]
 plot(x, y,
@@ -289,6 +296,8 @@ abline(0,1)
 @ 
 <<fig=T, echo=F>>=
 aberrant <- (snpl.df$lci.rec == -1)
+aberrant[c(168,486,677)] <- TRUE
+
 x <- exp(rec.df$b1[!aberrant] - 1.96*rec.df$b1.se[!aberrant])
 y <- snpl.df$lci.rec[!aberrant]
 plot(x, y,
