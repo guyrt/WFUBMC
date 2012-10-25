@@ -85,7 +85,7 @@ foreach my $engine (sort @to_do) {
     logr($fnx, $msg) ;
     next TEST ;
   }
-  $msg = "Done with $engine, ", scalar localtime(), ".\n" ;
+  $msg = "Done with $engine, " . scalar localtime() . ".\n" ;
   logr($fnx, $msg) ;
 
 } # end foreach engine
@@ -93,7 +93,7 @@ foreach my $engine (sort @to_do) {
 print "There were $failed failed tests; check log and output.\n"
   if $failed ;
 
-$msg = "Finished snplash evaluation ", scalar localtime(), ".\n" ;
+$msg = "Finished snplash evaluation " . scalar localtime() . ".\n" ;
 logr($fnx, $msg) ;
 
 exit 0 ;
@@ -403,11 +403,11 @@ sub run_dprime {
   my $msg = "Running dprime with output to $outfile." ;
   logr($fnx, $msg) ;
 
-  my $cmd = join(" ", $p->{cms}{snplash},
+  my $cmd = join(" ", $p->{cmd}{snplash},
                  "-engine", "dprime",
-                 "-geno",   $p->{bin}{dir}/$p->{bin}{geno},
-                 "-phen",   $p->{bin}{dir}/$p->{bin}{phen},
-                 "-map",    $p->{bin}{dir}/$p->{bin}{map},
+                 "-geno",   "$p->{bin}{dir}/$p->{bin}{geno}",
+                 "-phen",   "$p->{bin}{dir}/$p->{bin}{phen}",
+                 "-map",    "$p->{bin}{dir}/$p->{bin}{map}",
                  "-trait",  "ds",
                  "-out",    $outfile) ;
 
@@ -430,7 +430,7 @@ sub run_dprime {
   $msg = "Dprime test ran ok.\n" ;
   logr($fnx, $msg) ;
 
-  if (parse_dprime($p, $outfile)) {
+  if (parse_dprime($outfile, $p)) {
     $msg = " Failed to parse $outfile.\n" ;
     logr($fnx, $msg) ;
     return 1 ;
@@ -495,9 +495,9 @@ sub run_intertwolog {
 
   my $cmd = join(" ", $p->{cmd}{snplash},
                  "-engine", "intertwolog",
-                 "-geno",   $p->{bin}{dir}/$p->{bin}{geno},
-                 "-phen",   $p->{bin}{dir}/$p->{bin}{phen},
-                 "-map",    $p->{bin}{dir}/$p->{bin}{map},
+                 "-geno",   "$p->{bin}{dir}/$p->{bin}{geno}",
+                 "-phen",   "$p->{bin}{dir}/$p->{bin}{phen}",
+                 "-map",    "$p->{bin}{dir}/$p->{bin}{map}",
                  "-cov",    "cov1,cov2",
                  "-trait",  "ds",
                  "-out",    $outfile) ;
@@ -663,10 +663,10 @@ sub run_snpgwa {
 
   my $cmd = join(" ", $p->{cmd}{snplash},
                  "-engine", "snpgwa",
-                 "-geno",   $p->{bin}{dir}/$p->{bin}{geno},
-                 "-phen",   $p->{bin}{dir}/$p->{bin}{phen},
+                 "-geno",   "$p->{bin}{dir}/$p->{bin}{geno}",
+                 "-phen",   "$p->{bin}{dir}/$p->{bin}{phen}",
                  "-trait",  "ds",
-                 "-map",    $p->{bin}{dir}/$p->{bin}{map},
+                 "-map",    "$p->{bin}{dir}/$p->{bin}{map}",
                  "-cov",    "cov1,cov2",
                  "--val",
                  "-out",    $outfile) ;
