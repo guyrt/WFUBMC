@@ -6,7 +6,7 @@
 % This file is written using the literate programming tools of R-Sweave.
 % Code following '<<>>=' is evaluated by the R interpreter, up to the next '@'
 % in the first column.  Code following this is LateX.  The report can be
-% run from the command line with 'R CMD Sweaver <this_file_name>' if the
+% run from the command line with 'R CMD Sweave <this_file_name>' if the
 % necessary files are present.
 %
 % David R. McWillliams <dmcwilli@wfubmc.edu>
@@ -35,14 +35,16 @@ log.it <- function(msg) {
   cat(msg, file=log.file, append=TRUE)
 }
 
+ref.dir = "./ref_data"
 files <- c("hisp.additive.lm.txt",
            "hisp.dominant.lm.txt",
            "hisp.recessive.lm.txt",
            "hisp.dprime.snpmatrix.txt",
            "hisp.rsquare.snpmatrix.txt",
-           "hisp.plink.hwe.txt",
-           "hisp.qsnpgwa.out.txt"
+           "hisp.plink.hwe.txt"
            )
+
+files <- paste(ref.dir, files, sep="/")
 
 for(f in files) {
   if( !file_test("-f", f) ) {
@@ -84,16 +86,25 @@ files
 \section{Regression p-Values}
 Regression p-values are compared as -log10(p).
 <<echo=F>>=
-add.df <- read.table("hisp.additive.lm.txt",  as.is=T, row.names=NULL, header=T)
-rec.df <- read.table("hisp.recessive.lm.txt", as.is=T, row.names=NULL, header=T)
-dom.df <- read.table("hisp.dominant.lm.txt",  as.is=T, row.names=NULL, header=T)
+add.file <- paste(ref.dir, "hisp.additive.lm.txt", sep="/")
+add.df   <- read.table(add.file,  as.is=T, row.names=NULL, header=T)
 
-dp.df  <- read.table("hisp.dprime.snpmatrix.txt",  as.is=T, row.names=NULL, header=F)
-rsq.df <- read.table("hisp.rsquare.snpmatrix.txt", as.is=T, row.names=NULL, header=F)
+rec.file <- paste(ref.dir, "hisp.recessive.lm.txt", sep="/")
+rec.df   <- read.table(rec.file, as.is=T, row.names=NULL, header=T)
 
-hwe.df <- read.table("hisp.plink.hwe.txt", as.is=T, row.names=NULL, header=T)
+dom.file <-paste(ref.dir, "hisp.dominant.lm.txt", sep="/")
+dom.df   <- read.table(dom.file,  as.is=T, row.names=NULL, header=T)
 
-hisp.df <- read.table("hisp.qsnpgwa.out.txt", as.is=T, row.names=NULL, header=F, skip=20)
+dp.file  <- paste(ref.dir, "hisp.dprime.snpmatrix.txt", sep="/")
+dp.df    <- read.table(dp.file,  as.is=T, row.names=NULL, header=F)
+
+rsq.file <- paste(ref.dir, "hisp.rsquare.snpmatrix.txt", sep="/")
+rsq.df   <- read.table(rsq.file, as.is=T, row.names=NULL, header=F)
+
+hwe.file <- paste(ref.dir, "hisp.plink.hwe.txt", sep="/")
+hwe.df   <- read.table(hwe.file, as.is=T, row.names=NULL, header=T)
+
+hisp.df <- read.table("./hisp.qsnpgwa.out.txt", as.is=T, row.names=NULL, header=F, skip=20)
 
 names(hisp.df) <- c("chr", "marker", "pos", "diff", "ind.tot",
                     "maf", "pc.miss", "pc.miss.pval", "p", "q",

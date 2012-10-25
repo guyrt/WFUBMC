@@ -35,8 +35,8 @@ log.it <- function(msg) {
   cat(msg, file=log.file, append=TRUE)
 }
 
-files <- c("sim2000.dprime.out.txt",
-           "sim2000.dprime.snpmatrix.txt")
+files <- c("./sim2000.dprime.out.txt",
+           "./ref_data/sim2000.dprime.snpmatrix.txt")
 
 for(f in files) {
   if( !file_test("-f", f) ) {
@@ -79,10 +79,10 @@ snpl.dp.df <- read.table("sim2000.dprime.just100.out.txt",
                          as.is=T, row.names=NULL, header=F)
 names(snpl.dp.df) <- c("m1.name", "m2.name", "d", "dp.multi", "rsq.bi", "delta.bi")
 
-r.dp.df <- read.table("sim2000.dprime.snpmatrix.txt", as.is=T, row.names=NULL, header=T)
+r.dp.df <- read.table("./ref_data/sim2000.dprime.snpmatrix.txt", as.is=T, row.names=NULL, header=T)
 r.dp    <- as.vector(t(as.matrix(r.dp.df[1:1900,])))
 
-r.rsq.df <- read.table("sim2000.rsquare.snpmatrix.txt", as.is=T, row.names=NULL, header=T)
+r.rsq.df <- read.table("./ref_data/sim2000.rsquare.snpmatrix.txt", as.is=T, row.names=NULL, header=T)
 r.rsq    <- as.vector(t(as.matrix(r.rsq.df[1:1900,])))
 @
 
