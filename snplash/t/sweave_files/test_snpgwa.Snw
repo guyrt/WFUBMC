@@ -210,7 +210,10 @@ abline(0,1)
 \newpage{}
 \section{Odds Ratios}
 SNPLASH/SNPGWA odds ratios with the signal value $-1$ were removed before
-executing the comparison.
+executing the comparison.  In addition, SNPs 168, 486 and 677, which have wildly
+different extreme values for the R reference and SNPGWA in the recessive model,
+are removed for this comparison.
+
 \subsection{Additive Model}
 \begin{center}
 <<fig=T, echo=F>>=
@@ -261,6 +264,8 @@ abline(0,1)
 \begin{center}
 <<fig=T, echo=F>>=
 aberrant <- (snpl.df$or.rec == -1)
+aberrant[c(168,486,677)] <- TRUE
+
 x <- exp(rec.df$b1[!aberrant])
 y <- snpl.df$or.rec[!aberrant]
 
@@ -276,6 +281,8 @@ abline(0,1)
 @ 
 <<fig=T, echo=F>>=
 aberrant <- (snpl.df$uci.rec == -1)
+aberrant[c(168,486,677)] <- TRUE
+
 x <- exp(rec.df$b1[!aberrant] + 1.96*rec.df$b1.se[!aberrant])
 y <- snpl.df$uci.rec[!aberrant]
 plot(x, y,
@@ -289,6 +296,8 @@ abline(0,1)
 @ 
 <<fig=T, echo=F>>=
 aberrant <- (snpl.df$lci.rec == -1)
+aberrant[c(168,486,677)] <- TRUE
+
 x <- exp(rec.df$b1[!aberrant] - 1.96*rec.df$b1.se[!aberrant])
 y <- snpl.df$lci.rec[!aberrant]
 plot(x, y,
