@@ -126,6 +126,7 @@ void GenoStats::prepGenoStatsForOutput(int snp, GenoStatsResults &results){
                 // won't happen.
                 break;
             }
+            
             if(hasCov){
                 vector<double> *t = data->get_covariates(i);
                 for(unsigned int j=0;j<t->size();j++){
@@ -159,6 +160,7 @@ void GenoStats::prepGenoStatsForOutput(int snp, GenoStatsResults &results){
     twodegfree_in.push_back(twodegfree1);
     twodegfree_in.push_back(ones);
 
+    lof_in.push_back(add);
     lof_in.push_back(ones);
     lof_in.push_back(lof);
 
@@ -174,11 +176,12 @@ void GenoStats::prepGenoStatsForOutput(int snp, GenoStatsResults &results){
     results.addPVal = add_l.pVal;
     #if DEBUG_GENO_SINGLE
     if(add_beta.size() > 0){
-    cout << "Add size: " << add_in.size() << " " << add_in.at(0).size() << endl;
-    cout << "Additive beta: " ;
-    for(unsigned int i=0;i < add_beta.size(); i++){
-        cout << add_beta.at(i) << " ";
-    }cout << endl;
+        cout << "Add size: " << add_in.size() << " " << add_in.at(0).size() << endl;
+        cout << "Additive beta: " ;
+        for(unsigned int i=0; i < add_beta.size(); i++){
+            cout << add_beta.at(i) << " ";
+        }
+        cout << endl;
     }
     #endif
 
