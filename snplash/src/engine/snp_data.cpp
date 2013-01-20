@@ -67,6 +67,9 @@ int SnpData::remove_covariate(double d){
 	return deleted;
 }
 
+/**
+ * Delete data from SNPs that are missing data for all rows.
+ */
 int SnpData::remove_missing_geno(){
 
 	int deleted = 0;
@@ -508,7 +511,7 @@ void SnpData::fill_allele_codes(int i, char &maj, char &min, char &ref){
 }
 
 ////////////////////////////////////////////////////////////////////////
-// Removal...
+// SNP Removal
 
 /**
  * Remove a SNP from the sample data completely.
