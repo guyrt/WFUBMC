@@ -363,10 +363,7 @@ LRStats GenoStats::runSingleLRTest(const vector<vector<double> > &in, const vect
 }
 
 /*
- * Compute Wald statistic for two coefficients.
- * Return p-value.
- *
- * TODO: make this work for > 2 coefficients.
+ * Compute Wald statistic for two coefficients and return the p-value.
  */
 double GenoStats::runLRTest(const vector<vector<double> > &in, const vector<double> &phen, double &chiS, errorInformation errorData){
 
@@ -411,7 +408,6 @@ double GenoStats::runLRTest(const vector<vector<double> > &in, const vector<doub
 
             return lr.getStats(tdfb, td, chiS);
         }catch(NewtonRaphsonFailureEx){
-
 
             string tempS;
             int tempP;
@@ -467,7 +463,6 @@ double GenoStats::runLRTest(const vector<vector<double> > &in, const vector<doub
             string name1;
             data->get_map_info(errorData.snp, tempS, name1, tempP);
 
-
             if (separableVariable < 0){
                 // Error: poor conditioning.
                 stringstream ss;
@@ -487,6 +482,7 @@ double GenoStats::runLRTest(const vector<vector<double> > &in, const vector<doub
                 Logger::Instance()->writeLine(ss.str());
             }
             return 2.0;
+            
         }catch(alglib::ap_error err){
             retry++;
             if(retry == 1) {startVal = 0.5;}
