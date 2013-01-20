@@ -60,6 +60,7 @@ void LinkageReader::process(SnpData *data, ParamReader *params){
 
 }
 
+
 /** getGenotype()
  *
  * Retrieve and process all information from the genotype file.
@@ -76,28 +77,17 @@ void LinkageReader::process(SnpData *data, ParamReader *params){
  */
 void LinkageReader::getGenotype(SnpData *data, ParamReader *params){
 
-	bool warned = false; // If there are any warnings, we want to print the first one we see.
+	bool warned = false; // If there are any warnings, we want to print only the first one we see.
 	bool highVerbosity = params->get_verbosity(); // This will let us quickly know if we should include extra checks.
 
 	ifstream infile;
 	char s1, s2;
 	vector<string> line;
-	string id; // Will hold first elt of the line.
+	string id; // Will hold first element of the line.
 
 	int line_count = 1;
-	
-	// Push all vectors onto stack. Could get better performance here by
-	// reserving space.
-	
-	long l=0;
-	map<string, int>::iterator it;
-	for(it = order_in_file.begin(); it != order_in_file.end(); it++){
-		if(l < (*it).second) l = (*it).second;
-	}
-	for(long i=0;i<=l;i++){
-		vector<short> vec;
-		data->snp_data.push_back(vec);
-	}
+
+	fillDataMatrix(data);
 
 	infile.open(params->get_linkage_geno_file().c_str(), ifstream::in);
 	if(!infile.is_open()){
@@ -105,7 +95,7 @@ void LinkageReader::getGenotype(SnpData *data, ParamReader *params){
 		exit(0);
 	}
 
-	unsigned long start_spot = 1;  // Change one for skip.  Are we sure?
+	unsigned long start_spot = 1;  // Change one for skip.
 	while( ! this->getLine(&infile, &line, params, true)){
 
 		// Data verification:
@@ -116,26 +106,9 @@ void LinkageReader::getGenotype(SnpData *data, ParamReader *params){
 
 		id = line.at(0);
 
-		// Code the char sets.
+		// On first line, code the char sets.
 		if(line_count == 1){
-			for(unsigned long i=start_spot;i < line.size(); i+=2){
-
-				s1 = *(line.at(i).c_str());
-				s2 = *(line.at(i+1).c_str());
-
-				// EDIT 3-1-2010
-				if(s1 == '0' || s2 == '0'){
-					data->character_list.push_back(' ');
-					data->character_list.push_back(' ');
-				}else if(s1 == s2){
-					data->character_list.push_back(line.at(i).at(0));
-					data->character_list.push_back(' ');
-				}else{
-					data->character_list.push_back(line.at(i).at(0));
-					data->character_list.push_back(line.at(i+1).at(0));
-				}
-
-			}
+			codeCharacterSets(data, line, start_spot);
 		}else if (line_count == 2){
 			// Now, go through and reserve space for each vector.
 			size_t number_of_snps = data->character_list.size() / 2;
@@ -145,8 +118,11 @@ void LinkageReader::getGenotype(SnpData *data, ParamReader *params){
 			}
 		}
 
+		// If individual is used in the phenotype, then store their ordering.
 		if(order_in_file.count(id) == 0){
-			if(params->get_verbosity() > 1) cout << "Individual " << id << " line " << line_count << " unused." << endl;
+			if(params->get_verbosity() > 1){
+				 cout << "Individual " << id << " line " << line_count << " unused." << endl;
+			}
 			line_count++;
 			continue;
 		}else{
@@ -156,9 +132,7 @@ void LinkageReader::getGenotype(SnpData *data, ParamReader *params){
 		// Pull line apart and put it in data.
 		for(unsigned long i=start_spot;i < data->character_list.size(); i+=2){
 
-			// THIS IS A BIT OF A HACK
-			// I am checking here for windowing and omitting the element if it is outside
-			// the window.
+			// Verify element is in the window
 			if(!params->in_window( (i-start_spot)/2+1 )){
 				continue;
 			}
@@ -168,94 +142,75 @@ void LinkageReader::getGenotype(SnpData *data, ParamReader *params){
 			s2 = *(line.at(i+1).c_str());
 
 			// Check for a specified set of characters. Warn on others.
-			if(highVerbosity){
-				if(!warned && !((s1 >= '0' && s1 <= '9' ) || s1 == 'A'|| s1 == 'C'|| s1 == 'T'|| s1 == 'G'|| s1 == 'a'|| s1 == 'c'|| s1 == 'g'|| s1 == 't'|| s1 == 'B'|| s1 == 'b'|| s1 == '.')){
-					warned = true;
-					cerr << "SNP: " << (i-start_spot)/2 + 1 << "  Locus 1" << endl << "Line " << line_count << " had coding '" << s1 << " " << s2 <<"'.  If unexpected, please check data." << endl;
-					cerr << "Further warnings suppressed." << endl;
-				}
-				if(!warned && !((s2 >= '0' && s2 <= '9') || s2 == 'A'|| s2 == 'C'|| s2 == 'T'|| s2 == 'G'|| s2 == 'a'|| s2 == 'c'|| s2 == 'g'|| s2 == 't'|| s2 == 'B'|| s2 == 'b'|| s2 == '.')){
-					warned = true;
-					cerr << "SNP: " << (i-start_spot)/2 + 1 << "  Locus 2" << endl << "Line " << line_count << " had coding '" << s1 << " " << s2 <<"'.  If unexpected, please check data." << endl;
-					cerr << "Further warnings suppressed." << endl;
-				}
+			if(highVerbosity && !warned){
+				warned = warned || performCharacterCheck(s1, s2, line_count, i, start_spot);
 			}
-
 
 			if(s1 == '0' || s2 == '0' || s1 == '.' || s2 == '.'){
 				// A missing in either means push missing onto stack.
 				data->snp_data.at(order_in_file[id]).push_back(0);
-			}else{
-				// First, check if we have stored ' ' , ' ', which means we've always seen blanks here.
-
-				if(' ' == data->character_list.at(i-start_spot) && ' ' == data->character_list.at((i-start_spot)+1)){
-
-					if(s1 == s2){
-						data->character_list.at(i-start_spot) = s1;
-
-					}else{
-						data->character_list.at(i-start_spot) = s1;
-						data->character_list.at(i-start_spot+1) = s2;
-					}
-
-				}
-				else{
-					// Have we seen these elements before?
-					// Check against both spots.  If not match first, check second is available
-					// or matching.  Note that zeros (missing) are skipped.
-					if(s1 != data->character_list.at((i-start_spot))){
-						if(data->character_list.at((i-start_spot)+1) != s1){
-							if(data->character_list.at((i-start_spot)+1) != ' '){
-								if(!warned){
-									cerr << "Message: " << data->character_list.at((i-start_spot)+1)  << " " << data->character_list.at((i-start_spot)) << endl;
-									cerr << "Have: " << s1 << " " << s2 << endl;
-									cerr << "Non-biallelic SNP: " << (i-start_spot)/2 + 1 << "  Locus 1" << endl << "Line " << line_count << endl;
-									cerr << "Individuals that do not have characters " << data->character_list.at((i-start_spot)+1)  << " or " << data->character_list.at((i-start_spot)) << " will be treated as missing." << endl;
-								}
-								warned = true;
-							}else{
-								data->character_list.at((i-start_spot)+1) = s1;
-							}
-						}
-					}
-					if(s2 != data->character_list.at((i-start_spot))){
-						if(data->character_list.at((i-start_spot)+1) != s2){
-							if(data->character_list.at((i-start_spot)+1) != ' '){
-								if(!warned){
-									cerr << "Message: " << data->character_list.at((i-start_spot)+1)  << " " << data->character_list.at((i-start_spot)) << endl;
-									cerr << "Have: " << s1 << " " << s2 << endl;
-									cerr << "Non-biallelic SNP: " << (i-start_spot)/2 + 1 << "  Locus 1" << endl << "Line " << line_count << endl;
-									cerr << "Individuals that do not have characters " << data->character_list.at((i-start_spot)+1)  << " or " << data->character_list.at((i-start_spot)) << " will be treated as missing." << endl;
-								}
-								warned = true;
-							}else{
-								data->character_list.at((i-start_spot)+1) = s2;
-							}
-						}
-					}
-				}
-
-				// Push this element onto the end of the last genotype.
-				// Use coding described in snp_data.h.
-				short push_val = 1;
-				char d1, d2;
-				d1 = data->character_list.at(i-start_spot);
-				d2 = data->character_list.at(i-start_spot+1);
-
-				if(s1 == d1 && s2 == d1){
-					push_val = 1;
-				}else if(s1 == d1 && s2 == d2){
-					push_val = 2;
-				}else if(s1 == d2 && s2 == d1){
-					push_val = 3;
-				}else if(s1 == d2 && s2 == d2){
-					push_val = 4;
-				}else{
-					push_val = 0;
-				}
-
-				data->snp_data.at( order_in_file[id] ).push_back( push_val );
+				continue;
 			}
+			
+			// If both spots are blank, then attempt to store both s1 and s2.
+			if(' ' == data->character_list.at(i-start_spot) && ' ' == data->character_list.at((i-start_spot)+1)){
+				if(s1 == s2){
+					data->character_list.at(i-start_spot) = s1;
+				}else{
+					data->character_list.at(i-start_spot) = s1;
+					data->character_list.at(i-start_spot+1) = s2;
+				}
+			} else {
+				// Have we seen these elements before?
+				// Check against both spots.  If not match first, check second is available
+				// or matching.  Note that zeros (missing) are skipped.
+				if(s1 != data->character_list.at((i-start_spot)) && s1 != data->character_list.at((i-start_spot)+1)){
+					if(data->character_list.at((i-start_spot)+1) != ' '){
+						if(!warned){
+							cerr << "Message: " << data->character_list.at((i-start_spot)+1)  << " " << data->character_list.at((i-start_spot)) << endl;
+							cerr << "Have: " << s1 << " " << s2 << endl;
+							cerr << "Non-biallelic SNP: " << (i-start_spot)/2 + 1 << "  Locus 1" << endl << "Line " << line_count << endl;
+							cerr << "Individuals that do not have characters " << data->character_list.at((i-start_spot)+1)  << " or " << data->character_list.at((i-start_spot)) << " will be treated as missing." << endl;
+						}
+						warned = true;
+					}else{
+						data->character_list.at((i - start_spot) + 1) = s1;
+					}
+				}
+				if(s2 != data->character_list.at((i-start_spot)) && s2 != data->character_list.at((i-start_spot)+1)){
+					if(data->character_list.at((i - start_spot) + 1) != ' '){
+						if(!warned){
+							cerr << "Message: " << data->character_list.at((i-start_spot)+1)  << " " << data->character_list.at((i-start_spot)) << endl;
+							cerr << "Have: " << s1 << " " << s2 << endl;
+							cerr << "Non-biallelic SNP: " << (i-start_spot)/2 + 1 << "  Locus 1" << endl << "Line " << line_count << endl;
+							cerr << "Individuals that do not have characters " << data->character_list.at((i-start_spot)+1)  << " or " << data->character_list.at((i-start_spot)) << " will be treated as missing." << endl;
+						}
+						warned = true;
+					}else{
+						data->character_list.at((i - start_spot) + 1) = s2;
+					}
+				}
+			}
+
+			// Push this element onto the end of the last genotype.
+			// Use coding described in snp_data.h.
+			short push_val = 1;
+			char d1 = data->character_list.at(i-start_spot);
+			char d2 = data->character_list.at(i-start_spot+1);
+
+			if(s1 == d1 && s2 == d1){
+				push_val = 1;
+			}else if(s1 == d1 && s2 == d2){
+				push_val = 2;
+			}else if(s1 == d2 && s2 == d1){
+				push_val = 3;
+			}else if(s1 == d2 && s2 == d2){
+				push_val = 4;
+			}else{
+				push_val = 0;
+			}
+
+			data->snp_data.at(order_in_file[id]).push_back( push_val );
 
 		}
 
@@ -421,6 +376,7 @@ void LinkageReader::getMapFile(SnpData *data, ParamReader *params){
 			if(line.size() == 4){
 				data->push_map(line.at(0), line.at(1), atol(line.at(3).c_str()));
 			}else{
+				// If a reference allele is provided, store it in the map.
 				data->push_map(line.at(0), line.at(1), atol(line.at(3).c_str()), line.at(4).at(0));
 			}
 		}
@@ -456,4 +412,75 @@ void LinkageReader::verify_phen_header(int trait_pos, vector<int> *cov_pos, vect
 	}
 
 	if(quit){exit(0);}
+}
+
+
+/**
+ * Initialize data matrix to the correct size.
+ */
+void LinkageReader::fillDataMatrix(SnpData *data) {
+	long numSNPS = 0;
+	map<string, int>::iterator it;
+	for(it = order_in_file.begin(); it != order_in_file.end(); it++){
+		if(numSNPS < (*it).second){
+			numSNPS = (*it).second;
+		}
+	}
+	data->snp_data.reserve(numSNPS);
+	for(long i = 0; i <= numSNPS; i++){
+		vector<short> vec;
+		data->snp_data.push_back(vec);
+	}
+}
+
+/**
+ * Attempt to code character sets. This performs two functions:
+ * 
+ * 1) Most importantly, reserve space in the character_list array.
+ * 2) If possible, note the characters that are used for each SNP.
+ * 
+ * @param data Pointer to data object
+ * @param line Vector of string tokens in the line.
+ * @param start_spot Location in line of first SNP.
+ */
+void LinkageReader::codeCharacterSets(SnpData *data, const vector<string> &line, unsigned long start_spot) {
+	char s1, s2;
+	data->character_list.reserve((line.size() - start_spot) / 2);
+	for(unsigned long i=start_spot;i < line.size(); i+=2){
+
+		s1 = *(line.at(i).c_str());
+		s2 = *(line.at(i+1).c_str());
+
+		if(s1 == '0' || s2 == '0'){
+			data->character_list.push_back(' ');
+			data->character_list.push_back(' ');
+		}else if(s1 == s2){
+			data->character_list.push_back(line.at(i).at(0));
+			data->character_list.push_back(' ');
+		}else{
+			data->character_list.push_back(line.at(i).at(0));
+			data->character_list.push_back(line.at(i+1).at(0));
+		}
+	}
+}
+
+/**
+ * Check that characters are in the allowed character set.
+ * 
+ * @param s1 Locus 1 character
+ * @param s2 Locus 2 character
+ * @return boolean true iff warning was made.
+ */
+bool LinkageReader::performCharacterCheck(const char s1, const char s2, unsigned long line_count, unsigned int i, unsigned int start_spot) {
+	if(!(s1 >= '0' && s1 <= '9' ) || s1 == 'A'|| s1 == 'C'|| s1 == 'T'|| s1 == 'G'|| s1 == 'a'|| s1 == 'c'|| s1 == 'g'|| s1 == 't'|| s1 == 'B'|| s1 == 'b'|| s1 == '.'){
+		cerr << "SNP: " << (i-start_spot)/2 + 1 << "  Locus 1" << endl << "Line " << line_count << " had coding '" << s1 << ", " << s2 <<"'.  If unexpected, please check data." << endl;
+		cerr << "Further warnings suppressed." << endl;
+		return true;
+	}
+	if(!(s2 >= '0' && s2 <= '9') || s2 == 'A'|| s2 == 'C'|| s2 == 'T'|| s2 == 'G'|| s2 == 'a'|| s2 == 'c'|| s2 == 'g'|| s2 == 't'|| s2 == 'B'|| s2 == 'b'|| s2 == '.'){
+		cerr << "SNP: " << (i-start_spot)/2 + 1 << "  Locus 2" << endl << "Line " << line_count << " had coding '" << s1 << ", " << s2 <<"'.  If unexpected, please check data." << endl;
+		cerr << "Further warnings suppressed." << endl;
+		return true;
+	}
+	return false;
 }

@@ -300,6 +300,11 @@ void SnpData::verify_data_size_match(){
  *
  * Also updates the max length for all maps.
  *
+ * @param c Chromosome
+ * @param n SNP name
+ * @param p SNP position
+ * @param ref Optional reference allele character code. Defaults to null
+ * 
  */
 void SnpData::push_map(string c, string n, long p, char ref){
 	MapData m;
@@ -312,6 +317,20 @@ void SnpData::push_map(string c, string n, long p, char ref){
 
 	if(n.length() > maxMapLength) maxMapLength = n.length();
 }
+
+/**
+ *
+ * Insert a new map structure into the map array at end.
+ *
+ * Also updates the max length for all maps.
+ *
+ * @param c Chromosome
+ * @param n SNP name
+ * @param p SNP position
+ * @param ref Reference allele character code.
+ * @param minor Minor allele character code.
+ * 
+ */
 void SnpData::push_map(string c, string n, long p, char ref, char minor){
 	MapData m;
 	m.chr = c;

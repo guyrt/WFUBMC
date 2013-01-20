@@ -28,6 +28,11 @@ private:
 	void getMapFile(SnpData *, ParamReader *);
 	
 	void verify_phen_header(int, vector<int> *, vector<string> *, ParamReader *);
+	
+	// helpers
+	void fillDataMatrix(SnpData *);
+	void codeCharacterSets(SnpData *, const vector<string> &line, unsigned long start_spot);
+	bool performCharacterCheck(const char s1, const char s2, unsigned long line_count, unsigned int i, unsigned int start_spot);
 
 };
 
