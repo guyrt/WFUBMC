@@ -33,6 +33,12 @@ SnpData::~SnpData(){
 
 /**
  * Remove anyone with phenotype listed.
+ *
+ * This method uses exact arithmatic on floating point numbers, which is almost always wrong.
+ * In this case, we mean to specify that the exact *value* that was imported as phenotype is 
+ * the target, and we are assuming that the transformation from bits to a float is consistent
+ * on any given machine.
+ * 
  * @param d All individuals with given phenotype are removed.
  * @return int Number of individuals that are removed.
  */
@@ -40,12 +46,12 @@ int SnpData::remove_phenotype(double d){
 	int deleted = 0;
 	for(unsigned int i=0;i<phenotypes.size();i++){
 		if(phenotypes.at(i) == d){
-			if(delete_indiv(i)) deleted++;
+			if(delete_indiv(i)){
+				deleted++;
+			}
 		}
-
 	}
 	indiv_flush();
-
 	return deleted;
 }
 
@@ -67,6 +73,9 @@ int SnpData::remove_covariate(double d){
 	return deleted;
 }
 
+/**
+ * Delete data from SNPs that are missing data for all rows.
+ */
 int SnpData::remove_missing_geno(){
 
 	int deleted = 0;
@@ -300,6 +309,11 @@ void SnpData::verify_data_size_match(){
  *
  * Also updates the max length for all maps.
  *
+ * @param c Chromosome
+ * @param n SNP name
+ * @param p SNP position
+ * @param ref Optional reference allele character code. Defaults to null
+ * 
  */
 void SnpData::push_map(string c, string n, long p, char ref){
 	MapData m;
@@ -312,6 +326,20 @@ void SnpData::push_map(string c, string n, long p, char ref){
 
 	if(n.length() > maxMapLength) maxMapLength = n.length();
 }
+
+/**
+ *
+ * Insert a new map structure into the map array at end.
+ *
+ * Also updates the max length for all maps.
+ *
+ * @param c Chromosome
+ * @param n SNP name
+ * @param p SNP position
+ * @param ref Reference allele character code.
+ * @param minor Minor allele character code.
+ * 
+ */
 void SnpData::push_map(string c, string n, long p, char ref, char minor){
 	MapData m;
 	m.chr = c;
@@ -489,7 +517,7 @@ void SnpData::fill_allele_codes(int i, char &maj, char &min, char &ref){
 }
 
 ////////////////////////////////////////////////////////////////////////
-// Removal...
+// SNP Removal
 
 /**
  * Remove a SNP from the sample data completely.
@@ -600,9 +628,13 @@ bool SnpData::delete_indiv(int l){
 	return true;
 }
 
-// Actually perform the delete.
+// Actually perform the delete for individuals in the indiv_delete_records function.
+// Works in reverse order. This method is not efficient b/c we don't want to assume
+// that we can store the data in memory more than once.
 void SnpData::indiv_flush(){
-	if(indiv_delete_records.size() == 0){return;}
+	if(indiv_delete_records.size() == 0){
+		return;
+	}
 
 	vector<int>::reverse_iterator it;
 	sort(indiv_delete_records.begin(), indiv_delete_records.end());
