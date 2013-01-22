@@ -126,6 +126,7 @@ void GenoStats::prepGenoStatsForOutput(int snp, GenoStatsResults &results){
                 // won't happen.
                 break;
             }
+            
             if(hasCov){
                 vector<double> *t = data->get_covariates(i);
                 for(unsigned int j=0;j<t->size();j++){
@@ -159,6 +160,7 @@ void GenoStats::prepGenoStatsForOutput(int snp, GenoStatsResults &results){
     twodegfree_in.push_back(twodegfree1);
     twodegfree_in.push_back(ones);
 
+    lof_in.push_back(add);
     lof_in.push_back(ones);
     lof_in.push_back(lof);
 
@@ -174,11 +176,12 @@ void GenoStats::prepGenoStatsForOutput(int snp, GenoStatsResults &results){
     results.addPVal = add_l.pVal;
     #if DEBUG_GENO_SINGLE
     if(add_beta.size() > 0){
-    cout << "Add size: " << add_in.size() << " " << add_in.at(0).size() << endl;
-    cout << "Additive beta: " ;
-    for(unsigned int i=0;i < add_beta.size(); i++){
-        cout << add_beta.at(i) << " ";
-    }cout << endl;
+        cout << "Add size: " << add_in.size() << " " << add_in.at(0).size() << endl;
+        cout << "Additive beta: " ;
+        for(unsigned int i=0; i < add_beta.size(); i++){
+            cout << add_beta.at(i) << " ";
+        }
+        cout << endl;
     }
     #endif
 
@@ -360,10 +363,7 @@ LRStats GenoStats::runSingleLRTest(const vector<vector<double> > &in, const vect
 }
 
 /*
- * Compute Wald statistic for two coefficients.
- * Return p-value.
- *
- * TODO: make this work for > 2 coefficients.
+ * Compute Wald statistic for two coefficients and return the p-value.
  */
 double GenoStats::runLRTest(const vector<vector<double> > &in, const vector<double> &phen, double &chiS, errorInformation errorData){
 
@@ -408,7 +408,6 @@ double GenoStats::runLRTest(const vector<vector<double> > &in, const vector<doub
 
             return lr.getStats(tdfb, td, chiS);
         }catch(NewtonRaphsonFailureEx){
-
 
             string tempS;
             int tempP;
@@ -464,7 +463,6 @@ double GenoStats::runLRTest(const vector<vector<double> > &in, const vector<doub
             string name1;
             data->get_map_info(errorData.snp, tempS, name1, tempP);
 
-
             if (separableVariable < 0){
                 // Error: poor conditioning.
                 stringstream ss;
@@ -484,6 +482,7 @@ double GenoStats::runLRTest(const vector<vector<double> > &in, const vector<doub
                 Logger::Instance()->writeLine(ss.str());
             }
             return 2.0;
+            
         }catch(alglib::ap_error err){
             retry++;
             if(retry == 1) {startVal = 0.5;}
