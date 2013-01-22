@@ -132,14 +132,14 @@ LRStats LogisticRegression::getSingleStats(const vector<double> &betas, const ve
  * 
  * @param betas A vector of beta values
  * @param invInf Inverse of corresponding information matrix.
- * @return chiS The test statistic
+ * 
+ * @return chiSq The test statistic
  * @return p-value.
  */
 double LogisticRegression::getStats(const vector<double> &betas, const vector<vector<double> > invInf, double &chiS){
     
     if(betas.size() != invInf.size())
         return 2.0;
-    
     
     int sz = betas.size()-1;
     
@@ -161,21 +161,10 @@ double LogisticRegression::getStats(const vector<double> &betas, const vector<ve
         }
     }
     
-    #if DEBUG_STATS
-    cout << "Before:" << endl;
-    cout << vInvInf(0,0) << " " << vInvInf(0,1) << endl;
-    cout << vInvInf(1,0) << " " << vInvInf(1,1) << endl;
-    #endif
-    
     alglib::matinvreport report;
     alglib::ae_int_t reportInfo;
     rmatrixinverse(vInvInf, reportInfo, report);
     if(reportInfo != 1) return 2.0;
-    #if DEBUG_STATS
-    cout << "After:" << endl;
-    cout << vInvInf(0,0) << " " << vInvInf(0,1) << endl;
-    cout << vInvInf(1,0) << " " << vInvInf(1,1) << endl;
-    #endif
     
     // Check condition number.
     if (report.r1 < condition_number_limit){
@@ -195,10 +184,6 @@ double LogisticRegression::getStats(const vector<double> &betas, const vector<ve
                         vTemp,0,sz,1.0,singleNum,0,0,0.0);
     
     chiS = singleNum(0);
-    
-    #if DEBUG_STATS
-    cout << "x2val: " << chiS << endl;
-    #endif
     
     try{
         return Statistics::chi2prob(chiS, betas.size());
