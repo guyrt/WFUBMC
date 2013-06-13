@@ -579,7 +579,8 @@ sub run_qsnpgwa {
 
   my $cmd = join(" ", $p->{cmd}{snplash},
                  "-engine", "qsnpgwa",
-                 "-geno",   "$p->{quant}{dir}/$p->{quant}{geno}",
+# drm                 "-geno",   "$p->{quant}{dir}/$p->{quant}{geno}",
+                 "-bed", "$p->{quant}{dir}/$p->{quant}{bed}",
                  "-phen",   "$p->{quant}{dir}/$p->{quant}{phen}",
                  "-map",    "$p->{quant}{dir}/$p->{quant}{map}",
                  "-trait",  "response",
@@ -663,7 +664,8 @@ sub run_snpgwa {
 
   my $cmd = join(" ", $p->{cmd}{snplash},
                  "-engine", "snpgwa",
-                 "-geno",   "$p->{bin}{dir}/$p->{bin}{geno}",
+# drm                 "-geno",   "$p->{bin}{dir}/$p->{bin}{geno}",
+                 "-bed",   "$p->{bin}{dir}/$p->{bin}{bed}",
                  "-phen",   "$p->{bin}{dir}/$p->{bin}{phen}",
                  "-trait",  "ds",
                  "-map",    "$p->{bin}{dir}/$p->{bin}{map}",

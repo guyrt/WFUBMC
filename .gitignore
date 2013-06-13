@@ -4,9 +4,14 @@
 */t/*aux
 */t/*tex
 */t/figures/*
+*/t/*gz
+*/t/*txt
 build/*
 */QsnpgwaTest/*
 
 snplash/docs/doxygen.conf
 snplash/snplash
 snplash/snplashUnitTestDriver
+snplash/manual/*tmp
+snplash/manual/aux
+snplash/manual/*log
