@@ -1,25 +1,776 @@
+% This section was copied from the document 'SNPGWA4.0_User_Guide.doc'
+% downloaded from the PHS web site 06-Sep-2011
 \section{SNPGWA}
 \label{sec:snpgwa}
 \subsection{Description}
+Logistic regression with a binomial trait (case/control) and optional
+covariates.  SNPGWA allows a maximum of two alphanumeric characters per genetic
+marker to represent the alleles of a diallelic marker in the input file.
+Missing allelic data is represented by 0 (zero) and does not count toward the
+maximum of two characters.
+
+\subsubsection{Hardy-Weinberg Proportions Tests}
+For each marker, SNPGWA calculates the maximum likelihood estimate of the allele
+frequencies, observed and expected number of heterozygotes and homozygotes under
+the assumption of Hardy-Weinberg equilibrium and p-values for the chi square
+goodness of fit and exact tests for Hardy-Weinberg equilibrium \cite{Guo92}.
+
+\subsubsection{Goodness of Fit Test}
+\label{goodness-of-fit}
+SNPGWA calculates p-values for the Hardy-Weinberg goodness of fit test for the
+combined group of cases and controls only.  The table and equations below
+describe how SNPGWA categorizes single marker allele data and calculates the chi
+square value for the HW goodness of fit test.
+
+\vspace{1em}
+\begin{tabular}{rccc}
+  \hline
+  {} & \textbf{AA} & \textbf{Aa} & \textbf{aa} \\
+  \hline
+  Case and Controls & $n_1$ & $n_2$ & $n_3$ \\
+  \hline
+\end{tabular}
+\vspace{1em}
+
+SNPGWA calculates allele frequencies (\textit{p} and \textit{q}), expected
+numbers of homozygotes and heterozygotes ($E_1$, $E_2$ and $E_3$) and chi square
+value ($\chi^2$) for the goodness-of-fit test according to the following
+equations.
+
+\begin{equation*}
+  p = \frac{2n_1 + n_2}{2n_1 + 2n_2 + 2n_3}, \quad  q = \frac{2n_3 +n_2}{2n_1 + 2n_2 + 2n_3}
+\end{equation*}
+
+\begin{equation*}
+  E_1=p^2(n_1 + n_2 +n_3), E_2 = 2pq(n_1 + n_2 +n_3) \text{ and } E_3=(n_1 + n_2 +n_3)
+\end{equation*}
+
+\begin{equation*}
+  \chi^2 = \frac{(E_1 - n_1)^2}{E_1} + \frac{(E_2 - n_2)^2}{E_2} + \frac{(E_2 - n_3)^2}{E_3}
+\end{equation*}
+
+$\chi^2$ is distributed as an asymptotic chi square value with one degree of
+freedom.  Low p-values indicate deviation from Hardy-Weinberg Equilibrium.
+
+\subsubsection{Exact Test}
+\label{exact-test}
+SNPGWA calculates p-values for the Hardy-Weinberg exact test for the combined
+group of cases and controls, cases only and controls only.  The exact test is
+that of Wigginton et al. and is calculated as follows \cite{Wiggington05}.
+
+Consider a sample of $N$ individuals and a diallelic marker with $n_A$ alleles of
+type $A$ and $n_{Aa}$ heterozygotes.  Note that if $N$, $n_A$ and $n_{Aa}$ are
+known then $n_a$, $n_{aa}$ and $n_{AA}$ can be determined.  Calculating the
+exact test p-value begins by calculating the probability of every possible
+heterozygote configuration given $N$ and $n_a$ ($P(N_{Aa} = n_{Aa} |N,n_A)$ for
+all $n_{Aa}$). Once these are known, the p-value is the sum of the probability
+of all heterozygote configuration that are less than the probability of the
+observed heterozygote configuration in our sample.
+\begin{equation*}
+(P_{HWE}=\sum_{n^*_{Aa}}I[P(N_{Aa} = n_{Aa}|N,n_a)\geq P(N_{Aa} = n^*_{Aa}|N,n_A)] * P(N_{Aa} = n^*_{Aa}|N,n_A)
+\end{equation*}
+
+\vspace{1em}
+where $I[x]$ is an indicator function that is equal to 1 when the
+comparison is true and 0 when false).  SNPGWA implements an iterative process
+for calculating heterozygote probabilities (Guo and Thompson, \cite{Guo92}) by
+determining the heterozygote configuration with the highest probability and
+assigning it a probability of 1.0.  All other heterozygotes probabilities are
+calculated according to the formulas:
+\vspace{1em}
+
+\begin{equation*}
+  P(N_{Aa} = n_{Aa}+2|N,n_A) = P(N_{Aa}=n_{Aa} |N,n_A)\frac{4n_{AA}n_{aa}}{(n_{Aa}+2)(n_{Aa}+1)}
+\end{equation*}
+
+\noindent{}and
+
+\begin{equation*}
+  P(N_{Aa}=n_{Aa}-2|N,n_A) = P(N_{Aa}=n_{Aa}|N,n)\frac{4n_{Aa}(n_{Aa}-1)}{4(n_{AA}+1)(n_{aa}+1)}.
+\end{equation*}
+
+\noindent{}SNPGWA then calculates the p-value as described above.  Low p-values indicate
+deviation from Hardy-Weinberg Equilibrium.
+
+\subsubsection{Genotype Tests}
+For each marker, SNPGWA calculates the p-values for four tests of genotypic
+association.  Specifically, it calculates the two degree of freedom genotypic
+test of association and tests for three genetic models: dominant, additive and
+recessive.  SNPGWA also calculates the lack of fit test for the additive genetic
+model.  SNPGWA calculates the odds ratio and odds ratio 95\% confidence interval
+for the dominant, additive and recessive tests.  SNPGWA allows the option of
+calculating empirical p-values for all genotypic tests.  See \{FIX internal
+refs\} Sections I.G: Empirical P-Value Calculation and III.A.4: Empirical
+P-Value Calculation from the Command Line for information on empirical p-value
+calculation.
+
+The genotype tests may be performed using covariate adjustment by specifying
+covariates (which must be included in the phenotype file) on the command line
+via the -cov option.  See Section III.A.  \{FIX internal refs\}
+
+\begin{enumerate}
+\item{Two Degree of Freedom Test}
+SNPGWA calculates the two degree of freedom genotypic association test as the
+standard 2 x 3 contingency table chi square test of independence (Agresti
+\cite{Agresti02}).  Low p-values indicate deviation from independence.
+
+The tables below describe how SNPGWA categorizes single marker allele data and
+calculates the chi square value for the two degree of freedom test.
+
+\begin{center}
+  \begin{tabular}{lcccc}
+    \hline
+    {}     & \textbf{AA} & \textbf{Aa} & \textbf{aa} & \\
+    \hline
+    Case    & $n_{11}$ & $n_{12}$ & $n_{13}$ & $n_{1+}$ \\
+    Control & $n_{21}$ & $n_{22}$ & $n_{23}$ & $n_{2+}$ \\
+    {}    & $n_{+1}$ & $n_{+2}$ & $n_{+3}$ & $n$     \\
+    \hline
+    \label{tab:n_tab}
+  \end{tabular}
+\end{center}
+
+\begin{center}
+  \begin{tabular}{lccc}
+    \hline
+    {} & \textbf{AA} & \textbf{Aa} & \textbf{aa} \\
+    \hline
+    Case    & $E_{11} = n_{1+}n_{+1}/n$ & $E_{12} = n_{1+}n_{+2}/n$ & $E_{13} = n_{1+}n_{+3}/n$ \\
+    Control & $E_{21} = n_{2+}n_{+1}/n$ & $E_{22} = n_{2+}n_{+2}/n$ & $E_{23} = n_{2+}n_{+3}/n$ \\
+    \hline
+    \label{tab:e_tab}
+  \end{tabular}
+\end{center}
+
+\begin{align*}
+  \chi^2 &= \frac{(E_{11}-n_{11})^2}{E_{11}} + \frac{(E_{12}-n_{12})^2}{E_{12}} + \frac{(E_{13}-n_{13})^2}{E_{13}} \\
+         &+ \frac{(E_{21}-n_{21})^2}{E_{21}} + \frac{(E_{22}-n_{22})^2}{E_{22}} + \frac{(E_{23}-n_{23})^2}{E_{23}}
+\end{align*}
+
+\noindent{}$\chi^2$ is distributed as an asymptotic chi square value with two
+degrees of freedom.
+
+\item{Dominant and Recessive Tests}
+The tests for the dominant and recessive genetic models are set up as a $2 * 2$
+contingency table chi square test, combining heterozygotes and homozygotes.  The
+dominant model tests for an association between the outcome and having at least
+one copy of the reference allele, while the recessive model tests for an
+association between the outcome and having two copies of the reference allele.
+By default, SNPGWA assigns the minor allele as the reference allele.  SNPGWA
+allows the option to specify the reference allele for the dominant and recessive
+tests from the map file.  See Section III.A.5, Map File Option.  Note that if
+the reference allele for a single marker is switched from the minor allele to
+the major allele then the dominant and recessive test p-values, odds ratios and
+95\% confidence intervals are reversed in the output file(s).
+
+The tables below describe how SNPGWA categorizes single marker allele data and
+calculates the chi square value for the dominant and recessive tests.  Lower
+case 'a' represents the reference allele.
+
+\vspace{2em}
+Dominant Test:
+
+\begin{center}
+  \begin{tabular}{lccc}
+    \hline
+    {}  & \textbf{AA}  & \textbf{Aa \& aa} & {} \\
+    \hline
+    Case    & $n_{11}$ & $n_{12} + n_{13}$ & $n_{1+}$ \\
+    Control & $n_{21}$ & $n_{22} + n_{23}$ & $n_{2+}$ \\
+    {}    & $n_{+1}$ & $n_{+2}$         & $n$ \\
+    \hline  
+  \end{tabular}
+\end{center}
+
+\begin{center}
+  \begin{tabular}{lcc}
+    \hline
+    {}     & \textbf{AA}            & \textbf{Aa \& aa} \\
+    \hline
+    Case    & $E_{11} = n_{1+}n_{+1}/n$ &  $E_{12} = n_{1+}n_{+2}/n$ \\
+    Control & $E_{21} = n_{2+}n_{+1}/n$ &  $E_{22} = n_{2+}n_{+2}/n$ \\
+    \hline
+  \end{tabular}
+\end{center}
+
+\vspace{2em}
+Recessive Test:
+
+\vspace{2em}
+\begin{center}
+  \begin{tabular}{lccc}
+    \hline
+    {}     & \textbf{AA \& aa} & \textbf{aa} & {} \\
+    \hline
+    Case    & $n_{11} + n_{12}$   & $n_{13}$ & $n_{1+}$ \\
+    Control & $n_{21} + n_{22}$   & $n_{23}$ & $n_{2+}$ \\
+    {}     & $n_{+1}$           & $n_{+2}$ & $n$ \\
+    \hline  
+  \end{tabular}
+\end{center}
+
+\begin{center}
+  \begin{tabular}{lcc}
+    \hline
+    {}     & \textbf{AA \& Aa}    & \textbf{aa} \\
+    \hline
+    Case    & $E_{11}=n_{1+}n_{+1}/n$ & $E_{12}=n_{1+}n_{+2}/n$ \\
+    Control & $E_{21}=n_{2+}n_{+1}/n$ & $E_{22}=n_{2+}n_{+2}/n$ \\
+    \hline
+  \end{tabular}
+\end{center}
+
+\begin{equation*}
+  \chi^2 = \frac{(E_{11}-n_{11})^2}{E_{11}} + \frac{(E_{12}-n_{12})^2}{E_{12}} +\frac{(E_{21}-n_{21})^2}{E_{21}} + \frac{(E_{21}-n_{21})^2}{E_{21}}
+\end{equation*}
+
+$\chi^2$ for both the dominant and recessive tests is distributed
+as an asymptotic chi square value with one degree of freedom.
+
+SNPGWA calculates the odds ratios and 95\% confidence intervals for the dominant
+and recessive genetic models from the $2 x 2$ tables above (Agresti 2002
+\cite{Agresti02}):
+
+Dominant Test:
+
+\begin{equation*}
+  OR = \frac{n_{11}/(n_{12}+n_{13})}{n_{21}/(n_{22}+n_{23})}
+\end{equation*}
+
+\begin{equation*}
+  (LCI,UCI) = (\exp(log(OR) - (1.96B)), \exp(log(OR)+1.96B))
+\end{equation*}
+
+where 
+
+\begin{equation*}
+  B = \sqrt{\frac{1}{n_{11}} + \frac{1}{n_{12}+n_{13}} + \frac{1}{n_{21}} + \frac{1}{n_{22}+n_{23}}}
+\end{equation*}
+
+SNPGWA calculates sensitivity, specificity and C-statistics for dominant and
+recessive models (Rosner, 2006 \cite{Rosner06}).  The C-statistic is the area
+under the receiver operating characteristic (ROC) curve.
+
+Using the tables above, sensitivity, specificity and C-statistic under the
+dominant model are calculated as follows.
+
+\begin{equation*}
+  Sens = (n_{12} + n_{13})/n_{1+}
+\end{equation*}
+
+\begin{equation*}
+  Spec = n_{11}/n_{1+}
+\end{equation*}
+
+\begin{equation*}
+  C\-Stat = \frac{1}{2}(Sens)(1-Spec) + \frac{1}{2}(1-Sens)(1-(1-Spec))=\frac{1}{2}(Sens+Spec)
+\end{equation*}
+
+Similarly, sensitivity, specificity and C-statistic under the recessive model are
+
+\begin{equation*}
+  Sens = n_{13}/n_{1+}
+\end{equation*}
+
+\begin{equation*}
+  Spec = (n_{11} +n_{12})/n_{1+}
+\end{equation*}
+
+\begin{equation*}
+  C\-Stat = \frac{1}{2}(Sens+Spec)
+\end{equation*}
+
+\item{Additive Test}
+
+SNPGWA implements the Cochran-Armitage test for trends as the test for the
+additive genetic model.  The calculation of the Cochran-Armitage test and
+goodness of fit test are described below.
+
+Let the table below contain the genotype data for a single diallelic marker.
+Lower case 'a' represents the reference allele.  By default, SNPGWA assigns the
+minor allele as the reference allele.  SNPGWA allows the option to specify the
+reference allele for the additive test from the map file.  See \{FIX links\}
+Section III.A.5, Map File Option.
+
+\begin{center}
+  \begin{tabular}{lcccc}
+    \hline
+    {} & \textbf{AA} & \textbf{Aa} & \textbf{aa} & {} \\
+    \hline
+    Case & $n_{11}$ & $n_{12}$ & $n_{13}$ & $n_{1+}$ \\
+    Control & $n_{21}$ & $n_{22}$ & $n_{23}$ & $n_{2+}$ \\
+    {}   & $n_{+1}$ & $n_{+2}$ & $n_{+3}$  & $n$ \\
+    \hline
+  \end{tabular}
+\end{center}
+
+SNPGWA calculates the p-value for the Cochran Armitage test for trends as
+follows (Agresti 2002, \cite{Agresti02}):
+
+\begin{center}
+  \begin{tabular}{ll}
+    $\bar{X_1} = (1n_{+1})/n$ &  $BD_1 = n_{+1}(1-sum\bar{X})^2$ \\
+    $\bar{X_2} = (2n_{+2})/n$ &  $BD_2 = n_{+2}(1-sum\bar{X})^2$ \\
+    $\bar{X_3} = (3n_{+3})/n$ &  $BD_3 = n_{+3}(1-sum\bar{X})^2$ \\
+    $sum\bar{X} = \sum_{i=1}^3\bar{X}_i$ & $sumBD = \sum_{i=1}^3\overline{BD}_i$ \\
+  \end{tabular}
+\end{center}
+\vspace{1em}
+
+\begin{center}
+  \begin{tabular}{c}
+    $BN_1 = n_{+1}(n_{11}/n_{+1} -n_{1+}/n)(1-sum\bar{X})$ \\
+    $BN_2 = n_{+2}(n_{12}/n_{+2} -n_{1+}/n)(2-sum\bar{X})$ \\
+    $BN_3 = n_{+3}(n_{13}/n_{+3} -n_{1+}/n)(3-sum\bar{X})$ \\
+  \end{tabular}
+\end{center}
+
+\begin{equation*}
+  sumBN = \sum_{i=1}^3BN_i
+\end{equation*}
+
+\vspace{1em}
+\begin{equation*}
+  B = sumBN/sumBD
+\end{equation*}
+
+\begin{equation*}
+  \chi^2 = \left(\frac{B^2}{n_{1+}/n(1-n_{1+}/n)}\right)sumBD
+\end{equation*}
+
+$\chi^2$ is distributed as an asymptotic chi square value with one degree of freedom.
+
+SNPGWA calculates the odds ratio and 95\% confidence intervals for the additive
+test by a two parameter logistic regression model (Agresti 2002,
+\cite{Agresti02}).  The logit is expressed in the following form:
+
+\vspace{1em}
+\begin{equation*}
+  g(\mathbf{x}) = \beta_0 + \beta_1x_1
+\end{equation*}
+
+The regression coefficients $\beta_0$ and $\beta_1$ are calculated using a
+Newton-Raphson iterative method (Agresti 2002 \cite{Agresti02}) as described
+below.  SNPGWA makes three attempts to calculate regression coefficients with
+regression coefficients set to different initial conditions on each attempt.
+The regression coefficients are initially set to 0.5, 0.0 and -0.5 on each
+successive attempt.  If the Newton-Raphson method does achieve convergence to a
+solution on the three attempts, SNPGWA sets the odds ratio and upper and lower
+confidence interval bounds to 2.0.
+
+Each iteration of the Newton-Raphson method begins with calculating
+$\pi_i^{(t)}$ for each individual $i$.
+
+\begin{equation*}
+  \pi_i^{(t)} = \frac{\exp(\beta_0 + \beta_1x_{i1})}{1+\exp(\beta_0 + \beta_1x_{i1})}
+\end{equation*}
+
+In accordance with the Cochran-Armitage Trends test implemented in SNPGWA, with
+respect to a specific SNP, each individual falls into one of three categories:
+non-reference allele homozygotes $(x_{i1}=1)$ , heterozygotes $(x_{i1}=2)$ and
+reference allele homozygotes $(x_{i1}=3)$ .
+
+The regression coefficients for the next iteration are calculated according to
+the Newton-Raphson formula:
+
+\begin{equation*}
+  \boldsymbol{\beta}^{(t+1)} = \boldsymbol{\beta}^{(t)} + \left\{\mathbf{X'diag}[n_i\pi_i^{(t)}(1-\pi_i^{(t)})]\mathbf{X}\right\}^{-1}\mathbf{X'}(\mathbf{y}-\mathbf{u}^{(t)})
+\end{equation*}
+
+where $\mu_i^{(t)} = n_i\pi_i^{(t)}$ and $n_i$ are the number of incidences of
+individuals with duplicate $x_{i1}$ values.  The intermediates in the
+Newton-Raphson formula take the following values:
+
+\begin{equation*}
+  \mathbf{X} =
+  \begin{pmatrix}
+    1 & x_{11} \\
+    1 & x_{12} \\
+    1 & x_{13} \\
+  \end{pmatrix}
+  =
+  \begin{pmatrix}
+    1 & 1 \\
+    1 & 2 \\
+    1 & 3 \\
+  \end{pmatrix}
+\end{equation*}
+
+\begin{equation*}
+  \mathbf{diag}[n_i\pi_i^{(t)}(1-\pi_i^{(t)})] = 
+  \begin{pmatrix}
+    (n_{11}+n_{21})\pi_1^{(t)}(1-\pi_1^{(t)}) & 0 & 0 \\
+    0 & (n_{12}+n_{22})\pi_2^{(t)}(1-\pi_2^{(t)}) & 0 \\
+    0 & 0 & (n_{13}+n_{23})\pi_3^{(t)}(1-\pi_3^{(t)}) \\
+  \end{pmatrix}
+\end{equation*}
+
+\begin{equation*}
+  (\mathbf{y}-\boldsymbol{\mu}^{(t)}) = 
+  \begin{pmatrix}
+    n_{11} - (n_{11} + n_{21})\pi_1^{(t)} \\
+    n_{12} - (n_{12} + n_{22})\pi_2^{(t)} \\
+    n_{13} - (n_{13} + n_{23})\pi_3^{(t)} \\
+  \end{pmatrix}
+\end{equation*}
+
+Once SNPGWA calculates the regression coefficients, the odds ratio and 95\%
+confidence interval are calculated as follows:
+
+\noindent{}$OR = \exp{\beta_1}$
+
+\begin{equation*}
+  (LCI, UCI) = \left(\exp\left(\beta_1 - 1.96\sqrt{B}\right), \exp\left(\beta_1 + 1.96\sqrt{B}\right)\right)
+\end{equation*}
+
+where $B$ is the diagonal element of the inverse information matrix
+corresponding to $\beta_1$ .
+
+Under the additive model, SNPGWA calculates sensitivity and specificity between
+non-reference allele homozygotes and heterozygotes, between non-reference allele
+homozygotes and reference allele homozygotes and between heterozygotes and
+reference allele homozygotes.  SNPGWA also calculates the C-statistic under the
+overall additive model. (Rosner, 2006 \cite{Rosner06})
+
+Using the table above, sensitivities and specificities are calculated as
+follows.
+
+\{FIX: This equation set has two definitions for Sens and Spec AA/aa\}
+\begin{center}
+  \begin{tabular}{c}
+    $Sens_{AA/Aa} = n_{12}/(n_{11} + n_{12}$ \\
+    $Spec_{AA/Aa} = n_{21}/(n_{21} + n_{22}$ \\
+    $Sens_{AA/aa} = n_{13}/(n_{11} + n_{13}$ \\
+    $Spec_{AA/aa} = n_{21}/(n_{21} + n_{23}$ \\
+    $Sens_{AA/aa} = n_{13}/(n_{12} + n_{13}$ \\
+    $Spec_{AA/aa} = n_{22}/(n_{22} + n_{23}$ \\
+  \end{tabular}
+\end{center}
+
+The C-statistic is the area under the receiver operating characteristic (ROC)
+curve.  The C-statistic under the additive model is calculated as follows.
+
+\begin{align*}
+  \text{C-Stat} &= \frac{1}{2}\left(\frac{n_{23}}{n_{2+}}\right)\left(\frac{n_{13}}{n_{1+}}\right) \\
+          &+ \frac{1}{2}\left(\frac{n_{22}}{n_{2+}}\right)\left(2\left(\frac{n_{13}}{n_{1+}}\right)+\left(\frac{n_{12}}{n_{1+}}\right)\right) \\
+          &+ \frac{1}{2}\left(\frac{n_{21}}{n_{2+}}\right)\left(2\left(\frac{n_{13}}{n_{1+}}\right) + 2\left(\frac{n_{12}}{n_{1+}}\right) + \left(\frac{n_{11}}{n_{1+}}\right)\right)
+\end{align*}
+
+\item{Lack of Fit Test} 
+
+  SNPGWA calculates the lack of fit p-value as follows (\cite{Agresti02}), ($B$
+  and $sum\bar{X}$ are intermediates from the additive test calculation in the
+  previous section):
+  \begin{center}
+    \begin{tabular}{ll}
+      $\pi_1 = n_{+1}/n + B(1-sum\bar{X})$ & $C_1 = n_{+1}(n_{11}/n_{+1} - \pi_1)^2$ \\
+      $\pi_2 = n_{+1}/n + B(2-sum\bar{X})$ & $C_2 = n_{+2}(n_{12}/n_{+2} - \pi_2)^2$ \\
+      $\pi_3 = n_{+1}/n + B(3-sum\bar{X})$ & $C_3 = n_{+3}(n_{13}/n_{+3} - \pi_3)^2$ \\
+    \end{tabular}
+  \end{center}
+
+  \begin{equation*}
+    sumC = \sum_{i=1}^3C
+  \end{equation*}
+  \begin{equation*}
+    \chi^2 = \left(\frac{1}{n_{+1}/n(1-n_{1+}/n)}\right)sumC
+  \end{equation*}
+
+$\chi^2$ is distributed as an asymptotic chi square value with one degree of freedom.
+
+\vspace{1em}
+
+\item{Low Expected Values}
+
+  SNPGWA calculates expected numbers of case and control individuals for each
+  genotype in the standard $2x3$ table for each genotype
+  ($E_{11}$, $E_{12}$, $E_{13}$, $E_{21}$, $E_{22}$, $E_{23}$ in the table on page
+  \pageref{tab:e_tab}).  These are necessary intermediates for calculating
+  p-values for the two degree of freedom test.  In the case that an expected
+  value is low enough to induce an unusually high chi square and subsequent low
+  p-value, SNPGWA adds 0.5 to the number of case and control individuals for
+  each genotype ($n_{11}, n_{12}, n_{13}, n_{21}, n_{22}, n_{23}$ in the table
+  on page \pageref{tab:n_tab}).  The genotypic and lack-of-fit p-values are
+  calculated using the corrected totals.  SNPGWA uses an expected value
+  threshold of 3.0 to induce SNPGWA to recalculating with the continuity
+  correction.
+
+  For example, suppose the tables below contain data and expected values for a
+  single marker.
+  \begin{center}
+    \begin{tabular}{lcccc}
+      \hline
+      {}     & \textbf{AA} & \textbf{Aa} & \textbf{aa} & {}\\
+      \hline
+      Case    & 120 & 87 & 6 & 213 \\
+      Control & 133 &  7 & 1 & 141 \\
+      {}    & 253 & 94 & 7 & 354 \\
+      \hline
+      % \label{}
+    \end{tabular}
+  \end{center}
+
+  \begin{center}
+    \begin{tabular}{lccc}
+      \hline
+      {}     & \textbf{AA} & \textbf{Aa} & \textbf{aa} \\
+      Case    & 152.23      & 56.56       & 4.21 \\
+      Control & 100.77      & 37.44       & 2.79 \\
+      \hline
+      % \label{tab}
+    \end{tabular}
+  \end{center}
+
+Because the expected number of controls with genotype aa is less that 3.0,
+SNPGWA adds 0.5 to the total number of case and control individuals for each
+genotype.  See the tables below.
+
+\begin{center}
+  \begin{tabular}{lcccc}
+    \hline
+    {}     & \textbf{AA} & \textbf{Aa} & \textbf{aa} & {} \\
+    \hline
+    Case    & 120.5 & 87.5 & 6.5 & 214.5 \\
+    Control & 133.5 &  7.5 & 1.5 & 142.5 \\
+    {}    & 254   & 95   & 8 & 357 \\
+    \hline
+    % \label{}
+  \end{tabular}
+\end{center}
+
+\begin{center}
+  \begin{tabular}{lccc}
+    \hline
+    {}     & \textbf{AA} & \textbf{Aa} & \textbf{aa}  \\
+    \hline
+    Case    & 152.61      & 57.08       & 4.81 \\
+    Control & 100.39      & 37.92       & 3.19 \\
+    \hline
+    % \label{tab}
+  \end{tabular}
+\end{center}
+
+SNPGWA calculates genotypic tests, odds ratios, 95\% confidence intervals and
+the lack-of-fit test with the modified data.
+
+\end{enumerate}
+
+\subsubsection{Linkage Disequilibrium Tests}
+\label{sec:linkage-dis}
+For each consecutive pair of diallelic markers, SNPGWA calculates values for D
+Prime $\left(D'\right)$ and R Squared $\left(R^2\right)$ linkage disequilibrium
+tests (Devlin and Risch \cite{Devlin95}).  SNPGWA begins by calculating
+autosomal haplotype frequencies for the two consecutive markers using the EM
+algorithm (Slatkin and Excoffier \cite{Slatkin96}) and assuming Hardy-Weinberg
+equilibrium.  Then $\left(D'\right)$ and $\left(R^2\right)$ are calculated as
+follows:
+\begin{equation*}
+ D = freq_{11}freq_{22} - freq_{12}freq_{21}
+\end{equation*}
+
+\begin{equation*}
+\text{If } D > 0, D' = \frac{D}{min\left(freq_{1+}freq_{+2}, freq_{+1}freq_{2+}\right)}
+\end{equation*}
+
+\begin{equation*}
+  \text{If } D < 0, D' = \frac{D}{min\left(freq_{1+}freq_{+1}, freq_{+2}freq_{2+}\right)}
+\end{equation*}
+
+\begin{equation*}
+  R^2 = \frac{D}{\sqrt{\left(freq_{1+}freq_{2+}freq_{+1}freq_{+2}\right)}}
+\end{equation*}
+
+Where $freq_{11}$, $freq_{12}$, $freq_{21}$ and $freq_{22}$ are autosomal
+haplotype frequencies as calculated by the EM algorithm and
+$freq_{1+} = freq_{11} + freq_{12}$, $freq_{2+} = freq_{21} + freq_{22}$,
+$freq_{+1} = freq_{11} + freq_{21}$ and $freq_{+2} = freq_{12} + freq_{22}$.
+
+\subsubsection{Allelic Test}
+
+SNPGWA calculates the allelic association test as a $2 x 2$ contingency table
+chi square test of independence (Guedj, Wojcik, Della-Chiesa, Nuel, Forner 2006
+\cite{Guedj06}).  Low p-values indicate deviation from independence.
+
+The tables below describe how SNPGWA categorizes single marker allele data and
+calculates the chi square value for the allelic test.
+
+\begin{center}
+  \begin{tabular}{lccc}
+    \hline
+    {}     & \textbf{AA} & \textbf{Aa} & \textbf{aa} \\
+    \hline
+    Case    & $n_{11}$ & $n_{12}$ & $n_{13}$ \\
+    Control & $n_{21}$ &  $n_{22}$ & $n_{23}$ \\
+    \hline
+    % \label{}
+  \end{tabular}
+\end{center}
+
+\begin{center}
+  \begin{tabular}{lccc}
+    \hline
+    {} & Case & Control & {} \\
+    \hline
+    A  & $m_{11} = 2n_{11} + n_{12}$ & $m_{12} = 2n_{13} + n_{12}$ & $m_{1+}$ \\
+    a  & $m_{21} = 2n_{21} + n_{22}$ & $m_{22} = 2n_{23} + n_{22}$ & $m_{2+}$ \\
+    {} & $m_{+1}$                  & $m_{+2}$                   & $m$     \\
+    \hline
+  \end{tabular}
+\end{center}
+
+\begin{center}
+  \begin{tabular}{ccc}
+    \hline
+    {} & Case & Control \\
+    \hline
+    A  & $E_{11} = m_{1+}m_{+1}/m$ & $E_{21} = m_{1+}m_{+2}/m$ \\
+    a  & $E_{12} = m_{2+}m_{+1}/m$ & $E_{22} = m_{2+}m_{+2}/m$ \\  
+    \hline
+  \end{tabular}
+\end{center}
+
+
+\begin{equation*}
+  \chi^2 = \frac{\left(E_{11} - m_{11}\right)^2}{E_{11}} + \frac{\left(E_{12} - m_{12}\right)^2}{E_{12}} + \frac{\left(E_{21} - m_{21}\right)^2}{E_{21}} + \frac{\left(E_{22} - m_{22}\right)^2}{E_{22}}
+\end{equation*}
+
+$\chi^2$ is distributed as an asymptotic chi square value with one degree of
+freedom.
+
+For each marker, SNPGWA allows empirical p-value calculation for the allelic
+test.  See Sections I.G: Empirical P-Value Calculation \{FIX refs\} and III.A.4:
+Empirical P-Value Calculation from the Command Line for information on empirical
+p-value calculation.
+
+
+\subsubsection{Two and Three Marker Haplotype Tests}
+For each two consecutive markers and three consecutive markers, SNPGWA
+calculates a p-value for the likelihood ratio statistic (LRS) (Green, Langefeld
+and Lange 2001 \cite{Green01}) to ascertain heterogeneity in the observed
+haplotype frequencies between cases and controls.  To calculate the LRS, SNPGWA
+must first calculate autosomal haplotype frequencies within each marker, two
+consecutive markers and three consecutive markers for three groups: (1) combined
+case and control individuals, (2) case individuals and (3) control individuals.
+Autosomal haplotype frequencies are calculated using the EM algorithm, assuming
+Hardy-Weinberg equilibrium.
+
+The LRS for each marker, two consecutive markers and three consecutive markers
+is calculated as follows:
+
+\begin{equation*}
+  LRS = 2log\left(\frac{\prod^N_{i=1}{Pr\left(g_i|\tilde{f}_{cases}\right)}\prod^{2N}_{j=N+1}Pr\left(g_j|\tilde{f}_{controls}\right)}{\prod^{2N}_{k=1}Pr\left(g_k|\tilde{f}_{combined}\right)}\right)
+\end{equation*}
+
+\noindent{} where $g_i$ represents the multilocus genotypes in the $i^{th}$
+individual.
+
+LRS is distributed as a chi square variable with the degrees of freedom set to
+the number of haplotypes that have significant autosomal haplotype frequencies
+(greater than or equal to 0.0001) in either the case or control groups minus
+one.
+
+For example, suppose SNPGWA calculates the LRS for three consecutive diallelic
+markers.  In the process SNPGWA employs the EM algorithm to calculate autosomal
+haplotype frequencies within the three consecutive markers for groups of case
+individuals, control individuals and combined case and control individuals.
+Since each marker is diallelic there are eight possible haplotypes that an
+individual could possess.  If SNPGWA determines five haplotypes in the case or
+control group have significant probability (greater than or equal to 0.0001),
+then the LRS is distributed as a chi square variable with 5 – 1 = 4 degrees of
+freedom.
+
+For each consecutive two and three markers, SNPGWA allows empirical p-value
+calculation for the two and three marker haplotype tests.  See Sections I.G:
+Empirical P-Value Calculation and III.A.4: Empirical P-Value Calculation from
+the Command Line \{FIX reference \} for information on empirical p-value
+calculation.
+
+\subsubsection{Empirical P-Value Calculation}
+
+SNPGWA allows the option of calculating empirical p-values for all genotypic
+tests, the allelic test and the two and three marker haplotype tests.  SNPGWA
+calculates a chi square value for each test as described in the sections above
+using unmodified sample data prior to calculating an empirical p-value for that
+test.  This chi square value is necessary for calculating the empirical p-value.
+This document refers to it as the unpermuted chi square value
+$\left(\chi^2_u\right)$.
+
+SNPGWA calculates an empirical p-value for a test by executing the following
+three steps a specified number of times.  This document refers to the number of
+times that SNPGWA executes steps 1 through 3 for a specific test as the number
+of permutations for that test.
+
+\begin{enumerate}
+\item Permute the affection statuses (case or control) of the entire sample
+  represented in the input file while preserving the total number of cases and
+  total number of controls.
+
+\item Execute the specific test as described in the sections above using the
+  permuted sample.
+
+\item Compare the chi square value from the test using permuted data with the
+  unpermuted chi square value.  The chi square value using permuted data is
+  referred to as the permuted chi square value $\left(\chi^2_{p_{i}}\right)$.
+
+\end{enumerate}
+
+SNPGWA records the number of instances that the permuted chi square exceeds the
+unpermuted chi square value.  The permuted chi square value is considered to
+exceed the unpermuted chi square value when the permuted chi square value is
+greater than the sum of the unpermuted chi square value and a small epsilon.
+Epsilon is set to 0.0001 in SNPGWA.  If a permuted chi square value is within
+epsilon of the unpermuted chi square value, above or below, then SNPGWA adds 0.5
+to the number of instances the permuted chi square value exceeds the unpermuted
+chi square value.  The empirical p-value is the number of instances that the
+permuted chi square value exceeds the unpermuted chi square value divided by the
+total number of permutations.  See the equation below.
+
+\begin{equation*}
+  EmpPVal = \frac{\sum^{NumPerms}_{i=1}\left\{I[\chi^2_{p_{i}} > \chi^2_{u} + \epsilon] + \frac{1}{2}I[\chi^2_u + \epsilon \ge \chi^2_{p_{i}} > \chi^2_{u} - \epsilon]\right\}}{NumPerms}
+\end{equation*}
+
+Where $I[]$ is an indicator function equal to 1 when the statement in
+the bracket is true and $\epsilon = 0.0001$.
+
+SNPGWA allows two options for setting the number of permutations to calculate
+empirical p-values: 1) use a fixed number of permutations or 2) use a variable
+number of permutations.  If a fixed number of permutations are desired, then the
+number of permutations is supplied to SNPGWA from the command line (See Section
+III.A.4, Empirical P-Value Calculation from the Command Line \{FIX
+cross-references\}).  If a variable number of permutations are desired, the
+number of permutations for each test is calculated by the formula
+
+\begin{equation*}
+  NumPerm = \left(18/PVal\right)-9
+\end{equation*}
+
+\noindent{}where $PVal$  is the p-value of the unpermuted test.
 
 \subsection{Usage}
 \begin{verbatim}
-  snplash -engine snpgwa -geno <filename> -phen <filename> \
-          -out <filename> -map <filename> -cov <name1,...> \
-          --haplo_file --hwe_file --haplo_thresh <integer> \
-          --snpgwa_nohap --val
 
-where
+snplash -engine snpgwa -geno <filename> -phen <filename>  \
+        -out <filename> -map <filename> [OPTIONS]
 
-  --snpgwa_nohap  Do not calculate haplotype tests (saves
-                  run-time)
+where options are
 
-and the other options are as for QSNPGWA
+  --condition_number Float. Maximum allowable condition number
+                     in logistic and linear regression. Condition
+                     number is measured in the 1-norm. Default is 1e12.
+  --cov              Comma-separated list of coverariates
+  --geno_file        Print extra genotypic data to <outfile>.geno[1,2,3]
+  --haplo_thresh     Integer.  Sets the threshold number of chromosomes
+                     on which a haplotype must exist to be used for
+                     global haplotype association testing.
+  --haplo_file       Print exta haplotype data to <outfile>.haplo[1,2,3]
+  --hwe_file         Print extra Hardy-Weinberg data to <outfile>.hwe[ctrl,case]
+  --snpgwa_nohap     Do not calculate haplotype tests (shortens run-time)
+  --val              Print statistics values to <outfile>.statvals
+
 \end{verbatim}
 
 \subsection{Output}
 
-\vspace{1em}
 \begin{supertabular}{r p{5in}}
   General & xx ~ \\
     Chr: & The chromosomal location for the feature \\
@@ -38,7 +789,7 @@ and the other options are as for QSNPGWA
     Controls  & xx  \\
     Pvalue  & xx  \\
     Odds Ratio  & xx  \\ [1em]
-  (??Category??) & xx  \\
+    ?Category? & xx  \\
     P  & xx  \\
     Q  & xx  \\
     Ref  & xx  \\ [1em]

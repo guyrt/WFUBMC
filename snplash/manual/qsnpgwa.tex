@@ -1,17 +1,209 @@
+%% Most of this discussion is inserted from the document
+%% 'qsnpgwa2.1UserGuideDraft.doc' documenting version 2.1
+%% Downloaded from the PHS web site 06-Sep-2011
+
 \section{QSNPGWA}
 \label{sec:qsnpgwa}
 \subsection{Description}
-This is the QSNPGWA section.
+
+QSNPGWA is a program that reads diallelic marker data and quantitative data for
+individuals from input files and computes ardy-Weinberg, genotypic association
+and linkage disequilibrium tests.  It also performs linkage disequilibrium tests
+for each consecutive pair of markers.
+
+QSNPGWA implements the Expectation-Maximization (EM) Algorithm to calculate two
+marker haplotype frequencies for the linkage disequilibrium tests.
+
+QSNPGWA allows a maximum of two integers to represent the alleles of a dialleic
+marker in the input file and only allows integers between 1 and 30 to represent
+alleles.
+
+\subsubsection{Hardy-Weinberg Proportions Tests}
+
+For each marker, SNPGWA calculates the maximum likelihood estimate of the allele
+frequencies, observed and expected number of heterozygotes and homozygotes under
+the assumption of Hardy-Weinberg equilibrium and p-values for the chi square
+goodness of fit and exact tests for Hardy-Weinberg equilibrium \cite{Guo92}
+
+\begin{enumerate}
+
+\item{Goodness of Fit Test}
+See the discussion under SNPGWA, p.\pageref{goodness-of-fit}
+
+\item{Exact Test}
+See the discussion under SNPGWA, p.\pageref{exact-test}
+
+\end{enumerate}
+
+\subsubsection{Genotype Tests}
+For each marker, QSNPGWA calculates the p-values for four tests of genotypic
+association.  Specifically, it calculates the two degree of freedom genotypic
+test of association and genotypic tests of association for three genetic models:
+dominant, additive and recessive.  For the dominant, additive and recessive
+models, QSNPGWA calculates the beta and standard error.  QSNPGWA also calculates
+the lack of fit test for the additive genetic model.
+
+With respect to the genotypic tests according to the dominant, additive and
+recessive models, QSNPGWA distinguishes between reference (a) and non-reference
+(A) alleles for each marker.  The minor allele is the reference allele by
+default.  QSNPGWA has an option to set the major allele as the reference allele
+(See Section III.4 Map File Option). \{FIX cross-references\} QSNPGWA will not
+calculate genotypic tests for monomorphic markers.
+
+QSNPGWA also calculates the mean of the numeric data for groups of reference
+allele homozygotes (aa), non-reference allele homozygotes (AA), heterozygotes
+(Aa), combined reference allele homozygotes and heterozygotes (aa \& Aa) and
+combined non-reference allele homozygotes and heterozygotes (AA \& Aa).
+
+\begin{enumerate}
+
+\item{Two Degree of Freedom Test}
+
+
+  SNPGWA calculates a two degree of freedom test p-value for each marker.  The
+  two degree of freedom test is a one-way ANOVA F-test with the numeric data for
+  each marker and each individual assigned to one of three groups: reference
+  homozygotes, non-reference homozygotes and heterozygotes.
+
+  The ANOVA is a procedure for testing the null hypothesis that the mean between
+  groups are equivalent against the alternative hypothesis that the mean for at
+  least two groups are not equivalent (Draper and Smith, 1998 \cite{Draper98}).
+  Non-equivalent means between groups of reference homozygotes, non-reference
+  homozygotes and heterozygotes might be indicative of an underlying genetic
+  association.
+
+  The ANOVA procedure is described here.  The within sum of squares term is
+  calculated by:
+
+  \begin{equation*}
+    WSS = \sum^k_{i=1}\sum^{n{i}}_{j=1}\left(y_{ij} - \bar{y}_i\right)^2
+  \end{equation*}
+
+  where $y_{ij}$ is the numeric data for the ith group and the jth individual
+  and $\bar{y}_i$ is the mean of the numeric data for the ith group.
+
+  The between sum of squares term is calculated by:
+
+  \begin{equation*}
+    BSS = \sum^k_{i=1}\sum^{n{i}}_{j=1}\left(\bar{y}_i - \bar{\bar{y}}\right)^2    
+  \end{equation*}
+
+  where $\bar{y}_i$ is the mean of the numeric data for the ith group and
+  $\bar{\bar{y}}$ is the mean of numeric data for all groups.
+
+  The test statistic is calculated by:
+
+  \begin{equation*}
+    F = \frac{BSS/\left(k-1\right)}{WSS/\left(n-k\right)}
+  \end{equation*}
+
+  where $BSS$ and $WSS$ and are calculated above, is the total number of
+  individuals and is the number of groups. $k=3$ for the two degree of freedom
+  test.
+
+  $F$ is is distributed by an F distribution with $k-1$ and $n-k$ degrees of
+  freedom under the null hypothesis.  QSNPGWA calculates the p-value by
+  $Pr\left(F_{k-1,n-k} > F\right)$.
+
+  \item{Dominant and Recessive Tests}
+
+    QSNPGWA calculates p-values for each marker using a one-way ANOVA F test
+    procedure according to both dominant and recessive models.  Under the
+    dominant model, QSNPGWA assigns each individual to either a group of
+    non-reference homozygotes or the combined group of reference homozygotes and
+    heterozygotes.  Under the recessive model, QSNPGWA assign each individual to
+    either a group of reference homozygotes or the combined group of
+    non-reference homozygotes and heterozygotes.  QSNPGWA calculates F
+    statistics and p-values for the dominant and recessive tests with the
+    numeric data for each individual using the same procedure as described for
+    the two degree of freedom test.  (See section II.1 Two Degree of Freedom
+    Test). \{FIX cross-references\}
+
+    QSNPGWA calculates regression slope (beta) and standard error for each
+    marker using regression analysis according to both dominant and recessive
+    models.  Under the dominant model, QSNPGWA assigns the following numeric
+    values to each individual’s genotype for that marker: 1.0 to reference
+    homozygotes, 1.0 to heterozygotes and 0.0 to non-reference homozygotes.
+    Under the recessive model, QSNPGWA assigns the following numeric values to
+    each individual’s genotype for that marker: 1.0 to reference homozygotes,
+    0.0 to heterozygotes and 0.0 to non-reference homozygotes.  QSNPGWA
+    calculates regression slope and standard error using the numeric data for
+    each individual with the procedure described under the additive test (See
+    II.C.3 Additive Test).  \{FIX cross-references\}
+
+  \item{Additive Test}
+
+    The additive test is set up as a linear regression between marker genotypes
+    and numeric data.  QSNPGWA calculates regression slope (beta), standard
+    error and a p-value for each marker over the individuals in the input file.
+    To perform the regression analysis on a marker, QSNPGWA assigns the
+    following numeric values to each individual’s genotype for that marker: 1.0
+    to reference homozygotes, 0.0 to heterozygotes and -1.0 to non-reference
+    homozygotes.  Using the method of least squares (Draper and Smith, 1998),
+    QSNPGWA calculates regression slope and standard error with the procedure
+    described below where represents the genotype value for a given marker and
+    represents the numeric data and is the number of individuals in our sample.
+
+    Corrected sum of squares for x:
+
+    \begin{equation*}
+      L_{xx} = \sum^n_{i=1}\left(x_i - \bar{x}\right)^2 = \sum^n_{i=1}x^2_i - \left(\sum^n_{i=1}x_i\right)^2/n
+    \end{equation*}
+
+    Corrected sum of squares for y:
+
+    \begin{equation*}
+      L_{yy} = \sum^n_{i=1}\left(y_i - \bar{y}\right)^2 = \sum^n_{i=1}y^2_i - \left(\sum^n_{i=1}y_i\right)^2/n
+    \end{equation*}
+
+    Corrected sum of cross product:
+
+    \begin{equation*}
+      L_{xy} = \sum^n_{i=1}\left(x_i-\bar{x}\right)\left(y_i-\bar{y}\right) = \sum^n_{i=1}x_iy_i - \left(\sum^n_{i=1}x_i\right)\left(\sum^n_{i=1}y_i\right)/n
+    \end{equation*}
+
+    Residual mean square:
+
+    \begin{equation*}
+      s^2_{y\cdot{}x} = \left(L_{yy} - L^2_{xy}/L_{xx}\right)/\left(n-2\right)
+    \end{equation*}
+
+    Regression slope (beta):
+
+    \begin{equation*}
+      b = L_{xy}/L_{xx}
+    \end{equation*}
+
+    Standard error of b:
+
+    \begin{equation*}
+      se(b) = s_{y\cdot{}x}/\left(L_{xx}\right)^{1/2}
+    \end{equation*}
+
+  \item{Lack of Fit Test}
+    
+    QSNPGWA tests the significance of the fit between the additive model
+    regression slope and the data (Draper and Smith, 1998 \cite{Draper98}).
+    QSNPGWA calculates lack of fit and pure error between the regression slope
+    and the test data.  Using these results, QSNPGWA calculates the lack of fit
+    F statistic and p-value using an ANOVA procedure.
+
+\end{enumerate}
+
+\subsubsection{Linkage Disequilibrium Tests}
+See discussion under SNPGWA, p.\pageref{sec:linkage-dis}
+
 \subsection{Usage}
 \begin{verbatim}
-  snplash -engine qsnpgwa -geno <filename> -phen <filename> \
-          -out <filename> -map <filename> -cov <name1,...>  \
-          --haplo_file --hwe_file --haplo_thresh <integer> --val
 
-where
+  snplash -engine qsnpgwa -geno <filename> -phen <filename> \
+          -out <filename> -map <filename> [OPTIONS]
+
+where options are
 
   -cov            Comma-separated names of covariates from the
                   phenotype file
+  --geno_file     Print extra genotypic data to <outfile>.geno[1,2,3]
   --haplo_file    Print additional haplotype information to
                   <out>.haplo[1,2,3]
   --hwe_file      Print additional Hardy-Weinberg statistics to
@@ -91,3 +283,4 @@ specific  variables are:
       R\_Sqr: & $r^2$  \\
  
 \end{supertabular}
+
