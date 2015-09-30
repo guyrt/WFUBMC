@@ -23,7 +23,7 @@ alleles.
 For each marker, SNPGWA calculates the maximum likelihood estimate of the allele
 frequencies, observed and expected number of heterozygotes and homozygotes under
 the assumption of Hardy-Weinberg equilibrium and p-values for the chi square
-goodness of fit and exact tests for Hardy-Weinberg equilibrium \cite{Guo92}
+goodness of fit and exact tests for Hardy-Weinberg equilibrium (Guo, 1992)
 
 \begin{enumerate}
 
@@ -67,7 +67,7 @@ combined non-reference allele homozygotes and heterozygotes (AA \& Aa).
 
   The ANOVA is a procedure for testing the null hypothesis that the mean between
   groups are equivalent against the alternative hypothesis that the mean for at
-  least two groups are not equivalent (Draper and Smith, 1998 \cite{Draper98}).
+  least two groups are not equivalent (Draper and Smith, 1998).
   Non-equivalent means between groups of reference homozygotes, non-reference
   homozygotes and heterozygotes might be indicative of an underlying genetic
   association.
@@ -183,7 +183,7 @@ combined non-reference allele homozygotes and heterozygotes (AA \& Aa).
   \item{Lack of Fit Test}
     
     QSNPGWA tests the significance of the fit between the additive model
-    regression slope and the data (Draper and Smith, 1998 \cite{Draper98}).
+    regression slope and the data (Draper and Smith, 1998).
     QSNPGWA calculates lack of fit and pure error between the regression slope
     and the test data.  Using these results, QSNPGWA calculates the lack of fit
     F statistic and p-value using an ANOVA procedure.
@@ -194,6 +194,8 @@ combined non-reference allele homozygotes and heterozygotes (AA \& Aa).
 See discussion under SNPGWA, p.\pageref{sec:linkage-dis}
 
 \subsection{Usage}
+See ``SNPlash'', p.\pageref{sec:snplash}, for options common to all engines.
+
 \begin{verbatim}
 
   snplash -engine qsnpgwa -geno <filename> -phen <filename> \
@@ -284,3 +286,4 @@ specific  variables are:
  
 \end{supertabular}
 
+%% End qsnpgwa.tex \\ 

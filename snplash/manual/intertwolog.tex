@@ -1,9 +1,23 @@
+% This file originated as
+% phscore:/home/jgrab/AnalysisSoftware/Intertwolog/Intertwolog5.1/README.
+% Accessed 07-Nov-2014 by David McWilliams.  It was the latest version readme
+% found under the Intertwolog directory tree.  The file time stamp was Jul 18,
+% 2008. Simple reformatting has been applied.
+
 \section{Intertwolog}
 \label{sec:i2l}
 \subsection{Description}
-This is the intertwolog section.
+Intertwolog reads genotype data from a genotype file and affection status data
+from a phenotype file and calculates the two-way interaction beta, interaction
+beta p-value and standard error for each combination of two markers.  The
+two-way interaction calculation is set up as an additive logisitic regression
+model with an interaction term corrected for colinearity.  Only the beta,
+p-value and standard error for the interaction term are written to the output
+file.
 
 \subsection{Usage}
+\label{sub:i2l_usage}
+See ``SNPlash'', p.\pageref{sec:snplash}, for options common to all engines.
 
 \begin{verbatim}
   snplash -engine intertwolog -geno <filename> -phen <filename> \
@@ -15,11 +29,37 @@ A header section is printed with information about the files read and options
 used.  The variable labels are multi-line.  The values printed are:
 
 \begin{description}
-\item[Marker 1 Index:] Index of the first marker
-\item[Name:] Name of the first maker
-\item[Marker 2 Index:] Index of the second marker
-\item[Name:] Name of the second maker
-\item[Interact. Beta] The interaction coefficient
-\item[Interact. P Value] The interaction p-value
-\item[Interact. Standard Error] Standard error of the interaction
+\item[Marker 1 Position:] The genotype file position of the first marker used
+  for the two way interaction calculations.
+
+\item[Marker 1 Name:] The SNP name of the first marker used for the two way
+  interaction calculations.  Appears in the output file if the map file option
+  is used.
+
+\item[Marker 2 Position:] The genotype file position of the second marker used
+  for the two way interaction calculations.
+
+\item[Marker 2 Name:] The SNP name of the second marker used for the two way
+  interaction calculations.  Appears in the output file if the map file option
+  is used.
+
+\item[Interaction Beta] The logistic regression interaction beta.
+
+\item[Interaction P Value] The p-vlaue for the logistic regression interaction beta.
+
+\item[Interaction Standard Error] The Standard Error for the logistic regression
+  interaction beta.
 \end{description}
+
+\noindent{}Example output:
+\begin{verbatim}
+Marker 1 Marker 1 Marker 2  Marker 2 Interact.  Interact.  Standard  
+Position Name     Position  Name     Beta       P Value    Error     
+-------- -------- --------  -------- ---------- ---------- ----------
+       1 Marker01        2  Marker02   -0.42848    0.08704  0.25039
+       1 Marker01        3  Marker03   -0.18137    0.38484  0.20870
+       1 Marker01        4  Marker04   -0.12193    0.53099  0.19462
+       1 Marker01        5  Marker05   -0.14906    0.63916  0.31792
+\end{verbatim}
+
+%% End intertwolog.tex \\

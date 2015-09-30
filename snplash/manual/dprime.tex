@@ -1,22 +1,419 @@
+%% Created using selections from 'DPRIME User Guide, Version 3.0, February 21,
+%% 2008' by M.Steiger
+
 \section{DPrime}
 \label{sec:dprime}
 
 \subsection{Description}
-This is the dprime section.
+
+DPRIME is a program that reads biallelic or multiallelic marker data for case
+and control individuals from input files and calculates four linkage
+disequilibrium statistics for each pair of markers in the input files.
+
+DPRIME implements the Expectation-Maximization (EM) Algorithm to calculate two
+marker haplotype frequencies that are necessary for calculating linkage
+disequilibrium statistics.
+
+DPRIME also has an option to calculate an empirical p-value using the D Prime
+statistic between each pair of markers.  DPRIME only allows integers between 1
+and 30 to represent allele data in the input file.
+
+\subsubsection{Linkage Disequilibrium Tests}
+\label{susub:linkage_dis}
+
+For each diallelic pair of markers, DPRIME calculates values D (D), R Squared
+($R^2$) and Delta ($\delta$) linkage disequilibrium statistics.  DPRIME also
+calculates D Prime ($D'$) for diallelic and multiallelic markers (Devlin and
+Risch, 1995).
+
+DPRIME begins by calculating autosomal haplotype frequencies for each pair
+markers using the EM algorithm (Slatkin and Excoffier, 1996) and assuming
+Hardy-Weinberg equilibrium.
+
+Let A and B be two diallelic markers with alleles 1 and 2 and let the table
+below show the haplotype frequencies as calculated by the EM Algorithm.  $f_{11}$ is the
+frequency of haplotypes with allele 1 at marker 1 and allele 1 at marker 2.
+
+\vspace{1em}
+\begin{tabular}[!h]{ccccc}
+  \hline
+  & \multicolumn{4}{c}{MarkerA} \\
+  \cline{2-5}
+  \multirow{4}{*}{Marker B} & & Allele 1 & Allele 2 & \\
+  & Allele 1 & $f_{11}$ & $f_{12}$ & $f_{1+}$ \\
+  & Allele 2 & $f_{21}$ & $f_{22}$ & $f_{2+}$ \\
+  &          & $f_{+1}$ & $f_{+2}$ & 1 \\
+  \hline
+\end{tabular}
+\vspace{1em}
+
+The linkage disequilibrium statistics are calculated as follows:
+
+\begin{align*}
+  D &= f_{11}f_{22} - f_{12}f_{21} \\
+  D>0, ~~~~ D' &= \frac{D}{min(f_{1+}f_{+2},f_{+1}f_{2+})} \\
+  D<0, ~~~~ D' &= \frac{D}{min(f_{1+}f_{+1},f_{+2}f_{2+})} \\
+  R^2 &= \frac{D}{\sqrt{f_{1+}f_{2+}f_{+1}f_{+2}}} \\
+  \delta &= \frac{D}{f_{+1}f_{22}}
+\end{align*}
+
+Where $f_{1+}, ~ f_{2+}, ~ f_{+1} \text{ and } f_{+2}$ and are marginal
+haplotype freqencies.
+
+\subsubsection{Empirical P-Value Calculation}
+
+DPRIME has an option to calculate an empirical p-value for each marker pair
+through a permutation process using the multiallelic D Prime ($D'$) statistic.
+This document refers to the original D Prime statistic calculated between two
+markers with unpermuted marker data as the unpermuted D Prime ($D'_u$).
+
+DPRIME calculates an empirical p-value with the D Prime statistic by executing
+the following three steps a specified number of times.  This document refers to
+the number of times that DPRIME executes steps 1 through 3 as the number of
+permutations.
+
+\begin{enumerate}
+\item Permute the marker allele data of the specific marker pair while
+  preserving the total number and types of alleles in each marker.
+
+\item Calculate the D Prime statistic using permuted marker data.
+
+\item Compare the D Prime statistic with permuted data with the unpermuted D
+  Prime Statistic.  The DPrime statistic calculated with permuted data is
+  referred to as the permuted D Prime statistic .
+\end{enumerate}
+
+DPRIME records the number of instances that the permuted D Prime statistic
+exceeds or is equal to the unpermuted D Prime statistic.  The empirical p-value
+is the number of instances that the permuted chi square value exceeds the
+unpermuted chi square value divided by the total number of permutations.  See
+the equation below.
+
+\begin{equation*}
+  EmpPVal = \frac{\displaystyle\sum_{i=1}^{NumPerms}\left\{ I\left[ D'_p>D'_u \right] \right\}}{NumPerms}
+\end{equation*}
+
+\noindent{}Where $I\left[ ~ \right]$ is an indicator function equal to 1 when
+the statement in the bracket is true.
+
+%% Input file format omitted
 
 \subsection{Usage}
+\label{subsub:dprime_usage}
+
+See ``SNPlash'', p.\pageref{sec:snplash}, for options common to all engines.
+
 \begin{verbatim}
-  snplash -engine dprime -geno <filename> -phen <filename> \
-          -out <filename> -map <filename>
+snplash -engine dprime -geno <filename> -phen <filename> \
+        -out <filename> -map <filename>
+
+where
+
+     --dprime_window <int>     Specify the window around each SNPs on 
+                               which we should compute LD on SNP pairs  
+     --dprime_fmt <int>        Output format (see below 'Output')
+     --dprime_smartpairs <int> Only compute dprime on SNP pairs
+                               from the same chromosome. 
 \end{verbatim}
 
 \subsection{Output}
+DPRIME writes the results of all tests for each marker to a single output file.  There are five output file format options.  
 
-\begin{supertabular}{r p{5in}}
-  Marker 1 Name: & First marker name \\
-  Marker 2 Name: & Second marker name \\
-  D: & \\
-  Multi-allelic D Prime: & \\
-  Biallelic R-Squared: & \\
-  Biallelic Delta: &  \\
-\end{supertabular}
+\begin{enumerate}
+\item LD Statistics with Haplotype and Allele Frequencies 
+\item LD Statistics in Arrays 
+\item LD Statistics in Columns 
+\item LD Statistics between Consecutive Markers in Columns
+\item D Prime and R Squared Statistics only in a Single Array
+\end{enumerate}
+
+
+\subsubsection{LD Statistics with Haplotype and Allele Frequencies}
+
+If DPRIME is executed with output format option 1., DPRIME writes LD Statistics,
+allele frequencies, maximum likelihood estimate of haplotype frequencies.  The
+example below shows output for a pair of markers.
+
+\begin{verbatim}
+*********************************************************
+Marker Pair: 1, 2
+*********************************************************
+
+Number of individuals for this marker pair: 1204
+
+HAPLOTYPE-BASED ESTIMATES OF ALLELE FREQUENCIES 
+---------------------------------------------------------
+Marker  Allele  Frequency  Allele  Frequency
+------  ------  ---------  ------  ---------
+     1       2     0.1159       4     0.8841
+     2       1     0.8684       3     0.1316
+
+TWO MARKER HAPLOTYPE FREQUENCY MAXIMUM LIKELIHOOD ESTIMATES
+-----------------------------------------------------------
+Allele Allele  Frequency
+------ ------  ---------
+     2      1     0.0918
+     2      3     0.0240
+     4      1     0.7765
+     4      3     0.1076
+
+LINKAGE DISEQUALIBRIUM STATISTICS
+---------------------------------
+D          D Prime    R Squared  Delta
+---------  ---------  ---------  ---------
+ -0.00876    0.08708    0.00655   -0.09374
+\end{verbatim}
+
+\subsubsection{LD Statistics in Arrays}
+
+If DPRIME is executed with output format option 2., DPRIME writes LD Statistics
+in separate arrays.  See the Example below.  This example also shows empirical
+p-values.
+
+\begin{verbatim}
+*********************************************************
+Marker-Marker D (Biallelic Markers Only)
+
+             1         2         3         4         5         6 ...
+     --------- --------- --------- --------- --------- --------- 
+    1        .  -0.00876  -0.00207   0.00497  -0.00350  -0.00584 
+    2        .         .   0.00366   0.00178   0.00067   0.00569 
+    3        .         .         .   0.06804  -0.00357   0.00137 
+    4        .         .         .         .  -0.00330   0.01011 
+    5        .         .         .         .         .   0.00287 
+    6        .         .         .         .         .         . 
+    7        .         .         .         .         .         . 
+    8        .         .         .         .         .         . 
+    9        .         .         .         .         .         . 
+   10        .         .         .         .         .         . 
+   11        .         .         .         .         .         . 
+   12        .         .         .         .         .         . 
+   13        .         .         .         .         .         . 
+   14        .         .         .         .         .         . 
+   15        .         .         .         .         .         . 
+   16        .         .         .         .         .         . 
+
+
+*********************************************************
+Marker-Marker Multiallelic D' (bounded between 0 and 1)
+
+             1         2         3         4         5         6 ...
+     --------- --------- --------- --------- --------- --------- 
+    1        .   0.08708   0.02262   0.05985   0.29364   0.07402 
+    2        .         .   0.03520   0.04269   0.04971   0.07372 
+    3        .         .         .   1.00000   0.04409   0.01931 
+    4        .         .         .         .   0.10358   0.37449 
+    5        .         .         .         .         .   0.31406 
+    6        .         .         .         .         .         . 
+    7        .         .         .         .         .         . 
+    8        .         .         .         .         .         . 
+    9        .         .         .         .         .         . 
+   10        .         .         .         .         .         . 
+   11        .         .         .         .         .         . 
+   12        .         .         .         .         .         . 
+   13        .         .         .         .         .         . 
+   14        .         .         .         .         .         . 
+   15        .         .         .         .         .         . 
+   16       
+
+*********************************************************
+Marker-Marker multiallelic empiric p-value (Ho: D' = 0)
+
+             1         2         3         4         5         6 ...
+     --------- --------- --------- --------- --------- --------- 
+    1        .      0.37      0.79      0.42      0.07      0.36 
+    2        .         .      0.55      0.69      0.46      0.42 
+    3        .         .         .      0.00      0.57      0.77 
+    4        .         .         .         .      0.27      0.01 
+    5        .         .         .         .         .      0.14 
+    6        .         .         .         .         .         . 
+    7        .         .         .         .         .         . 
+    8        .         .         .         .         .         . 
+    9        .         .         .         .         .         . 
+   10        .         .         .         .         .         . 
+   11        .         .         .         .         .         . 
+   12        .         .         .         .         .         . 
+   13        .         .         .         .         .         . 
+   14        .         .         .         .         .         . 
+   15        .         .         .         .         .         . 
+   16        .         .         .         .         .         . 
+
+
+*********************************************************
+Marker-Marker r^2 (Biallelic Markers Only)
+
+             1         2         3         4         5         6 ...
+     --------- --------- --------- --------- --------- --------- 
+    1        .   0.00655   0.00025   0.00108   0.00130   0.00409 
+    2        .         .   0.00070   0.00013   0.00004   0.00350 
+    3        .         .         .   0.12646   0.00083   0.00014 
+    4        .         .         .         .   0.00055   0.00601 
+    5        .         .         .         .         .   0.00110 
+    6        .         .         .         .         .         . 
+    7        .         .         .         .         .         . 
+    8        .         .         .         .         .         . 
+    9        .         .         .         .         .         . 
+   10        .         .         .         .         .         . 
+   11        .         .         .         .         .         . 
+   12        .         .         .         .         .         . 
+   13        .         .         .         .         .         . 
+   14        .         .         .         .         .         . 
+   15        .         .         .         .         .         . 
+   16        .         .         .         .         .         . 
+*********************************************************
+Marker-Marker Delta (Biallelic Markers Only)
+
+             1         2         3         4         5         6 ...
+     --------- --------- --------- --------- --------- --------- 
+    1        .  -0.09374  -0.01426   0.02612  -0.04326  -0.08778 
+    2        .         .   0.14608   0.06085   0.05504   0.35957 
+    3        .         .         .   1.00000  -0.18642   0.07358 
+    4        .         .         .         .  -0.05228   0.15777 
+    5        .         .         .         .         .   0.03802 
+    6        .         .         .         .         .         . 
+    7        .         .         .         .         .         . 
+    8        .         .         .         .         .         . 
+    9        .         .         .         .         .         . 
+   10        .         .         .         .         .         . 
+   11        .         .         .         .         .         . 
+   12        .         .         .         .         .         . 
+   13        .         .         .         .         .         . 
+   14        .         .         .         .         .         . 
+   15        .         .         .         .         .         . 
+   16        .         .         .         .         .         . 
+\end{verbatim}
+
+\subsubsection{LD Statistics in Columns}
+
+If DPRIME is executed with output format option 3., DPRIME writes LD Statistics
+in separate columns.  See the Example below.  This example also shows empirical
+p-values and map data. (Last 3 columns put below)
+
+\begin{verbatim}
+Marker 1  Marker 1  Marker 2  Marker 2              allelic   
+Position  Name      Position  Name      D           D Prime   
+--------  --------  --------  --------  ----------  ----------
+1         Marker01  2         Marker02  -0.0087611   0.0870790
+1         Marker01  3         Marker03  -0.0020720   0.0226227
+1         Marker01  4         Marker04   0.0049701   0.0598500
+1         Marker01  5         Marker05  -0.0034994   0.2936352
+.
+.
+.
+2         Marker02  7         Marker07   0.0119474   0.1933463
+2         Marker02  8         Marker08   0.0004402   0.0589372
+2         Marker02  9         Marker09  -0.0096989   0.1942114
+2         Marker02  10        Marker10  -0.0011012   0.0104711
+2         Marker02  11        Marker11   0.0050391   0.1143034
+2         Marker02  12        Marker12   0.0561478   0.9999992
+2         Marker02  13        Marker13   0.0006005   0.8825537
+2         Marker02  14        Marker14  -0.0048104   0.1311587
+2         Marker02  15        Marker15  -0.0020886   0.0528272
+2         Marker02  16        Marker16  -0.0002796   0.8580508
+3         Marker03  4         Marker04   0.0680402   0.9999993
+.
+.
+.
+
+  PValue        Biallelic   Biallelic 
+  (Ho: DP = 0)  R Squared   Delta     
+  ------------  ----------  ----------
+         0.370   0.0065547  -0.0937401
+         0.790   0.0002518  -0.0142593
+         0.420   0.0010848   0.0261235
+         0.070   0.0012955  -0.0432570
+         .
+         .                            
+         .
+         0.040   0.0050202   0.3115108
+         0.510   0.0000317   0.0622369
+         0.040   0.0034786  -0.3858932
+         0.880   0.0000672  -0.0536026
+         0.180   0.0009976   0.1625592
+         0.000   0.1126467   0.9999975
+         0.320   0.0006143   0.8830852
+         0.110   0.0010051  -0.2085365
+         0.530   0.0001816  -0.0796859
+         0.510   0.0002768  -6.0597964
+         0.000   0.1264589   0.9999974
+\end{verbatim}
+
+\subsubsection{LD Statistics between Consecutive Markers in Columns}
+
+If DPRIME is executed with output format option 4., DPRIME writes LD Statistics
+only between consecutive markers in separate columns.  See the Example below.
+This example also shows empirical p-values and map data. (Last 3 columns put
+below)
+
+\begin{verbatim}
+Marker 1  Marker 1  Marker 2  Marker 2              allelic   
+Position  Name      Position  Name      D           D Prime   
+--------  --------  --------  --------  ----------  ----------
+1         Marker01  2         Marker02  -0.0087611   0.0870790  
+2         Marker02  3         Marker03   0.0036639   0.0352007  
+3         Marker03  4         Marker04   0.0680402   0.9999993  
+4         Marker04  5         Marker05  -0.0033027   0.1035845  
+5         Marker05  6         Marker06   0.0028710   0.3140621  
+6         Marker06  7         Marker07  -0.0030661   0.0647962  
+7         Marker07  8         Marker08   0.0073956   0.2470350  
+8         Marker08  9         Marker09  -0.0034873   0.0973636  
+9         Marker09  10        Marker10  -0.0106785   0.0856054  
+10        Marker10  11        Marker11  -0.0110742   0.1647865  
+11        Marker11  12        Marker12   0.0133247   0.0683489  
+12        Marker12  13        Marker13  -0.0006806   0.3206978  
+13        Marker13  14        Marker14   0.0002397   0.1723320  
+14        Marker14  15        Marker15   0.0001883   0.0009801  
+15        Marker15  16        Marker16  -0.0004217   0.5792568
+
+  PValue        Biallelic   Biallelic 
+  (Ho: DP = 0)  R Squared   Delta     
+  ------------  ----------  ----------
+         0.410   0.0065547  -0.0937401
+         0.720   0.0006969   0.1460818
+         0.000   0.1264589   0.9999974
+         0.260   0.0005530  -0.0522790
+         0.170   0.0011030   0.0380172
+         0.450   0.0004654  -0.1478651
+         0.030   0.0041364   0.2579659
+         0.450   0.0009656  -0.0159743
+         0.140   0.0030589  -0.1862445
+         0.020   0.0034404  -0.0631064
+         0.130   0.0032467   0.0796870
+         0.400   0.0003779  -0.2331846
+         0.700   0.0000574   0.0012031
+         0.990   8.465e-07   0.0032534
+         0.530   0.0003495  -1.3801019
+\end{verbatim}
+
+\subsubsection{D Prime and R Squared Statistics only in a Single Array}
+
+If DPRIME is executed with output format option 5, DPRIME writes D Prime and R
+Squared Statistics in a single array with D Prime in the upper right half and R
+Squared in the lower left half.  See the Example below. (16 Column output
+truncated at column 5)
+
+\begin{verbatim}
+**********************************************************************************
+        Marker-Marker Multiallelic D' (bounded between 0 and 1)
+
+                      1         2         3         4         5 ...
+              --------- --------- --------- --------- ---------
+ Marker-     1        .   0.08708   0.02262   0.05985   0.29364 
+ Marker      2  0.00655         .   0.03520   0.04269   0.04971 
+ R^2         3  0.00025   0.00070         .   1.00000   0.04409 
+             4  0.00108   0.00013   0.12646         .   0.10358 
+ (Biallelic  5  0.00130   0.00004   0.00083   0.00055         . 
+ Markers     6  0.00409   0.00350   0.00014   0.00601   0.00110 
+ Only)       7  0.11645   0.00502   0.00022   0.00398   0.00008 
+             8  0.00207   0.00003  9.22e-06   0.00010   0.00502 
+             9  0.00011   0.00348   0.00034   0.00015   0.00063 
+            10  0.00200   0.00007   0.00172  7.58e-06   0.00386 
+            11  0.00046   0.00100   0.00052   0.00053   0.00173 
+            12  0.00066   0.11265   0.00008   0.00044   0.00064 
+            13  0.00002   0.00061   0.00053   0.00241   0.00170 
+            14  0.00022   0.00101   0.00756   0.00158   0.00059 
+            15  0.00071   0.00018   0.00009   0.00020   0.00004 
+            16  0.00002   0.00028   0.00921   0.00115   0.00011
+\end{verbatim}
+
+%% End dprime.tex \\

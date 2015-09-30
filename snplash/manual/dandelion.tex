@@ -2,7 +2,7 @@
 \label{sec:dandy}
 \subsection{Description}
 %% Taken from the MS Word Document ``DANDELION User Guide, Version 3.0, February
-%% 29, 2008'''
+%% 29, 2008'', M.Steiger
 
 DANDELION is a program that reads a specific range of multiallelic or diallelic
 marker data from an input file containing genetic data for case and control
@@ -264,15 +264,14 @@ where
                       process (optional)
 \end{verbatim}
 
-%% ToDo: Fix cross-references
 \subsubsection{Empirical P-Value Calculation from the Command Line}
 \label{subsec:p_val_cmd_line}
 As described in the section ``Empirical P-Value Calculation'',
 p.\pageref{subsec:emp_p_val}, DANDELION has an option to calculate an LRS based
 empirical p-value using a permutation process.
 
-\{TODO: Check code to see if this still pertains.  It is not output in the help
-as an option:\} 
+\{Note: The following is not listed as an option in the help.  I could not find
+any reference in the code. DRM 30-Sep-2015\}
 
 DANDELION calculates empirical p-value only if the command line
 contains the -per flag followed by the number of permutations.
@@ -303,6 +302,7 @@ empirical p-value to the output file, if an empirical p-value is calculated.
 See the example below.
 
 \begin{verbatim}
+
 *********************************
 Map Markers: 
    Map Marker #1   : Marker01
@@ -313,15 +313,24 @@ Map Markers:
    Map Marker #6   : Marker06
 *********************************
 
-                   <-EM Algorithm Est Haplotype Freqs-> <-Haplo. Z Stat & PVal->
-       Haplotype       Cases     Controls    Combined   Z Statistic    P-Value   Odds Ratio      95% CI
-----------------  ----------   ----------  ----------   -----------  ----------  ---------- ------------
-4  1  2  3  3  2  0.28655010   0.32551301  0.30638950   1.49240592   0.13559277        0.83 (0.70, 0.99)
-4  1  2  3  3  4  0.02968700   0.03953450  0.03413547   0.95149345   0.34135395        0.75 (0.48, 1.15)
-4  1  2  3  1  2  0.04536407   0.03629012  0.03950821  -0.80875290   0.41865729        1.26 (0.85, 1.87)
+                   <-EM Algorithm Est Haplotype Freqs-> <-Haplo. Z 
+       Haplotype       Cases     Controls    Combined   Z Statistic ....
+----------------  ----------   ----------  ----------   -----------
+4  1  2  3  3  2  0.28655010   0.32551301  0.30638950   1.49240592 
+4  1  2  3  3  4  0.02968700   0.03953450  0.03413547   0.95149345 
+4  1  2  3  1  2  0.04536407   0.03629012  0.03950821  -0.80875290 
+
+   ... Stat & PVal->                        
+           P-Value   Odds Ratio      95% CI 
+         ----------  ---------- ------------
+         0.13559277        0.83 (0.70, 0.99)
+         0.34135395        0.75 (0.48, 1.15)
+         0.41865729        1.26 (0.85, 1.87)
    .
    .
    .
+
+
 Haplotype specific p-value is an approximation based upon a standard normal distribution.
 
 ----Likelihood Ratio Statistic---->
@@ -374,13 +383,13 @@ End Marker:             5
 DISPLAY PERSONAL PROBABILITIES: CASES
 ------------------------------------------------------------------
 
-                   Affection
-Individual ID      Status       Haplotype #1      Haplotype #2      Probability
------------------  ---------    --------------    --------------    -----------
-1-1309                     2     4  3  2  2  3     2  3  2  2  1         1.0000
-1-2                        2     4  1  2  3  3     4  1  2  3  3         1.0000
-1-261                      2     4  1  3  3  3     4  1  3  3  3         1.0000
-10-10401                   2     4  1  2  3  3     2  1  3  3  3         0.5599
+                Affection
+Individual ID   Status     Haplotype #1     Haplotype #2    Probability
+--------------  ---------  --------------   --------------  -----------
+1-1309                  2   4  3  2  2  3    2  3  2  2  1       1.0000
+1-2                     2   4  1  2  3  3    4  1  2  3  3       1.0000
+1-261                   2   4  1  3  3  3    4  1  3  3  3       1.0000
+10-10401                2   4  1  2  3  3    2  1  3  3  3       0.5599
   .
   .
   .
@@ -389,13 +398,13 @@ DISPLAY PERSONAL PROBABILITIES: CONTROLS
 ------------------------------------------------------------------
 
                    Affection
-Individual ID      Status       Haplotype #1      Haplotype #2      Probability
------------------  ---------    --------------    --------------    -----------
-10171744-10171744          1     4  1  2  3  3     2  1  3  3  3         0.7360
-10171744-10171744          1     4  1  3  3  3     2  1  2  3  3         0.2640
-10531774-10531774          1     4  1  2  3  3     4  3  2  3  3         1.0000
-10664238-10664238          1     4  1  2  3  3     4  1  2  3  3         1.0000
-11083364-11083364          1     4  1  2  3  3     4  1  3  3  3         1.0000
+Individual ID      Status     Haplotype #1    Haplotype #2    Probability
+-----------------  ---------  --------------  --------------  -----------
+10171744-10171744          1   4  1  2  3  3   2  1  3  3  3       0.7360
+10171744-10171744          1   4  1  3  3  3   2  1  2  3  3       0.2640
+10531774-10531774          1   4  1  2  3  3   4  3  2  3  3       1.0000
+10664238-10664238          1   4  1  2  3  3   4  1  2  3  3       1.0000
+11083364-11083364          1   4  1  2  3  3   4  1  3  3  3       1.0000
 \end{verbatim}
 
 %% End dandelion.tex \\
