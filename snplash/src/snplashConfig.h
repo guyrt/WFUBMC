@@ -1,1 +1,1 @@
-#define SNPLASH_VERSION "1.2"
+#define SNPLASH_VERSION "1.2.1"
