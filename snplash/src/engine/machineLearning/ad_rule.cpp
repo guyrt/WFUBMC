@@ -2,7 +2,9 @@
  *      ad_rule.cpp
  *      
  *      Copyright 2009 Richard T. Guy <guyrt7@wfu.edu>
- *      
+ *
+ *      Modified by Christian Ponte <christian.ponte@udc.es>, September 2019
+ *
  *      This program is free software; you can redistribute it and/or modify
  *      it under the terms of the GNU General Public License as published by
  *      the Free Software Foundation; either version 2 of the License, or
@@ -57,23 +59,15 @@ bool AD_Rule::evaluate_truth(vector<short> * vec){
 }
 
 bool AD_Rule::operator< (const AD_Rule &compare) const{
-	
-	Precondition compare_p = compare.getPrecondition();
-	
-	bool localIsLarger = false;
-	unsigned int sz = precon.conditions.size();
-	if (sz > compare_p.conditions.size()){
-		localIsLarger = true;
-		sz = compare_p.conditions.size();
-	}
-	
-	for (unsigned int i=0; i < sz; i++){
-		if (precon.conditions.at(i).attribute_index != compare_p.conditions.at(i).attribute_index){
-			return precon.conditions.at(i).attribute_index < compare_p.conditions.at(i).attribute_index;
-		}
-	}
-	
-	return !localIsLarger; // reverse this, so if local is the shorter one, it is returned first.
+    const std::vector<Condition> &c1 = this->precon.conditions;
+    const std::vector<Condition> &c2 = compare.precon.conditions;
+
+    for (size_t i = 0; i < std::min(c1.size(), c2.size()); i++){
+        if (c1[i].attribute_index != c2[i].attribute_index) {
+            return c1[i].attribute_index < c2[i].attribute_index;
+        }
+    }
+    return c1.size() < c2.size();
 }
 
 /**
